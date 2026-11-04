@@ -1,0 +1,46 @@
+[
+  {
+    "id": "notificacao-financas", "order": 1, "placeholder": true,
+    "slug": { "pt": "recebi-uma-notificacao-das-financas", "en": "received-a-tax-authority-notice" },
+    "area": "fiscal",
+    "title": { "pt": "Recebi uma notificação das Finanças. E agora?", "en": "I have received a notice from the Tax Authority. What now?" },
+    "excerpt": { "pt": "Três perguntas a fazer antes de pagar, reclamar ou impugnar.", "en": "Three questions to ask before you pay, object or appeal." },
+    "date": "2026-10-14",
+    "readingMinutes": 4,
+    "image": "desk-documents",
+    "body": [
+      { "type": "p", "text": { "pt": "Uma notificação da Autoridade Tributária costuma trazer um prazo. Antes de decidir, vale a pena parar e responder a três perguntas simples.", "en": "A notice from the Tax Authority usually comes with a deadline. Before deciding, it is worth pausing to answer three simple questions." } },
+      { "type": "h2", "text": { "pt": "1. O que está a ser pedido?", "en": "1. What is being asked?" } },
+      { "type": "p", "text": { "pt": "Identifique o imposto, o ano a que diz respeito e o valor em causa. Muitas vezes a notificação refere-se a uma divergência que pode ser explicada com documentos que já tem.", "en": "Identify the tax, the year it relates to and the amount involved. Often the notice concerns a discrepancy that can be explained with documents you already have." } },
+      { "type": "h2", "text": { "pt": "2. Qual é o prazo?", "en": "2. What is the deadline?" } },
+      { "type": "p", "text": { "pt": "Os prazos para pagar, reclamar ou impugnar são diferentes. Deixar passar um prazo pode limitar as opções disponíveis.", "en": "The deadlines to pay, object or appeal are different. Missing one can limit the options available." } },
+      { "type": "h2", "text": { "pt": "3. Que opções tenho?", "en": "3. What are my options?" } },
+      { "type": "ul", "items": [
+        { "pt": "Pagar, se a liquidação estiver correta.", "en": "Pay, if the assessment is correct." },
+        { "pt": "Apresentar uma reclamação graciosa, se houver um erro a corrigir.", "en": "File an administrative objection, if there is an error to correct." },
+        { "pt": "Impugnar judicialmente, quando a questão o justificar.", "en": "Appeal to the courts, where the matter warrants it." }
+      ] },
+      { "type": "p", "text": { "pt": "Este artigo tem caráter informativo e não substitui aconselhamento jurídico sobre o seu caso concreto.", "en": "This article is for information only and does not replace legal advice on your specific case." } }
+    ]
+  },
+  {
+    "id": "comprar-casa", "order": 2, "placeholder": true,
+    "slug": { "pt": "comprar-casa-antes-de-assinar", "en": "buying-a-home-before-you-sign" },
+    "area": "imobiliario",
+    "title": { "pt": "Comprar casa: o que verificar antes de assinar", "en": "Buying a home: what to check before you sign" },
+    "excerpt": { "pt": "Os documentos que convém ler antes do contrato-promessa.", "en": "The documents worth reading before the preliminary contract." },
+    "date": "2026-09-02",
+    "readingMinutes": 5,
+    "image": "modern-house",
+    "body": [
+      { "type": "p", "text": { "pt": "O contrato-promessa é muitas vezes o momento em que se assumem os compromissos mais importantes de uma compra. Antes de o assinar, há documentos que convém conhecer.", "en": "The preliminary contract is often where the most important commitments of a purchase are made. Before signing it, there are documents worth knowing." } },
+      { "type": "ul", "items": [
+        { "pt": "Certidão permanente do registo predial, para confirmar o proprietário e eventuais ónus.", "en": "The land registry certificate, to confirm the owner and any charges." },
+        { "pt": "Caderneta predial, com a descrição matricial do imóvel.", "en": "The property tax record, with the official description of the property." },
+        { "pt": "Licença de utilização ou documento equivalente.", "en": "The occupancy licence or equivalent document." },
+        { "pt": "Certificado energético.", "en": "The energy performance certificate." }
+      ] },
+      { "type": "p", "text": { "pt": "Este artigo tem caráter informativo e não substitui aconselhamento jurídico sobre o seu caso concreto.", "en": "This article is for information only and does not replace legal advice on your specific case." } }
+    ]
+  }
+]

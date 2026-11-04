@@ -1,0 +1,75 @@
+[
+  {
+    "id": "jose-carreto-lages", "order": 1, "slug": "jose-carreto-lages",
+    "name": "José Carreto Lages",
+    "role": { "pt": "Sócio Fundador", "en": "Founding Partner" },
+    "group": "partner",
+    "areas": ["penal", "fiscal"],
+    "email": "cl@carretolages.com",
+    "photo": "jose-carreto-lages",
+    "bio": [
+      { "type": "p", "text": { "pt": "Fundou a sociedade em Aveiro, em junho de 2002, com João Carlos Lages, assente em dois princípios que ainda hoje a definem: rigor técnico e proximidade com o cliente.", "en": "He founded the firm in Aveiro in June 2002 with João Carlos Lages, built on two principles that still define it: technical rigour and closeness to the client." } },
+      { "type": "p", "text": { "pt": "Dedica-se sobretudo ao Direito Penal e ao Direito Fiscal.", "en": "His practice focuses mainly on Criminal Law and Tax Law." } }
+    ]
+  },
+  {
+    "id": "joao-carlos-lages", "order": 2, "slug": "joao-carlos-lages",
+    "name": "João Carlos Lages",
+    "role": { "pt": "Sócio e Administrador", "en": "Partner and Managing Director" },
+    "group": "partner",
+    "areas": ["imobiliario", "financeiro"],
+    "email": "jcl@carretolages.com",
+    "photo": "joao-carlos-lages",
+    "bio": [
+      { "type": "p", "text": { "pt": "Cofundador da sociedade em 2002 e responsável pela sua administração.", "en": "Co-founder of the firm in 2002 and responsible for its management." } },
+      { "type": "p", "text": { "pt": "Acompanha sobretudo questões de Direito Imobiliário e de Direito Financeiro.", "en": "He mainly advises on Real Estate Law and Banking & Finance Law." } }
+    ]
+  },
+  {
+    "id": "catarina-pereira-carvalho", "order": 3, "slug": "catarina-pereira-carvalho",
+    "name": "Catarina Pereira Carvalho",
+    "role": { "pt": "Sócia e Administradora", "en": "Partner and Managing Director" },
+    "group": "partner",
+    "areas": ["imobiliario"],
+    "email": "cpc@carretolages.com",
+    "photo": "catarina-pereira-carvalho",
+    "bio": [
+      { "type": "p", "text": { "pt": "Sócia e administradora da sociedade, dedica-se sobretudo ao Direito Imobiliário.", "en": "Partner and managing director of the firm, her practice focuses mainly on Real Estate Law." } }
+    ]
+  },
+  {
+    "id": "adriana-silva", "order": 4, "slug": "adriana-silva",
+    "name": "Adriana Silva",
+    "role": { "pt": "Advogada Associada", "en": "Associate" },
+    "group": "associate", "areas": [], "email": "geral@carretolages.com",
+    "bio": [ { "type": "p", "text": { "pt": "Advogada associada da Carreto Lages & Associados.", "en": "Associate at Carreto Lages & Associados." } } ]
+  },
+  {
+    "id": "sara-matos", "order": 5, "slug": "sara-matos",
+    "name": "Sara Matos",
+    "role": { "pt": "Advogada Associada", "en": "Associate" },
+    "group": "associate", "areas": [], "email": "geral@carretolages.com",
+    "bio": [ { "type": "p", "text": { "pt": "Advogada associada da Carreto Lages & Associados.", "en": "Associate at Carreto Lages & Associados." } } ]
+  },
+  {
+    "id": "daniela-rodrigues", "order": 6, "slug": "daniela-rodrigues",
+    "name": "Daniela Rodrigues",
+    "role": { "pt": "Advogada Associada", "en": "Associate" },
+    "group": "associate", "areas": [], "email": "geral@carretolages.com",
+    "bio": [ { "type": "p", "text": { "pt": "Advogada associada da Carreto Lages & Associados.", "en": "Associate at Carreto Lages & Associados." } } ]
+  },
+  {
+    "id": "diana-antao-seabra", "order": 7, "slug": "diana-antao-seabra",
+    "name": "Diana Antão Seabra",
+    "role": { "pt": "Advogada Associada", "en": "Associate" },
+    "group": "associate", "areas": [], "email": "geral@carretolages.com",
+    "bio": [ { "type": "p", "text": { "pt": "Advogada associada da Carreto Lages & Associados.", "en": "Associate at Carreto Lages & Associados." } } ]
+  },
+  {
+    "id": "francisco-lopes", "order": 8, "slug": "francisco-lopes",
+    "name": "Francisco Lopes",
+    "role": { "pt": "Consultor", "en": "Of Counsel" },
+    "group": "consultant", "areas": [], "email": "geral@carretolages.com",
+    "bio": [ { "type": "p", "text": { "pt": "Consultor da Carreto Lages & Associados.", "en": "Of counsel at Carreto Lages & Associados." } } ]
+  }
+]

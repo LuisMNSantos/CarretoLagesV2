@@ -1,0 +1,20 @@
+[
+  {
+    "id": "t1", "order": 1, "placeholder": true,
+    "quote": { "pt": "Explicaram tudo com clareza desde o primeiro dia. Senti sempre que sabia onde estava e o que vinha a seguir.", "en": "They explained everything clearly from day one. I always knew where I stood and what came next." },
+    "author": "Maria S.",
+    "descriptor": { "pt": "Empresária, Aveiro", "en": "Business owner, Aveiro" }
+  },
+  {
+    "id": "t2", "order": 2, "placeholder": true,
+    "quote": { "pt": "Uma equipa próxima, que responde e que acompanha. Foi isso que fez a diferença.", "en": "A close team that replies and stays with you. That is what made the difference." },
+    "author": "António M.",
+    "descriptor": { "pt": "Engenheiro, Viseu", "en": "Engineer, Viseu" }
+  },
+  {
+    "id": "t3", "order": 3, "placeholder": true,
+    "quote": { "pt": "Trataram de uma questão fiscal complicada com rigor e serenidade.", "en": "They handled a complicated tax matter with rigour and composure." },
+    "author": "Carla F.",
+    "descriptor": { "pt": "Professora, Oliveira de Frades", "en": "Teacher, Oliveira de Frades" }
+  }
+]

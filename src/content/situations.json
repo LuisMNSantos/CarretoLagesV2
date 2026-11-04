@@ -1,0 +1,58 @@
+[
+  {
+    "id": "notificacao-penal",
+    "order": 1,
+    "icon": "scale",
+    "eyebrow": { "pt": "Um processo", "en": "A proceeding" },
+    "prompt": { "pt": "Fui notificado num processo-crime.", "en": "I have been notified in criminal proceedings." },
+    "title": [ { "pt": "Primeiro, perceber.", "en": "First, understand." }, { "pt": "Depois, responder.", "en": "Then, respond." } ],
+    "body": { "pt": "Explicamos o que significa a notificação, os prazos que se aplicam e as opções que tem. Preparamos a resposta consigo, com discrição.", "en": "We explain what the notice means, which deadlines apply and what options you have. We prepare the response with you, discreetly." },
+    "tags": [ { "pt": "Notificações", "en": "Notices" }, { "pt": "Defesa", "en": "Defence" }, { "pt": "Prazos", "en": "Deadlines" } ],
+    "area": "penal",
+    "linkLabel": { "pt": "Conhecer o Direito Penal", "en": "Explore Criminal Law" },
+    "image": "office-corridor",
+    "imageCaption": { "pt": "Calma, com um plano claro.", "en": "Calm, with a clear plan." }
+  },
+  {
+    "id": "comprar-casa",
+    "order": 2,
+    "icon": "home",
+    "eyebrow": { "pt": "Um novo capítulo", "en": "A new chapter" },
+    "prompt": { "pt": "Vou comprar, vender ou arrendar um imóvel.", "en": "I am buying, selling or renting a property." },
+    "title": [ { "pt": "Abra espaço", "en": "Make room" }, { "pt": "para o que vem a seguir.", "en": "for what comes next." } ],
+    "body": { "pt": "Verificamos documentos, ónus e licenças antes de assinar, e acompanhamos o negócio até ao registo.", "en": "We check documents, charges and licences before you sign, and see the transaction through to registration." },
+    "tags": [ { "pt": "Contrato-promessa", "en": "Preliminary contract" }, { "pt": "Escritura", "en": "Deed of sale" }, { "pt": "Arrendamento", "en": "Leasing" } ],
+    "area": "imobiliario",
+    "linkLabel": { "pt": "Conhecer o Direito Imobiliário", "en": "Explore Real Estate Law" },
+    "image": "modern-house",
+    "imageCaption": { "pt": "Uma base sólida para decidir.", "en": "A solid basis for deciding." }
+  },
+  {
+    "id": "carta-financas",
+    "order": 3,
+    "icon": "document",
+    "eyebrow": { "pt": "Uma notificação", "en": "A notice" },
+    "prompt": { "pt": "Recebi uma carta das Finanças.", "en": "I have received a letter from the Tax Authority." },
+    "title": [ { "pt": "Encontre clareza.", "en": "Find clarity." }, { "pt": "Depois, avance.", "en": "Then move forward." } ],
+    "body": { "pt": "Analisamos a liquidação e explicamos se deve pagar, reclamar ou impugnar, sempre dentro do prazo.", "en": "We analyse the assessment and explain whether to pay, object or appeal, always within the deadline." },
+    "tags": [ { "pt": "IRS / IRC", "en": "Income tax" }, { "pt": "Reclamação", "en": "Objection" }, { "pt": "Impugnação", "en": "Appeal" } ],
+    "area": "fiscal",
+    "linkLabel": { "pt": "Conhecer o Direito Fiscal", "en": "Explore Tax Law" },
+    "image": "desk-documents",
+    "imageCaption": { "pt": "Uma nova perspetiva sobre o caminho.", "en": "A fresh perspective on the way forward." }
+  },
+  {
+    "id": "problema-banco",
+    "order": 4,
+    "icon": "bank",
+    "eyebrow": { "pt": "Uma mudança de rumo", "en": "A change of direction" },
+    "prompt": { "pt": "Tenho um problema com o banco ou com dívidas.", "en": "I have a problem with my bank or with debt." },
+    "title": [ { "pt": "Recupere o equilíbrio.", "en": "Regain your balance." }, { "pt": "Passo a passo.", "en": "Step by step." } ],
+    "body": { "pt": "Lemos o contrato consigo, avaliamos a margem para negociar e, se for preciso, defendemos os seus interesses em tribunal.", "en": "We read the contract with you, assess the room to negotiate and, if needed, defend your interests in court." },
+    "tags": [ { "pt": "Crédito", "en": "Credit" }, { "pt": "Reestruturação", "en": "Restructuring" }, { "pt": "Negociação", "en": "Negotiation" } ],
+    "area": "financeiro",
+    "linkLabel": { "pt": "Conhecer o Direito Financeiro", "en": "Explore Banking & Finance Law" },
+    "image": "glass-facade",
+    "imageCaption": { "pt": "Ambição, com uma base clara.", "en": "Ambition, with a clear foundation." }
+  }
+]

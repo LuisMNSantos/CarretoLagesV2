@@ -1,0 +1,90 @@
+[
+  {
+    "id": "penal",
+    "order": 1,
+    "slug": { "pt": "direito-penal", "en": "criminal-law" },
+    "eyebrow": { "pt": "Direito Penal", "en": "Criminal Law" },
+    "title": { "pt": "Direito Penal", "en": "Criminal Law" },
+    "headline": [ { "pt": "Uma defesa serena.", "en": "A calm defence." }, { "pt": "Uma resposta firme.", "en": "A firm response." } ],
+    "summary": { "pt": "Acompanhamento em processos-crime e contraordenações, desde a primeira notificação até ao recurso.", "en": "Guidance through criminal and regulatory proceedings, from the first notice to appeal." },
+    "keywords": [ { "pt": "Processos-crime", "en": "Criminal proceedings" }, { "pt": "Contraordenações", "en": "Regulatory offences" }, { "pt": "Recursos", "en": "Appeals" } ],
+    "services": [
+      { "pt": "Defesa de arguidos em inquérito, instrução e julgamento", "en": "Defence of suspects and defendants at every stage of proceedings" },
+      { "pt": "Representação de vítimas e assistentes", "en": "Representation of victims and private prosecutors" },
+      { "pt": "Processos de contraordenação (rodoviária, laboral, ambiental, entre outras)", "en": "Regulatory offence proceedings (road traffic, employment, environmental and others)" },
+      { "pt": "Recursos para os tribunais superiores e habeas corpus", "en": "Appeals to the higher courts and habeas corpus" }
+    ],
+    "description": [
+      { "type": "p", "text": { "pt": "Receber uma notificação num processo-crime é, para a maioria das pessoas, um momento de grande incerteza. O nosso primeiro trabalho é explicar com clareza o que está em causa, quais são os prazos e que opções existem.", "en": "Receiving a notice in criminal proceedings is, for most people, a moment of real uncertainty. Our first job is to explain clearly what is at stake, what the deadlines are and which options exist." } },
+      { "type": "p", "text": { "pt": "A partir daí, preparamos a defesa com rigor técnico e discrição, mantendo-o informado em cada fase do processo.", "en": "From there, we prepare the defence with technical rigour and discretion, keeping you informed at every stage." } }
+    ],
+    "image": "architecture-columns",
+    "metaDescription": { "pt": "Advogados de Direito Penal em Aveiro e Oliveira de Frades: processos-crime, contraordenações e recursos.", "en": "Criminal law lawyers in Aveiro and Oliveira de Frades: criminal proceedings, regulatory offences and appeals." }
+  },
+  {
+    "id": "imobiliario",
+    "order": 2,
+    "slug": { "pt": "direito-imobiliario", "en": "real-estate-law" },
+    "eyebrow": { "pt": "Direito Imobiliário", "en": "Real Estate Law" },
+    "title": { "pt": "Direito Imobiliário", "en": "Real Estate Law" },
+    "headline": [ { "pt": "Bases sólidas.", "en": "A sound foundation." }, { "pt": "Possibilidades maiores.", "en": "A wider possibility." } ],
+    "summary": { "pt": "Orientação clara em cada momento da vida de um imóvel: compra, venda, arrendamento e licenciamento.", "en": "Clear guidance at every point in a property's story: buying, selling, leasing and licensing." },
+    "keywords": [ { "pt": "Compra e venda", "en": "Sales and purchases" }, { "pt": "Arrendamento", "en": "Leasing" }, { "pt": "Licenciamento", "en": "Planning and licensing" } ],
+    "services": [
+      { "pt": "Contratos-promessa e escrituras de compra e venda", "en": "Preliminary contracts and deeds of sale" },
+      { "pt": "Contratos de arrendamento habitacional e comercial", "en": "Residential and commercial leases" },
+      { "pt": "Licenciamento urbanístico e expropriações", "en": "Planning permission and compulsory purchase" },
+      { "pt": "Propriedade horizontal e relações de condomínio", "en": "Condominium ownership and owners' associations" }
+    ],
+    "description": [
+      { "type": "p", "text": { "pt": "Comprar, vender ou arrendar um imóvel envolve documentos, prazos e riscos que nem sempre são visíveis à primeira vista. Verificamos o que precisa de ser verificado antes de assinar.", "en": "Buying, selling or leasing a property involves documents, deadlines and risks that are not always visible at first. We check what needs checking before you sign." } },
+      { "type": "p", "text": { "pt": "Acompanhamos particulares e empresas, da negociação ao registo, e intervimos quando surge um conflito.", "en": "We advise individuals and companies from negotiation to registration, and step in when a dispute arises." } }
+    ],
+    "image": "modern-house",
+    "metaDescription": { "pt": "Advogados de Direito Imobiliário em Aveiro e Oliveira de Frades: compra e venda, arrendamento e licenciamento.", "en": "Real estate lawyers in Aveiro and Oliveira de Frades: sales, leasing and planning." }
+  },
+  {
+    "id": "fiscal",
+    "order": 3,
+    "slug": { "pt": "direito-fiscal", "en": "tax-law" },
+    "eyebrow": { "pt": "Direito Fiscal", "en": "Tax Law" },
+    "title": { "pt": "Direito Fiscal", "en": "Tax Law" },
+    "headline": [ { "pt": "Clareza nos números.", "en": "Clarity in the numbers." }, { "pt": "Firmeza na resposta.", "en": "Firmness in the response." } ],
+    "summary": { "pt": "Planeamento, reclamações e impugnações perante a Autoridade Tributária, para particulares e empresas.", "en": "Planning, objections and appeals before the Tax Authority, for individuals and companies." },
+    "keywords": [ { "pt": "IRS e IRC", "en": "Income and corporate tax" }, { "pt": "IVA", "en": "VAT" }, { "pt": "Impugnações", "en": "Tax appeals" } ],
+    "services": [
+      { "pt": "Planeamento fiscal de particulares e empresas", "en": "Tax planning for individuals and companies" },
+      { "pt": "Reclamações graciosas e recursos hierárquicos", "en": "Administrative objections and hierarchical appeals" },
+      { "pt": "Impugnações judiciais nos tribunais administrativos e fiscais", "en": "Judicial appeals before the administrative and tax courts" },
+      { "pt": "Acompanhamento em inspeções tributárias", "en": "Support during tax inspections" }
+    ],
+    "description": [
+      { "type": "p", "text": { "pt": "Uma notificação das Finanças traz quase sempre um prazo curto. Analisamos a liquidação, explicamos o que significa e indicamos o caminho mais adequado: pagar, reclamar ou impugnar.", "en": "A notice from the Tax Authority almost always comes with a short deadline. We analyse the assessment, explain what it means and point to the most suitable path: pay, object or appeal." } },
+      { "type": "p", "text": { "pt": "Também ajudamos a planear com antecedência, para que as decisões fiscais acompanhem as decisões de vida e de negócio.", "en": "We also help you plan ahead, so that tax decisions keep pace with life and business decisions." } }
+    ],
+    "image": "desk-documents",
+    "metaDescription": { "pt": "Advogados de Direito Fiscal em Aveiro e Oliveira de Frades: IRS, IRC, IVA, reclamações e impugnações.", "en": "Tax lawyers in Aveiro and Oliveira de Frades: income tax, corporate tax, VAT, objections and appeals." }
+  },
+  {
+    "id": "financeiro",
+    "order": 4,
+    "slug": { "pt": "direito-financeiro", "en": "banking-and-finance-law" },
+    "eyebrow": { "pt": "Direito Financeiro", "en": "Banking & Finance Law" },
+    "title": { "pt": "Direito Financeiro", "en": "Banking & Finance Law" },
+    "headline": [ { "pt": "Equilíbrio nas contas.", "en": "Balance in your finances." }, { "pt": "Força na negociação.", "en": "Strength at the table." } ],
+    "summary": { "pt": "Crédito, reestruturação de dívida e litígios com instituições financeiras, com uma estratégia clara.", "en": "Credit, debt restructuring and disputes with financial institutions, with a clear strategy." },
+    "keywords": [ { "pt": "Crédito bancário", "en": "Bank lending" }, { "pt": "Reestruturação", "en": "Restructuring" }, { "pt": "Litígios", "en": "Disputes" } ],
+    "services": [
+      { "pt": "Análise e negociação de contratos de crédito", "en": "Review and negotiation of credit agreements" },
+      { "pt": "Reestruturação de dívida de particulares e empresas", "en": "Debt restructuring for individuals and companies" },
+      { "pt": "Litígios com bancos e outras instituições de crédito", "en": "Disputes with banks and other lenders" },
+      { "pt": "Execuções, penhoras e processos de insolvência", "en": "Enforcement, attachments and insolvency proceedings" }
+    ],
+    "description": [
+      { "type": "p", "text": { "pt": "Quando a relação com o banco se torna difícil, é importante saber exatamente o que diz o contrato e que margem existe para negociar. Fazemos essa leitura consigo.", "en": "When the relationship with a bank becomes difficult, it matters to know exactly what the contract says and how much room there is to negotiate. We read it with you." } },
+      { "type": "p", "text": { "pt": "Procuramos primeiro soluções negociadas e, quando necessário, defendemos os seus interesses em tribunal.", "en": "We look first for negotiated solutions and, where necessary, defend your interests in court." } }
+    ],
+    "image": "glass-facade",
+    "metaDescription": { "pt": "Advogados de Direito Financeiro e Bancário em Aveiro e Oliveira de Frades: crédito, dívida e litígios bancários.", "en": "Banking and finance lawyers in Aveiro and Oliveira de Frades: credit, debt and banking disputes." }
+  }
+]

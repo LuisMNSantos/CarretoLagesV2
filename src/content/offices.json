@@ -1,0 +1,24 @@
+[
+  {
+    "id": "aveiro",
+    "order": 1,
+    "name": "Aveiro",
+    "address": { "pt": "Aveiro, Portugal (morada completa a confirmar)", "en": "Aveiro, Portugal (full address to be confirmed)" },
+    "addressToConfirm": true,
+    "phone": "(+351) 232 762 464",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=40.6412,-8.6535",
+    "embedUrl": "https://www.google.com/maps?q=40.6412,-8.6535&z=15&output=embed",
+    "image": "aveiro-canal"
+  },
+  {
+    "id": "oliveira-de-frades",
+    "order": 2,
+    "name": "Oliveira de Frades",
+    "address": { "pt": "Oliveira de Frades, Portugal (morada completa a confirmar)", "en": "Oliveira de Frades, Portugal (full address to be confirmed)" },
+    "addressToConfirm": true,
+    "phone": "(+351) 232 762 464",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=40.7299,-8.1795",
+    "embedUrl": "https://www.google.com/maps?q=40.7299,-8.1795&z=15&output=embed",
+    "image": "countryside-hills"
+  }
+]

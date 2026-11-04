@@ -1,0 +1,49 @@
+{
+  "foundedYear": 2002,
+  "phone": "(+351) 232 762 464",
+  "phoneHref": "tel:+351232762464",
+  "email": "geral@carretolages.com",
+  "hours": { "pt": "Segunda a sexta, 9h00 – 18h00", "en": "Monday to Friday, 9:00 – 18:00" },
+  "responsePromise": { "pt": "Resposta em 24 horas úteis", "en": "A reply within one working day" },
+  "hero": {
+    "eyebrow": { "pt": "Advogados desde 2002 · Aveiro & Oliveira de Frades", "en": "Lawyers since 2002 · Aveiro & Oliveira de Frades" },
+    "title": [
+      { "pt": "Decisões importantes.", "en": "Important decisions." },
+      { "pt": "Em boas mãos.", "en": "In safe hands." }
+    ],
+    "lead": { "pt": "Rigor, proximidade e estratégia nos momentos que contam.", "en": "Rigour, closeness and strategy when it matters most." },
+    "caption": { "pt": "Uma perspetiva mais ampla. Um caminho mais claro.", "en": "A broader perspective. A clearer way forward." }
+  },
+  "pillars": [
+    { "icon": "conversation", "title": { "pt": "Conversas diretas.", "en": "Direct conversations." }, "text": { "pt": "Respostas claras, de uma equipa que sabe o seu nome.", "en": "Clear answers from a team that knows your name." } },
+    { "icon": "experience", "title": { "pt": "Mais de 20 anos.", "en": "More than 20 years." }, "text": { "pt": "Prática jurídica em Aveiro e na região de Dão-Lafões.", "en": "Legal practice in Aveiro and the Dão-Lafões region." } },
+    { "icon": "clock", "title": { "pt": "Resposta em 24 horas.", "en": "A reply within a day." }, "text": { "pt": "Por telefone, email ou formulário, em dias úteis.", "en": "By telephone, email or form, on working days." } }
+  ],
+  "stats": [
+    { "value": "2002", "label": { "pt": "Ano de fundação", "en": "Year founded" } },
+    { "value": "2", "label": { "pt": "Escritórios", "en": "Offices" } },
+    { "value": "8", "label": { "pt": "Profissionais", "en": "Professionals" } },
+    { "value": "4", "label": { "pt": "Áreas de atuação", "en": "Practice areas" } }
+  ],
+  "sections": {
+    "areas": {
+      "eyebrow": { "pt": "Áreas de atuação", "en": "Practice areas" },
+      "title": [ { "pt": "Experiência para", "en": "Experience for" }, { "pt": "o que vem a seguir.", "en": "what comes next." } ],
+      "lead": { "pt": "Quatro áreas, uma forma de trabalhar: perceber primeiro, aconselhar com clareza.", "en": "Four areas, one way of working: understand first, advise with clarity." }
+    },
+    "situations": {
+      "eyebrow": { "pt": "Em que situação está?", "en": "Where are you today?" },
+      "title": [ { "pt": "Cada situação é diferente.", "en": "Every situation is different." }, { "pt": "O nosso compromisso é o mesmo.", "en": "Our commitment is the same." } ],
+      "lead": { "pt": "As decisões importantes raramente cabem numa categoria. Comece pelo que está a mudar na sua vida.", "en": "Important decisions rarely fit neatly into a category. Start with what is changing in your life." }
+    },
+    "process": {
+      "eyebrow": { "pt": "Como trabalhamos", "en": "How we work" },
+      "title": [ { "pt": "Perceber primeiro.", "en": "Understand first." }, { "pt": "Agir com clareza.", "en": "Act with clarity." } ],
+      "lead": { "pt": "Um bom conselho é uma conversa. É assim que a transformamos num plano.", "en": "Good counsel is a conversation. This is how we turn yours into a plan." }
+    }
+  },
+  "seo": {
+    "homeTitle": { "pt": "Carreto Lages & Associados — Advogados em Aveiro e Oliveira de Frades", "en": "Carreto Lages & Associados — Lawyers in Aveiro and Oliveira de Frades" },
+    "homeDescription": { "pt": "Sociedade de advogados desde 2002, com escritórios em Aveiro e Oliveira de Frades. Direito Penal, Imobiliário, Fiscal e Financeiro.", "en": "Law firm founded in 2002 with offices in Aveiro and Oliveira de Frades. Criminal, Real Estate, Tax and Banking & Finance law." }
+  }
+}

@@ -1,0 +1,147 @@
+[
+  {
+    "id": "firm",
+    "eyebrow": { "pt": "A Sociedade", "en": "The Firm" },
+    "title": [ { "pt": "Uma sociedade próxima,", "en": "A close-knit firm," }, { "pt": "desde 2002.", "en": "since 2002." } ],
+    "lead": { "pt": "Carreto Lages & Associados é uma sociedade de advogados com escritórios em Aveiro e Oliveira de Frades, construída sobre rigor técnico e proximidade com cada cliente.", "en": "Carreto Lages & Associados is a law firm with offices in Aveiro and Oliveira de Frades, built on technical rigour and closeness to every client." },
+    "body": [
+      { "type": "p", "text": { "pt": "Acreditamos que por detrás de cada processo existe uma pessoa com uma história. É essa história que orienta o nosso trabalho.", "en": "We believe that behind every case there is a person with a story. That story is what guides our work." } },
+      { "type": "p", "text": { "pt": "Cada mandato começa com uma escuta atenta e uma análise cuidada da situação concreta, antes de qualquer estratégia ser definida.", "en": "Every engagement begins with careful listening and a close look at the specific situation, before any strategy is set." } }
+    ],
+    "image": "aveiro-canal",
+    "metaDescription": { "pt": "Conheça a Carreto Lages & Associados, sociedade de advogados em Aveiro e Oliveira de Frades desde 2002.", "en": "About Carreto Lages & Associados, a law firm in Aveiro and Oliveira de Frades since 2002." }
+  },
+  {
+    "id": "history",
+    "eyebrow": { "pt": "História", "en": "History" },
+    "title": [ { "pt": "Mais de duas décadas", "en": "More than two decades" }, { "pt": "ao lado dos nossos clientes.", "en": "alongside our clients." } ],
+    "lead": { "pt": "Fundada em Aveiro em junho de 2002, a sociedade cresceu sem perder a proximidade com que começou.", "en": "Founded in Aveiro in June 2002, the firm has grown without losing the closeness it began with." },
+    "body": [
+      { "type": "h2", "text": { "pt": "2002 · O início", "en": "2002 · The beginning" } },
+      { "type": "p", "text": { "pt": "Em junho de 2002, os advogados José Carreto Lages e João Carlos Lages fundaram em Aveiro um escritório assente em dois pilares que ainda hoje o definem: rigor técnico e proximidade com o cliente.", "en": "In June 2002, lawyers José Carreto Lages and João Carlos Lages founded an office in Aveiro built on two pillars that still define it today: technical rigour and closeness to the client." } },
+      { "type": "h2", "text": { "pt": "Crescer na região", "en": "Growing in the region" } },
+      { "type": "p", "text": { "pt": "A equipa cresceu e a abertura de um segundo escritório em Oliveira de Frades alargou a presença à região de Dão-Lafões, aproximando a sociedade de quem antes tinha mais dificuldade em aceder a apoio jurídico.", "en": "The team grew, and a second office in Oliveira de Frades extended the firm's presence to the Dão-Lafões region, bringing it closer to people who previously found legal advice harder to reach." } },
+      { "type": "h2", "text": { "pt": "Hoje", "en": "Today" } },
+      { "type": "p", "text": { "pt": "Mais de vinte anos depois, mantemos o mesmo compromisso: defender os interesses de cada cliente com competência, dedicação e clareza.", "en": "More than twenty years on, we keep the same commitment: to defend each client's interests with competence, dedication and clarity." } }
+    ],
+    "image": "library-books",
+    "metaDescription": { "pt": "A história da Carreto Lages & Associados, fundada em Aveiro em 2002.", "en": "The history of Carreto Lages & Associados, founded in Aveiro in 2002." }
+  },
+  {
+    "id": "values",
+    "eyebrow": { "pt": "Perfil e Valores", "en": "Profile and Values" },
+    "title": [ { "pt": "Os princípios", "en": "The principles" }, { "pt": "por detrás de cada decisão.", "en": "behind every decision." } ],
+    "lead": { "pt": "Não existem casos iguais, nem clientes iguais. Por isso, a nossa abordagem é sempre pessoal.", "en": "No two cases and no two clients are alike. That is why our approach is always personal." },
+    "body": [
+      { "type": "h3", "text": { "pt": "Rigor técnico", "en": "Technical rigour" } },
+      { "type": "p", "text": { "pt": "A boa advocacia exige atualização permanente. Investimos na formação contínua da equipa.", "en": "Good legal work demands constant updating. We invest in the team's continuous training." } },
+      { "type": "h3", "text": { "pt": "Ética e integridade", "en": "Ethics and integrity" } },
+      { "type": "p", "text": { "pt": "Cumprimos escrupulosamente as normas deontológicas da Ordem dos Advogados.", "en": "We follow the Portuguese Bar Association's professional rules scrupulously." } },
+      { "type": "h3", "text": { "pt": "Proximidade", "en": "Closeness" } },
+      { "type": "p", "text": { "pt": "Comunicação clara, acessível e regular, para que nunca se sinta sozinho num processo.", "en": "Clear, accessible and regular communication, so you never feel alone in a process." } },
+      { "type": "h3", "text": { "pt": "Eficiência", "en": "Efficiency" } },
+      { "type": "p", "text": { "pt": "Procuramos a solução mais célere e menos onerosa, sem abdicar da qualidade.", "en": "We look for the quickest and least costly solution, without compromising on quality." } },
+      { "type": "h3", "text": { "pt": "Confidencialidade", "en": "Confidentiality" } },
+      { "type": "p", "text": { "pt": "O segredo profissional é um compromisso absoluto.", "en": "Professional secrecy is an absolute commitment." } },
+      { "type": "h3", "text": { "pt": "Responsabilidade", "en": "Accountability" } },
+      { "type": "p", "text": { "pt": "Quando aceitamos um assunto, assumimos plena responsabilidade pelo trabalho até à sua conclusão.", "en": "When we take on a matter, we take full responsibility for the work until it is concluded." } }
+    ],
+    "image": "meeting-room",
+    "metaDescription": { "pt": "Perfil e valores da Carreto Lages & Associados: rigor, ética, proximidade e confidencialidade.", "en": "Profile and values of Carreto Lages & Associados: rigour, ethics, closeness and confidentiality." }
+  },
+  {
+    "id": "proBono",
+    "eyebrow": { "pt": "Pro Bono", "en": "Pro Bono" },
+    "title": [ { "pt": "O acesso à justiça", "en": "Access to justice" }, { "pt": "é um direito.", "en": "is a right." } ],
+    "lead": { "pt": "Desde a fundação, reservamos parte do nosso tempo a quem não teria, de outro modo, acesso a apoio jurídico qualificado.", "en": "Since our founding, we have set aside part of our time for those who would not otherwise have access to qualified legal support." },
+    "body": [
+      { "type": "h2", "text": { "pt": "O que abrange", "en": "What it covers" } },
+      { "type": "ul", "items": [
+        { "pt": "Consulta jurídica inicial gratuita para pessoas em situação de vulnerabilidade económica comprovada", "en": "A free initial consultation for people in proven economic hardship" },
+        { "pt": "Apoio a IPSS e associações sem fins lucrativos em questões de interesse social", "en": "Support for charities and non-profit associations on matters of social interest" },
+        { "pt": "Colaboração com a Ordem dos Advogados no sistema de acesso ao direito e aos tribunais", "en": "Work with the Bar Association within the legal aid system" },
+        { "pt": "Participação em iniciativas de literacia jurídica em escolas e comunidades locais", "en": "Taking part in legal literacy initiatives in schools and local communities" }
+      ] },
+      { "type": "h2", "text": { "pt": "Como pedir apoio", "en": "How to ask for support" } },
+      { "type": "p", "text": { "pt": "Envie-nos uma mensagem pelo formulário de contacto, indicando brevemente a sua situação. Cada pedido é analisado individualmente e com total confidencialidade.", "en": "Send us a message through the contact form, briefly describing your situation. Each request is assessed individually and in complete confidence." } },
+      { "type": "p", "text": { "pt": "O apoio pro bono não substitui o sistema público de proteção jurídica previsto na Lei n.º 34/2004, sobre o qual também o podemos orientar.", "en": "Pro bono support does not replace the public legal aid system under Law no. 34/2004, which we can also guide you through." } }
+    ],
+    "image": "conversation-table",
+    "metaDescription": { "pt": "O compromisso pro bono da Carreto Lages & Associados com o acesso à justiça.", "en": "The pro bono commitment of Carreto Lages & Associados to access to justice." }
+  },
+  {
+    "id": "privacy",
+    "draft": true,
+    "updated": "2026-11-04",
+    "eyebrow": { "pt": "Informação legal", "en": "Legal information" },
+    "title": [ { "pt": "Política de", "en": "Privacy" }, { "pt": "Privacidade", "en": "Policy" } ],
+    "lead": { "pt": "Como tratamos os dados pessoais recolhidos através deste site.", "en": "How we handle the personal data collected through this website." },
+    "body": [
+      { "type": "h2", "text": { "pt": "Responsável pelo tratamento", "en": "Data controller" } },
+      { "type": "p", "text": { "pt": "Carreto Lages & Associados — Sociedade de Advogados [denominação social, NIPC e sede a confirmar]. Contacto para questões de privacidade: geral@carretolages.com.", "en": "Carreto Lages & Associados — Sociedade de Advogados [legal name, tax number and registered office to be confirmed]. Privacy contact: geral@carretolages.com." } },
+      { "type": "h2", "text": { "pt": "Que dados recolhemos", "en": "What data we collect" } },
+      { "type": "p", "text": { "pt": "Apenas os dados que nos envia pelo formulário de contacto: nome, email, telefone (opcional), área e escritório preferidos (opcionais) e a mensagem.", "en": "Only the data you send us through the contact form: name, email, telephone (optional), preferred area and office (optional) and your message." } },
+      { "type": "h2", "text": { "pt": "Finalidade e fundamento", "en": "Purpose and legal basis" } },
+      { "type": "p", "text": { "pt": "Os dados são usados apenas para responder ao seu pedido, com base no seu consentimento e em diligências pré-contratuais a seu pedido.", "en": "The data is used only to reply to your request, on the basis of your consent and of pre-contractual steps taken at your request." } },
+      { "type": "h2", "text": { "pt": "Conservação", "en": "Retention" } },
+      { "type": "p", "text": { "pt": "As mensagens são recebidas por email e conservadas apenas pelo tempo necessário para tratar o pedido, ou pelo prazo legal aplicável se der origem a um mandato. O site não guarda as mensagens em nenhuma base de dados.", "en": "Messages are received by email and kept only as long as needed to deal with the request, or for the applicable legal period if an engagement follows. The website does not store messages in any database." } },
+      { "type": "h2", "text": { "pt": "Subcontratantes", "en": "Processors" } },
+      { "type": "ul", "items": [
+        { "pt": "Alojamento do site: Cloudflare", "en": "Website hosting: Cloudflare" },
+        { "pt": "Envio dos emails do formulário: Resend (a ativar na versão final)", "en": "Form email delivery: Resend (to be enabled in the final version)" },
+        { "pt": "Mapas: Google, apenas se carregar no botão para ver o mapa", "en": "Maps: Google, only if you press the button to view the map" }
+      ] },
+      { "type": "h2", "text": { "pt": "Os seus direitos", "en": "Your rights" } },
+      { "type": "p", "text": { "pt": "Pode pedir o acesso, a retificação, o apagamento, a limitação ou a portabilidade dos seus dados, e opor-se ao tratamento, escrevendo para geral@carretolages.com. Pode também apresentar reclamação à Comissão Nacional de Proteção de Dados (CNPD).", "en": "You may request access to, rectification, erasure, restriction or portability of your data, and object to its processing, by writing to geral@carretolages.com. You may also lodge a complaint with the Portuguese Data Protection Authority (CNPD)." } }
+    ],
+    "metaDescription": { "pt": "Política de privacidade do site da Carreto Lages & Associados.", "en": "Privacy policy of the Carreto Lages & Associados website." }
+  },
+  {
+    "id": "terms",
+    "draft": true,
+    "updated": "2026-11-04",
+    "eyebrow": { "pt": "Informação legal", "en": "Legal information" },
+    "title": [ { "pt": "Termos e", "en": "Terms and" }, { "pt": "Condições", "en": "Conditions" } ],
+    "lead": { "pt": "As condições de utilização deste site.", "en": "The conditions for using this website." },
+    "body": [
+      { "type": "h2", "text": { "pt": "Natureza da informação", "en": "Nature of the information" } },
+      { "type": "p", "text": { "pt": "O conteúdo deste site tem caráter meramente informativo e não constitui aconselhamento jurídico. A utilização do site ou o envio de uma mensagem não estabelece uma relação de mandato.", "en": "The content of this website is for information only and does not constitute legal advice. Using the website or sending a message does not create a lawyer–client relationship." } },
+      { "type": "h2", "text": { "pt": "Propriedade intelectual", "en": "Intellectual property" } },
+      { "type": "p", "text": { "pt": "Os textos, o desenho e os elementos gráficos deste site pertencem à Carreto Lages & Associados ou aos respetivos titulares e não podem ser reproduzidos sem autorização.", "en": "The text, design and graphic elements of this website belong to Carreto Lages & Associados or their respective owners and may not be reproduced without permission." } },
+      { "type": "h2", "text": { "pt": "Ligações externas", "en": "External links" } },
+      { "type": "p", "text": { "pt": "Não somos responsáveis pelo conteúdo de sites de terceiros para os quais existam ligações.", "en": "We are not responsible for the content of third-party websites we link to." } },
+      { "type": "h2", "text": { "pt": "Lei aplicável", "en": "Governing law" } },
+      { "type": "p", "text": { "pt": "Estes termos regem-se pela lei portuguesa.", "en": "These terms are governed by Portuguese law." } }
+    ],
+    "metaDescription": { "pt": "Termos e condições de utilização do site da Carreto Lages & Associados.", "en": "Terms and conditions of use of the Carreto Lages & Associados website." }
+  },
+  {
+    "id": "disputes",
+    "draft": true,
+    "updated": "2026-11-04",
+    "eyebrow": { "pt": "Informação legal", "en": "Legal information" },
+    "title": [ { "pt": "Resolução", "en": "Dispute" }, { "pt": "de Litígios", "en": "Resolution" } ],
+    "lead": { "pt": "Informação sobre meios de resolução alternativa de litígios.", "en": "Information on alternative dispute resolution." },
+    "body": [
+      { "type": "p", "text": { "pt": "Em caso de litígio de consumo, o consumidor pode recorrer a uma entidade de resolução alternativa de litígios de consumo. Mais informações no Portal do Consumidor, em www.consumidor.gov.pt.", "en": "In the event of a consumer dispute, the consumer may use an alternative consumer dispute resolution body. More information is available on the Portuguese Consumer Portal at www.consumidor.gov.pt." } },
+      { "type": "p", "text": { "pt": "Questões relacionadas com a atuação profissional de advogados podem também ser apresentadas à Ordem dos Advogados.", "en": "Matters concerning the professional conduct of lawyers may also be raised with the Portuguese Bar Association (Ordem dos Advogados)." } }
+    ],
+    "metaDescription": { "pt": "Informação sobre resolução alternativa de litígios.", "en": "Information on alternative dispute resolution." }
+  },
+  {
+    "id": "cookies",
+    "draft": true,
+    "updated": "2026-11-04",
+    "eyebrow": { "pt": "Informação legal", "en": "Legal information" },
+    "title": [ { "pt": "Este site", "en": "This website" }, { "pt": "não usa cookies.", "en": "does not use cookies." } ],
+    "lead": { "pt": "Não usamos cookies próprios nem ferramentas de rastreio.", "en": "We do not set our own cookies or use tracking tools." },
+    "body": [
+      { "type": "p", "text": { "pt": "Este site não define cookies e não carrega serviços de terceiros sem uma ação sua.", "en": "This website does not set cookies and does not load third-party services without an action from you." } },
+      { "type": "h2", "text": { "pt": "Mapas", "en": "Maps" } },
+      { "type": "p", "text": { "pt": "Os mapas dos escritórios são fornecidos pela Google e só são carregados se carregar no botão \"Ver mapa interativo\". Nesse momento, a Google pode definir os seus próprios cookies, de acordo com a política de privacidade da Google.", "en": "The office maps are provided by Google and only load if you press the \"View interactive map\" button. At that point, Google may set its own cookies under Google's privacy policy." } },
+      { "type": "h2", "text": { "pt": "Estatísticas", "en": "Statistics" } },
+      { "type": "p", "text": { "pt": "Se forem usadas estatísticas de visitas, serão de um serviço que não usa cookies nem identifica visitantes.", "en": "If visit statistics are used, they will come from a service that does not use cookies or identify visitors." } }
+    ],
+    "metaDescription": { "pt": "Informação sobre cookies no site da Carreto Lages & Associados.", "en": "Information about cookies on the Carreto Lages & Associados website." }
+  }
+]

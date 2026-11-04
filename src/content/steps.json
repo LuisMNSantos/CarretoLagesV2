@@ -1,0 +1,30 @@
+[
+  {
+    "id": "ouvir", "order": 1, "number": "01",
+    "title": { "pt": "Ouvir", "en": "Listen" },
+    "headline": { "pt": "Primeiro, a sua perspetiva.", "en": "First, your perspective." },
+    "body": { "pt": "Começamos pela sua situação, pelas suas prioridades e pelo que seria, para si, um bom resultado.", "en": "We begin with your situation, your priorities and what a good outcome would mean to you." },
+    "image": "conversation-table"
+  },
+  {
+    "id": "esclarecer", "order": 2, "number": "02",
+    "title": { "pt": "Esclarecer", "en": "Clarify" },
+    "headline": { "pt": "Um plano que compreende.", "en": "A plan you understand." },
+    "body": { "pt": "As opções, os riscos e os próximos passos, explicados com clareza antes de avançarmos.", "en": "Your options, the trade-offs and the next steps, explained clearly before we move forward." },
+    "image": "meeting-room"
+  },
+  {
+    "id": "agir", "order": 3, "number": "03",
+    "title": { "pt": "Agir", "en": "Act" },
+    "headline": { "pt": "Estratégia, com rigor.", "en": "Strategy, with rigour." },
+    "body": { "pt": "Executamos o plano com rigor técnico e mantemo-lo informado em cada decisão importante.", "en": "We carry out the plan with technical rigour and keep you informed at every important decision." },
+    "image": "library-books"
+  },
+  {
+    "id": "acompanhar", "order": 4, "number": "04",
+    "title": { "pt": "Acompanhar", "en": "Stay close" },
+    "headline": { "pt": "Para além do imediato.", "en": "Beyond the immediate." },
+    "body": { "pt": "Uma conversa contínua sobre as suas prioridades e as decisões que ainda estão para vir.", "en": "A continuing conversation about your priorities and the decisions still ahead." },
+    "image": "office-corridor"
+  }
+]

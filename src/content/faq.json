@@ -1,0 +1,27 @@
+[
+  {
+    "id": "primeiro-contacto", "order": 1,
+    "question": { "pt": "Como funciona o primeiro contacto?", "en": "How does the first contact work?" },
+    "answer": { "pt": "Pode ligar-nos, escrever-nos ou usar o formulário. Marcamos uma primeira conversa para perceber a sua situação e explicar as opções e os honorários antes de qualquer decisão.", "en": "You can call us, write to us or use the form. We arrange a first conversation to understand your situation and explain the options and fees before any decision is made." }
+  },
+  {
+    "id": "areas", "order": 2,
+    "question": { "pt": "Em que áreas trabalham?", "en": "Which areas do you work in?" },
+    "answer": { "pt": "Direito Penal, Direito Imobiliário, Direito Fiscal e Direito Financeiro. Se a sua questão for de outra área, dizemos-lhe com franqueza se a podemos acompanhar.", "en": "Criminal Law, Real Estate Law, Tax Law and Banking & Finance Law. If your matter falls outside these areas, we will tell you frankly whether we can help." }
+  },
+  {
+    "id": "prazo-resposta", "order": 3,
+    "question": { "pt": "Em quanto tempo respondem?", "en": "How quickly do you reply?" },
+    "answer": { "pt": "Respondemos a pedidos de contacto no prazo de 24 horas úteis.", "en": "We reply to contact requests within one working day." }
+  },
+  {
+    "id": "fora-da-regiao", "order": 4,
+    "question": { "pt": "Trabalham com clientes fora de Aveiro e Oliveira de Frades?", "en": "Do you work with clients outside Aveiro and Oliveira de Frades?" },
+    "answer": { "pt": "Sim. Acompanhamos clientes de todo o país e reunimos presencialmente ou por videochamada, conforme for mais prático para si.", "en": "Yes. We work with clients across the country and meet in person or by video call, whichever suits you best." }
+  },
+  {
+    "id": "honorarios", "order": 5,
+    "question": { "pt": "Como são calculados os honorários?", "en": "How are fees calculated?" },
+    "answer": { "pt": "Dependem da natureza e da complexidade do assunto. São sempre apresentados e acordados consigo antes de o trabalho começar.", "en": "They depend on the nature and complexity of the matter. They are always presented and agreed with you before any work begins." }
+  }
+]

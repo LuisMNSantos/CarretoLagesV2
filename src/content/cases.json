@@ -1,0 +1,39 @@
+[
+  {
+    "id": "burla-informatica", "order": 1, "placeholder": true,
+    "slug": { "pt": "absolvicao-burla-informatica", "en": "acquittal-computer-fraud" },
+    "area": "penal",
+    "title": { "pt": "Absolvição num processo de burla informática", "en": "Acquittal in a computer fraud case" },
+    "summary": { "pt": "Cliente acusado de acesso indevido a sistemas informáticos, com pedido de indemnização civil.", "en": "A client accused of unlawful access to computer systems, with a civil compensation claim attached." },
+    "context": [
+      { "type": "p", "text": { "pt": "O cliente foi acusado de aceder sem autorização a sistemas informáticos de uma empresa, que pediu também uma indemnização.", "en": "The client was accused of accessing a company's computer systems without authorisation; the company also sought compensation." } },
+      { "type": "p", "text": { "pt": "A defesa centrou-se na análise técnica da prova digital e na reconstrução cronológica dos acessos.", "en": "The defence focused on a technical analysis of the digital evidence and a chronological reconstruction of the access logs." } }
+    ],
+    "outcome": { "pt": "Absolvição e arquivamento do pedido civil.", "en": "Acquittal and dismissal of the civil claim." },
+    "date": "2024-03-01"
+  },
+  {
+    "id": "imovel-insolvencia", "order": 2, "placeholder": true,
+    "slug": { "pt": "recuperacao-imovel-insolvencia", "en": "property-recovered-insolvency" },
+    "area": "imobiliario",
+    "title": { "pt": "Recuperação de um imóvel num processo de insolvência", "en": "Recovering a property in insolvency proceedings" },
+    "summary": { "pt": "Imóvel de uma empresa penhorado indevidamente num processo executivo.", "en": "A company's property wrongly attached in enforcement proceedings." },
+    "context": [
+      { "type": "p", "text": { "pt": "Um imóvel da empresa cliente foi penhorado num processo executivo de terceiros, já durante o processo de insolvência.", "en": "A property belonging to the client company was attached in third-party enforcement proceedings while insolvency proceedings were already under way." } }
+    ],
+    "outcome": { "pt": "Levantamento da penhora e regresso do imóvel ao património do cliente.", "en": "The attachment was lifted and the property returned to the client's assets." },
+    "date": "2024-01-15"
+  },
+  {
+    "id": "liquidacao-irs", "order": 3, "placeholder": true,
+    "slug": { "pt": "impugnacao-liquidacao-irs", "en": "income-tax-assessment-appeal" },
+    "area": "fiscal",
+    "title": { "pt": "Impugnação de uma liquidação adicional de IRS", "en": "Challenging an additional income tax assessment" },
+    "summary": { "pt": "Particular com uma liquidação adicional de IRS por rendimentos alegadamente não declarados.", "en": "An individual facing an additional income tax assessment for allegedly undeclared income." },
+    "context": [
+      { "type": "p", "text": { "pt": "A Autoridade Tributária considerou não declarados rendimentos que já tinham sido tributados noutra sede.", "en": "The Tax Authority treated as undeclared income that had already been taxed elsewhere." } }
+    ],
+    "outcome": { "pt": "Anulação integral da liquidação na fase administrativa.", "en": "The assessment was cancelled in full at the administrative stage." },
+    "date": "2023-11-20"
+  }
+]
