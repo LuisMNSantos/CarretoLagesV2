@@ -17,9 +17,11 @@
     "video": "node scripts/encode-video.mjs",
     "serve:headers": "node scripts/serve-with-headers.mjs",
     "screens": "node --experimental-strip-types scripts/screenshots.ts",
-    "report": "node scripts/report.mjs"
+    "report": "node scripts/report.mjs",
+    "audit": "node scripts/summarize-audit.mjs"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
     "@fontsource-variable/dm-sans": "^5.3.0",
     "@fontsource/cormorant-garamond": "^5.3.0",
     "@tailwindcss/vite": "^4.3.4",

@@ -1,4 +1,7 @@
 ---
 import HomePage from '../../components/pages/HomePage.astro';
+import { faq, visible } from '../../lib/content';
+import { faqLd, legalServiceLd } from '../../lib/jsonld';
+const locale = 'en';
 ---
-<HomePage locale="en" />
+<HomePage locale={locale} jsonLd={[legalServiceLd(locale), faqLd(visible(faq, locale), locale)]} />

@@ -1,4 +1,7 @@
 import { z } from 'zod';
+
+// Strict CSP (no 'unsafe-eval'): stop Zod probing `new Function` for its JIT fast path.
+z.config({ jitless: true });
 import type { Locale } from '../i18n/locale';
 import { t, type UiKey } from '../i18n/ui';
 
