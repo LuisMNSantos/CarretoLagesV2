@@ -85,5 +85,5 @@ test.describe('hero background video', () => {
 test('hero heading and CTA are visible without JavaScript', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('#hero-title')).toContainText('Decisões importantes.');
-  await expect(page.getByRole('link', { name: /Marcar uma conversa/ })).toBeVisible();
+  await expect(page.locator('[data-hero]').getByRole('link', { name: /Marcar uma conversa/ })).toBeVisible();
 });

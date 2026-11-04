@@ -1,6 +1,9 @@
 ---
 import '../styles/global.css';
 import Head from '../components/seo/Head.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import StickyCta from '../components/layout/StickyCta.astro';
 
 export interface Props {
   locale: 'pt' | 'en';
@@ -20,12 +23,13 @@ const skip = locale === 'pt' ? 'Saltar para o conteúdo' : 'Skip to content';
   <head>
     <Head locale={locale} title={title} description={description} alternates={alternates} jsonLd={jsonLd} ogImage={ogImage} />
   </head>
-  <body class="min-h-dvh flex flex-col">
+  <body id="top" class="min-h-dvh flex flex-col">
     <a class="skip-link" href="#conteudo">{skip}</a>
-    <slot name="header" />
+    <Header locale={locale} alternates={alternates} variant={headerVariant} />
     <main id="conteudo" tabindex="-1" class="flex-1 outline-none">
       <slot />
     </main>
-    <slot name="footer" />
+    <Footer locale={locale} />
+    <StickyCta locale={locale} />
   </body>
 </html>

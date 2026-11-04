@@ -1,0 +1,128 @@
+---
+import Logo from './Logo.astro';
+import LangSwitch from './LangSwitch.astro';
+import Icon from '../shared/Icon.astro';
+import { navItems } from '../../lib/nav';
+import { getCollectionCounts, settings } from '../../lib/content';
+import { localizePath } from '../../i18n/routes';
+import { t } from '../../i18n/ui';
+import type { Locale } from '../../i18n/locale';
+
+export interface Props {
+  locale: Locale;
+  alternates: { pt?: string | undefined; en?: string | undefined };
+  variant: 'overlay' | 'solid';
+}
+const { locale, alternates, variant } = Astro.props;
+const items = navItems(locale, getCollectionCounts(locale));
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isHome = path === localizePath('home', locale);
+const ctaHref = isHome ? '#contacto' : `${localizePath('contact', locale)}#contacto`;
+const isActive = (href: string) => (href === '/' || href === '/en' ? path === href : path === href || path.startsWith(`${href}/`));
+---
+<header class="site-header fixed inset-x-0 top-0 z-50" data-variant={variant} data-scrolled="false" data-site-header>
+  <div class="container-site flex h-20 items-center justify-between gap-6">
+    <Logo locale={locale} />
+
+    <nav class="hidden xl:block" aria-label={t(locale, 'nav.label')}>
+      <ul class="flex items-center gap-6 whitespace-nowrap text-[0.9rem] xl:gap-7">
+        {items.map((it) => (
+          <li class="nav-item relative flex items-center" data-nav-item>
+            <a href={it.href} class:list={['nav-link py-2', isActive(it.href) && 'is-active']} aria-current={path === it.href ? 'page' : undefined}>{it.label}</a>
+            {it.children && (
+              <>
+                <button type="button" class="nav-sub-toggle -ml-1 inline-grid size-7 place-items-center align-middle" aria-expanded="false" aria-controls={`sub-${it.key}`} aria-label={`${it.label} — ${t(locale, 'nav.menu')}`} data-sub-toggle>
+                  <Icon name="chevron-down" size={14} />
+                </button>
+                <ul id={`sub-${it.key}`} class="nav-sub card absolute left-[-1rem] top-full mt-2 min-w-[14rem] p-2 text-tinta shadow-[0_18px_40px_-20px_rgb(15_36_29_/_0.35)]" data-sub>
+                  {it.children.map((c) => (
+                    <li><a href={c.href} class="block rounded px-3 py-2.5 text-[0.9375rem] hover:bg-areia" aria-current={path === c.href ? 'page' : undefined}>{c.label}</a></li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-4">
+      <a href={settings.phoneHref} class="hidden items-center gap-2 whitespace-nowrap text-sm opacity-90 hover:opacity-100 2xl:inline-flex"><Icon name="phone" size={15} />{settings.phone}</a>
+      <LangSwitch locale={locale} alternates={alternates} class="hidden sm:flex" />
+      <a href={ctaHref} class="header-cta btn hidden min-h-11 whitespace-nowrap px-4 py-2 text-sm xl:inline-flex">{t(locale, 'cta.book')}<Icon name="arrow-up-right" size={14} /></a>
+      <button type="button" class="menu-toggle inline-flex min-h-11 items-center gap-2 text-sm font-medium xl:hidden" aria-haspopup="dialog" aria-controls="mobile-menu" aria-label={t(locale, 'nav.openMenu')} data-menu-open>
+        <span aria-hidden="true">{t(locale, 'nav.menu')}</span>
+        <Icon name="menu" size={20} />
+      </button>
+    </div>
+  </div>
+</header>
+
+<dialog id="mobile-menu" class="mobile-menu on-dark" aria-label={t(locale, 'nav.label')} data-mobile-menu>
+  <div class="flex min-h-full flex-col">
+    <div class="container-site flex h-20 items-center justify-between">
+      <Logo locale={locale} />
+      <button type="button" class="icon-circle border-marfim/30 text-marfim" data-menu-close aria-label={t(locale, 'nav.closeMenu')}>
+        <Icon name="close" size={20} />
+      </button>
+    </div>
+    <nav class="container-site flex-1 pb-10 pt-6" aria-label={t(locale, 'nav.label')}>
+      <ul class="space-y-1">
+        {items.map((it) => (
+          <li>
+            <a href={it.href} class="block py-2 text-[2rem] font-light leading-tight tracking-tight">{it.label}</a>
+            {it.children && (
+              <ul class="mb-3 mt-1 grid grid-cols-2 gap-x-4 gap-y-1 border-l border-marfim/20 pl-4">
+                {it.children.slice(1).map((c) => <li><a href={c.href} class="block py-1.5 text-[0.9375rem] text-marfim/80">{c.label}</a></li>)}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ul>
+      <div class="mt-10 space-y-5 border-t border-marfim/20 pt-8">
+        <a href={ctaHref} class="btn btn-bronze w-full" data-menu-link>{t(locale, 'cta.book')}<Icon name="arrow-up-right" size={16} /></a>
+        <div class="flex items-center justify-between">
+          <a href={settings.phoneHref} class="inline-flex items-center gap-2 text-marfim/90"><Icon name="phone" size={16} />{settings.phone}</a>
+          <LangSwitch locale={locale} alternates={alternates} />
+        </div>
+      </div>
+    </nav>
+  </div>
+</dialog>
+
+<style>
+  .site-header { color: var(--color-tinta); transition: background-color 400ms var(--ease-calm), color 400ms var(--ease-calm), box-shadow 400ms var(--ease-calm); }
+  .site-header[data-variant='overlay'][data-scrolled='false'] { color: var(--color-marfim); }
+  .site-header[data-variant='solid'], .site-header[data-scrolled='true'] {
+    background: rgb(243 240 232 / 0.94);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 1px 0 var(--color-areia-escura);
+  }
+  .header-cta { background: var(--color-verde-700); color: var(--color-marfim); }
+  .header-cta:hover { background: var(--color-verde-900); }
+  .site-header[data-variant='overlay'][data-scrolled='false'] .header-cta { background: var(--color-bronze-claro); color: var(--color-verde-900); }
+  .site-header[data-variant='overlay'][data-scrolled='false'] :focus-visible { outline-color: var(--color-bronze-claro); }
+
+  .nav-link { position: relative; opacity: 0.88; }
+  .nav-link:hover, .nav-link.is-active { opacity: 1; }
+  .nav-link::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform 400ms var(--ease-calm); }
+  .nav-link:hover::after, .nav-link.is-active::after { transform: scaleX(1); }
+
+  .nav-sub { visibility: hidden; opacity: 0; transform: translateY(-4px); transition: opacity 200ms var(--ease-calm), transform 200ms var(--ease-calm), visibility 200ms; }
+  .nav-item:hover .nav-sub, .nav-item:focus-within .nav-sub, .nav-sub[data-open='true'] { visibility: visible; opacity: 1; transform: none; }
+  .nav-sub-toggle[aria-expanded='true'] { transform: rotate(180deg); }
+
+  .mobile-menu {
+    position: fixed; inset: 0; width: 100%; max-width: none; height: 100dvh; max-height: none;
+    margin: 0; padding: 0; border: 0; overflow-y: auto;
+    background: var(--color-verde-900); color: var(--color-marfim);
+  }
+  .mobile-menu::backdrop { background: rgb(15 36 29 / 0.6); }
+  .mobile-menu[open] { animation: menu-in 300ms var(--ease-calm); }
+  @keyframes menu-in { from { opacity: 0; } to { opacity: 1; } }
+</style>
+
+<script>
+  import { initHeader } from '../../scripts/header';
+  initHeader();
+</script>

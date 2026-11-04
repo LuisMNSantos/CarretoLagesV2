@@ -1,0 +1,31 @@
+---
+import type { Locale } from '../../i18n/locale';
+import { localizePath } from '../../i18n/routes';
+import { t } from '../../i18n/ui';
+export interface Props { locale: Locale; alternates: { pt?: string | undefined; en?: string | undefined }; class?: string }
+const { locale, alternates, class: cls = '' } = Astro.props;
+const links = (['pt', 'en'] as const).map((l) => ({
+  l,
+  href: alternates[l] ?? localizePath('home', l),
+  label: t(locale, l === 'pt' ? 'lang.pt' : 'lang.en'),
+  long: t(locale, l === 'pt' ? 'lang.ptLong' : 'lang.enLong'),
+}));
+---
+<nav class:list={['lang-switch flex items-center gap-1 text-[0.8125rem] font-medium tracking-[0.12em]', cls]} aria-label={t(locale, 'lang.switch')}>
+  {links.map((x, i) => (
+    <>
+      {i > 0 && <span aria-hidden="true" class="opacity-40">|</span>}
+      <a
+        href={x.href}
+        hreflang={x.l === 'pt' ? 'pt-PT' : 'en'}
+        lang={x.l === 'pt' ? 'pt-PT' : 'en'}
+        aria-current={x.l === locale ? 'true' : undefined}
+        class:list={['inline-grid min-h-11 min-w-9 place-items-center px-1', x.l === locale ? 'opacity-100 underline decoration-bronze underline-offset-[6px]' : 'opacity-70 hover:opacity-100']}
+        data-lang-link={x.l}
+      >
+        <span aria-hidden="true">{x.label}</span>
+        <span class="sr-only">{x.long}</span>
+      </a>
+    </>
+  ))}
+</nav>

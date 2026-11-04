@@ -1,0 +1,19 @@
+---
+import Icon from '../shared/Icon.astro';
+import { settings } from '../../lib/content';
+import { localizePath } from '../../i18n/routes';
+import { t } from '../../i18n/ui';
+import type { Locale } from '../../i18n/locale';
+export interface Props { locale: Locale }
+const { locale } = Astro.props;
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const href = path === localizePath('home', locale) ? '#contacto' : `${localizePath('contact', locale)}#contacto`;
+---
+<div class="sticky-cta fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 gap-px border-t border-areia-escura bg-areia-escura xl:hidden" data-sticky-cta data-hidden="false">
+  <a href={settings.phoneHref} class="flex min-h-14 items-center justify-center gap-2 bg-marfim text-[0.9375rem] font-medium text-verde-700"><Icon name="phone" size={17} />{t(locale, 'cta.call')}</a>
+  <a href={href} class="flex min-h-14 items-center justify-center gap-2 bg-verde-700 text-[0.9375rem] font-medium text-marfim"><Icon name="mail" size={17} />{t(locale, 'cta.contact')}</a>
+</div>
+<style>
+  .sticky-cta { transition: transform 300ms var(--ease-calm); padding-bottom: env(safe-area-inset-bottom); }
+  .sticky-cta[data-hidden='true'] { transform: translateY(110%); }
+</style>

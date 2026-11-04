@@ -1,0 +1,73 @@
+---
+import Logo from './Logo.astro';
+import Icon from '../shared/Icon.astro';
+import { navItems } from '../../lib/nav';
+import { getCollectionCounts, offices, settings, tr } from '../../lib/content';
+import { localizePath } from '../../i18n/routes';
+import { t } from '../../i18n/ui';
+import type { Locale } from '../../i18n/locale';
+import { designPreview } from '../../lib/env';
+
+export interface Props { locale: Locale }
+const { locale } = Astro.props;
+const items = navItems(locale, getCollectionCounts(locale));
+const firm = items.find((i) => i.key === 'firm');
+const explore = items.filter((i) => i.key !== 'firm');
+const legal = [
+  { href: localizePath('privacy', locale), label: t(locale, 'legal.privacy') },
+  { href: localizePath('terms', locale), label: t(locale, 'legal.terms') },
+  { href: localizePath('disputes', locale), label: t(locale, 'legal.disputes') },
+  { href: localizePath('cookies', locale), label: t(locale, 'legal.cookies') },
+];
+const year = new Date().getFullYear();
+---
+<footer class="site-footer bg-areia text-tinta">
+  <div class="container-site grid gap-12 py-16 md:grid-cols-12 md:py-20">
+    <div class="md:col-span-4">
+      <Logo locale={locale} class="text-verde-900" />
+      <p class="mt-6 max-w-xs text-sm leading-relaxed text-tinta-suave">{tr(settings.hero.lead, locale)}</p>
+      <ul class="mt-6 space-y-2 text-sm">
+        <li><a class="inline-flex items-center gap-2 hover:text-verde-700" href={settings.phoneHref}><Icon name="phone" size={15} />{settings.phone}</a></li>
+        <li><a class="inline-flex items-center gap-2 hover:text-verde-700" href={`mailto:${settings.email}`}><Icon name="mail" size={15} />{settings.email}</a></li>
+        <li class="inline-flex items-center gap-2 text-tinta-suave"><Icon name="clock" size={15} />{tr(settings.hours, locale)}</li>
+      </ul>
+    </div>
+    <nav class="grid grid-cols-2 gap-10 md:col-span-5" aria-label={t(locale, 'footer.explore')}>
+      <div>
+        <p class="eyebrow text-tinta-suave">{t(locale, 'footer.firm')}</p>
+        <ul class="mt-5 space-y-2.5 text-[0.9375rem]">
+          {firm?.children?.map((c) => <li><a class="hover:text-verde-700" href={c.href}>{c.label}</a></li>)}
+        </ul>
+      </div>
+      <div>
+        <p class="eyebrow text-tinta-suave">{t(locale, 'footer.explore')}</p>
+        <ul class="mt-5 space-y-2.5 text-[0.9375rem]">
+          {explore.map((c) => <li><a class="hover:text-verde-700" href={c.href}>{c.label}</a></li>)}
+        </ul>
+      </div>
+    </nav>
+    <div class="md:col-span-3">
+      <p class="eyebrow text-tinta-suave">{t(locale, 'contact.offices')}</p>
+      <ul class="mt-5 space-y-5 text-[0.9375rem]">
+        {offices.map((o) => (
+          <li>
+            <p class="font-medium">{o.name}</p>
+            <p class="mt-1 text-sm text-tinta-suave">{tr(o.address, locale)}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-areia-escura">
+    <div class="container-site flex flex-col gap-4 py-6 text-[0.8125rem] text-tinta-suave md:flex-row md:items-center md:justify-between">
+      <p>© {year} Carreto Lages &amp; Associados — {t(locale, 'brand.tagline')}. {t(locale, 'footer.rights')}</p>
+      <nav aria-label={t(locale, 'footer.legal')}>
+        <ul class="flex flex-wrap gap-x-5 gap-y-2">
+          {legal.map((l) => <li><a class="hover:text-verde-700" href={l.href}>{l.label}</a></li>)}
+        </ul>
+      </nav>
+      <a href="#top" class="inline-flex items-center gap-2 hover:text-verde-700">{t(locale, 'cta.backToTop')}<Icon name="arrow-up" size={14} /></a>
+    </div>
+    {designPreview && <p class="container-site pb-6 text-xs text-tinta-suave">{t(locale, 'footer.preview')}</p>}
+  </div>
+</footer>

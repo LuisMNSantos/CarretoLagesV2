@@ -184,3 +184,7 @@
     }
   }
 }
+
+/* Solid-header pages start below the fixed header; mobile keeps room for the sticky CTA bar. */
+html[data-header='solid'] main { padding-top: 5rem; }
+@media (max-width: 1279px) { body { padding-bottom: 3.5rem; } }
