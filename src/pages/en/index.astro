@@ -1,0 +1,9 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/home/Hero.astro';
+import { settings, tr } from '../../lib/content';
+const locale = 'en';
+---
+<Base locale={locale} title={tr(settings.seo.homeTitle, locale)} description={tr(settings.seo.homeDescription, locale)} alternates={{ pt: '/', en: '/en' }} headerVariant="overlay">
+  <Hero locale={locale} />
+</Base>

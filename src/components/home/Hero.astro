@@ -1,0 +1,154 @@
+---
+import { getImage } from 'astro:assets';
+import posterLandscape from '../../assets/hero-poster.jpg';
+import posterPortrait from '../../assets/hero-poster-portrait.jpg';
+import Icon from '../shared/Icon.astro';
+import { settings, tr } from '../../lib/content';
+import { t } from '../../i18n/ui';
+import type { Locale } from '../../i18n/locale';
+
+export interface Props { locale: Locale }
+const { locale } = Astro.props;
+
+// Poster = LCP element. Art-directed: 9:16 crop on portrait phones, 16:9 elsewhere.
+const portraitMq = '(orientation: portrait) and (max-width: 767px)';
+const [pAvif, pWebp, lAvif, lWebp, fallback] = await Promise.all([
+  getImage({ src: posterPortrait, format: 'avif', widths: [480, 720], quality: 55 }),
+  getImage({ src: posterPortrait, format: 'webp', widths: [480, 720], quality: 58 }),
+  getImage({ src: posterLandscape, format: 'avif', widths: [960, 1440, 1920], quality: 38 }),
+  getImage({ src: posterLandscape, format: 'webp', widths: [960, 1280], quality: 48 }),
+  getImage({ src: posterLandscape, format: 'jpg', width: 1024, quality: 55 }),
+]);
+const sizes = '100vw';
+const h = settings.hero;
+---
+<section class="hero on-dark relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-verde-900 text-marfim" data-hero aria-labelledby="hero-title">
+  <div class="absolute inset-0 -z-10" aria-hidden="true">
+    <picture>
+      <source media={portraitMq} type="image/avif" srcset={pAvif.srcSet.attribute} sizes={sizes} />
+      <source media={portraitMq} type="image/webp" srcset={pWebp.srcSet.attribute} sizes={sizes} />
+      <source type="image/avif" srcset={lAvif.srcSet.attribute} sizes={sizes} />
+      <source type="image/webp" srcset={lWebp.srcSet.attribute} sizes={sizes} />
+      <img
+        src={fallback.src}
+        alt=""
+        width="1920"
+        height="1080"
+        loading="eager"
+        fetchpriority="high"
+        decoding="sync"
+        class="hero-media h-full w-full object-cover"
+        data-hero-poster
+      />
+    </picture>
+    <video
+      class="hero-media hero-video absolute inset-0 h-full w-full object-cover"
+      muted
+      loop
+      playsinline
+      preload="none"
+      aria-hidden="true"
+      tabindex="-1"
+      data-hero-video
+      data-mobile-mp4="/video/hero-mobile.mp4"
+      data-mobile-webm="/video/hero-mobile.webm"
+      data-tablet-mp4="/video/hero-tablet.mp4"
+      data-tablet-webm="/video/hero-tablet.webm"
+      data-desktop-mp4="/video/hero-desktop.mp4"
+      data-desktop-webm="/video/hero-desktop.webm"
+    ></video>
+    <div class="hero-veil absolute inset-0"></div>
+  </div>
+
+  <div class="container-site flex flex-1 flex-col justify-end pb-10 pt-32 md:pb-16 lg:justify-center lg:pb-24">
+    <div class="max-w-[56rem]">
+      <p class="eyebrow text-marfim/85">{tr(h.eyebrow, locale)}</p>
+      <h1 id="hero-title" class="display-1 mt-6 text-marfim">
+        <span class="block">{tr(h.title[0], locale)}</span>
+        <span class="block">{tr(h.title[1], locale)}</span>
+      </h1>
+      <p class="lead mt-6 max-w-[30rem] text-marfim/85">{tr(h.lead, locale)}</p>
+      <div class="mt-9 flex flex-wrap items-center gap-x-6 gap-y-4">
+        <a class="btn btn-bronze" href="#contacto">
+          {t(locale, 'cta.book')}
+          <Icon name="arrow-up-right" size={16} />
+        </a>
+        <a class="inline-flex items-center gap-2.5 text-[0.9375rem] text-marfim/90 hover:text-marfim" href={settings.phoneHref}>
+          <Icon name="phone" size={17} />
+          <span>{settings.phone}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-site hidden pb-10 md:block">
+    <div class="ml-auto max-w-[24rem] border-t border-marfim/25 pr-16 pt-5">
+      <p class="text-[0.6875rem] uppercase tracking-[0.22em] text-marfim/80">{tr(h.caption, locale)}</p>
+      <p class="mt-2 text-sm text-marfim/70">{t(locale, 'hero.videoCaption')}</p>
+    </div>
+  </div>
+  <button
+    type="button"
+    class="hero-toggle icon-circle absolute bottom-6 right-5 border-marfim/40 bg-verde-900/30 text-marfim hover:border-marfim md:bottom-10 md:right-10"
+    aria-pressed="false"
+    aria-label={t(locale, 'hero.pause')}
+    data-label-pause={t(locale, 'hero.pause')}
+    data-label-play={t(locale, 'hero.play')}
+    data-hero-toggle
+    data-state="loading"
+  >
+    <Icon name="pause" size={16} class="icon-pause" />
+    <Icon name="play" size={16} class="icon-play" />
+  </button>
+</section>
+
+<section class="bg-areia" aria-label={locale === 'pt' ? 'Os nossos compromissos' : 'Our commitments'}>
+  <div class="container-site grid gap-8 py-10 md:grid-cols-3 md:gap-10 md:py-12">
+    {settings.pillars.map((p) => (
+      <div class="flex items-start gap-4">
+        <span class="icon-circle border-areia-escura bg-marfim-claro text-verde-700"><Icon name={p.icon} size={18} /></span>
+        <div>
+          <p class="text-[1.0625rem] font-medium text-tinta">{tr(p.title, locale)}</p>
+          <p class="mt-1 text-sm leading-relaxed text-tinta-suave">{tr(p.text, locale)}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+  <div class="container-site">
+    <dl class="grid grid-cols-2 border-t border-areia-escura md:grid-cols-4">
+      {settings.stats.map((s, i) => (
+        <div class:list={['py-6 md:py-7', i % 2 === 1 && 'pl-6 md:pl-0', i > 0 && 'md:pl-8', i < 3 && 'md:border-r md:border-areia-escura']}>
+          <dt class="text-xs uppercase tracking-[0.18em] text-tinta-suave">{tr(s.label, locale)}</dt>
+          <dd class="mt-1 text-[2rem] font-light leading-none tracking-tight text-verde-700">{s.value}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>
+
+<style>
+  .hero-veil {
+    background:
+      linear-gradient(180deg, rgb(15 36 29 / 0.55) 0%, rgb(15 36 29 / 0) 22%),
+      linear-gradient(0deg, rgb(15 36 29 / 0.94) 0%, rgb(15 36 29 / 0.7) 45%, rgb(15 36 29 / 0.25) 75%, rgb(15 36 29 / 0.15) 100%);
+  }
+  @media (min-width: 1024px) {
+    .hero-veil {
+      background:
+        linear-gradient(180deg, rgb(15 36 29 / 0.5) 0%, rgb(15 36 29 / 0) 20%),
+        linear-gradient(90deg, rgb(15 36 29 / 0.92) 0%, rgb(15 36 29 / 0.8) 32%, rgb(15 36 29 / 0.35) 60%, rgb(15 36 29 / 0.1) 100%);
+    }
+  }
+  .hero-media { filter: saturate(0.82); }
+  .hero-video { opacity: 0; transition: opacity 1.2s var(--ease-calm); }
+  [data-video='playing'] .hero-video { opacity: 1; }
+  .hero-toggle .icon-play { display: none; }
+  .hero-toggle[data-state='paused'] .icon-play { display: block; }
+  .hero-toggle[data-state='paused'] .icon-pause { display: none; }
+  .hero-toggle[data-state='loading'] { visibility: hidden; }
+</style>
+
+<script>
+  import { initHeroVideo } from '../../scripts/hero-video';
+  document.querySelectorAll<HTMLElement>('[data-hero]').forEach((el) => initHeroVideo(el));
+</script>

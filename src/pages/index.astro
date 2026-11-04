@@ -1,6 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
+import Hero from '../components/home/Hero.astro';
+import { settings, tr } from '../lib/content';
+const locale = 'pt';
 ---
-<Base locale="pt" title="Carreto Lages & Associados" description="Escritório de advogados em Aveiro e Oliveira de Frades." alternates={{ pt: '/', en: '/en' }}>
-  <h1 class="display-1 container-site py-24">Carreto Lages</h1>
+<Base locale={locale} title={tr(settings.seo.homeTitle, locale)} description={tr(settings.seo.homeDescription, locale)} alternates={{ pt: '/', en: '/en' }} headerVariant="overlay">
+  <Hero locale={locale} />
 </Base>

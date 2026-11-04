@@ -18,3 +18,4 @@ docs/**/*.fdb_latexmk
 docs/**/*.synctex.gz
 .DS_Store
 Thumbs.db
+.tmp-*
