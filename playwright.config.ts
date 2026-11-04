@@ -13,7 +13,7 @@ export default defineConfig({
     { name: 'mobile', use: { ...devices['Pixel 7'], viewport: { width: 390, height: 844 }, channel: 'chrome', defaultBrowserType: 'chromium' } },
     { name: 'nojs', use: { viewport: { width: 390, height: 844 }, javaScriptEnabled: false, channel: 'chrome' } },
   ],
-  webServer: external
-    ? undefined
-    : { command: 'npm run build && npm run preview', url: baseURL, reuseExistingServer: true, timeout: 180_000 },
+  ...(external
+    ? {}
+    : { webServer: { command: 'npm run build && npm run preview', url: baseURL, reuseExistingServer: true, timeout: 180_000 } }),
 });
