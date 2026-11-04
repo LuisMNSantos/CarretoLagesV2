@@ -1,0 +1,73 @@
+---
+import { Picture } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import Blocks from '../shared/Blocks.astro';
+import CtaBand from '../shared/CtaBand.astro';
+import Icon from '../shared/Icon.astro';
+import { areaById, tr, type Lawyer } from '../../lib/content';
+import { teamPhoto } from '../../lib/images';
+import { initials } from '../../lib/initials';
+import { localizePath } from '../../i18n/routes';
+import { t } from '../../i18n/ui';
+import type { Locale } from '../../i18n/locale';
+
+export interface Props { locale: Locale; lawyer: Lawyer; jsonLd?: object[] }
+const { locale, lawyer, jsonLd } = Astro.props;
+const areaList = lawyer.areas.map((id) => areaById(id)).filter((a) => a !== undefined);
+---
+<Base
+  locale={locale}
+  title={`${lawyer.name} — ${tr(lawyer.role, locale)} — Carreto Lages & Associados`}
+  description={`${lawyer.name}, ${tr(lawyer.role, locale)} — Carreto Lages & Associados.`}
+  alternates={{ pt: localizePath('lawyers', 'pt', lawyer.slug), en: localizePath('lawyers', 'en', lawyer.slug) }}
+  jsonLd={jsonLd}
+>
+  <section class="pb-20 pt-10 md:pb-28 md:pt-16" aria-labelledby="page-title">
+    <div class="container-site">
+      <nav aria-label={t(locale, 'breadcrumb.label')} class="mb-10 text-[0.8125rem] text-tinta-suave">
+        <ol class="flex flex-wrap items-center gap-2">
+          <li><a class="hover:text-verde-700" href={localizePath('home', locale)}>{t(locale, 'nav.home')}</a></li>
+          <li class="flex items-center gap-2"><Icon name="arrow-right" size={12} class="opacity-50" /><a class="hover:text-verde-700" href={localizePath('lawyers', locale)}>{t(locale, 'nav.lawyers')}</a></li>
+          <li class="flex items-center gap-2"><Icon name="arrow-right" size={12} class="opacity-50" /><span aria-current="page" class="text-tinta">{lawyer.name}</span></li>
+        </ol>
+      </nav>
+      <div class="grid gap-12 md:grid-cols-12">
+        <div class="md:col-span-5">
+          <div class="aspect-[4/5] overflow-hidden rounded-md bg-areia">
+            {lawyer.photo ? (
+              <Picture src={teamPhoto(lawyer.photo)} alt={lawyer.name} widths={[480, 720, 960]} sizes="(min-width: 768px) 40vw, 92vw" formats={['avif', 'webp']} quality={70} loading="eager" class="h-full w-full object-cover object-top" />
+            ) : (
+              <div class="grid h-full place-items-center bg-gradient-to-br from-areia to-areia-escura" role="img" aria-label={lawyer.name}>
+                <span class="font-logo text-[6rem] tracking-[0.06em] text-verde-700/80" aria-hidden="true">{initials(lawyer.name)}</span>
+              </div>
+            )}
+          </div>
+        </div>
+        <div class="md:col-span-6 md:col-start-7 md:pt-6">
+          <p class="eyebrow text-tinta-suave">{tr(lawyer.role, locale)}</p>
+          <h1 id="page-title" class="display-1 mt-6 text-tinta">{lawyer.name}</h1>
+          {areaList.length > 0 && (
+            <div class="mt-8">
+              <p class="text-xs uppercase tracking-[0.18em] text-tinta-suave">{t(locale, 'team.areas')}</p>
+              <ul class="mt-3 flex flex-wrap gap-2">
+                {areaList.map((a) => <li><a href={localizePath('areas', locale, tr(a.slug, locale))} class="inline-flex min-h-9 items-center rounded-full bg-areia px-3.5 text-sm hover:bg-areia-escura">{tr(a.title, locale)}</a></li>)}
+              </ul>
+            </div>
+          )}
+          <div class="mt-10 border-t border-areia-escura pt-8">
+            <h2 class="text-xs uppercase tracking-[0.18em] text-tinta-suave">{t(locale, 'team.bio')}</h2>
+            <Blocks blocks={lawyer.bio} locale={locale} class="mt-4" />
+          </div>
+          <div class="mt-10 flex flex-wrap gap-4">
+            <a href={`mailto:${lawyer.email}`} class="btn btn-verde"><Icon name="mail" size={16} />{t(locale, 'team.contactLawyer')} {lawyer.name.split(' ')[0]}</a>
+            {lawyer.linkedin && <a href={lawyer.linkedin} class="btn btn-ghost" rel="noopener" target="_blank">LinkedIn<Icon name="arrow-up-right" size={14} /></a>}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <CtaBand locale={locale} />
+</Base>
+<style>
+  :global(.aspect-\[4\/5\] picture) { display: block; height: 100%; }
+</style>

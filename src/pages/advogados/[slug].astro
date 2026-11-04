@@ -1,0 +1,11 @@
+---
+import LawyerPage from '../../components/pages/LawyerPage.astro';
+import { lawyers, visible } from '../../lib/content';
+import { pageJsonLd } from '../../lib/page-jsonld';
+
+export function getStaticPaths() {
+  return visible(lawyers, 'pt').map((x) => ({ params: { slug: x.slug }, props: { x } }));
+}
+const { x } = Astro.props;
+---
+<LawyerPage locale="pt" lawyer={x} jsonLd={pageJsonLd('lawyers', x, 'pt')} />

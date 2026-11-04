@@ -1,0 +1,10 @@
+---
+import InsightPage from '../../components/pages/InsightPage.astro';
+import { insights, visible } from '../../lib/content';
+
+export function getStaticPaths() {
+  return visible(insights, 'pt').map((x) => ({ params: { slug: x.slug.pt! }, props: { x } }));
+}
+const { x } = Astro.props;
+---
+<InsightPage locale="pt" item={x} />

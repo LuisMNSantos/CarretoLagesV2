@@ -1,0 +1,41 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../shared/PageHero.astro';
+import LawyerCard from '../shared/LawyerCard.astro';
+import CtaBand from '../shared/CtaBand.astro';
+import { lawyers, visible } from '../../lib/content';
+import { localizePath } from '../../i18n/routes';
+import { t } from '../../i18n/ui';
+import type { Locale } from '../../i18n/locale';
+
+export interface Props { locale: Locale }
+const { locale } = Astro.props;
+const list = visible(lawyers, locale);
+const groups = [
+  { key: 'partner', label: t(locale, 'team.partners') },
+  { key: 'associate', label: t(locale, 'team.associates') },
+  { key: 'consultant', label: t(locale, 'team.consultants') },
+] as const;
+---
+<Base
+  locale={locale}
+  title={`${t(locale, 'nav.lawyers')} — Carreto Lages & Associados`}
+  description={t(locale, 'team.lead')}
+  alternates={{ pt: localizePath('lawyers', 'pt'), en: localizePath('lawyers', 'en') }}
+>
+  <PageHero locale={locale} eyebrow={t(locale, 'team.eyebrow')} title={[t(locale, 'team.title1'), t(locale, 'team.title2')]} lead={t(locale, 'team.lead')} crumbs={[{ label: t(locale, 'nav.lawyers') }]} />
+  {groups.map((g) => {
+    const people = list.filter((l) => l.group === g.key);
+    return people.length > 0 && (
+      <section class="pb-20" aria-labelledby={`group-${g.key}`}>
+        <div class="container-site">
+          <h2 id={`group-${g.key}`} class="eyebrow border-t border-areia-escura pt-6 text-tinta-suave">{g.label}</h2>
+          <ul class:list={['mt-10 grid gap-x-8 gap-y-12', g.key === 'partner' ? 'sm:grid-cols-2 md:grid-cols-3' : 'grid-cols-2 md:grid-cols-4']}>
+            {people.map((l) => <li><LawyerCard lawyer={l} locale={locale} size={g.key === 'partner' ? 'lg' : 'sm'} /></li>)}
+          </ul>
+        </div>
+      </section>
+    );
+  })}
+  <CtaBand locale={locale} />
+</Base>

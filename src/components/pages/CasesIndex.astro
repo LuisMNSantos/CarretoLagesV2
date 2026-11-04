@@ -1,0 +1,27 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../shared/PageHero.astro';
+import CaseCard from '../shared/CaseCard.astro';
+import CtaBand from '../shared/CtaBand.astro';
+import { cases, visible } from '../../lib/content';
+import { localizePath } from '../../i18n/routes';
+import { t } from '../../i18n/ui';
+import type { Locale } from '../../i18n/locale';
+import { allRoutes } from '../../lib/all-routes';
+
+export interface Props { locale: Locale }
+const { locale } = Astro.props;
+const list = visible(cases, locale);
+const alt = allRoutes().find((r) => r.path === localizePath('cases', locale))?.alternates ?? {};
+---
+<Base locale={locale} title={`${t(locale, 'nav.cases')} — Carreto Lages & Associados`} description={`${t(locale, 'cases.title1')} ${t(locale, 'cases.title2')}`} alternates={alt}>
+  <PageHero locale={locale} eyebrow={t(locale, 'cases.eyebrow')} title={[t(locale, 'cases.title1'), t(locale, 'cases.title2')]} crumbs={[{ label: t(locale, 'nav.cases') }]} />
+  <section class="pb-24">
+    <div class="container-site">
+      <ul class="grid gap-4 md:grid-cols-3 md:gap-6">
+        {list.map((c) => <li><CaseCard item={c} locale={locale} headingLevel="h2" /></li>)}
+      </ul>
+    </div>
+  </section>
+  <CtaBand locale={locale} />
+</Base>

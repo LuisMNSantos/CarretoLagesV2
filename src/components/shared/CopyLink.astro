@@ -1,0 +1,21 @@
+---
+import Icon from './Icon.astro';
+import { t } from '../../i18n/ui';
+import type { Locale } from '../../i18n/locale';
+export interface Props { locale: Locale }
+const { locale } = Astro.props;
+---
+<button type="button" class="btn btn-ghost min-h-11 px-4 py-2 text-sm" data-copy-link data-done={t(locale, 'cta.linkCopied')}>
+  <Icon name="link" size={15} /><span data-copy-label>{t(locale, 'cta.copyLink')}</span>
+</button>
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-copy-link]').forEach((b) => {
+    b.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(location.href);
+        const label = b.querySelector('[data-copy-label]');
+        if (label) label.textContent = b.dataset.done ?? '';
+      } catch { /* clipboard unavailable: nothing to do */ }
+    });
+  });
+</script>

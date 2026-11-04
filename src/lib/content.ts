@@ -5,17 +5,17 @@ import {
   settingsSchema, situationSchema, stepSchema, testimonialSchema,
   type Localized, type Page, type PageId,
 } from '../content/schemas';
-import settingsJson from '../content/settings.json';
-import officesJson from '../content/offices.json';
-import areasJson from '../content/areas.json';
-import situationsJson from '../content/situations.json';
-import stepsJson from '../content/steps.json';
-import lawyersJson from '../content/lawyers.json';
-import casesJson from '../content/cases.json';
-import testimonialsJson from '../content/testimonials.json';
-import faqJson from '../content/faq.json';
-import insightsJson from '../content/insights.json';
-import pagesJson from '../content/pages.json';
+import settingsJson from '../content/settings.json' with { type: 'json' };
+import officesJson from '../content/offices.json' with { type: 'json' };
+import areasJson from '../content/areas.json' with { type: 'json' };
+import situationsJson from '../content/situations.json' with { type: 'json' };
+import stepsJson from '../content/steps.json' with { type: 'json' };
+import lawyersJson from '../content/lawyers.json' with { type: 'json' };
+import casesJson from '../content/cases.json' with { type: 'json' };
+import testimonialsJson from '../content/testimonials.json' with { type: 'json' };
+import faqJson from '../content/faq.json' with { type: 'json' };
+import insightsJson from '../content/insights.json' with { type: 'json' };
+import pagesJson from '../content/pages.json' with { type: 'json' };
 import { designPreview } from './env';
 
 export * from '../content/schemas';

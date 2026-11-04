@@ -1,0 +1,49 @@
+---
+/** Contact, thank-you and 404 pages share this small component. */
+import Base from '../../layouts/Base.astro';
+import PageHero from '../shared/PageHero.astro';
+import ContactSection from '../shared/ContactSection.astro';
+import Icon from '../shared/Icon.astro';
+import { settings, tr } from '../../lib/content';
+import { localizePath } from '../../i18n/routes';
+import { t } from '../../i18n/ui';
+import type { Locale } from '../../i18n/locale';
+
+export interface Props { locale: Locale; kind: 'contact' | 'thanks' | 'notFound' }
+const { locale, kind } = Astro.props;
+const alternates =
+  kind === 'contact' ? { pt: localizePath('contact', 'pt'), en: localizePath('contact', 'en') }
+  : kind === 'thanks' ? { pt: localizePath('thanks', 'pt'), en: localizePath('thanks', 'en') }
+  : {};
+const title = kind === 'contact' ? t(locale, 'nav.contact') : kind === 'thanks' ? t(locale, 'thanks.title1') : t(locale, 'notFound.title2');
+---
+<Base locale={locale} title={`${title} — Carreto Lages & Associados`} description={tr(settings.seo.homeDescription, locale)} alternates={alternates}>
+  {kind === 'contact' && (
+    <>
+      <PageHero locale={locale} eyebrow={t(locale, 'nav.contact')} title={[locale === 'pt' ? 'Fale connosco.' : 'Talk to us.']} lead={tr(settings.responsePromise, locale)} crumbs={[{ label: t(locale, 'nav.contact') }]}>
+        <ul class="mt-8 flex flex-wrap gap-x-8 gap-y-3 text-[0.9375rem] text-tinta">
+          <li><a class="inline-flex items-center gap-2 hover:text-verde-700" href={settings.phoneHref}><Icon name="phone" size={16} />{settings.phone}</a></li>
+          <li><a class="inline-flex items-center gap-2 hover:text-verde-700" href={`mailto:${settings.email}`}><Icon name="mail" size={16} />{settings.email}</a></li>
+          <li class="inline-flex items-center gap-2 text-tinta-suave"><Icon name="clock" size={16} />{tr(settings.hours, locale)}</li>
+        </ul>
+      </PageHero>
+      <ContactSection locale={locale} />
+    </>
+  )}
+  {kind !== 'contact' && (
+    <section class="grid min-h-[70vh] place-items-center py-24" aria-labelledby="page-title">
+      <div class="container-site max-w-3xl text-center">
+        <span class="icon-circle mx-auto size-14 border-bronze text-verde-700" aria-hidden="true"><Icon name={kind === 'thanks' ? 'conversation' : 'map'} size={22} /></span>
+        <h1 id="page-title" class="display-1 mt-8 text-tinta">
+          <span class="block">{t(locale, kind === 'thanks' ? 'thanks.title1' : 'notFound.title1')}</span>
+          <span class="block">{t(locale, kind === 'thanks' ? 'thanks.title2' : 'notFound.title2')}</span>
+        </h1>
+        <p class="lead mx-auto mt-6 max-w-xl text-tinta-suave">{t(locale, kind === 'thanks' ? 'thanks.lead' : 'notFound.lead')}</p>
+        <div class="mt-10 flex flex-wrap justify-center gap-4">
+          <a href={localizePath('home', locale)} class="btn btn-verde">{t(locale, 'cta.backHome')}<Icon name="arrow-up-right" size={16} /></a>
+          <a href={settings.phoneHref} class="btn btn-ghost"><Icon name="phone" size={16} />{settings.phone}</a>
+        </div>
+      </div>
+    </section>
+  )}
+</Base>

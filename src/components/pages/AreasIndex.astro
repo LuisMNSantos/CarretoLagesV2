@@ -1,0 +1,55 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../shared/PageHero.astro';
+import StockImage from '../shared/StockImage.astro';
+import CtaBand from '../shared/CtaBand.astro';
+import Icon from '../shared/Icon.astro';
+import { areas, settings, tr, visible } from '../../lib/content';
+import { localizePath } from '../../i18n/routes';
+import { t } from '../../i18n/ui';
+import type { Locale } from '../../i18n/locale';
+
+export interface Props { locale: Locale }
+const { locale } = Astro.props;
+const s = settings.sections.areas;
+const list = visible(areas, locale);
+---
+<Base
+  locale={locale}
+  title={`${t(locale, 'nav.areas')} — Carreto Lages & Associados`}
+  description={tr(s.lead, locale)}
+  alternates={{ pt: localizePath('areas', 'pt'), en: localizePath('areas', 'en') }}
+>
+  <PageHero locale={locale} eyebrow={tr(s.eyebrow, locale)} title={[tr(s.title[0], locale), tr(s.title[1], locale)]} lead={tr(s.lead, locale)} crumbs={[{ label: t(locale, 'nav.areas') }]} />
+  <section class="pb-24">
+    <div class="container-site">
+      <ul class="space-y-4 md:space-y-6">
+        {list.map((a, i) => (
+          <li>
+            <a href={localizePath('areas', locale, tr(a.slug, locale))} class="card group grid overflow-hidden transition-colors hover:bg-areia md:grid-cols-12">
+              <div class="aspect-[16/9] md:col-span-5 md:aspect-auto md:min-h-[18rem]">
+                <StockImage id={a.image} sizes="(min-width: 768px) 40vw, 92vw" />
+              </div>
+              <div class="flex flex-col p-7 md:col-span-7 md:p-10">
+                <div class="flex items-center justify-between">
+                  <p class="eyebrow text-tinta-suave">{tr(a.eyebrow, locale)}</p>
+                  <span class="text-sm tabular-nums text-tinta-suave">{String(i + 1).padStart(2, '0')}</span>
+                </div>
+                <h2 class="mt-6 text-[clamp(1.6rem,2.6vw,2.25rem)] text-tinta">
+                  <span class="block">{tr(a.headline[0], locale)}</span>
+                  <span class="block">{tr(a.headline[1], locale)}</span>
+                </h2>
+                <p class="mt-4 max-w-lg text-[0.9375rem] leading-relaxed text-tinta-suave">{tr(a.summary, locale)}</p>
+                <div class="mt-auto flex items-end justify-between gap-4 pt-8">
+                  <p class="text-xs text-tinta-suave">{a.keywords.map((k) => tr(k, locale)).join(' · ')}</p>
+                  <span class="icon-circle group-hover:border-verde-700 group-hover:bg-verde-700 group-hover:text-marfim" aria-hidden="true"><Icon name="arrow-up-right" size={15} /></span>
+                </div>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+  <CtaBand locale={locale} />
+</Base>

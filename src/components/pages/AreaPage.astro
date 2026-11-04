@@ -1,0 +1,83 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../shared/PageHero.astro';
+import Blocks from '../shared/Blocks.astro';
+import LawyerCard from '../shared/LawyerCard.astro';
+import ContactSection from '../shared/ContactSection.astro';
+import Icon from '../shared/Icon.astro';
+import { lawyers, situations, tr, visible, type Area } from '../../lib/content';
+import { localizePath } from '../../i18n/routes';
+import { t } from '../../i18n/ui';
+import type { Locale } from '../../i18n/locale';
+
+export interface Props { locale: Locale; area: Area; jsonLd?: object[] }
+const { locale, area, jsonLd } = Astro.props;
+const related = visible(situations, locale).filter((s) => s.area === area.id);
+const team = visible(lawyers, locale).filter((l) => l.areas.includes(area.id));
+---
+<Base
+  locale={locale}
+  title={`${tr(area.title, locale)} — Carreto Lages & Associados`}
+  description={tr(area.metaDescription, locale)}
+  alternates={{ pt: localizePath('areas', 'pt', area.slug.pt), en: area.slug.en ? localizePath('areas', 'en', area.slug.en) : undefined }}
+  jsonLd={jsonLd}
+>
+  <PageHero
+    locale={locale}
+    eyebrow={tr(area.eyebrow, locale)}
+    title={[tr(area.headline[0], locale), tr(area.headline[1], locale)]}
+    lead={tr(area.summary, locale)}
+    image={area.image}
+    crumbs={[{ label: t(locale, 'nav.areas'), href: localizePath('areas', locale) }, { label: tr(area.title, locale) }]}
+  />
+
+  <section class="pb-20 md:pb-28">
+    <div class="container-site grid gap-14 md:grid-cols-12">
+      <div class="md:col-span-6">
+        <Blocks blocks={area.description} locale={locale} />
+      </div>
+      <div class="md:col-span-5 md:col-start-8">
+        <h2 class="eyebrow text-tinta-suave">{t(locale, 'area.whatWeDo')}</h2>
+        <ul class="mt-6 border-t border-areia-escura">
+          {area.services.map((s) => (
+            <li class="flex items-start gap-4 border-b border-areia-escura py-4 text-[1.0625rem] text-tinta">
+              <span class="mt-2.5 size-1.5 shrink-0 rounded-full bg-bronze" aria-hidden="true"></span>{tr(s, locale)}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  {related.length > 0 && (
+    <section class="bg-marfim-claro py-20" aria-labelledby="area-situations">
+      <div class="container-site">
+        <h2 id="area-situations" class="eyebrow text-tinta-suave">{t(locale, 'area.situations')}</h2>
+        <ul class="mt-8 grid gap-4 md:grid-cols-2">
+          {related.map((s) => (
+            <li class="card bg-marfim p-7 md:p-9">
+              <p class="text-[0.625rem] uppercase tracking-[0.22em] text-tinta-suave">{tr(s.eyebrow, locale)}</p>
+              <p class="mt-3 text-[1.375rem] leading-snug text-tinta">{tr(s.prompt, locale)}</p>
+              <p class="mt-4 text-[0.9375rem] leading-relaxed text-tinta-suave">{tr(s.body, locale)}</p>
+              <ul class="mt-5 flex flex-wrap gap-2">{s.tags.map((tag) => <li class="rounded-full bg-areia px-3 py-1 text-xs">{tr(tag, locale)}</li>)}</ul>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  {team.length > 0 && (
+    <section class="py-20" aria-labelledby="area-team">
+      <div class="container-site">
+        <h2 id="area-team" class="eyebrow text-tinta-suave">{t(locale, 'area.lawyers')}</h2>
+        <ul class="mt-8 grid gap-8 sm:grid-cols-2 md:grid-cols-4">
+          {team.map((l) => <li><LawyerCard lawyer={l} locale={locale} size="sm" /></li>)}
+        </ul>
+        <a href={localizePath('lawyers', locale)} class="link-arrow mt-10 text-verde-700">{t(locale, 'cta.meetTeam')}<Icon name="arrow-up-right" size={14} /></a>
+      </div>
+    </section>
+  )}
+
+  <ContactSection locale={locale} preselectArea={area.id} showOffices={false} />
+</Base>

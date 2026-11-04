@@ -1,0 +1,8 @@
+---
+import CasesIndex from '../../components/pages/CasesIndex.astro';
+import { getCollectionCounts } from '../../lib/content';
+import { localizePath } from '../../i18n/routes';
+// Empty collection: the listing is not offered (spec: colecoes vazias).
+if (getCollectionCounts('en').cases === 0) return Astro.redirect(localizePath('home', 'en'));
+---
+<CasesIndex locale="en" />

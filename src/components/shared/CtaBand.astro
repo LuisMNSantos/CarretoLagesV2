@@ -1,0 +1,21 @@
+---
+import Icon from './Icon.astro';
+import { settings } from '../../lib/content';
+import { localizePath } from '../../i18n/routes';
+import { t } from '../../i18n/ui';
+import type { Locale } from '../../i18n/locale';
+export interface Props { locale: Locale; title?: string }
+const { locale, title = t(locale, 'area.ctaTitle') } = Astro.props;
+---
+<section class="on-dark bg-verde-700 text-marfim" aria-label={t(locale, 'cta.book')}>
+  <div class="container-site flex flex-col gap-8 py-16 md:flex-row md:items-center md:justify-between md:py-20">
+    <div>
+      <p class="eyebrow text-marfim/75">{t(locale, 'nav.contact')}</p>
+      <p class="display-3 mt-4 max-w-xl font-light">{title}</p>
+    </div>
+    <div class="flex flex-wrap items-center gap-x-6 gap-y-4">
+      <a href={`${localizePath('contact', locale)}#contacto`} class="btn btn-bronze">{t(locale, 'cta.book')}<Icon name="arrow-up-right" size={16} /></a>
+      <a href={settings.phoneHref} class="inline-flex items-center gap-2 text-marfim/90 hover:text-marfim"><Icon name="phone" size={16} />{settings.phone}</a>
+    </div>
+  </div>
+</section>

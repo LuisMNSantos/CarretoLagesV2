@@ -1,0 +1,62 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../shared/PageHero.astro';
+import Blocks from '../shared/Blocks.astro';
+import CtaBand from '../shared/CtaBand.astro';
+import Icon from '../shared/Icon.astro';
+import { pages, settings, tr, type PageId } from '../../lib/content';
+import { localizePath, type RouteKey } from '../../i18n/routes';
+import { t } from '../../i18n/ui';
+import type { Locale } from '../../i18n/locale';
+
+export interface Props { locale: Locale; id: Extract<PageId, 'firm' | 'history' | 'values' | 'proBono'> }
+const { locale, id } = Astro.props;
+const page = pages[id];
+const key: RouteKey = id;
+const firmLinks = (['history', 'values', 'proBono'] as const).filter((k) => k !== id);
+const label = { history: 'nav.history', values: 'nav.values', proBono: 'nav.proBono' } as const;
+const crumbs = id === 'firm'
+  ? [{ label: t(locale, 'nav.firm') }]
+  : [{ label: t(locale, 'nav.firm'), href: localizePath('firm', locale) }, { label: tr(page.eyebrow, locale) }];
+---
+<Base
+  locale={locale}
+  title={`${tr(page.eyebrow, locale)} — Carreto Lages & Associados`}
+  description={tr(page.metaDescription, locale)}
+  alternates={{ pt: localizePath(key, 'pt'), en: localizePath(key, 'en') }}
+>
+  <PageHero locale={locale} eyebrow={tr(page.eyebrow, locale)} title={[tr(page.title[0], locale), tr(page.title[1], locale)]} lead={tr(page.lead, locale)} image={page.image} crumbs={crumbs} />
+
+  <section class="pb-20 md:pb-28">
+    <div class="container-site grid gap-14 md:grid-cols-12">
+      <div class:list={['md:col-span-7', id === 'values' && 'values-grid']}>
+        <Blocks blocks={page.body} locale={locale} />
+      </div>
+      <aside class="md:col-span-4 md:col-start-9">
+        {id === 'firm' && (
+          <dl class="grid grid-cols-2 gap-6 border-t border-areia-escura pt-6">
+            {settings.stats.map((s) => (
+              <div>
+                <dt class="text-xs uppercase tracking-[0.18em] text-tinta-suave">{tr(s.label, locale)}</dt>
+                <dd class="mt-1 text-[2rem] font-light text-verde-700">{s.value}</dd>
+              </div>
+            ))}
+          </dl>
+        )}
+        <nav aria-label={t(locale, 'nav.firm')} class:list={['mt-10 md:mt-0', id === 'firm' && 'md:mt-10']}>
+          <ul class="space-y-3">
+            {firmLinks.map((k) => (
+              <li>
+                <a href={localizePath(k, locale)} class="card group flex items-center justify-between gap-4 p-5 transition-colors hover:bg-areia">
+                  <span class="text-[1.125rem] text-tinta">{t(locale, label[k])}</span>
+                  <span class="icon-circle group-hover:border-verde-700" aria-hidden="true"><Icon name="arrow-up-right" size={15} /></span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </aside>
+    </div>
+  </section>
+  <CtaBand locale={locale} />
+</Base>

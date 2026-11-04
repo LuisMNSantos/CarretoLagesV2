@@ -1,0 +1,40 @@
+---
+import Icon from './Icon.astro';
+import { localizePath } from '../../i18n/routes';
+import { t } from '../../i18n/ui';
+import type { Locale } from '../../i18n/locale';
+
+export interface Props {
+  locale: Locale;
+  eyebrow: string;
+  title: string;
+  lead: string;
+  date: string;
+  minutes?: number | undefined;
+  crumbs: { label: string; href: string }[];
+}
+const { locale, eyebrow, title, lead, date, minutes, crumbs } = Astro.props;
+const formatted = new Intl.DateTimeFormat(locale === 'pt' ? 'pt-PT' : 'en-GB', { dateStyle: 'long' }).format(new Date(date));
+---
+<header class="pb-12 pt-10 md:pb-16 md:pt-16">
+  <div class="container-site">
+    <nav aria-label={t(locale, 'breadcrumb.label')} class="mb-10 text-[0.8125rem] text-tinta-suave">
+      <ol class="flex flex-wrap items-center gap-2">
+        <li><a class="hover:text-verde-700" href={localizePath('home', locale)}>{t(locale, 'nav.home')}</a></li>
+        {crumbs.map((c) => <li class="flex items-center gap-2"><Icon name="arrow-right" size={12} class="opacity-50" /><a class="hover:text-verde-700" href={c.href}>{c.label}</a></li>)}
+      </ol>
+    </nav>
+    <div class="max-w-4xl">
+      <div class="flex flex-wrap items-center gap-4">
+        <p class="eyebrow text-tinta-suave">{eyebrow}</p>
+        <slot />
+      </div>
+      <h1 id="page-title" class="display-2 mt-6 text-tinta">{title}</h1>
+      <p class="lead mt-6 max-w-2xl text-tinta-suave">{lead}</p>
+      <p class="mt-6 text-sm text-tinta-suave">
+        <time datetime={date}>{formatted}</time>
+        {minutes && <span> · {minutes} min</span>}
+      </p>
+    </div>
+  </div>
+</header>

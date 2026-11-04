@@ -29,9 +29,13 @@ export function initCarousel(root: HTMLElement): void {
     return r.right <= t.left + 1 || r.left >= t.right - 1;
   };
 
+  // While a button-driven scroll is running, the button's target is the truth; intermediate
+  // scroll positions (or an interrupted earlier animation) must not overwrite it.
+  let target: { left: number; until: number } | undefined;
   const goTo = (i: number) => {
     current = i;
     const left = slides[i]!.offsetLeft - track.offsetLeft;
+    target = { left, until: performance.now() + 1500 };
     track.scrollTo({ left, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
     render();
   };
@@ -41,6 +45,11 @@ export function initCarousel(root: HTMLElement): void {
 
   let raf = 0;
   track.addEventListener('scroll', () => {
+    if (target) {
+      const arrived = Math.abs(track.scrollLeft - target.left) < 2;
+      if (!arrived && performance.now() < target.until) return;
+      target = undefined;
+    }
     cancelAnimationFrame(raf);
     raf = requestAnimationFrame(() => {
       const x = track.scrollLeft;

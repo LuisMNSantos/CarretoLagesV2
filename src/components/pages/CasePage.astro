@@ -1,0 +1,47 @@
+---
+import Base from '../../layouts/Base.astro';
+import Blocks from '../shared/Blocks.astro';
+import CtaBand from '../shared/CtaBand.astro';
+import CopyLink from '../shared/CopyLink.astro';
+import PlaceholderBadge from '../shared/PlaceholderBadge.astro';
+import ReadingHeader from '../shared/ReadingHeader.astro';
+import { areaById, tr, type CaseStudy } from '../../lib/content';
+import { localizePath } from '../../i18n/routes';
+import { t } from '../../i18n/ui';
+import type { Locale } from '../../i18n/locale';
+
+export interface Props { locale: Locale; item: CaseStudy }
+const { locale, item } = Astro.props;
+const area = areaById(item.area)!;
+---
+<Base
+  locale={locale}
+  title={`${tr(item.title, locale)} — Carreto Lages & Associados`}
+  description={tr(item.summary, locale)}
+  alternates={{ pt: localizePath('cases', 'pt', item.slug.pt), en: item.slug.en ? localizePath('cases', 'en', item.slug.en) : undefined }}
+>
+  <article>
+    <ReadingHeader
+      locale={locale}
+      eyebrow={tr(area.title, locale)}
+      title={tr(item.title, locale)}
+      lead={tr(item.summary, locale)}
+      date={item.date}
+      crumbs={[{ label: t(locale, 'nav.cases'), href: localizePath('cases', locale) }]}
+    >
+      {item.placeholder && <PlaceholderBadge locale={locale} />}
+    </ReadingHeader>
+    <div class="container-site pb-24">
+      <div class="max-w-[68ch]">
+        <h2 class="eyebrow text-tinta-suave">{t(locale, 'cases.context')}</h2>
+        <Blocks blocks={item.context} locale={locale} class="mt-5" />
+        <div class="mt-12 rounded-md bg-verde-700 p-7 text-marfim md:p-9">
+          <p class="eyebrow text-marfim/75">{t(locale, 'cases.result')}</p>
+          <p class="mt-4 text-[1.375rem] font-light leading-snug">{tr(item.outcome, locale)}</p>
+        </div>
+        <div class="mt-10"><CopyLink locale={locale} /></div>
+      </div>
+    </div>
+  </article>
+  <CtaBand locale={locale} />
+</Base>

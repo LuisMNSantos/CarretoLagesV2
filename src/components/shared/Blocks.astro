@@ -1,0 +1,20 @@
+---
+import { tr, type Block } from '../../lib/content';
+import type { Locale } from '../../i18n/locale';
+export interface Props { blocks: Block[]; locale: Locale; class?: string }
+const { blocks, locale, class: cls = '' } = Astro.props;
+---
+<div class:list={['prose-site text-[1.0625rem] leading-relaxed text-tinta', cls]}>
+  {blocks.map((b) => {
+    if (b.type === 'p') return <p>{tr(b.text, locale)}</p>;
+    if (b.type === 'h2') return <h2>{tr(b.text, locale)}</h2>;
+    if (b.type === 'h3') return <h3>{tr(b.text, locale)}</h3>;
+    if (b.type === 'ul') return <ul>{b.items.map((i) => <li>{tr(i, locale)}</li>)}</ul>;
+    return (
+      <blockquote class="border-l-2 border-bronze pl-5 text-xl font-light">
+        <p>{tr(b.text, locale)}</p>
+        {b.cite && <cite class="mt-2 block text-sm not-italic text-tinta-suave">{tr(b.cite, locale)}</cite>}
+      </blockquote>
+    );
+  })}
+</div>

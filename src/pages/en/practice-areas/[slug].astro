@@ -1,0 +1,11 @@
+---
+import AreaPage from '../../../components/pages/AreaPage.astro';
+import { areas, visible } from '../../../lib/content';
+import { pageJsonLd } from '../../../lib/page-jsonld';
+
+export function getStaticPaths() {
+  return visible(areas, 'en').map((x) => ({ params: { slug: x.slug.en! }, props: { x } }));
+}
+const { x } = Astro.props;
+---
+<AreaPage locale="en" area={x} jsonLd={pageJsonLd('areas', x, 'en')} />

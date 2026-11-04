@@ -1,0 +1,8 @@
+---
+import InsightsIndex from '../components/pages/InsightsIndex.astro';
+import { getCollectionCounts } from '../lib/content';
+import { localizePath } from '../i18n/routes';
+// Empty collection: the listing is not offered (spec: colecoes vazias).
+if (getCollectionCounts('pt').insights === 0) return Astro.redirect(localizePath('home', 'pt'));
+---
+<InsightsIndex locale="pt" />

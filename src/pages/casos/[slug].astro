@@ -1,0 +1,10 @@
+---
+import CasePage from '../../components/pages/CasePage.astro';
+import { cases, visible } from '../../lib/content';
+
+export function getStaticPaths() {
+  return visible(cases, 'pt').map((x) => ({ params: { slug: x.slug.pt! }, props: { x } }));
+}
+const { x } = Astro.props;
+---
+<CasePage locale="pt" item={x} />
