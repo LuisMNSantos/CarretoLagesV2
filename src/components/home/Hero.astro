@@ -142,9 +142,9 @@ const h = settings.hero;
   .hero-media { filter: saturate(0.82); }
   .hero-video { opacity: 0; transition: opacity 1.2s var(--ease-calm); }
   [data-video='playing'] .hero-video { opacity: 1; }
-  .hero-toggle .icon-play { display: none; }
-  .hero-toggle[data-state='paused'] .icon-play { display: block; }
-  .hero-toggle[data-state='paused'] .icon-pause { display: none; }
+  .hero-toggle :global(.icon-play) { display: none; }
+  .hero-toggle[data-state='paused'] :global(.icon-play) { display: block; }
+  .hero-toggle[data-state='paused'] :global(.icon-pause) { display: none; }
   .hero-toggle[data-state='loading'] { visibility: hidden; }
 </style>
 

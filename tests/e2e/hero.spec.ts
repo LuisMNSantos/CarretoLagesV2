@@ -87,3 +87,13 @@ test('hero heading and CTA are visible without JavaScript', async ({ page }) => 
   await expect(page.locator('#hero-title')).toContainText('Decisões importantes.');
   await expect(page.locator('[data-hero]').getByRole('link', { name: /Marcar uma conversa/ })).toBeVisible();
 });
+
+test('pause button shows exactly one icon at a time', async ({ page }) => {
+  test.skip(test.info().project.name === 'nojs', 'JS');
+  await page.goto('/');
+  await expect(page.locator('[data-hero]')).toHaveAttribute('data-video', 'playing', { timeout: 15_000 });
+  const btn = page.locator('[data-hero-toggle]');
+  await expect(btn.locator('svg:visible')).toHaveCount(1);
+  await btn.click();
+  await expect(btn.locator('svg:visible')).toHaveCount(1);
+});

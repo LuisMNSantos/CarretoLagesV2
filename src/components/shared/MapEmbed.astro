@@ -1,0 +1,40 @@
+---
+import Icon from './Icon.astro';
+import { t } from '../../i18n/ui';
+import type { Locale } from '../../i18n/locale';
+import type { Office } from '../../lib/content';
+
+export interface Props { office: Office; locale: Locale }
+const { office, locale } = Astro.props;
+const title = `${t(locale, 'map.title')} ${office.name}`;
+---
+<div class="map-embed relative aspect-[4/3] overflow-hidden rounded-md bg-areia" data-map data-embed={office.embedUrl} data-title={title}>
+  <!-- Stylised, self-hosted map illustration: no request to Google until the visitor asks for the real map. -->
+  <svg class="absolute inset-0 h-full w-full" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+    <rect width="400" height="300" fill="#E5E1D3" />
+    <path d="M-10 210 C 80 180, 140 240, 230 200 S 360 150, 420 175 L 420 240 C 340 220, 280 270, 210 255 S 70 250, -10 270 Z" fill="#CFD6CB" />
+    <g stroke="#F3F0E8" stroke-width="7" fill="none" stroke-linecap="round">
+      <path d="M-10 90 L 410 120" /><path d="M120 -10 L 160 310" /><path d="M260 -10 L 230 310" /><path d="M-10 160 L 410 60" />
+    </g>
+    <g stroke="#F3F0E8" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.9">
+      <path d="M40 -10 L 70 310" /><path d="M330 -10 L 350 310" /><path d="M-10 40 L 410 30" /><path d="M-10 250 L 410 290" /><path d="M190 -10 L 200 310" />
+    </g>
+    <g transform="translate(200 128)">
+      <circle r="26" fill="#1B3A2F" opacity="0.12" />
+      <path d="M0 14 C -9 3 -13 -3 -13 -9 a13 13 0 1 1 26 0 c0 6 -4 12 -13 23 Z" fill="#1B3A2F" />
+      <circle cy="-9" r="4.5" fill="#E9D3B4" />
+    </g>
+  </svg>
+  <div class="map-overlay absolute inset-x-0 bottom-0 flex flex-col items-start gap-3 bg-gradient-to-t from-marfim/95 via-marfim/85 to-transparent p-5 pt-14">
+    <button type="button" class="btn btn-verde min-h-11 px-4 py-2 text-sm" data-map-load>
+      <Icon name="map" size={16} />{t(locale, 'map.view')}
+    </button>
+    <p class="max-w-xs text-xs leading-relaxed text-tinta-suave">{t(locale, 'map.notice')}</p>
+  </div>
+</div>
+<a href={office.mapsUrl} class="link-arrow mt-4 text-sm text-verde-700" rel="noopener" target="_blank">{t(locale, 'map.open')}<Icon name="arrow-up-right" size={13} /></a>
+
+<script>
+  import { initMaps } from '../../scripts/map';
+  initMaps();
+</script>

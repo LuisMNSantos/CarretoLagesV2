@@ -1,0 +1,21 @@
+---
+import SectionHeading from '../shared/SectionHeading.astro';
+import LawyerCard from '../shared/LawyerCard.astro';
+import Icon from '../shared/Icon.astro';
+import { lawyers, visible } from '../../lib/content';
+import { localizePath } from '../../i18n/routes';
+import { t } from '../../i18n/ui';
+import type { Locale } from '../../i18n/locale';
+export interface Props { locale: Locale }
+const { locale } = Astro.props;
+const partners = visible(lawyers, locale).filter((l) => l.group === 'partner');
+---
+<section class="bg-marfim-claro py-20 md:py-28" aria-labelledby="team-title">
+  <div class="container-site">
+    <SectionHeading id="team-title" eyebrow={t(locale, 'team.eyebrow')} title={[t(locale, 'team.title1'), t(locale, 'team.title2')]} lead={t(locale, 'team.lead')} />
+    <ul class="mt-14 grid gap-10 sm:grid-cols-2 md:grid-cols-3 md:gap-8">
+      {partners.map((l) => <li><LawyerCard lawyer={l} locale={locale} /></li>)}
+    </ul>
+    <a href={localizePath('lawyers', locale)} class="link-arrow mt-12 text-verde-700">{t(locale, 'cta.meetTeam')}<Icon name="arrow-up-right" size={14} /></a>
+  </div>
+</section>

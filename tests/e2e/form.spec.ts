@@ -50,3 +50,14 @@ test('with JavaScript the no-JS notice is removed', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('[data-nojs-notice]')).toHaveCount(0);
 });
+
+test('the area select chevron sits inside the field', async ({ page }) => {
+  await page.goto('/#contacto');
+  // Measure both boxes in one frame: smooth scrolling to #contacto would skew separate measurements.
+  const inside = await form(page).locator('.select-wrap').evaluate((wrap) => {
+    const s = wrap.querySelector('select')!.getBoundingClientRect();
+    const i = wrap.querySelector('.select-icon')!.getBoundingClientRect();
+    return i.top >= s.top && i.bottom <= s.bottom + 1 && i.right <= s.right + 1;
+  });
+  expect(inside).toBe(true);
+});

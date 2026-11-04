@@ -114,7 +114,7 @@ const req = t(locale, 'form.required');
   .field [aria-invalid='true'] { border-bottom-color: #B4533C !important; }
   .select-wrap { position: relative; }
   .select-wrap select { appearance: none; padding-right: 2rem; cursor: pointer; }
-  .select-icon { position: absolute; right: 0.25rem; bottom: 0.9rem; pointer-events: none; color: var(--color-tinta-suave); }
+  .select-wrap :global(.select-icon) { position: absolute; right: 0.25rem; bottom: 0.9rem; pointer-events: none; color: var(--color-tinta-suave); }
   .chip { position: relative; display: inline-flex; cursor: pointer; }
   .chip input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
   .chip span { display: inline-flex; align-items: center; min-height: 2.75rem; padding: 0.5rem 1rem; border: 1px solid var(--color-areia-escura); border-radius: 999px; font-size: 0.875rem; transition: all 250ms var(--ease-calm); }

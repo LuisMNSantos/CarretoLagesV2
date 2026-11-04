@@ -1,0 +1,25 @@
+---
+import PlaceholderBadge from './PlaceholderBadge.astro';
+import Icon from './Icon.astro';
+import { areaById, tr, type CaseStudy } from '../../lib/content';
+import { localizePath } from '../../i18n/routes';
+import { t } from '../../i18n/ui';
+import type { Locale } from '../../i18n/locale';
+export interface Props { item: CaseStudy; locale: Locale; headingLevel?: 'h2' | 'h3' }
+const { item: c, locale, headingLevel: H = 'h3' } = Astro.props;
+---
+<a href={localizePath('cases', locale, tr(c.slug, locale))} class="card group flex h-full flex-col p-7 transition-colors hover:bg-areia md:p-8">
+  <div class="flex flex-wrap items-center justify-between gap-3">
+    <p class="eyebrow text-tinta-suave">{tr(areaById(c.area)!.title, locale)}</p>
+    {c.placeholder && <PlaceholderBadge locale={locale} />}
+  </div>
+  <H class="mt-8 text-[1.5rem] leading-tight text-tinta">{tr(c.title, locale)}</H>
+  <p class="mt-4 text-[0.9375rem] leading-relaxed text-tinta-suave">{tr(c.summary, locale)}</p>
+  <div class="mt-auto pt-8">
+    <div class="border-t border-areia-escura pt-5">
+      <p class="text-xs uppercase tracking-[0.18em] text-tinta-suave">{t(locale, 'cases.result')}</p>
+      <p class="mt-2 text-[0.9375rem] text-verde-700">{tr(c.outcome, locale)}</p>
+    </div>
+  </div>
+  <span class="icon-circle mt-6 self-end group-hover:border-verde-700" aria-hidden="true"><Icon name="arrow-up-right" size={15} /></span>
+</a>

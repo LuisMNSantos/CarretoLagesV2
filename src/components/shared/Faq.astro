@@ -1,0 +1,36 @@
+---
+import Icon from './Icon.astro';
+import { faq, tr, visible } from '../../lib/content';
+import { localizePath } from '../../i18n/routes';
+import { t } from '../../i18n/ui';
+import type { Locale } from '../../i18n/locale';
+export interface Props { locale: Locale }
+const { locale } = Astro.props;
+const list = visible(faq, locale);
+---
+<section class="py-20 md:py-28" aria-labelledby="faq-title">
+  <div class="container-site grid gap-12 md:grid-cols-12">
+    <div class="md:col-span-5" data-reveal>
+      <p class="eyebrow text-tinta-suave">{t(locale, 'faq.eyebrow')}</p>
+      <h2 id="faq-title" class="display-2 mt-5 text-tinta">
+        <span class="block">{t(locale, 'faq.title1')}</span>
+        <span class="block">{t(locale, 'faq.title2')}</span>
+      </h2>
+      <a href={`${localizePath('contact', locale)}#contacto`} class="link-arrow mt-10 text-verde-700">{t(locale, 'faq.more')}<Icon name="arrow-up-right" size={14} /></a>
+    </div>
+    <div class="md:col-span-7">
+      {list.map((q, i) => (
+        <details class="faq-item group border-t border-areia-escura last:border-b" open={i === 0}>
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-[1.125rem] text-tinta">
+            <span>{tr(q.question, locale)}</span>
+            <span class="icon-circle size-9 transition-transform group-open:rotate-45" aria-hidden="true"><Icon name="plus" size={15} /></span>
+          </summary>
+          <p class="max-w-xl pb-7 text-[0.9375rem] leading-relaxed text-tinta-suave">{tr(q.answer, locale)}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+<style>
+  .faq-item summary::-webkit-details-marker { display: none; }
+</style>

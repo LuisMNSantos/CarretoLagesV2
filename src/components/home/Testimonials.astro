@@ -1,0 +1,35 @@
+---
+import PlaceholderBadge from '../shared/PlaceholderBadge.astro';
+import Icon from '../shared/Icon.astro';
+import { testimonials, tr, visible } from '../../lib/content';
+import { t } from '../../i18n/ui';
+import type { Locale } from '../../i18n/locale';
+export interface Props { locale: Locale }
+const { locale } = Astro.props;
+const list = visible(testimonials, locale);
+---
+{list.length > 0 && (
+  <section class="on-dark bg-verde-700 py-20 text-marfim md:py-28" aria-labelledby="testimonials-title" data-section="testimonials">
+    <div class="container-site">
+      <div data-reveal>
+        <p class="eyebrow text-marfim/75">{t(locale, 'testimonials.eyebrow')}</p>
+        <h2 id="testimonials-title" class="display-2 mt-5">
+          <span class="block">{t(locale, 'testimonials.title1')}</span>
+          <span class="block">{t(locale, 'testimonials.title2')}</span>
+        </h2>
+      </div>
+      <ul class="mt-14 grid gap-4 md:grid-cols-3 md:gap-6">
+        {list.map((x) => (
+          <li class="flex h-full flex-col rounded-md border border-marfim/15 bg-verde-900/35 p-7 md:p-8">
+            <div class="flex items-center justify-between gap-3">
+              <Icon name="quote" size={26} class="text-bronze-claro" />
+              {x.placeholder && <PlaceholderBadge locale={locale} />}
+            </div>
+            <blockquote class="mt-6 text-[1.1875rem] font-light leading-snug">“{tr(x.quote, locale)}”</blockquote>
+            <p class="mt-auto pt-8 text-sm"><span class="text-marfim">{x.author}</span> <span class="text-marfim/75">· {tr(x.descriptor, locale)}</span></p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+)}

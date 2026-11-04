@@ -1,0 +1,23 @@
+---
+import SectionHeading from '../shared/SectionHeading.astro';
+import CaseCard from '../shared/CaseCard.astro';
+import Icon from '../shared/Icon.astro';
+import { cases, visible } from '../../lib/content';
+import { localizePath } from '../../i18n/routes';
+import { t } from '../../i18n/ui';
+import type { Locale } from '../../i18n/locale';
+export interface Props { locale: Locale }
+const { locale } = Astro.props;
+const list = visible(cases, locale).slice(0, 3);
+---
+{list.length > 0 && (
+  <section class="py-20 md:py-28" aria-labelledby="cases-title" data-section="cases">
+    <div class="container-site">
+      <SectionHeading id="cases-title" eyebrow={t(locale, 'cases.eyebrow')} title={[t(locale, 'cases.title1'), t(locale, 'cases.title2')]} />
+      <ul class="mt-14 grid gap-4 md:grid-cols-3 md:gap-6">
+        {list.map((c) => <li><CaseCard item={c} locale={locale} /></li>)}
+      </ul>
+      <a href={localizePath('cases', locale)} class="link-arrow mt-12 text-verde-700">{t(locale, 'cta.allCases')}<Icon name="arrow-up-right" size={14} /></a>
+    </div>
+  </section>
+)}

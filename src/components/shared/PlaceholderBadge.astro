@@ -1,0 +1,9 @@
+---
+import { t } from '../../i18n/ui';
+import type { Locale } from '../../i18n/locale';
+export interface Props { locale: Locale; class?: string; kind?: 'placeholder' | 'draft' }
+const { locale, class: cls = '', kind = 'placeholder' } = Astro.props;
+---
+<span class:list={['inline-flex items-center gap-1.5 rounded-full border border-bronze/50 bg-bronze-claro/60 px-2.5 py-1 text-[0.6875rem] font-medium uppercase tracking-[0.12em] text-verde-900', cls]} data-placeholder-badge>
+  <span class="size-1.5 rounded-full bg-bronze" aria-hidden="true"></span>{t(locale, kind === 'draft' ? 'badge.draft' : 'badge.placeholder')}
+</span>
