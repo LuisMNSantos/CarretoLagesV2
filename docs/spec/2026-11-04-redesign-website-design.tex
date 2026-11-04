@@ -1,0 +1,589 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{lmodern}
+\usepackage[a4paper,margin=2.4cm]{geometry}
+\usepackage[table]{xcolor}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{xurl}
+\usepackage[hidelinks]{hyperref}
+
+% ---------- Paleta do projeto ----------
+\definecolor{verde900}{HTML}{0F241D}
+\definecolor{verde700}{HTML}{1B3A2F}
+\definecolor{marfim}{HTML}{F3F0E8}
+\definecolor{areia}{HTML}{E5E1D3}
+\definecolor{areiaesc}{HTML}{D3C8B8}
+\definecolor{bronze}{HTML}{AA8D73}
+\definecolor{bronzecl}{HTML}{E9D3B4}
+\definecolor{tinta}{HTML}{1F2420}
+\definecolor{tintasuave}{HTML}{5B5347}
+
+\newcommand{\swatch}[1]{\fcolorbox{gray!40}{#1}{\rule{0pt}{8pt}\rule{14pt}{0pt}}}
+\newcommand{\decidido}{\textcolor{verde700}{\textbf{[Decidido]}}}
+\newcommand{\proposta}{\textcolor{bronze}{\textbf{[Proposta]}}}
+\newcommand{\aberto}{\textcolor{red!60!black}{\textbf{[Em aberto]}}}
+
+\titleformat{\section}{\Large\bfseries\color{verde700}}{\thesection}{0.8em}{}
+\titleformat{\subsection}{\large\bfseries\color{tinta}}{\thesubsection}{0.6em}{}
+\setlist{itemsep=2pt,topsep=4pt}
+\setlength{\parskip}{4pt}
+\setlength{\parindent}{0pt}
+\setlength{\emergencystretch}{3em}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small Carreto Lages --- Redesign do website}
+\rhead{\small Documento de requisitos}
+\cfoot{\small \thepage}
+
+\begin{document}
+
+\begin{titlepage}
+  \vspace*{3cm}
+  {\color{bronze}\small\scshape Documento de requisitos e desenho}\\[0.6em]
+  {\Huge\bfseries\color{verde700} Redesign do website\\[0.2em] Carreto Lages \& Associados}\\[1.2em]
+  {\large Levantamento de requisitos para a reconstrução de raiz do site}\\[3em]
+  \begin{tabular}{@{}ll}
+    Data: & 4 de novembro de 2026 \\
+    Preparado por: & Luis Santos \\
+    Estado: & Para aprovação \\
+  \end{tabular}
+  \vfill
+  {\small\color{tintasuave}
+  Convenção usada ao longo do documento:\\
+  \decidido{} decisão tomada pelo responsável do projeto durante o levantamento.\\
+  \proposta{} proposta do autor do documento; pode ser revista sem alterar a intenção.\\
+  \aberto{} depende de informação ou decisão externa (normalmente do escritório).}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+% =====================================================================
+\section{Intenção}
+
+O escritório Carreto Lages \& Associados (fundado em 2002, sedes em Aveiro e Oliveira de Frades) precisa de um site novo que substitua o WordPress atual. Já existe uma primeira versão em Astro neste repositório, mas o projeto vai ser \textbf{refeito de raiz} com base neste documento \decidido. O código existente serve apenas como referência de conteúdo, não de arquitetura.
+
+\textbf{Para quem é o site.} Para um possível cliente que procura os serviços de um advogado \decidido. Muitas vezes essa pessoa chega num momento de preocupação (uma notificação, um processo, uma compra de casa, um problema com o banco). O site tem de lhe transmitir, em poucos segundos, que está perante um escritório sério, próximo e competente, e tornar o contacto fácil.
+
+\textbf{Sucesso.} Um visitante percebe rapidamente o que o escritório faz, sente confiança e contacta (formulário ou telefone). Do lado do escritório: os pedidos chegam diretamente ao email, sem custos e com segurança, e a equipa consegue atualizar o conteúdo sozinha.
+
+\textbf{Mudança de tom.} O site atual é preto e amarelo, com tipografia condensada e uma mensagem provocadora (``O seu problema. A nossa batalha.''). O amarelo foi considerado demasiado agressivo \decidido. O novo site segue a direção da referência Alden \& Vale: calmo, editorial, de confiança --- moderno e limpo, mas não minimalista ao ponto de parecer vazio \decidido.
+
+% =====================================================================
+\section{Objetivos, não-objetivos e anti-objetivos}
+
+\subsection{Objetivos}
+\begin{enumerate}
+  \item Página inicial com o vídeo de Aveiro como fundo em ecrã inteiro, carregado de forma eficiente em computador e telemóvel \decidido.
+  \item Formulário de contacto seguro, que envia diretamente para um email \texttt{@carretolages.com}, sem custos adicionais \decidido.
+  \item Identidade visual inspirada no Alden \& Vale: verde escuro, marfim, bronze \decidido.
+  \item Conteúdo editável pelo próprio escritório, sem tocar em código \decidido.
+  \item Excelente desempenho em telemóvel, acessibilidade e conformidade com o RGPD.
+  \item Site bilingue: português de Portugal (principal) e inglês, com \textbf{todo} o conteúdo traduzido \decidido{} (secção~\ref{sec:linguas}).
+\end{enumerate}
+
+\subsection{Não-objetivos (fora do âmbito desta versão)}
+\begin{itemize}
+  \item Outras línguas além de português e inglês.
+  \item Área de cliente, marcações online, pagamentos ou chat.
+  \item Guardar os pedidos de contacto numa base de dados ou CRM \proposta.
+  \item Migrar o domínio \texttt{carretolages.com} ou o email do escritório (ver secção~\ref{sec:dominios}).
+  \item Fotografia profissional: nesta fase usam-se imagens de banco gratuitas, a substituir mais tarde \decidido.
+\end{itemize}
+
+\subsection{Anti-objetivos (falhar aqui é falhar o projeto, mesmo que ``funcione'')}
+\begin{itemize}
+  \item Um vídeo que faz o site demorar a abrir no telemóvel ou que gasta os dados móveis do visitante.
+  \item Um formulário que perde mensagens, que é inundado de spam ou que expõe dados pessoais.
+  \item Um visual agressivo, ``de batalha'', ou pelo contrário tão minimalista que parece um modelo vazio.
+  \item Custos recorrentes escondidos (além do domínio novo).
+  \item Conteúdo que só um programador consegue alterar.
+  \item Cookies ou serviços de terceiros que obriguem a um banner de cookies sem necessidade.
+\end{itemize}
+
+% =====================================================================
+\section{Restrições}
+\begin{itemize}
+  \item \textbf{Custo:} zero, exceto o domínio novo (cerca de 10--20\,€/ano) \decidido. Todos os serviços em plano gratuito.
+  \item \textbf{Línguas:} português de Portugal (pt-PT) como língua principal e inglês, ambos completos, incluindo mensagens de erro, rótulos e textos alternativos \decidido.
+  \item \textbf{Alojamento:} Cloudflare Pages, plano gratuito \decidido. Escolhido em vez da Vercel porque o plano gratuito da Vercel (Hobby) não permite uso comercial; a Cloudflare permite-o e não tem limite de tráfego, o que é útil para o vídeo.
+  \item \textbf{Privacidade:} RGPD; sem cookies de terceiros sem ação do utilizador \decidido{} (mapa só carrega ao clicar).
+  \item \textbf{Deontologia:} as regras de publicidade do Estatuto da Ordem dos Advogados (art.~94.º) aplicam-se ao conteúdo. O escritório deve validar casos práticos e testemunhos antes do lançamento (secção~\ref{sec:conformidade}).
+  \item \textbf{Sem acesso ao DNS de \texttt{carretolages.com}} neste momento: nada no lançamento pode depender dele.
+\end{itemize}
+
+% =====================================================================
+\section{Análise da referência: Alden \& Vale}
+
+Referência: \url{https://dribbble.com/shots/27806443-Alden-Vale-Premium-Law-Firm-Website-Design} (conceito de página inicial, apresentado em vídeo). A descrição do autor resume a intenção: ``marfim quente, verde profundo e acentos subtis de bronze'', com ``hero cinematográfico, slider editorial de áreas, cenários interativos de cliente e revelações de texto cuidadosamente ritmadas''.
+
+\subsection{Paleta publicada pelo autor}
+\begin{center}
+\begin{tabular}{llll}
+\swatch{black} \texttt{\#080C0A} & \swatch{gray!45} \texttt{\#ADAB9F} & \swatch{areia} \texttt{\#E5E1D3} & \swatch{areiaesc} \texttt{\#D3C8B8} \\[4pt]
+\swatch{tintasuave} \texttt{\#5B5347} & \fcolorbox{gray!40}{brown!60!gray}{\rule{0pt}{8pt}\rule{14pt}{0pt}} \texttt{\#8A7664} & \swatch{bronze} \texttt{\#AA8D73} & \fcolorbox{gray!40}{brown!20}{\rule{0pt}{8pt}\rule{14pt}{0pt}} \texttt{\#C7BAA6} \\
+\end{tabular}
+\end{center}
+Nas imagens, o verde dominante anda à volta de \texttt{\#1B3A2F}.
+
+\subsection{Secções observadas e o que fazemos com cada uma}
+\begin{longtable}{p{4.2cm}p{5.6cm}p{5cm}}
+\toprule
+\textbf{No Alden \& Vale} & \textbf{Como é} & \textbf{No nosso site} \\
+\midrule
+\endhead
+Hero & Dividido: painel verde com título grande à esquerda, vídeo aéreo da cidade à direita, botão de pausa, botão ``Start a conversation'' bronze-claro. &
+\textbf{Adaptado}: vídeo em ecrã inteiro com véu verde do lado do texto (variante A escolhida) \decidido. \\
+Faixa de três ideias & ``Direct conversations / A connected perspective / Considered next steps'', em fundo areia, com ícones finos. & \textbf{Adotado} \decidido. \\
+Slider de áreas & ``Expertise for what comes next.'' Cartão grande por área (texto à esquerda, fotografia à direita), contador 01/04, setas, indicadores. & \textbf{Adotado} para as 4 áreas \decidido. \\
+Cenários de cliente & ``Life moves forward. So should your counsel.'' Lista de situações na voz do cliente (``I'm building something'', ``I'm at a crossroads''); ao escolher, muda a imagem e o painel com descrição, etiquetas e ligação. & \textbf{Adotado e adaptado} às situações jurídicas reais do escritório (secção~\ref{sec:situacoes}) \decidido. \\
+Processo & ``A closer understanding.'' 4 passos (Listen, Clarify, Act, Stay close); o passo ativo expande com fotografia. & \textbf{Adotado} (Ouvir, Esclarecer, Agir, Acompanhar) \decidido. \\
+Fecho de contacto & ``Your priorities. Our full attention.'' Fotografia de interior + título + botão verde. & \textbf{Adotado}, mas com o formulário na própria secção \decidido. \\
+Rodapé & Logótipo serifado com assinatura em versaletes, duas colunas de ligações, ``Back to top''. & \textbf{Adotado} com moradas e páginas legais. \\
+\bottomrule
+\end{longtable}
+
+\subsection{Linguagem visual a reter}
+\begin{itemize}
+  \item Títulos grandes em sans-serif de peso leve (300), entrelinha apertada, frases curtas em duas linhas (``Your next move. / On solid ground.'').
+  \item Rótulos pequenos em maiúsculas com espaçamento largo, por vezes precedidos de um ponto bronze.
+  \item Muito espaço em branco, cantos ligeiramente arredondados, linhas finas como separadores.
+  \item Fotografia arquitetónica e de interiores, tons frios e dessaturados.
+  \item Movimento lento: revelação de texto ao fazer scroll, transições suaves entre estados.
+\end{itemize}
+
+% =====================================================================
+\section{Estado atual (referência, não base)}
+
+O que o repositório já tem e que interessa ao novo projeto:
+\begin{itemize}
+  \item \textbf{Conteúdo}: 4 áreas (Penal, Imobiliário, Fiscal, Financeiro), 8 pessoas, 3 casos práticos, 3 testemunhos (fictícios), 5 perguntas frequentes, páginas institucionais e legais. Ver apêndice~\ref{ap:conteudo}.
+  \item \textbf{Fotografias} de 3 advogados (\texttt{JoseLages.png}, \texttt{JoaoCarlos.png}, \texttt{Catarina.png}).
+  \item \textbf{Vídeo} \texttt{Aveiro.mp4} com \textbf{62\,MB}, servido diretamente e \emph{versionado no git}.
+  \item \textbf{Formulário} com Resend, mas: remetente de teste, destinatário pessoal, texto do cliente inserido no HTML do email sem escape, sem proteção anti-spam, sem consentimento explícito, sem funcionamento sem JavaScript.
+  \item \textbf{Fontes} carregadas do Google Fonts (problema de RGPD) e \textbf{mapas} Google embutidos à partida (cookies de terceiros).
+\end{itemize}
+
+% =====================================================================
+\section{Identidade visual}
+
+\subsection{Cores \decidido{} (valores exatos: \proposta)}
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+\textbf{Token} & \textbf{Valor} & \textbf{Uso} \\
+\midrule
+\swatch{verde900} \texttt{verde-900} & \texttt{\#0F241D} & Véu do vídeo, fundos escuros profundos \\
+\swatch{verde700} \texttt{verde-700} & \texttt{\#1B3A2F} & Botões primários, cartões ativos, secções escuras \\
+\swatch{marfim} \texttt{marfim} & \texttt{\#F3F0E8} & Fundo principal da página \\
+\swatch{areia} \texttt{areia} & \texttt{\#E5E1D3} & Faixas e cartões secundários \\
+\swatch{areiaesc} \texttt{areia-escura} & \texttt{\#D3C8B8} & Bordas, separadores, estados inativos \\
+\swatch{bronze} \texttt{bronze} & \texttt{\#AA8D73} & Acentos decorativos, pontos, linhas, ícones \\
+\swatch{bronzecl} \texttt{bronze-claro} & \texttt{\#E9D3B4} & Botão principal sobre fundo verde \\
+\swatch{tinta} \texttt{tinta} & \texttt{\#1F2420} & Texto principal sobre claro \\
+\swatch{tintasuave} \texttt{tinta-suave} & \texttt{\#5B5347} & Texto secundário \\
+\bottomrule
+\end{tabular}
+\end{center}
+O bronze \texttt{\#AA8D73} sobre marfim \textbf{não} tem contraste suficiente para texto corrido (WCAG AA); usa-se só em elementos decorativos ou texto grande. Os valores finais podem ser afinados por quem implementa, desde que todos os pares texto/fundo cumpram AA.
+
+\subsection{Tipografia \proposta}
+\begin{itemize}
+  \item Uma sans-serif de leitura calma para títulos e texto (ex.: DM Sans, Manrope ou equivalente), com títulos em peso 300.
+  \item Uma serifada apenas para o logótipo/assinatura (ex.: Cormorant Garamond), à semelhança do Alden \& Vale.
+  \item No máximo 2 famílias, fontes variáveis, \textbf{alojadas no próprio site} (sem Google Fonts), subconjunto latino, \texttt{font-display: swap}.
+  \item A Bebas Neue sai.
+\end{itemize}
+
+\subsection{Imagem}
+Imagens de banco gratuitas (licença que permita uso comercial, ex.: Unsplash/Pexels) \decidido, no registo do Alden \& Vale: arquitetura, interiores de escritório, Aveiro e a região, dessaturadas. Todas substituíveis pelo CMS. A licença e o autor de cada imagem ficam registados.
+
+\subsection{Movimento \proposta}
+Revelações suaves de texto e elementos ao fazer scroll; transições curtas (200--600\,ms) nos cartões e no carrossel. Tudo desativado com \texttt{prefers-reduced-motion}. Sem bibliotecas de animação pesadas: CSS (incluindo animações ligadas ao scroll, onde houver suporte) e \texttt{IntersectionObserver}.
+
+% =====================================================================
+\section{Mapa do site}
+
+Estrutura de páginas igual à atual, refeita com o novo visual \decidido.
+
+\begin{center}
+\begin{tabularx}{\textwidth}{lX}
+\toprule
+\textbf{Caminho} & \textbf{Página} \\
+\midrule
+\texttt{/} & Página inicial (secção~\ref{sec:home}) \\
+\texttt{/sociedade} & Sociedade (resumo) + \texttt{/historia}, \texttt{/perfil-e-valores}, \texttt{/pro-bono} \\
+\texttt{/areas-de-atuacao} & Lista das áreas; \texttt{/areas-de-atuacao/[slug]} por área \\
+\texttt{/advogados} & Equipa completa; \texttt{/advogados/[slug]} por pessoa \\
+\texttt{/casos} & Casos práticos; \texttt{/casos/[slug]} \\
+\texttt{/destaques} & Artigos; \texttt{/destaques/[slug]} \\
+\texttt{/contactos} & Formulário, escritórios, mapas (ao clicar), telefone, email, horário \\
+\texttt{/obrigado} & Confirmação após envio \\
+Páginas legais & \texttt{/politica-de-privacidade}, \texttt{/termos-e-condicoes}, \texttt{/resolucao-de-litigios}, \texttt{/cookies} \\
+\texttt{404} & Página não encontrada \\
+\bottomrule
+\end{tabularx}
+\end{center}
+Os caminhos exatos (por exemplo \texttt{/sociedade} vs.\ \texttt{/sobre}) ficam ao critério de quem implementa \proposta; devem ser curtos e estáveis, em português na versão principal e em inglês sob \texttt{/en/} (secção~\ref{sec:linguas}).
+
+\textbf{Navegação \proposta.} Cabeçalho transparente sobre o vídeo, que passa a fundo marfim com texto verde ao fazer scroll. Itens: Sociedade (submenu), Áreas de atuação, Advogados, Casos, Destaques, Contactos, telefone e botão ``Marcar uma conversa''. Em telemóvel: menu em ecrã inteiro e um botão fixo no fundo do ecrã com ``Ligar'' e ``Contactar''.
+
+% =====================================================================
+\section{Línguas: português e inglês}\label{sec:linguas}
+
+O site suporta português e inglês, com \textbf{todo} o conteúdo traduzido: páginas institucionais, áreas, advogados, casos práticos, testemunhos, destaques, perguntas frequentes, formulário e páginas legais \decidido.
+
+\begin{itemize}
+  \item \textbf{Endereços \proposta}: português na raiz (\texttt{/areas-de-atuacao/direito-fiscal}); inglês sob \texttt{/en/} com caminhos e \textit{slugs} traduzidos (\texttt{/en/practice-areas/tax-law}). Correspondência de nomes: Sociedade $\rightarrow$ The Firm; Áreas de atuação $\rightarrow$ Practice Areas; Advogados $\rightarrow$ Lawyers; Casos $\rightarrow$ Case Studies; Destaques $\rightarrow$ Insights; Contactos $\rightarrow$ Contact.
+  \item \textbf{Seletor ``PT | EN''} no cabeçalho (e no menu de telemóvel), que leva à página equivalente na outra língua \proposta.
+  \item \textbf{Sem redireção automática} pela língua do browser: quem entra em português fica em português. A escolha não é guardada em cookie; segue o endereço \proposta.
+  \item \textbf{Conteúdo no CMS}: cada campo de texto tem a versão PT e EN lado a lado no mesmo documento; os \textit{slugs} também existem nas duas línguas. Imagens e dados não textuais são partilhados \proposta.
+  \item \textbf{Tradução em falta}: se um item não tiver a versão inglesa preenchida, não é publicado em inglês (nem aparece nas listas em inglês); o seletor de língua leva, nesse caso, à página inicial inglesa. Nunca se mostra texto português na versão inglesa \proposta.
+  \item \textbf{Páginas legais em inglês}: tradução de cortesia, com uma nota a indicar que prevalece a versão portuguesa \proposta.
+  \item \textbf{Textos fixos da interface} (botões, rótulos, mensagens de erro, textos alternativos do vídeo e do mapa) existem nas duas línguas no código.
+  \item O \textbf{vídeo, as imagens e o desenho} são iguais nas duas línguas; o comprimento dos títulos em inglês deve ser verificado para não quebrar o desenho.
+\end{itemize}
+
+% =====================================================================
+\section{Página inicial}\label{sec:home}
+
+Ordem das secções aprovada \decidido. Os textos de exemplo são propostas no novo tom; a versão final é revista pelo escritório (secção~\ref{sec:textos}).
+
+\subsection*{01 --- Topo com vídeo (variante A)}
+Vídeo de Aveiro em ecrã inteiro (\texttt{100svh}), com um véu verde (\texttt{verde-900}) em gradiente da esquerda (opaco, ~90\%) para a direita (quase transparente), deixando a cidade visível à direita. Sobre o véu, alinhados à esquerda:
+\begin{itemize}
+  \item Rótulo: ``Advogados desde 2002 · Aveiro \& Oliveira de Frades''.
+  \item Título (ex.): ``Decisões importantes. / Em boas mãos.''
+  \item Frase (ex.): ``Rigor, proximidade e estratégia nos momentos que contam.''
+  \item Botão principal bronze-claro ``Marcar uma conversa'' (leva ao formulário) e telefone visível.
+  \item Botão discreto de pausa/retoma do vídeo (canto inferior direito).
+\end{itemize}
+Requisitos técnicos do vídeo: secção~\ref{sec:video}.
+
+\subsection*{02 --- Três ideias e números}
+Faixa areia logo abaixo do topo: ``Conversas diretas'', ``Mais de 20 anos'', ``Resposta em 24h'', cada uma com ícone fino e uma frase. Números discretos: desde 2002, 2 escritórios, 8 profissionais (editáveis no CMS). Substitui a barra de contadores animados.
+
+\subsection*{03 --- Áreas de atuação em carrossel}
+Título (ex.): ``Experiência para o que vem a seguir.'' Um cartão grande por área: rótulo, título de duas linhas, descrição, palavras-chave (ex.: ``Processos-crime · Contraordenações · Recursos''), botão para a página da área, fotografia à direita. Contador ``01 / 04'', setas e indicadores. Em telemóvel, desliza com o dedo (\texttt{scroll-snap} nativo) e a fotografia passa para cima do texto. Funciona sem JavaScript (lista deslizável); as setas são melhoria progressiva.
+
+\subsection*{04 --- ``Em que situação está?''}\label{sec:situacoes}
+Título (ex.): ``Cada situação é diferente. / O nosso compromisso é o mesmo.'' Lista de situações na voz do cliente à esquerda; ao escolher uma, o painel à direita mostra imagem, título, descrição, etiquetas e ligação para a área respetiva. Situações iniciais \proposta:
+\begin{itemize}
+  \item ``Fui notificado num processo-crime'' $\rightarrow$ Direito Penal
+  \item ``Vou comprar, vender ou arrendar um imóvel'' $\rightarrow$ Direito Imobiliário
+  \item ``Recebi uma notificação das Finanças'' $\rightarrow$ Direito Fiscal
+  \item ``Tenho um problema com o banco ou com dívidas'' $\rightarrow$ Direito Financeiro
+\end{itemize}
+Implementação acessível como separadores (\textit{tabs}) com teclado; sem JavaScript, mostra todas as situações em lista. Em telemóvel, funciona como acordeão. Situações editáveis no CMS (3 a 6).
+
+\subsection*{05 --- Como trabalhamos}
+Título (ex.): ``Perceber primeiro. / Agir com clareza.'' Quatro passos: \textbf{Ouvir} (a sua situação e o que é importante para si), \textbf{Esclarecer} (opções, riscos e próximos passos explicados com clareza), \textbf{Agir} (com estratégia e rigor), \textbf{Acompanhar} (manter contacto até ao fim e depois). O passo ativo expande-se com fotografia; em telemóvel, empilhados. Ligação ``Comece por nos contar a sua situação'' para o formulário.
+
+\subsection*{06 --- Equipa}
+Os 3 sócios em destaque (fotografia, nome, cargo, áreas) e ligação ``Conhecer a equipa''. Pessoas sem fotografia aparecem com um retrato neutro com iniciais \proposta.
+
+\subsection*{07 --- Casos práticos}
+Três casos (categoria, título, resumo, resultado) com ligação para \texttt{/casos}. Mantido por decisão \decidido, condicionado à validação deontológica (secção~\ref{sec:conformidade}). Tal como os testemunhos, a secção só é renderizada se houver casos publicados no CMS \proposta.
+
+\textbf{Regra geral para coleções vazias \proposta.} Casos práticos, testemunhos e destaques podem estar vazios no lançamento. Se uma coleção não tiver itens publicados: a secção da página inicial não aparece, a página de listagem não é gerada (ou redireciona para a página inicial) e a entrada correspondente desaparece da navegação e do mapa do site. A navegação é fixa no código quanto à ordem e ao desenho, mas estas três entradas dependem da existência de conteúdo.
+
+\subsection*{08 --- Testemunhos}
+Mantido \decidido. Os testemunhos atuais são fictícios e \textbf{não podem ir para produção}; a secção só aparece se houver testemunhos reais publicados no CMS (se a lista estiver vazia, a secção não é renderizada) \proposta.
+
+\subsection*{09 --- Perguntas frequentes}
+Acordeão acessível (\texttt{<details>} nativo), 5--8 perguntas editáveis, com dados estruturados \texttt{FAQPage}.
+
+\subsection*{10 --- Contacto}
+Fecho ao estilo Alden \& Vale: fotografia de interior à esquerda; à direita, título (ex.: ``As suas prioridades. / A nossa atenção.''), frase curta e o formulário (secção~\ref{sec:form}). Abaixo, os dois escritórios com morada, telefone e mapa que só carrega ao clicar (secção~\ref{sec:conformidade}).
+
+\subsection*{11 --- Rodapé}
+Logótipo, ligações de navegação, moradas, telefone, email, horário, redes (se existirem), páginas legais, ``Voltar ao topo''.
+
+% =====================================================================
+\section{Páginas interiores}
+\begin{itemize}
+  \item \textbf{Área de atuação}: introdução, ``o que fazemos'' (lista), situações típicas, advogados da área, perguntas frequentes da área (opcional), botão de contacto com a área pré-selecionada no formulário.
+  \item \textbf{Advogado}: fotografia, nome, cargo, áreas, biografia, email profissional, LinkedIn (opcional).
+  \item \textbf{Caso prático} e \textbf{Destaque}: página de leitura com boa tipografia (largura de linha ~65--75 caracteres), data, área, partilha simples por ligação.
+  \item \textbf{Sociedade}: História, Perfil e Valores, Pro Bono, em formato editorial com imagens.
+  \item \textbf{Contactos}: formulário, os dois escritórios (morada, telefone, horário, mapa ao clicar, ``Abrir no Google Maps'').
+  \item Todas as páginas interiores terminam com uma chamada para o contacto.
+\end{itemize}
+
+% =====================================================================
+\section{Vídeo de fundo}\label{sec:video}
+
+\subsection{Objetivo}
+O vídeo deve ser a primeira impressão do site sem nunca atrasar a abertura da página nem gastar dados de forma desnecessária \decidido.
+
+\subsection{Requisitos \proposta}
+\begin{enumerate}
+  \item \textbf{Imagem de capa primeiro.} Uma imagem fixa (um fotograma do vídeo) em AVIF/WebP, $\leq$\,100\,KB, é o elemento principal (LCP) da página: pré-carregada com prioridade alta. O vídeo entra por cima, com transição suave, quando estiver pronto a tocar.
+  \item \textbf{Versões por ecrã.} O original (62\,MB) é re-codificado sem áudio, em loop curto (10--20\,s), em três versões:
+  \begin{center}
+  \begin{tabular}{llll}
+  \toprule
+  \textbf{Versão} & \textbf{Resolução} & \textbf{Orientação} & \textbf{Tamanho alvo} \\
+  \midrule
+  Telemóvel & 720$\times$1280 & vertical (recorte central) & $\leq$ 2,5\,MB \\
+  Tablet / portátil pequeno & 1280$\times$720 & horizontal & $\leq$ 4\,MB \\
+  Computador & 1920$\times$1080 & horizontal & $\leq$ 8\,MB \\
+  \bottomrule
+  \end{tabular}
+  \end{center}
+  Cada versão em dois formatos: um moderno e mais leve (AV1 ou VP9 em WebM) e H.264 em MP4 como alternativa universal. O recorte vertical para telemóvel evita enviar pixels que \texttt{object-fit: cover} iria cortar.
+  \item \textbf{Escolha da versão no browser.} Atributo \texttt{media} nas \texttt{<source>} e/ou pequeno script que escolhe a fonte pela largura e orientação do ecrã.
+  \item \textbf{Respeitar o visitante.} Não carregar o vídeo (fica só a imagem) se: \texttt{prefers-reduced-motion: reduce}; poupança de dados ativa (\texttt{navigator.connection.saveData}); ligação lenta (\texttt{effectiveType} 2g/3g, onde disponível).
+  \item \textbf{Não competir com a página.} \texttt{preload="none"} até a página estar carregada; o vídeo começa a descarregar depois do evento \texttt{load} (ou em tempo ocioso). Atributos \texttt{muted}, \texttt{playsinline}, \texttt{loop}.
+  \item \textbf{Poupar recursos.} Pausa automática quando o topo sai do ecrã (\texttt{IntersectionObserver}) e quando o separador fica oculto; retoma ao voltar.
+  \item \textbf{Acessibilidade.} Botão visível de pausa/retoma (obrigatório para conteúdo em movimento com mais de 5\,s, WCAG 2.2.2), com estado anunciado; o vídeo é decorativo (\texttt{aria-hidden}).
+  \item \textbf{Entrega.} Ficheiros estáticos com cache longa e nomes com \textit{hash}, todos abaixo do limite de 25\,MiB por ficheiro da Cloudflare Pages. O vídeo original de 62\,MB deixa de ser seguido pelo git no novo código e fica guardado fora do repositório; só as versões codificadas são publicadas. \textbf{Não} se reescreve o histórico do git (o ficheiro permanece nos commits antigos, o que é aceitável) \proposta.
+  \item \textbf{Legibilidade.} O véu verde garante contraste AA do texto sobre qualquer fotograma do vídeo.
+\end{enumerate}
+
+% =====================================================================
+\section{Formulário de contacto}\label{sec:form}
+
+\subsection{Campos \proposta}
+\begin{center}
+\begin{tabularx}{\textwidth}{llX}
+\toprule
+\textbf{Campo} & \textbf{Obrigatório} & \textbf{Notas} \\
+\midrule
+Nome & sim & 2--100 caracteres \\
+Email & sim & validado; usado como ``responder para'' \\
+Telefone & não & formato livre, normalizado no servidor \\
+Área & não & lista vinda do CMS + ``Outro / não sei''; pré-selecionada quando se vem de uma página de área \\
+Escritório preferido & não & Aveiro / Oliveira de Frades / Indiferente \\
+Mensagem & sim & 10--3000 caracteres \\
+Consentimento RGPD & sim & caixa de verificação com ligação à Política de Privacidade \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Fluxo}
+\begin{itemize}
+  \item Funciona \textbf{sem JavaScript}: envio normal (POST) para o servidor e redireção para \texttt{/obrigado}. Com JavaScript: envio sem recarregar, estados ``A enviar…'', sucesso e erro anunciados (\texttt{aria-live}).
+  \item Erros de validação junto a cada campo, na língua da página, sem apagar o que a pessoa escreveu.
+  \item O email recebido pelo escritório é sempre em português e indica a língua em que o visitante escreveu; a página de confirmação segue a língua do visitante (\texttt{/obrigado} ou \texttt{/en/thank-you}).
+  \item Nenhum email automático de confirmação é enviado ao visitante \proposta{} (evita que o formulário seja usado para enviar spam a terceiros); a página \texttt{/obrigado} explica o prazo de resposta.
+\end{itemize}
+
+\subsection{Segurança e anti-spam (custo zero) \proposta}
+\begin{itemize}
+  \item Validação completa no servidor (esquema tipado), limites de tamanho, rejeição de campos inesperados.
+  \item Todo o texto do visitante é \textbf{escapado} antes de entrar no HTML do email; quebras de linha removidas do assunto; email do remetente validado antes de ser usado em \texttt{reply-to}.
+  \item Campo-armadilha invisível (\textit{honeypot}) e tempo mínimo de preenchimento.
+  \item Limite de envios por IP: regra de limitação da própria Cloudflare (incluída no plano gratuito) ou contador de melhor esforço na função, sem base de dados.
+  \item Se o spam aparecer na prática: ativar Cloudflare Turnstile (gratuito, sem cookies de rastreio, nativo do alojamento escolhido). Não ativo por omissão.
+  \item Chaves (API do Resend, destinatário) só em variáveis de ambiente; nunca no código.
+  \item Nenhum dado é guardado: nem base de dados, nem conteúdo das mensagens nos registos (\textit{logs}).
+\end{itemize}
+
+\subsection{Envio}
+\begin{itemize}
+  \item \textbf{Serviço}: Resend, plano gratuito (3\,000 emails/mês, 100/dia) \proposta.
+  \item \textbf{Destinatário}: endereço \texttt{@carretolages.com} \decidido; presumido \texttt{geral@carretolages.com} \aberto. Configurável por variável de ambiente.
+  \item \textbf{Fase de desenvolvimento}: remetente de teste do Resend (\texttt{onboarding@resend.dev}), que só entrega no email do dono da conta Resend; os pedidos chegam ao email do Luigi.
+  \item \textbf{Produção}: remetente no domínio novo (ex.: \texttt{site@<dominio-novo>}), verificado no Resend (SPF, DKIM, DMARC) no DNS do domínio novo, que o projeto controla. Não exige acesso ao DNS de \texttt{carretolages.com}.
+  \item O assunto identifica a área (ex.: ``Novo contacto pelo site — Direito Fiscal''); o corpo traz todos os campos e a data/hora.
+  \item Testar a entrega no filtro anti-spam do email atual do escritório (\texttt{cleanmx.pt}) antes do lançamento; se necessário, pedir ao escritório para marcar o remetente como seguro.
+  \item \textbf{Plano B}: outro serviço de email transacional com API HTTP e plano gratuito (ex.: Brevo), trocando apenas o módulo de envio. O envio por SMTP através da caixa do escritório deixa de ser o plano B, porque o ambiente de servidor da Cloudflare não suporta bem SMTP.
+\end{itemize}
+
+% =====================================================================
+\section{Gestão de conteúdos}\label{sec:cms}
+
+O escritório atualiza o conteúdo sozinho \decidido{} através do \textbf{Sanity} (plano gratuito) \proposta.
+\begin{itemize}
+  \item Painel web (Sanity Studio alojado gratuitamente pelo Sanity), com rótulos e ajudas em pt-PT; cada campo de texto tem a versão PT e EN lado a lado. Acesso por email ou conta Google; cada pessoa tem o seu utilizador.
+  \item \textbf{Editável}: definições gerais (contactos, horário, números da faixa 02, textos do topo, redes sociais), escritórios (morada, telefone, coordenadas, ligação do mapa), áreas de atuação, situações (secção 04), passos do processo (secção 05), advogados, casos práticos, testemunhos, perguntas frequentes, destaques (artigos com texto rico e imagens), páginas institucionais e legais.
+  \item \textbf{Fixo no código}: desenho, ordem das secções, vídeo, navegação.
+  \item \textbf{Publicação}: ao publicar no Sanity, um \textit{webhook} chama o \textit{deploy hook} da Cloudflare Pages e o site é regenerado (cerca de 1--2 minutos). As páginas são estáticas; só o formulário corre no servidor.
+  \item Imagens servidas pelo CDN de imagens do Sanity, com tamanhos e formatos adequados a cada ecrã; texto alternativo obrigatório.
+  \item O conteúdo inicial (apêndice~\ref{ap:conteudo} + textos novos, em português e inglês) é carregado no Sanity por um script de importação, em vez de ficar duplicado no código como ``dados de recurso''.
+  \item Entrega: um guia curto em PDF, com capturas de ecrã, para o escritório (publicar um artigo, trocar uma fotografia, editar um advogado).
+\end{itemize}
+
+% =====================================================================
+\section{Arquitetura técnica \proposta}
+\begin{center}
+\begin{tabularx}{\textwidth}{lX}
+\toprule
+\textbf{Peça} & \textbf{Escolha} \\
+\midrule
+Framework & Astro (versão estável mais recente), páginas estáticas + uma rota de servidor para o formulário \\
+Estilos & Tailwind CSS (ou CSS próprio com os tokens da secção de identidade) \\
+CMS & Sanity (Studio no mesmo repositório, pasta própria) \\
+Alojamento & Cloudflare Pages \decidido{} com o adaptador Cloudflare do Astro; o formulário corre como função da Cloudflare. Se a Cloudflare recomendar Workers com ficheiros estáticos para projetos novos, essa variante é equivalente e fica ao critério de quem implementa \\
+Email & Resend \\
+Fontes & auto-alojadas (pacotes Fontsource ou ficheiros locais) \\
+Mapas & Google Maps embutido, carregado só ao clicar \decidido \\
+Estatísticas & opcional: Cloudflare Web Analytics (gratuito, sem cookies) \\
+JavaScript & mínimo: ilhas pequenas para vídeo, carrossel, situações, menu, formulário \\
+\bottomrule
+\end{tabularx}
+\end{center}
+O repositório é refeito de raiz \decidido. Recomenda-se um ramo novo, mantendo o atual como referência até ao lançamento.
+
+% =====================================================================
+\section{Privacidade, cookies e conformidade}\label{sec:conformidade}
+\begin{itemize}
+  \item \textbf{Sem banner de cookies} \decidido: o site não define cookies próprios não essenciais nem carrega serviços de terceiros sem ação do visitante.
+  \item \textbf{Mapa ao clicar} \decidido: aparece uma imagem estática do mapa (gerada uma vez e alojada no site) com o botão ``Ver mapa interativo''; só então o \texttt{iframe} do Google Maps é carregado. Uma frase curta junto ao botão informa que o mapa é fornecido pela Google. Há sempre a ligação ``Abrir no Google Maps''.
+  \item \textbf{Fontes} alojadas no site (sem pedidos ao Google).
+  \item \textbf{Política de Privacidade} atualizada: dados do formulário, finalidade, prazo de conservação no email do escritório, subcontratantes (Resend, Cloudflare, Sanity), mapa da Google ao clicar, estatísticas sem cookies, direitos do titular.
+  \item \textbf{Página de cookies}: explica que o site não usa cookies sem ação do visitante.
+  \item \textbf{Quem redige as páginas legais \proposta}: o projeto entrega rascunhos (Privacidade, Termos, Resolução de litígios, Cookies) com base nos conteúdos atuais e nesta lista, marcados como ``rascunho para revisão''; o escritório revê e aprova o texto final, que fica editável no CMS. Para isso faltam os dados do responsável pelo tratamento: denominação social, NIPC, sede e contacto para pedidos RGPD \aberto.
+  \item \textbf{Deontologia}: casos práticos (referência a resultados) e testemunhos devem ser validados pelo escritório face às regras de publicidade do Estatuto da Ordem dos Advogados antes de serem publicados \aberto. Os testemunhos fictícios atuais não vão para produção. A promessa ``Resposta em 24h'' também deve ser confirmada pelo escritório.
+\end{itemize}
+
+% =====================================================================
+\section{Desempenho, acessibilidade e SEO \proposta}
+\begin{itemize}
+  \item \textbf{Desempenho} (telemóvel, 4G simulado): Lighthouse Performance $\geq$ 90; LCP $<$ 2,5\,s; CLS $<$ 0,1; JavaScript por página $<$ 50\,KB comprimido (sem contar o vídeo).
+  \item \textbf{Acessibilidade}: WCAG 2.2 nível AA; Lighthouse Accessibility $\geq$ 95; navegação completa por teclado, foco visível, contraste AA, \texttt{prefers-reduced-motion}, rótulos e erros de formulário anunciados.
+  \item \textbf{SEO}: atributo \texttt{lang} correto por página (\texttt{pt-PT} / \texttt{en}), ligações \texttt{hreflang} entre versões (com \texttt{x-default} em português), mapa do site com as duas línguas, títulos e descrições por página, dados estruturados (\texttt{LegalService} com os dois escritórios, \texttt{Person} por advogado, \texttt{FAQPage}, \texttt{BreadcrumbList}), mapa do site, \texttt{robots.txt}, imagens de partilha (Open Graph), URLs canónicos no domínio de produção. A versão de desenvolvimento fica com \texttt{noindex}.
+  \item \textbf{Compatibilidade}: duas últimas versões de Chrome, Safari (incluindo iOS), Firefox e Edge; ecrãs a partir de 360\,px de largura.
+\end{itemize}
+
+% =====================================================================
+\section{Domínios e lançamento}\label{sec:dominios}
+\begin{enumerate}
+  \item \textbf{Fase 1 --- desenvolvimento} \decidido: o site é publicado num endereço gratuito do alojamento (ex.: \texttt{carretolages.pages.dev}), com \texttt{noindex}, para testar e mostrar ao escritório.
+  \item \textbf{Fase 2 --- produção} \decidido: compra de um \textbf{domínio novo}, controlado pelo projeto/escritório, associado ao site em produção (HTTPS automático). O mesmo domínio é verificado no Resend para o envio do formulário.
+  \item \textbf{\texttt{carretolages.com} e os emails do escritório mantêm-se} como estão \decidido. Hoje o DNS e o email estão num alojamento português (servidores \texttt{mydnspt.net}, filtro \texttt{cleanmx.pt}); o registo foi feito em 2007 e está pago até 11/06/2027. O acesso não é conhecido; o site antigo terá sido feito por uma empresa externa.
+  \item \textbf{Opcional, sem bloquear o lançamento}: recuperar o acesso a \texttt{carretolages.com} (faturas de renovação no email do escritório, contacto com o alojamento enquanto titular, com NIF e documentos da sociedade) para redirecionar o domínio antigo (301) para o novo e evitar que o site antigo continue no ar.
+\end{enumerate}
+
+\textbf{Lista de verificação para o lançamento \proposta}: textos revistos pelo escritório nas duas línguas; todas as páginas com versão inglesa e \texttt{hreflang} corretos; moradas e coordenadas confirmadas; email destinatário confirmado e testado; domínio novo comprado, ligado e verificado no Resend; \texttt{noindex} removido; Lighthouse dentro das metas; testes em iOS e Android reais; política de privacidade atualizada; testemunhos reais ou secção oculta.
+
+% =====================================================================
+\section{Custos}
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+\textbf{Item} & \textbf{Plano} & \textbf{Custo} \\
+\midrule
+Domínio novo & registo anual & $\approx$ 10--20\,€/ano \\
+Cloudflare Pages & gratuito & 0\,€ \\
+Resend & gratuito (3\,000 emails/mês) & 0\,€ \\
+Sanity & gratuito & 0\,€ \\
+Imagens & banco gratuito & 0\,€ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% =====================================================================
+\section{Fase atual: aprovação do design (v2)}\label{sec:fasedesign}
+
+Antes de construir o site completo, faz-se uma \textbf{v2 para o escritório aprovar o design} \decidido.
+
+\subsection*{Âmbito}
+\begin{itemize}
+  \item Todas as páginas do mapa do site, com o visual final, em computador e telemóvel, nas duas línguas \decidido.
+  \item Construída com a pilha final (Astro), para que o que for aprovado seja a base do site real; não são esboços descartáveis \proposta.
+  \item Conteúdo fixo em ficheiros dentro do projeto, organizado já com a forma dos modelos do Sanity (secção~\ref{sec:cms}), para depois ser só ligar \proposta.
+  \item Vídeo do topo completo, como na secção~\ref{sec:video}.
+  \item Formulário completo visualmente, com validação e mensagens de erro; \textbf{sem envio real de emails} nesta fase \proposta.
+  \item Mapas com carregamento ao clicar, seletor PT/EN, menus, carrossel, ``Em que situação está?'' e restantes interações a funcionar.
+\end{itemize}
+
+\subsection*{Repositório}
+Pasta nova \texttt{D:\textbackslash PersonalProjects\textbackslash CarretoLagesV2}, com repositório git próprio \decidido. As mensagens de commit não levam linhas de co-autoria \decidido.
+
+\subsection*{Documentação a entregar (\texttt{.tex} + PDF)}
+\begin{itemize}
+  \item Capturas de ecrã de \textbf{todas} as páginas e estados relevantes (menu aberto, situação escolhida, erros do formulário, mapa carregado, etc.), em computador (1440\,px) e telemóvel (390\,px), em PT e EN \decidido.
+  \item Testes: verificação de ligações, acessibilidade automática, Lighthouse (desempenho, acessibilidade, boas práticas, SEO), comportamento do vídeo (poupança de dados, movimento reduzido, pausa), validação do formulário, e testes de ponta a ponta das interações \decidido.
+  \item Segurança: cabeçalhos de segurança (CSP, HSTS, \texttt{X-Content-Type-Options}, \texttt{Referrer-Policy}, \texttt{Permissions-Policy}, proteção contra \textit{framing}), validação do formulário, auditoria das dependências, ausência de segredos no repositório \decidido.
+  \item Registo das decisões tomadas durante a construção.
+\end{itemize}
+
+\subsection*{Como o escritório vê o design}
+Pelo PDF com as capturas e por um endereço de teste gratuito na Cloudflare Pages (\texttt{*.pages.dev}) com \texttt{noindex}. A publicação só é feita com confirmação explícita do responsável do projeto \decidido.
+
+\subsection*{Custo zero garantido nesta fase \decidido}
+A conta Cloudflare usada está no plano gratuito, sem subscrições e sem método de pagamento associado (verificado a 4/11/2026). Nesta fase \textbf{não} se usa: compra de domínio, Resend, Sanity, funções de servidor, nem serviços pagos da Cloudflare (R2, Stream, Images, Workers Paid). O site é 100\,\% estático. Todas as ferramentas (Astro, Playwright, Lighthouse, fontes de licença aberta, imagens Unsplash/Pexels) são gratuitas. Se alguma ação implicar custo, pára-se e pergunta-se.
+
+% =====================================================================
+\section{Questões em aberto}
+\begin{enumerate}
+  \item \textbf{Titularidade das contas} (domínio novo, Cloudflare, Resend, Sanity): em nome do Luigi ou do escritório; quem mantém o site depois da entrega e que documentação de passagem é necessária. Adiado por decisão: o foco imediato é o design. \aberto
+  \item Email exato que recebe os pedidos (presumido \texttt{geral@carretolages.com}). \aberto
+  \item Moradas completas e coordenadas dos dois escritórios; telefone de cada um. \aberto
+  \item Validação deontológica de casos práticos e testemunhos; testemunhos reais. \aberto
+  \item Revisão dos textos pelo escritório (secção~\ref{sec:textos}). \aberto
+  \item Fotografias das 5 pessoas sem retrato. \aberto
+  \item Dados legais do escritório para as páginas legais (denominação social, NIPC, sede, contacto RGPD). \aberto
+\end{enumerate}
+
+% =====================================================================
+\section{Textos}\label{sec:textos}
+Textos em pt-PT e em inglês \decidido. Os textos novos (nas duas línguas) são propostos pelo autor do projeto no tom calmo e de confiança \decidido{} e revistos pelo escritório antes do lançamento \proposta. O inglês é inglês britânico \proposta, escrito de raiz para soar natural e não como tradução literal. Regras de escrita: frases curtas; linguagem do cliente, não jargão jurídico; sem promessas de resultado; sem superlativos sobre o escritório; títulos em duas linhas curtas, ao estilo da referência.
+
+% =====================================================================
+\section{Ao critério de quem implementa}
+\begin{itemize}
+  \item Valores finais de cor (dentro das regras de contraste) e escolha exata das fontes.
+  \item Ferramentas de codificação do vídeo e parâmetros, desde que cumpram os tamanhos alvo e a qualidade visual.
+  \item Estrutura de pastas, componentes, biblioteca de validação, testes.
+  \item Caminhos exatos das páginas (em português e em inglês).
+  \item Mecanismo de internacionalização (i18n nativo do Astro ou equivalente).
+  \item Detalhes das animações, dentro do princípio ``lento, discreto e desligável''.
+  \item Escolha das imagens de banco, dentro do registo visual definido.
+\end{itemize}
+
+% =====================================================================
+\appendix
+\section{Conteúdo existente a migrar}\label{ap:conteudo}
+
+\subsection*{Escritório}
+Carreto Lages \& Associados --- Sociedade de Advogados. Fundado em 2002. Escritórios em Aveiro e Oliveira de Frades. Telefone (+351) 232 762 464. Email geral@carretolages.com. Segunda a sexta, 9h00--18h00.
+
+\subsection*{Áreas de atuação}
+\begin{itemize}
+  \item \textbf{Direito Penal} --- defesa em processos criminais de qualquer complexidade, contraordenações, recursos e \textit{habeas corpus}.
+  \item \textbf{Direito Imobiliário} --- compra, venda e arrendamento de imóveis, licenciamento urbanístico, expropriações e propriedade horizontal.
+  \item \textbf{Direito Fiscal} --- planeamento fiscal, IRS, IRC, IVA, impugnações e reclamações graciosas perante a Autoridade Tributária.
+  \item \textbf{Direito Financeiro} --- crédito bancário, reestruturação de dívida, contratos financeiros e litígios com instituições de crédito.
+\end{itemize}
+
+\subsection*{Equipa}
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+\textbf{Nome} & \textbf{Cargo} & \textbf{Fotografia} \\
+\midrule
+José Carreto Lages & Sócio Fundador & sim \\
+João Carlos Lages & Sócio e Administrador & sim \\
+Catarina Pereira Carvalho & Sócia e Administradora & sim \\
+Adriana Silva & Advogada Associada & não \\
+Sara Matos & Advogada Associada & não \\
+Daniela Rodrigues & Advogada Associada & não \\
+Diana Antão Seabra & Advogada Associada & não \\
+Francisco Lopes & Consultor & não \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{Outros conteúdos}
+\begin{itemize}
+  \item Casos práticos: absolvição em processo de burla informática; recuperação de imóvel em processo de insolvência; impugnação de liquidação de IRS (a validar).
+  \item Perguntas frequentes: como funciona o primeiro contacto; áreas de especialização; prazo de resposta; clientes fora de Aveiro e Oliveira de Frades; cálculo de honorários.
+  \item Sociedade: História, Perfil e Valores (incluindo ``proximidade com o cliente''), Pro Bono (apoio a IPSS e associações sem fins lucrativos; colaboração com a Ordem dos Advogados).
+  \item Citação usada no site atual: Padre António Vieira, \textit{Sermões} --- pode ser reaproveitada numa página institucional.
+  \item Vídeo \texttt{Aveiro.mp4} (original, 62\,MB) e as 3 fotografias de advogados.
+\end{itemize}
+
+\end{document}

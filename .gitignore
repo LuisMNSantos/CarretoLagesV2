@@ -1,0 +1,20 @@
+node_modules/
+dist/
+.astro/
+.env
+.env.*
+!.env.example
+reports/*
+!reports/summary/
+test-results/
+playwright-report/
+# LaTeX build artifacts
+docs/**/*.aux
+docs/**/*.log
+docs/**/*.out
+docs/**/*.toc
+docs/**/*.fls
+docs/**/*.fdb_latexmk
+docs/**/*.synctex.gz
+.DS_Store
+Thumbs.db

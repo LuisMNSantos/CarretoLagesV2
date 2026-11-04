@@ -1,0 +1,38 @@
+{
+  "name": "carretolages-v2",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "description": "Carreto Lages & Associados — v2 design-approval build (static, bilingual PT/EN)",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview --port 4321",
+    "check": "astro check",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "video": "node scripts/encode-video.mjs",
+    "serve:headers": "node scripts/serve-with-headers.mjs",
+    "screens": "node --experimental-strip-types scripts/screenshots.ts",
+    "report": "node scripts/report.mjs"
+  },
+  "dependencies": {
+    "@fontsource-variable/dm-sans": "^5.3.0",
+    "@fontsource/cormorant-garamond": "^5.3.0",
+    "@tailwindcss/vite": "^4.3.4",
+    "astro": "^7.4.5",
+    "sharp": "^0.35.5",
+    "tailwindcss": "^4.3.4",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.64.1",
+    "typescript": "^6.0.3",
+    "vitest": "^5.1.0"
+  }
+}
