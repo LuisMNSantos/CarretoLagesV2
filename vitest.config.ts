@@ -4,5 +4,6 @@ export default defineConfig({
   test: {
     include: ['src/**/*.test.ts', 'scripts/**/*.test.ts'],
     environment: 'node',
+    reporters: ['default', ['json', { outputFile: 'reports/summary/vitest.json' }]],
   },
 });

@@ -1,17 +1,17 @@
 {
-  "date": "2026-11-04T23:14:54.175Z",
+  "date": "2026-11-04T23:39:06.505Z",
   "dependencies": {
     "prod": 207,
-    "dev": 113,
-    "optional": 94,
+    "dev": 231,
+    "optional": 113,
     "peer": 0,
     "peerOptional": 0,
-    "total": 413
+    "total": 531
   },
   "vulnerabilities": {
     "info": 0,
     "low": 0,
-    "moderate": 0,
+    "moderate": 6,
     "high": 0,
     "critical": 0
   }

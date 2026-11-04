@@ -1,5 +1,6 @@
 ---
 import { noindex } from '../../lib/env';
+import dmSans from '@fontsource-variable/dm-sans/files/dm-sans-latin-wght-normal.woff2?url';
 
 export interface Props {
   locale: 'pt' | 'en';
@@ -13,12 +14,15 @@ export interface Props {
 const { locale, title, description, alternates, jsonLd = [], ogImage } = Astro.props;
 const site = Astro.site ?? new URL('https://carretolages-v2.pages.dev');
 const abs = (p: string) => new URL(p, site).href;
-const canonical = abs(Astro.url.pathname);
+// Static build uses `x.html` files served at `/x`: canonical URLs never carry `.html` or `/index`.
+const cleanPath = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '') || '/';
+const canonical = abs(cleanPath);
 const ogLocale = locale === 'pt' ? 'pt_PT' : 'en_GB';
 const image = abs(ogImage ?? '/og-image.jpg');
 ---
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preload" href={dmSans} as="font" type="font/woff2" crossorigin />
 <title>{title}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonical} />

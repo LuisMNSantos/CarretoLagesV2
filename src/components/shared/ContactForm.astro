@@ -96,7 +96,7 @@ const req = t(locale, 'form.required');
     </button>
     {designPreview && <p class="max-w-xs text-xs leading-relaxed text-tinta-suave">{t(locale, 'form.previewNotice')}</p>}
   </div>
-  <p class="mt-6 rounded bg-areia p-4 text-sm text-tinta" data-nojs-notice>{t(locale, 'form.noscript')}</p>
+  <p class="nojs-notice mt-6 rounded bg-areia p-4 text-sm text-tinta" data-nojs-notice>{t(locale, 'form.noscript')}</p>
 </form>
 
 <style>
@@ -122,6 +122,9 @@ const req = t(locale, 'form.required');
   .chip input:focus-visible + span { outline: 2px solid var(--color-verde-700); outline-offset: 3px; }
   .consent input { margin-top: 0.2rem; width: 1.15rem; height: 1.15rem; accent-color: var(--color-verde-700); flex: none; }
   .field-error { margin-top: 0.5rem; font-size: 0.8125rem; color: #9A3B26; }
+  /* Shown only when scripting is off: no DOM change after load, so no layout shift. */
+  .nojs-notice { display: none; }
+  @media (scripting: none) { .nojs-notice { display: block; } }
   .hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 </style>
 

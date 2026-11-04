@@ -13,8 +13,8 @@ const { locale } = Astro.props;
 // Poster = LCP element. Art-directed: 9:16 crop on portrait phones, 16:9 elsewhere.
 const portraitMq = '(orientation: portrait) and (max-width: 767px)';
 const [pAvif, pWebp, lAvif, lWebp, fallback] = await Promise.all([
-  getImage({ src: posterPortrait, format: 'avif', widths: [480, 720], quality: 55 }),
-  getImage({ src: posterPortrait, format: 'webp', widths: [480, 720], quality: 58 }),
+  getImage({ src: posterPortrait, format: 'avif', widths: [480, 720], quality: 42 }),
+  getImage({ src: posterPortrait, format: 'webp', widths: [480, 720], quality: 50 }),
   getImage({ src: posterLandscape, format: 'avif', widths: [960, 1440, 1920], quality: 38 }),
   getImage({ src: posterLandscape, format: 'webp', widths: [960, 1280], quality: 48 }),
   getImage({ src: posterLandscape, format: 'jpg', width: 1024, quality: 55 }),

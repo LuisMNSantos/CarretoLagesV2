@@ -53,3 +53,7 @@ for (const v of variants) {
 run(['-ss', '0.2', '-i', src, '-frames:v', '1', '-vf', 'scale=1920:1080:flags=lanczos', '-q:v', '3', 'src/assets/hero-poster.jpg']);
 run(['-ss', '0.2', '-i', src, '-frames:v', '1', '-vf', 'crop=ih*9/16:ih,scale=720:1280:flags=lanczos', '-q:v', '3', 'src/assets/hero-poster-portrait.jpg']);
 console.log('posters written');
+
+// Social sharing image (Open Graph), 1200×630, from the landscape poster.
+run(['-i', 'src/assets/hero-poster.jpg', '-vf', 'crop=iw:iw*630/1200,scale=1200:630:flags=lanczos', '-q:v', '4', 'public/og-image.jpg']);
+console.log('og image written');

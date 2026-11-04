@@ -15,7 +15,7 @@ export interface Props {
 }
 const { locale, alternates, variant } = Astro.props;
 const items = navItems(locale, getCollectionCounts(locale));
-const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const path = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '').replace(/\/$/, '') || '/';
 const isHome = path === localizePath('home', locale);
 const ctaHref = isHome ? '#contacto' : `${localizePath('contact', locale)}#contacto`;
 const isActive = (href: string) => (href === '/' || href === '/en' ? path === href : path === href || path.startsWith(`${href}/`));

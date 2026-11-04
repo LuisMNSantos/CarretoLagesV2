@@ -46,9 +46,9 @@ test('English form shows English errors', async ({ page }) => {
   await expect(form(page).locator('[data-error-for="nome"]')).toHaveText('Please enter your name (2 to 100 characters).');
 });
 
-test('with JavaScript the no-JS notice is removed', async ({ page }) => {
+test('with JavaScript the no-JS notice is not shown', async ({ page }) => {
   await page.goto('/');
-  await expect(page.locator('[data-nojs-notice]')).toHaveCount(0);
+  await expect(page.locator('[data-nojs-notice]').first()).toBeHidden();
 });
 
 test('the area select chevron sits inside the field', async ({ page }) => {

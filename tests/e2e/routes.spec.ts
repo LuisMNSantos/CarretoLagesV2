@@ -19,6 +19,11 @@ for (const r of routes) {
     await expect(page.locator('html')).toHaveAttribute('lang', r.locale === 'pt' ? 'pt-PT' : 'en');
     expect((await page.title()).length).toBeGreaterThan(5);
     expect(await page.locator('meta[name="description"]').getAttribute('content')).toBeTruthy();
+    if (r.key !== '404') {
+      const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
+      expect(canonical).toBe(`https://carretolages-v2.pages.dev${r.path}`);
+      expect(await page.locator('meta[property="og:image"]').getAttribute('content')).toBe('https://carretolages-v2.pages.dev/og-image.jpg');
+    }
 
     for (const href of await page.locator('link[rel="alternate"][hreflang]').evaluateAll((ls) => ls.map((l) => new URL((l as HTMLLinkElement).href).pathname))) {
       const alt = await request.get(href);

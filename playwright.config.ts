@@ -6,7 +6,7 @@ const external = Boolean(process.env.PW_BASE_URL);
 export default defineConfig({
   testDir: 'tests/e2e',
   fullyParallel: true,
-  reporter: [['list'], ['json', { outputFile: 'reports/playwright.json' }]],
+  reporter: [['list'], ['json', { outputFile: process.env.PW_JSON ?? 'reports/summary/playwright.json' }]],
   use: { baseURL, channel: 'chrome' },
   projects: [
     { name: 'desktop', use: { viewport: { width: 1440, height: 900 }, channel: 'chrome' } },

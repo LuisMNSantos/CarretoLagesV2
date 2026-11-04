@@ -1,0 +1,32 @@
+[
+  {
+    "path": "/destaques/recebi-uma-notificacao-das-financas",
+    "viewport": "mobile",
+    "violations": []
+  },
+  {
+    "path": "/en/insights/received-a-tax-authority-notice",
+    "viewport": "mobile",
+    "violations": []
+  },
+  {
+    "path": "/destaques/comprar-casa-antes-de-assinar",
+    "viewport": "mobile",
+    "violations": []
+  },
+  {
+    "path": "/en/insights/buying-a-home-before-you-sign",
+    "viewport": "mobile",
+    "violations": []
+  },
+  {
+    "path": "/404",
+    "viewport": "mobile",
+    "violations": []
+  },
+  {
+    "path": "/en/404",
+    "viewport": "mobile",
+    "violations": []
+  }
+]

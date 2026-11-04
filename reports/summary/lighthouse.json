@@ -1,0 +1,71 @@
+{
+  "date": "2026-11-04T23:34:20.711Z",
+  "gates": {
+    "performance": 90,
+    "accessibility": 95,
+    "lcpMs": 2500,
+    "cls": 0.1
+  },
+  "rows": [
+    {
+      "path": "/",
+      "runs": 3,
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcpMs": 1234,
+      "cls": 0,
+      "tbtMs": 0,
+      "fcpMs": 1226
+    },
+    {
+      "path": "/en",
+      "runs": 3,
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcpMs": 1223,
+      "cls": 0,
+      "tbtMs": 9,
+      "fcpMs": 1223
+    },
+    {
+      "path": "/areas-de-atuacao/direito-fiscal",
+      "runs": 3,
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcpMs": 1888,
+      "cls": 0,
+      "tbtMs": 0,
+      "fcpMs": 1011
+    },
+    {
+      "path": "/advogados",
+      "runs": 3,
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcpMs": 1659,
+      "cls": 0,
+      "tbtMs": 0,
+      "fcpMs": 1011
+    },
+    {
+      "path": "/contactos",
+      "runs": 3,
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcpMs": 1014,
+      "cls": 0,
+      "tbtMs": 0,
+      "fcpMs": 1014
+    }
+  ]
+}
