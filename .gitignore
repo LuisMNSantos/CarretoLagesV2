@@ -19,3 +19,4 @@ docs/**/*.synctex.gz
 .DS_Store
 Thumbs.db
 .tmp-*
+.superpowers/
