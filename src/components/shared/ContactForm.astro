@@ -1,0 +1,131 @@
+---
+import Icon from './Icon.astro';
+import { areas, offices, tr, visible } from '../../lib/content';
+import { localizePath } from '../../i18n/routes';
+import { t } from '../../i18n/ui';
+import type { Locale } from '../../i18n/locale';
+import { designPreview } from '../../lib/env';
+
+export interface Props { locale: Locale; preselectArea?: string | undefined; idPrefix?: string }
+const { locale, preselectArea, idPrefix = 'cf' } = Astro.props;
+const id = (name: string) => `${idPrefix}-${name}`;
+const areaOptions = visible(areas, locale).map((a) => ({ value: a.id, label: tr(a.title, locale) }));
+const thanks = localizePath('thanks', locale);
+const req = t(locale, 'form.required');
+---
+<form
+  class="contact-form"
+  method="post"
+  action={thanks}
+  novalidate
+  aria-label={t(locale, 'form.legend')}
+  data-contact-form
+  data-locale={locale}
+  data-thanks={thanks}
+>
+  <div class="form-summary mb-6 hidden rounded border border-[#B4533C]/40 bg-[#F6E7E1] p-4 text-sm text-[#7A2E1C]" role="alert" aria-live="polite" tabindex="-1" data-form-summary></div>
+
+  <div class="grid gap-x-6 gap-y-7 sm:grid-cols-2">
+    <div class="field">
+      <label for={id('nome')}>{t(locale, 'form.name')} <span class="req" aria-hidden="true">*</span><span class="sr-only">({req})</span></label>
+      <input id={id('nome')} name="nome" type="text" autocomplete="name" required maxlength="100" aria-describedby={`${id('nome')}-err`} />
+      <p id={`${id('nome')}-err`} class="field-error" data-error-for="nome" hidden></p>
+    </div>
+    <div class="field">
+      <label for={id('email')}>{t(locale, 'form.emailLabel')} <span class="req" aria-hidden="true">*</span><span class="sr-only">({req})</span></label>
+      <input id={id('email')} name="email" type="email" autocomplete="email" inputmode="email" required maxlength="254" aria-describedby={`${id('email')}-err`} />
+      <p id={`${id('email')}-err`} class="field-error" data-error-for="email" hidden></p>
+    </div>
+    <div class="field">
+      <label for={id('telefone')}>{t(locale, 'form.phone')} <span class="opt">({t(locale, 'form.optional')})</span></label>
+      <input id={id('telefone')} name="telefone" type="tel" autocomplete="tel" inputmode="tel" maxlength="30" aria-describedby={`${id('telefone')}-err`} />
+      <p id={`${id('telefone')}-err`} class="field-error" data-error-for="telefone" hidden></p>
+    </div>
+    <div class="field">
+      <label for={id('area')}>{t(locale, 'form.area')} <span class="opt">({t(locale, 'form.optional')})</span></label>
+      <div class="select-wrap">
+        <select id={id('area')} name="area" aria-describedby={`${id('area')}-err`}>
+          <option value="" selected={!preselectArea}>{t(locale, 'form.areaPlaceholder')}</option>
+          {areaOptions.map((o) => <option value={o.value} selected={o.value === preselectArea}>{o.label}</option>)}
+          <option value="outro">{t(locale, 'form.areaOther')}</option>
+        </select>
+        <Icon name="chevron-down" size={16} class="select-icon" />
+      </div>
+      <p id={`${id('area')}-err`} class="field-error" data-error-for="area" hidden></p>
+    </div>
+    <fieldset class="field sm:col-span-2">
+      <legend>{t(locale, 'form.office')} <span class="opt">({t(locale, 'form.optional')})</span></legend>
+      <div class="mt-3 flex flex-wrap gap-2">
+        {[...offices.map((o) => ({ value: o.id, label: o.name })), { value: 'indiferente', label: t(locale, 'form.officeAny') }].map((o, i) => (
+          <label class="chip">
+            <input type="radio" name="escritorio" value={o.value} checked={i === 2} />
+            <span>{o.label}</span>
+          </label>
+        ))}
+      </div>
+      <p class="field-error" data-error-for="escritorio" hidden></p>
+    </fieldset>
+    <div class="field sm:col-span-2">
+      <label for={id('mensagem')}>{t(locale, 'form.message')} <span class="req" aria-hidden="true">*</span><span class="sr-only">({req})</span></label>
+      <textarea id={id('mensagem')} name="mensagem" rows="5" required maxlength="3000" aria-describedby={`${id('mensagem')}-hint ${id('mensagem')}-err`}></textarea>
+      <p id={`${id('mensagem')}-hint`} class="mt-2 text-xs text-tinta-suave">{t(locale, 'form.messageHint')}</p>
+      <p id={`${id('mensagem')}-err`} class="field-error" data-error-for="mensagem" hidden></p>
+    </div>
+  </div>
+
+  <div class="hp" aria-hidden="true">
+    <label for={id('website')}>Website</label>
+    <input id={id('website')} name="website" type="text" tabindex="-1" autocomplete="off" />
+  </div>
+  <input type="hidden" name="startedAt" value="" data-started-at />
+
+  <div class="field mt-7">
+    <label class="consent flex items-start gap-3 text-sm leading-relaxed text-tinta-suave">
+      <input type="checkbox" name="consentimento" required aria-describedby={`${id('consentimento')}-err`} />
+      <span>
+        {t(locale, 'form.consent').replace(t(locale, 'form.privacyLink'), '§').split('§')[0]}<a class="underline underline-offset-2 hover:text-verde-700" href={localizePath('privacy', locale)}>{t(locale, 'form.privacyLink')}</a>{t(locale, 'form.consent').replace(t(locale, 'form.privacyLink'), '§').split('§')[1]}
+      </span>
+    </label>
+    <p id={`${id('consentimento')}-err`} class="field-error" data-error-for="consentimento" hidden></p>
+  </div>
+
+  <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+    <button type="submit" class="btn btn-verde" data-submit>
+      <span data-submit-label>{t(locale, 'form.submit')}</span>
+      <Icon name="arrow-up-right" size={16} />
+    </button>
+    {designPreview && <p class="max-w-xs text-xs leading-relaxed text-tinta-suave">{t(locale, 'form.previewNotice')}</p>}
+  </div>
+  <noscript><p class="mt-6 rounded bg-areia p-4 text-sm text-tinta">{t(locale, 'form.noscript')}</p></noscript>
+</form>
+
+<style>
+  .field label, .field legend { display: block; font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.02em; color: var(--color-tinta); }
+  .req { color: var(--color-bronze); }
+  .opt { font-weight: 400; color: var(--color-tinta-suave); }
+  .field input:not([type='checkbox']):not([type='radio']), .field select, .field textarea {
+    display: block; width: 100%; margin-top: 0.5rem; padding: 0.75rem 0.1rem;
+    background: transparent; border: 0; border-bottom: 1px solid var(--color-areia-escura); border-radius: 0;
+    font: inherit; font-size: 1rem; color: var(--color-tinta);
+    transition: border-color 250ms var(--ease-calm);
+  }
+  .field textarea { resize: vertical; min-height: 8rem; }
+  .field input:focus-visible, .field select:focus-visible, .field textarea:focus-visible { outline: none; border-bottom-color: var(--color-verde-700); box-shadow: 0 1px 0 0 var(--color-verde-700); }
+  .field [aria-invalid='true'] { border-bottom-color: #B4533C !important; }
+  .select-wrap { position: relative; }
+  .select-wrap select { appearance: none; padding-right: 2rem; cursor: pointer; }
+  .select-icon { position: absolute; right: 0.25rem; bottom: 0.9rem; pointer-events: none; color: var(--color-tinta-suave); }
+  .chip { position: relative; display: inline-flex; cursor: pointer; }
+  .chip input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+  .chip span { display: inline-flex; align-items: center; min-height: 2.75rem; padding: 0.5rem 1rem; border: 1px solid var(--color-areia-escura); border-radius: 999px; font-size: 0.875rem; transition: all 250ms var(--ease-calm); }
+  .chip input:checked + span { background: var(--color-verde-700); border-color: var(--color-verde-700); color: var(--color-marfim); }
+  .chip input:focus-visible + span { outline: 2px solid var(--color-verde-700); outline-offset: 3px; }
+  .consent input { margin-top: 0.2rem; width: 1.15rem; height: 1.15rem; accent-color: var(--color-verde-700); flex: none; }
+  .field-error { margin-top: 0.5rem; font-size: 0.8125rem; color: #9A3B26; }
+  .hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+</style>
+
+<script>
+  import { initContactForm } from '../../scripts/contact-form';
+  document.querySelectorAll<HTMLFormElement>('[data-contact-form]').forEach((f) => initContactForm(f));
+</script>

@@ -4,6 +4,7 @@ import Hero from '../home/Hero.astro';
 import AreasCarousel from '../home/AreasCarousel.astro';
 import Situations from '../home/Situations.astro';
 import Process from '../home/Process.astro';
+import ContactForm from '../shared/ContactForm.astro';
 import { settings, tr } from '../../lib/content';
 import { localizePath } from '../../i18n/routes';
 import type { Locale } from '../../i18n/locale';
@@ -22,4 +23,5 @@ const { locale } = Astro.props;
   <AreasCarousel locale={locale} />
   <Situations locale={locale} />
   <Process locale={locale} />
+  <section id="contacto" class="container-site py-20"><ContactForm locale={locale} /></section>
 </Base>
