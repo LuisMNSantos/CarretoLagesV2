@@ -1,0 +1,25 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../home/Hero.astro';
+import AreasCarousel from '../home/AreasCarousel.astro';
+import Situations from '../home/Situations.astro';
+import Process from '../home/Process.astro';
+import { settings, tr } from '../../lib/content';
+import { localizePath } from '../../i18n/routes';
+import type { Locale } from '../../i18n/locale';
+
+export interface Props { locale: Locale }
+const { locale } = Astro.props;
+---
+<Base
+  locale={locale}
+  title={tr(settings.seo.homeTitle, locale)}
+  description={tr(settings.seo.homeDescription, locale)}
+  alternates={{ pt: localizePath('home', 'pt'), en: localizePath('home', 'en') }}
+  headerVariant="overlay"
+>
+  <Hero locale={locale} />
+  <AreasCarousel locale={locale} />
+  <Situations locale={locale} />
+  <Process locale={locale} />
+</Base>

@@ -1,0 +1,68 @@
+---
+import SectionHeading from '../shared/SectionHeading.astro';
+import StockImage from '../shared/StockImage.astro';
+import Icon from '../shared/Icon.astro';
+import { settings, steps, tr, visible } from '../../lib/content';
+import { t } from '../../i18n/ui';
+import type { Locale } from '../../i18n/locale';
+
+export interface Props { locale: Locale }
+const { locale } = Astro.props;
+const list = visible(steps, locale);
+const s = settings.sections.process;
+---
+<section class="py-20 md:py-28" aria-labelledby="process-title">
+  <div class="container-site">
+    <SectionHeading id="process-title" eyebrow={tr(s.eyebrow, locale)} title={[tr(s.title[0], locale), tr(s.title[1], locale)]} lead={tr(s.lead, locale)} />
+    <ol class="process mt-14 flex flex-col gap-3 lg:h-[30rem] lg:flex-row" data-process>
+      {list.map((x, i) => (
+        <li class="process-step relative flex-1 overflow-hidden rounded-md" data-step data-active={String(i === 1)} tabindex="0">
+          <div class="step-media absolute inset-0 hidden lg:block" aria-hidden="true">
+            <StockImage id={x.image} sizes="45vw" />
+            <div class="absolute inset-0 bg-gradient-to-t from-verde-900/90 via-verde-900/40 to-verde-900/70"></div>
+          </div>
+          <div class="relative flex h-full flex-col p-6 lg:p-7">
+            <span class="text-sm tabular-nums opacity-70">{x.number}</span>
+            <h3 class="mt-2 text-[1.625rem] lg:mt-4">{tr(x.title, locale)}</h3>
+            <div class="step-body mt-auto pt-8">
+              <p class="text-[1.125rem] font-medium">{tr(x.headline, locale)}</p>
+              <p class="mt-2 max-w-md text-[0.9375rem] leading-relaxed opacity-85">{tr(x.body, locale)}</p>
+            </div>
+            <span class="step-arrow icon-circle mt-auto hidden self-start lg:inline-grid" aria-hidden="true"><Icon name="arrow-up-right" size={15} /></span>
+          </div>
+        </li>
+      ))}
+    </ol>
+    <div class="mt-8 flex flex-wrap items-center justify-between gap-4">
+      <p class="text-[0.6875rem] uppercase tracking-[0.22em] text-tinta-suave">{t(locale, 'process.footer')}</p>
+      <a href="#contacto" class="link-arrow text-verde-700">{t(locale, 'cta.tellUs')}<Icon name="arrow-up-right" size={14} /></a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .process-step { background: var(--color-areia); color: var(--color-tinta); transition: flex-grow 700ms var(--ease-calm), background-color 500ms var(--ease-calm); }
+  .process-step:nth-child(3), .process-step:nth-child(4) { background: #DCDCCF; }
+  .step-media { opacity: 0; transition: opacity 600ms var(--ease-calm); }
+  @media (min-width: 1024px) {
+    .process-step { flex-grow: 1; cursor: default; }
+    .process-step[data-active='true'] { flex-grow: 3.2; color: var(--color-marfim); }
+    .process-step[data-active='true'] .step-media { opacity: 1; }
+    .process-step .step-body { opacity: 0; transform: translateY(8px); transition: opacity 500ms var(--ease-calm) 150ms, transform 500ms var(--ease-calm) 150ms; }
+    .process-step[data-active='true'] .step-body { opacity: 1; transform: none; }
+    .process-step[data-active='true'] .step-arrow { display: none; }
+    .process-step .step-body { position: absolute; left: 1.75rem; right: 1.75rem; bottom: 1.75rem; }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-process]').forEach((list) => {
+    const steps = Array.from(list.querySelectorAll<HTMLElement>('[data-step]'));
+    const activate = (el: HTMLElement) => steps.forEach((s) => { s.dataset.active = String(s === el); });
+    steps.forEach((s) => {
+      s.addEventListener('mouseenter', () => activate(s));
+      s.addEventListener('focus', () => activate(s));
+      s.addEventListener('click', () => activate(s));
+    });
+  });
+</script>

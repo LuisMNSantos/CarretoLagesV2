@@ -1,0 +1,22 @@
+---
+export interface Props {
+  eyebrow: string;
+  title: [string, string];
+  lead?: string | undefined;
+  id: string;
+  as?: 'h1' | 'h2';
+  class?: string;
+}
+const { eyebrow, title, lead, id, as: Tag = 'h2', class: cls = '' } = Astro.props;
+---
+<div class:list={['grid gap-6 md:grid-cols-12 md:items-end', cls]} data-reveal>
+  <div class="md:col-span-9">
+    <p class="eyebrow text-tinta-suave">{eyebrow}</p>
+    <Tag id={id} class="display-2 mt-5 text-tinta">
+      <span class="block">{title[0]}</span>
+      <span class="block">{title[1]}</span>
+    </Tag>
+  </div>
+  {lead && <p class="text-[0.9375rem] leading-relaxed text-tinta-suave md:col-span-3 md:pb-2">{lead}</p>}
+  <slot />
+</div>

@@ -1,0 +1,114 @@
+---
+import SectionHeading from '../shared/SectionHeading.astro';
+import StockImage from '../shared/StockImage.astro';
+import Icon from '../shared/Icon.astro';
+import { areaById, settings, situations, tr, visible } from '../../lib/content';
+import { localizePath } from '../../i18n/routes';
+import { t } from '../../i18n/ui';
+import type { Locale } from '../../i18n/locale';
+
+export interface Props { locale: Locale }
+const { locale } = Astro.props;
+const list = visible(situations, locale);
+const s = settings.sections.situations;
+const areaHref = (id: string) => {
+  const a = areaById(id);
+  return a ? localizePath('areas', locale, tr(a.slug, locale)) : localizePath('areas', locale);
+};
+---
+<section class="bg-marfim-claro py-20 md:py-28" aria-labelledby="situations-title">
+  <div class="container-site">
+    <SectionHeading id="situations-title" eyebrow={tr(s.eyebrow, locale)} title={[tr(s.title[0], locale), tr(s.title[1], locale)]} lead={tr(s.lead, locale)} />
+
+    <!-- Wide screens: ARIA tabs (all panels visible without JS) -->
+    <div class="situations-tabs mt-14 hidden md:grid md:grid-cols-12 md:gap-8" data-tabs>
+      <div class="md:col-span-4">
+        <div role="tablist" aria-label={t(locale, 'situations.listLabel')} aria-orientation="vertical" class="tablist flex flex-col gap-3">
+          {list.map((x, i) => (
+            <button
+              type="button"
+              role="tab"
+              id={`sit-tab-${x.id}`}
+              aria-controls={`sit-panel-${x.id}`}
+              aria-selected={i === 0 ? 'true' : 'false'}
+              tabindex={i === 0 ? 0 : -1}
+              class="situation-tab group flex w-full items-center gap-4 rounded-md p-5 text-left"
+            >
+              <span class="tab-icon icon-circle"><Icon name={x.icon} size={18} /></span>
+              <span class="flex-1">
+                <span class="block text-[0.625rem] uppercase tracking-[0.22em] opacity-70">{tr(x.eyebrow, locale)}</span>
+                <span class="mt-1 block text-[1.0625rem] leading-snug">{tr(x.prompt, locale)}</span>
+              </span>
+              <Icon name="arrow-up-right" size={16} class="opacity-60" />
+            </button>
+          ))}
+        </div>
+        <p class="mt-8 max-w-xs pl-5 text-sm text-tinta-suave">{t(locale, 'situations.footer')}</p>
+      </div>
+      <div class="md:col-span-8">
+        {list.map((x) => (
+          <div role="tabpanel" id={`sit-panel-${x.id}`} aria-labelledby={`sit-tab-${x.id}`} tabindex="0" class="situation-panel">
+            <div class="grid h-full gap-0 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)]">
+              <figure class="relative min-h-[18rem] overflow-hidden rounded-md lg:min-h-[28rem]">
+                <StockImage id={x.image} sizes="(min-width: 1024px) 30vw, 60vw" />
+                <figcaption class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-verde-900/80 to-transparent p-5 pt-16 text-[0.6875rem] uppercase tracking-[0.22em] text-marfim">{tr(x.imageCaption, locale)}</figcaption>
+              </figure>
+              <div class="card relative z-10 flex flex-col bg-marfim p-8 shadow-[0_24px_50px_-30px_rgb(15_36_29_/_0.35)] lg:-ml-10 lg:my-8 lg:p-10">
+                <p class="eyebrow text-tinta-suave">{tr(x.eyebrow, locale)}</p>
+                <h3 class="mt-6 text-[clamp(1.6rem,2.6vw,2.25rem)] text-tinta">
+                  <span class="block">{tr(x.title[0], locale)}</span>
+                  <span class="block">{tr(x.title[1], locale)}</span>
+                </h3>
+                <p class="mt-5 text-[0.9375rem] leading-relaxed text-tinta-suave">{tr(x.body, locale)}</p>
+                <ul class="mt-6 flex flex-wrap gap-2">
+                  {x.tags.map((tag) => <li class="rounded-full bg-areia px-3 py-1 text-xs text-tinta">{tr(tag, locale)}</li>)}
+                </ul>
+                <a href={areaHref(x.area)} class="link-arrow mt-auto self-start pt-8 text-verde-700">{tr(x.linkLabel, locale)}<Icon name="arrow-up-right" size={14} /></a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Narrow screens: accordion -->
+    <div class="mt-10 space-y-3 md:hidden">
+      {list.map((x, i) => (
+        <details class="situation-acc group rounded-md bg-marfim" open={i === 0}>
+          <summary class="flex cursor-pointer list-none items-center gap-4 p-5">
+            <span class="icon-circle text-verde-700"><Icon name={x.icon} size={18} /></span>
+            <span class="flex-1">
+              <span class="block text-[0.625rem] uppercase tracking-[0.22em] text-tinta-suave">{tr(x.eyebrow, locale)}</span>
+              <span class="mt-1 block text-[1.0625rem] leading-snug text-tinta">{tr(x.prompt, locale)}</span>
+            </span>
+            <Icon name="plus" size={18} class="acc-icon text-tinta-suave transition-transform group-open:rotate-45" />
+          </summary>
+          <div class="px-5 pb-6">
+            <div class="aspect-[16/10] overflow-hidden rounded"><StockImage id={x.image} sizes="90vw" /></div>
+            <h3 class="mt-5 text-2xl text-tinta">{tr(x.title[0], locale)} {tr(x.title[1], locale)}</h3>
+            <p class="mt-3 text-[0.9375rem] leading-relaxed text-tinta-suave">{tr(x.body, locale)}</p>
+            <a href={areaHref(x.area)} class="link-arrow mt-5 text-verde-700">{tr(x.linkLabel, locale)}<Icon name="arrow-up-right" size={14} /></a>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .situation-tab { background: var(--color-areia); color: var(--color-tinta); transition: background-color 300ms var(--ease-calm), color 300ms var(--ease-calm); }
+  .situation-tab:hover { background: var(--color-areia-escura); }
+  .situation-tab[aria-selected='true'] { background: var(--color-verde-700); color: var(--color-marfim); }
+  .situation-tab[aria-selected='true'] .tab-icon { border-color: rgb(243 240 232 / 0.35); }
+  .situation-tab:focus-visible { outline-offset: 2px; }
+  /* Without JS every panel is shown, stacked; tabs are hidden because they would do nothing. */
+  .situations-tabs:not([data-enhanced='true']) .tablist { display: none; }
+  .situations-tabs:not([data-enhanced='true']) .situation-panel + .situation-panel { margin-top: 2rem; }
+  .situations-tabs[data-enhanced='true'] .situation-panel[hidden] { display: none; }
+  .situation-acc summary::-webkit-details-marker { display: none; }
+</style>
+
+<script>
+  import { initTabs } from '../../scripts/tabs';
+  document.querySelectorAll<HTMLElement>('[data-tabs]').forEach((el) => initTabs(el));
+</script>

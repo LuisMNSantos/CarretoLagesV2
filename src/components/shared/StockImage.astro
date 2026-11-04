@@ -1,0 +1,24 @@
+---
+import { Picture } from 'astro:assets';
+import { stockImage } from '../../lib/images';
+export interface Props {
+  id: string;
+  alt?: string;
+  sizes: string;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+  widths?: number[];
+}
+const { id, alt = '', sizes, class: cls = '', loading = 'lazy', widths = [480, 800, 1200, 1600] } = Astro.props;
+---
+<Picture
+  src={stockImage(id)}
+  alt={alt}
+  sizes={sizes}
+  widths={widths}
+  formats={['avif', 'webp']}
+  quality={60}
+  loading={loading}
+  decoding="async"
+  class:list={['img-tone h-full w-full object-cover', cls]}
+/>

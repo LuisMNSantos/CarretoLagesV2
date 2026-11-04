@@ -1,0 +1,72 @@
+---
+import SectionHeading from '../shared/SectionHeading.astro';
+import StockImage from '../shared/StockImage.astro';
+import Icon from '../shared/Icon.astro';
+import { areas, settings, tr, visible } from '../../lib/content';
+import { localizePath } from '../../i18n/routes';
+import { t } from '../../i18n/ui';
+import type { Locale } from '../../i18n/locale';
+import { slideLabel } from '../../scripts/carousel';
+
+export interface Props { locale: Locale }
+const { locale } = Astro.props;
+const list = visible(areas, locale);
+const s = settings.sections.areas;
+---
+<section class="py-20 md:py-28" aria-labelledby="areas-title" data-carousel>
+  <div class="container-site">
+    <SectionHeading id="areas-title" eyebrow={tr(s.eyebrow, locale)} title={[tr(s.title[0], locale), tr(s.title[1], locale)]} lead={tr(s.lead, locale)} />
+    <div class="carousel-controls mt-10 hidden items-center justify-end gap-4">
+      <p class="text-sm tabular-nums tracking-[0.1em] text-tinta-suave" aria-live="polite" data-carousel-counter>{slideLabel(0, list.length)}</p>
+      <button type="button" class="icon-circle hover:border-verde-700 disabled:opacity-35" aria-label={t(locale, 'carousel.prev')} data-carousel-prev><Icon name="arrow-left" size={16} /></button>
+      <button type="button" class="icon-circle hover:border-verde-700 disabled:opacity-35" aria-label={t(locale, 'carousel.next')} data-carousel-next><Icon name="arrow-right" size={16} /></button>
+    </div>
+  </div>
+
+  <div class="container-site mt-8">
+    <ul class="carousel-track flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 md:gap-6" aria-label={t(locale, 'carousel.label')} data-carousel-track tabindex="0">
+      {list.map((a, i) => (
+        <li class="w-[86%] shrink-0 snap-start md:w-[92%]" data-slide aria-roledescription="slide" aria-label={slideLabel(i, list.length)}>
+          <article class="grid h-full overflow-hidden rounded-md bg-marfim-claro md:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)]">
+            <div class="order-2 flex flex-col p-7 md:order-1 md:p-12">
+              <p class="eyebrow text-tinta-suave">{tr(a.eyebrow, locale)}</p>
+              <h3 class="mt-8 text-[clamp(1.75rem,3vw,2.75rem)] text-tinta">
+                <span class="block">{tr(a.headline[0], locale)}</span>
+                <span class="block">{tr(a.headline[1], locale)}</span>
+              </h3>
+              <p class="mt-5 max-w-sm text-[0.9375rem] leading-relaxed text-tinta-suave">{tr(a.summary, locale)}</p>
+              <div class="mt-auto flex items-end justify-between gap-4 pt-10">
+                <p class="text-xs text-tinta-suave">{a.keywords.map((k) => tr(k, locale)).join(' · ')}</p>
+                <a href={localizePath('areas', locale, tr(a.slug, locale))} class="icon-circle shrink-0 hover:border-verde-700 hover:bg-verde-700 hover:text-marfim" aria-label={`${t(locale, 'cta.learnMore')}: ${tr(a.title, locale)}`}>
+                  <Icon name="arrow-up-right" size={16} />
+                </a>
+              </div>
+            </div>
+            <div class="order-1 aspect-[4/3] md:order-2 md:aspect-auto md:min-h-[26rem]">
+              <StockImage id={a.image} sizes="(min-width: 768px) 55vw, 86vw" />
+            </div>
+          </article>
+        </li>
+      ))}
+    </ul>
+    <div class="mt-8 flex items-center justify-between">
+      <p class="text-[0.6875rem] uppercase tracking-[0.22em] text-tinta-suave">{t(locale, 'carousel.footer')}</p>
+      <div class="flex gap-2" aria-hidden="true">
+        {list.map((_, i) => <span class="carousel-bar h-px w-8 bg-areia-escura" data-carousel-bar data-active={String(i === 0)} />)}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .carousel-track { scrollbar-width: none; scroll-padding-inline: 0; }
+  .carousel-track::-webkit-scrollbar { display: none; }
+  [data-enhanced='true'] .carousel-controls { display: flex; }
+  .carousel-bar { transition: background-color 400ms var(--ease-calm), height 400ms var(--ease-calm); }
+  .carousel-bar[data-active='true'] { background: var(--color-bronze); height: 2px; }
+</style>
+
+<script>
+  import { initCarousel } from '../../scripts/carousel';
+  document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((el) => initCarousel(el));
+</script>
