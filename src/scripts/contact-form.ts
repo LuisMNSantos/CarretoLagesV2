@@ -10,6 +10,7 @@ export function initContactForm(form: HTMLFormElement): void {
   const locale = (form.dataset.locale === 'en' ? 'en' : 'pt') as Locale;
   const started = form.querySelector<HTMLInputElement>('[data-started-at]');
   const summary = form.querySelector<HTMLElement>('[data-form-summary]');
+  form.querySelector<HTMLElement>('[data-nojs-notice]')?.remove();
 
   form.addEventListener('focusin', () => {
     if (started && !started.value) started.value = String(Date.now());

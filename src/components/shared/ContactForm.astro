@@ -96,7 +96,7 @@ const req = t(locale, 'form.required');
     </button>
     {designPreview && <p class="max-w-xs text-xs leading-relaxed text-tinta-suave">{t(locale, 'form.previewNotice')}</p>}
   </div>
-  <noscript><p class="mt-6 rounded bg-areia p-4 text-sm text-tinta">{t(locale, 'form.noscript')}</p></noscript>
+  <p class="mt-6 rounded bg-areia p-4 text-sm text-tinta" data-nojs-notice>{t(locale, 'form.noscript')}</p>
 </form>
 
 <style>

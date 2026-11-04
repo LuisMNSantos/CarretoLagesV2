@@ -45,3 +45,8 @@ test('English form shows English errors', async ({ page }) => {
   await form(page).locator('[data-submit]').click();
   await expect(form(page).locator('[data-error-for="nome"]')).toHaveText('Please enter your name (2 to 100 characters).');
 });
+
+test('with JavaScript the no-JS notice is removed', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('[data-nojs-notice]')).toHaveCount(0);
+});
