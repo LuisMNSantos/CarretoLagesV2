@@ -1,0 +1,31 @@
+---
+import '../styles/global.css';
+import Head from '../components/seo/Head.astro';
+
+export interface Props {
+  locale: 'pt' | 'en';
+  title: string;
+  description: string;
+  alternates: { pt?: string | undefined; en?: string | undefined };
+  headerVariant?: 'overlay' | 'solid';
+  jsonLd?: object[] | undefined;
+  ogImage?: string | undefined;
+}
+
+const { locale, title, description, alternates, headerVariant = 'solid', jsonLd, ogImage } = Astro.props;
+const skip = locale === 'pt' ? 'Saltar para o conteúdo' : 'Skip to content';
+---
+<!doctype html>
+<html lang={locale === 'pt' ? 'pt-PT' : 'en'} data-header={headerVariant}>
+  <head>
+    <Head locale={locale} title={title} description={description} alternates={alternates} jsonLd={jsonLd} ogImage={ogImage} />
+  </head>
+  <body class="min-h-dvh flex flex-col">
+    <a class="skip-link" href="#conteudo">{skip}</a>
+    <slot name="header" />
+    <main id="conteudo" tabindex="-1" class="flex-1 outline-none">
+      <slot />
+    </main>
+    <slot name="footer" />
+  </body>
+</html>
