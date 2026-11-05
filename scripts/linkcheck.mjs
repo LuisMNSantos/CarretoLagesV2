@@ -10,7 +10,7 @@ const result = await checker.check({
   linksToSkip: ['^tel:', '^mailto:', 'google\\.com', 'unsplash\\.com', 'consumidor\\.gov\\.pt'],
   concurrency: 8,
   // Canonical/hreflang/OG URLs point at the future preview host; check them against the local build instead.
-  urlRewriteExpressions: [{ pattern: /^https:\/\/carretolages-v2\.pages\.dev/, replacement: base.replace(/\/$/, '') }],
+  urlRewriteExpressions: [{ pattern: /^https:\/\/carretolages\.pages\.dev/, replacement: base.replace(/\/$/, '') }],
 });
 const broken = result.links
   .filter((l) => l.state === 'BROKEN')

@@ -2,7 +2,7 @@ import type { Locale } from '../i18n/locale';
 import { localizePath } from '../i18n/routes';
 import { areas, offices, settings, tr, type Area, type Faq, type Lawyer } from './content';
 
-export const SITE = 'https://carretolages-v2.pages.dev';
+export const SITE = 'https://carretolages.pages.dev';
 const abs = (path: string) => new URL(path, SITE).href;
 const FIRM = 'Carreto Lages & Associados';
 const phone = settings.phoneHref.replace('tel:', '');
