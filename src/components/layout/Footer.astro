@@ -1,5 +1,6 @@
 ---
 import Logo from './Logo.astro';
+import LangSwitch from './LangSwitch.astro';
 import Icon from '../shared/Icon.astro';
 import { navItems } from '../../lib/nav';
 import { getCollectionCounts, offices, settings, tr } from '../../lib/content';
@@ -8,8 +9,8 @@ import { t } from '../../i18n/ui';
 import type { Locale } from '../../i18n/locale';
 import { designPreview } from '../../lib/env';
 
-export interface Props { locale: Locale }
-const { locale } = Astro.props;
+export interface Props { locale: Locale; alternates: { pt?: string | undefined; en?: string | undefined } }
+const { locale, alternates } = Astro.props;
 const items = navItems(locale, getCollectionCounts(locale));
 const firm = items.find((i) => i.key === 'firm');
 const explore = items.filter((i) => i.key !== 'firm');
@@ -66,6 +67,7 @@ const year = new Date().getFullYear();
           {legal.map((l) => <li><a class="hover:text-verde-700" href={l.href}>{l.label}</a></li>)}
         </ul>
       </nav>
+      <LangSwitch locale={locale} alternates={alternates} class="text-tinta" />
       <a href="#top" class="inline-flex items-center gap-2 hover:text-verde-700">{t(locale, 'cta.backToTop')}<Icon name="arrow-up" size={14} /></a>
     </div>
     {designPreview && <p class="container-site pb-6 text-xs text-tinta-suave">{t(locale, 'footer.preview')}</p>}

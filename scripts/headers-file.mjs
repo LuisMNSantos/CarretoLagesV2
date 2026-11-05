@@ -1,5 +1,12 @@
-/** Parser for Cloudflare Pages `_headers` files (pattern line, then indented "Name: value" lines). */
+/** @typedef {{ pattern: string; headers: Record<string, string> }} HeaderRule */
+
+/**
+ * Parser for Cloudflare Pages `_headers` files (pattern line, then indented "Name: value" lines).
+ * @param {string} text
+ * @returns {HeaderRule[]}
+ */
 export function parseHeaders(text) {
+  /** @type {HeaderRule[]} */
   const rules = [];
   let current;
   for (const raw of text.split(/\r?\n/)) {

@@ -10,11 +10,19 @@ export function initHeader(): void {
   document.querySelectorAll<HTMLButtonElement>('[data-sub-toggle]').forEach((btn) => {
     const sub = document.getElementById(btn.getAttribute('aria-controls') ?? '');
     if (!sub) return;
-    const set = (open: boolean) => { btn.setAttribute('aria-expanded', String(open)); sub.dataset.open = String(open); };
+    const item = btn.closest<HTMLElement>('[data-nav-item]');
+    const set = (open: boolean) => {
+      btn.setAttribute('aria-expanded', String(open));
+      sub.dataset.open = String(open);
+      if (item) item.dataset.dismissed = String(!open && item.contains(document.activeElement));
+    };
     btn.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
-    btn.closest('[data-nav-item]')?.addEventListener('keydown', (e) => {
-      if ((e as KeyboardEvent).key === 'Escape') { set(false); btn.focus(); }
+    item?.addEventListener('keydown', (e) => {
+      if ((e as KeyboardEvent).key === 'Escape') { btn.focus(); set(false); if (item) item.dataset.dismissed = 'true'; }
     });
+    // Leaving the item (focus or pointer) lifts the dismissal so hover/focus work again.
+    item?.addEventListener('focusout', (e) => { if (!item.contains((e as FocusEvent).relatedTarget as Node)) item.dataset.dismissed = 'false'; });
+    item?.addEventListener('mouseleave', () => { if (!item.contains(document.activeElement)) item.dataset.dismissed = 'false'; });
     document.addEventListener('click', (e) => { if (!btn.closest('[data-nav-item]')?.contains(e.target as Node)) set(false); });
   });
 

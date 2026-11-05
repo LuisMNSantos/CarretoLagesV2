@@ -20,13 +20,6 @@ export function initCarousel(root: HTMLElement): void {
     if (prev) prev.disabled = current === 0;
     if (next) next.disabled = current === slides.length - 1;
     bars.forEach((b, i) => { b.dataset.active = String(i === current); });
-    slides.forEach((s, i) => s.setAttribute('aria-hidden', String(i !== current && isOutOfView(s))));
-  };
-
-  const isOutOfView = (s: HTMLElement) => {
-    const t = track.getBoundingClientRect();
-    const r = s.getBoundingClientRect();
-    return r.right <= t.left + 1 || r.left >= t.right - 1;
   };
 
   // While a button-driven scroll is running, the button's target is the truth; intermediate

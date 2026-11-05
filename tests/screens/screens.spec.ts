@@ -109,7 +109,15 @@ for (const s of states) {
     test(`state ${s.id} ${locale}`, async ({ browser }, info) => {
       const vp = info.project.name as Viewport;
       test.skip(Boolean(s.only && s.only !== vp), `${s.id} is ${s.only}-only`);
-      const context = await browser.newContext({ ...info.project.use, reducedMotion: s.motion ? 'no-preference' : 'reduce', baseURL: 'http://localhost:4321' });
+      const use = info.project.use;
+      const context = await browser.newContext({
+        viewport: use.viewport ?? null,
+        isMobile: use.isMobile ?? false,
+        hasTouch: use.hasTouch ?? false,
+        deviceScaleFactor: use.deviceScaleFactor ?? 1,
+        reducedMotion: s.motion ? 'no-preference' : 'reduce',
+        baseURL: 'http://localhost:4321',
+      });
       const page = await context.newPage();
       await page.goto(s.path[locale]);
       await page.addStyleTag({ content: HIDE });

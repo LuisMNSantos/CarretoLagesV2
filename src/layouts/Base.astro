@@ -29,7 +29,7 @@ const skip = locale === 'pt' ? 'Saltar para o conteúdo' : 'Skip to content';
     <main id="conteudo" tabindex="-1" class="flex-1 outline-none">
       <slot />
     </main>
-    <Footer locale={locale} />
+    <Footer locale={locale} alternates={alternates} />
     <StickyCta locale={locale} />
   </body>
 </html>

@@ -53,6 +53,12 @@ const s = settings.sections.process;
     .process-step[data-active='true'] .step-arrow { display: none; }
     .process-step .step-body { position: absolute; left: 1.75rem; right: 1.75rem; bottom: 1.75rem; }
   }
+  /* Without JS no step can become active: show every step's text, equal widths. */
+  @media (min-width: 1024px) and (scripting: none) {
+    .process-step, .process-step[data-active='true'] { flex-grow: 1; color: var(--color-tinta); }
+    .process-step .step-media, .process-step[data-active='true'] .step-media { opacity: 0; }
+    .process-step .step-body { opacity: 1; transform: none; position: static; }
+  }
 </style>
 
 <script>

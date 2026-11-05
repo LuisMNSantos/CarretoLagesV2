@@ -50,7 +50,7 @@ const isActive = (href: string) => (href === '/' || href === '/en' ? path === hr
       <a href={settings.phoneHref} class="hidden items-center gap-2 whitespace-nowrap text-sm opacity-90 hover:opacity-100 2xl:inline-flex"><Icon name="phone" size={15} />{settings.phone}</a>
       <LangSwitch locale={locale} alternates={alternates} class="hidden sm:flex" />
       <a href={ctaHref} class="header-cta btn hidden min-h-11 whitespace-nowrap px-4 py-2 text-sm xl:inline-flex">{t(locale, 'cta.book')}<Icon name="arrow-up-right" size={14} /></a>
-      <button type="button" class="menu-toggle inline-flex min-h-11 items-center gap-2 text-sm font-medium xl:hidden" aria-haspopup="dialog" aria-controls="mobile-menu" aria-label={t(locale, 'nav.openMenu')} data-menu-open>
+      <button type="button" class="menu-toggle needs-js inline-flex min-h-11 items-center gap-2 text-sm font-medium xl:hidden" aria-haspopup="dialog" aria-controls="mobile-menu" aria-label={t(locale, 'nav.openMenu')} data-menu-open>
         <span aria-hidden="true">{t(locale, 'nav.menu')}</span>
         <Icon name="menu" size={20} />
       </button>
@@ -111,6 +111,8 @@ const isActive = (href: string) => (href === '/' || href === '/en' ? path === hr
   .nav-sub { visibility: hidden; opacity: 0; transform: translateY(-4px); transition: opacity 200ms var(--ease-calm), transform 200ms var(--ease-calm), visibility 200ms; }
   .nav-item:hover .nav-sub, .nav-item:focus-within .nav-sub, .nav-sub[data-open='true'] { visibility: visible; opacity: 1; transform: none; }
   .nav-sub-toggle[aria-expanded='true'] { transform: rotate(180deg); }
+  /* Escape must dismiss the sub-menu even while focus/hover would keep it open (WCAG 1.4.13). */
+  .nav-item[data-dismissed='true'] .nav-sub { visibility: hidden; opacity: 0; }
 
   .mobile-menu {
     position: fixed; inset: 0; width: 100%; max-width: none; height: 100dvh; max-height: none;
