@@ -6,14 +6,13 @@
     "viewport": "desktop",
     "kind": "page",
     "path": "/",
-    "height": 5744,
+    "height": 5496,
     "slices": [
       "screenshots/desktop/pt/home-1.jpg",
       "screenshots/desktop/pt/home-2.jpg",
       "screenshots/desktop/pt/home-3.jpg",
       "screenshots/desktop/pt/home-4.jpg",
-      "screenshots/desktop/pt/home-5.jpg",
-      "screenshots/desktop/pt/home-6.jpg"
+      "screenshots/desktop/pt/home-5.jpg"
     ]
   },
   {
@@ -23,14 +22,13 @@
     "viewport": "desktop",
     "kind": "page",
     "path": "/en",
-    "height": 5740,
+    "height": 5491,
     "slices": [
       "screenshots/desktop/en/home-1.jpg",
       "screenshots/desktop/en/home-2.jpg",
       "screenshots/desktop/en/home-3.jpg",
       "screenshots/desktop/en/home-4.jpg",
-      "screenshots/desktop/en/home-5.jpg",
-      "screenshots/desktop/en/home-6.jpg"
+      "screenshots/desktop/en/home-5.jpg"
     ]
   },
   {
