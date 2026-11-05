@@ -25,7 +25,9 @@ export interface Props {
   crumbs?: { label: string; href?: string }[];
 }
 const { locale, variant = 'banner', eyebrow, title, lead, image, label, watermark, crumbs = [] } = Astro.props;
-const hasCard = variant === 'feature' && (image || Astro.slots.has('card'));
+// A conditional <Fragment slot="card"> can render empty: only treat the slot as provided when it has content.
+const cardHtml = Astro.slots.has('card') ? (await Astro.slots.render('card')).trim() : '';
+const hasCard = variant === 'feature' && Boolean(image || cardHtml);
 const sideLabel = label ?? watermark ?? eyebrow;
 ---
 <div class="page-hero-wrap" data-page-hero data-variant={variant}>
@@ -71,7 +73,7 @@ const sideLabel = label ?? watermark ?? eyebrow;
           <div class="hero-card relative md:col-span-5 md:col-start-8">
             <div class="hero-frame absolute inset-0 hidden rounded-xl border border-bronze/70 md:block" aria-hidden="true" data-hero-frame></div>
             <div class="relative aspect-[4/5] overflow-hidden rounded-xl shadow-[0_30px_60px_-30px_rgb(0_0_0_/_0.6)]">
-              {Astro.slots.has('card') ? <slot name="card" /> : <StockImage id={image!} sizes="(min-width: 768px) 38vw, 92vw" loading="eager" />}
+              {cardHtml ? <Fragment set:html={cardHtml} /> : <StockImage id={image!} sizes="(min-width: 768px) 38vw, 92vw" loading="eager" />}
             </div>
           </div>
         )}

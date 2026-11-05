@@ -243,11 +243,10 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/destaques",
-    "height": 3503,
+    "height": 3138,
     "slices": [
       "screenshots/mobile/pt/destaques-1.jpg",
-      "screenshots/mobile/pt/destaques-2.jpg",
-      "screenshots/mobile/pt/destaques-3.jpg"
+      "screenshots/mobile/pt/destaques-2.jpg"
     ]
   },
   {
@@ -257,11 +256,10 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/en/insights",
-    "height": 3535,
+    "height": 3171,
     "slices": [
       "screenshots/mobile/en/insights-1.jpg",
-      "screenshots/mobile/en/insights-2.jpg",
-      "screenshots/mobile/en/insights-3.jpg"
+      "screenshots/mobile/en/insights-2.jpg"
     ]
   },
   {

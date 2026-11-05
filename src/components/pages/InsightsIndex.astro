@@ -26,7 +26,7 @@ const title: [string, string] = locale === 'pt' ? ['Notas claras', 'sobre o que 
         {list.map((a) => (
           <li>
             <a href={localizePath('insights', locale, tr(a.slug, locale))} class="card group flex h-full flex-col overflow-hidden transition-colors hover:bg-areia">
-              <div class="aspect-[16/9]"><StockImage id={a.image} sizes="(min-width: 768px) 45vw, 92vw" /></div>
+              <div class="aspect-[16/9] overflow-hidden"><StockImage id={a.image} sizes="(min-width: 768px) 45vw, 92vw" /></div>
               <div class="flex flex-1 flex-col p-7 md:p-8">
                 <div class="flex flex-wrap items-center gap-3 text-sm text-tinta-suave">
                   <time datetime={a.date}>{fmt.format(new Date(a.date))}</time><span>· {a.readingMinutes} min</span>

@@ -128,5 +128,15 @@
     "area": "20 anos",
     "decision": "Nova secção na página inicial com o troféu do 20.º aniversário; o troféu é também a imagem do topo da História.",
     "reason": "Pedido do cliente; o texto usa só factos conhecidos (fundação em 2002, 20 anos em 2022)."
+  },
+  {
+    "area": "Telemóvel",
+    "decision": "O menu passou a gaveta que abre da esquerda, com uma margem de 3,5 rem à direita onde o site continua visível; tocar nessa margem fecha o menu.",
+    "reason": "Pedido do cliente."
+  },
+  {
+    "area": "Imagens",
+    "decision": "As caixas de imagem com proporção fixa cortam o excesso (overflow: hidden).",
+    "reason": "Sem isso, a fotografia (3:2) fazia a caixa (16:9) crescer quando carregava durante o scroll no telemóvel — problema reportado pelo cliente nos Destaques."
   }
 ]

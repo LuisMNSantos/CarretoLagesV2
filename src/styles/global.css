@@ -201,3 +201,6 @@ html[data-header='solid'] main { padding-top: 5rem; }
 /* Stock photography: slightly desaturated so it sits within the palette. */
 .img-tone { filter: saturate(0.72) contrast(0.97); }
 picture:has(> img.img-tone) { display: block; width: 100%; height: 100%; }
+/* A box sized by aspect-ratio grows to fit visible overflow (min-height: auto). Clipping it keeps the
+   ratio fixed, so photos never resize their box when they load (e.g. lazy images while scrolling). */
+:has(> picture > img.img-tone) { overflow: hidden; }

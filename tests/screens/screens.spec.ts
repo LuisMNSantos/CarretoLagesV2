@@ -69,7 +69,7 @@ for (const r of allRoutes(true)) {
 type State = { id: string; title: { pt: string; en: string }; path: { pt: string; en: string }; only?: Viewport; motion?: boolean; act: (p: Page, vp: Viewport) => Promise<void> };
 const states: State[] = [
   { id: 'state-menu', title: { pt: 'Menu de telemóvel aberto', en: 'Mobile menu open' }, path: { pt: '/', en: '/en' }, only: 'mobile',
-    act: async (p) => { await p.locator('[data-menu-open]').click(); await p.waitForTimeout(400); } },
+    act: async (p) => { await p.locator('[data-menu-open]').click(); await p.locator('[data-mobile-menu]').evaluate((d) => Promise.all(d.getAnimations().map((x) => x.finished))); } },
   { id: 'state-header', title: { pt: 'Cabeçalho depois de descer na página', en: 'Header after scrolling' }, path: { pt: '/', en: '/en' },
     act: async (p) => { await p.evaluate(() => window.scrollTo(0, 1400)); await p.waitForTimeout(500); } },
   { id: 'state-carousel', title: { pt: 'Carrossel de áreas no segundo cartão', en: 'Areas carousel on the second card' }, path: { pt: '/', en: '/en' },

@@ -114,14 +114,18 @@ const isActive = (href: string) => (href === '/' || href === '/en' ? path === hr
   /* Escape must dismiss the sub-menu even while focus/hover would keep it open (WCAG 1.4.13). */
   .nav-item[data-dismissed='true'] .nav-sub { visibility: hidden; opacity: 0; }
 
+  /* Left drawer: slides in from the left and leaves a 3.5rem strip of the page visible on the right. */
   .mobile-menu {
-    position: fixed; inset: 0; width: 100%; max-width: none; height: 100dvh; max-height: none;
+    position: fixed; inset: 0 auto 0 0; width: calc(100% - 3.5rem); max-width: 26rem; height: 100dvh; max-height: none;
     margin: 0; padding: 0; border: 0; overflow-y: auto;
     background: var(--color-verde-900); color: var(--color-marfim);
+    box-shadow: 24px 0 60px -30px rgb(0 0 0 / 0.6);
   }
-  .mobile-menu::backdrop { background: rgb(15 36 29 / 0.6); }
-  .mobile-menu[open] { animation: menu-in 300ms var(--ease-calm); }
-  @keyframes menu-in { from { opacity: 0; } to { opacity: 1; } }
+  .mobile-menu::backdrop { background: rgb(15 36 29 / 0.45); backdrop-filter: blur(2px); }
+  .mobile-menu[open] { animation: menu-in 340ms var(--ease-calm); }
+  .mobile-menu[open]::backdrop { animation: backdrop-in 340ms var(--ease-calm); }
+  @keyframes menu-in { from { transform: translateX(-100%); } to { transform: none; } }
+  @keyframes backdrop-in { from { opacity: 0; } to { opacity: 1; } }
 </style>
 
 <script>

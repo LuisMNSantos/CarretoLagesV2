@@ -219,10 +219,9 @@
     "viewport": "desktop",
     "kind": "page",
     "path": "/destaques",
-    "height": 1301,
+    "height": 1018,
     "slices": [
-      "screenshots/desktop/pt/destaques-1.jpg",
-      "screenshots/desktop/pt/destaques-2.jpg"
+      "screenshots/desktop/pt/destaques.jpg"
     ]
   },
   {
@@ -232,10 +231,9 @@
     "viewport": "desktop",
     "kind": "page",
     "path": "/en/insights",
-    "height": 1298,
+    "height": 1031,
     "slices": [
-      "screenshots/desktop/en/insights-1.jpg",
-      "screenshots/desktop/en/insights-2.jpg"
+      "screenshots/desktop/en/insights.jpg"
     ]
   },
   {

@@ -33,6 +33,12 @@ export function initHeader(): void {
     opener.addEventListener('click', () => { dialog.showModal(); opener.setAttribute('aria-expanded', 'true'); });
     dialog.querySelector('[data-menu-close]')?.addEventListener('click', () => dialog.close());
     dialog.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => dialog.close()));
+    // Tapping the visible strip of the page (the dialog backdrop) closes the drawer.
+    dialog.addEventListener('click', (e) => {
+      const r = dialog.getBoundingClientRect();
+      const outside = e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom;
+      if (outside) dialog.close();
+    });
     dialog.addEventListener('close', () => { opener.setAttribute('aria-expanded', 'false'); opener.focus(); });
   }
 

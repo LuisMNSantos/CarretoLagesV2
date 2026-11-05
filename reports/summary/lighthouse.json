@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-05T03:01:40.786Z",
+  "date": "2026-11-05T03:28:50.939Z",
   "gates": {
     "performance": 90,
     "accessibility": 95,
@@ -14,10 +14,10 @@
       "accessibility": 100,
       "bestPractices": 100,
       "seo": 100,
-      "lcpMs": 1261,
+      "lcpMs": 1238,
       "cls": 0,
-      "tbtMs": 0,
-      "fcpMs": 1261
+      "tbtMs": 20,
+      "fcpMs": 1238
     },
     {
       "path": "/en",
@@ -26,10 +26,10 @@
       "accessibility": 100,
       "bestPractices": 100,
       "seo": 100,
-      "lcpMs": 1223,
+      "lcpMs": 1238,
       "cls": 0,
-      "tbtMs": 13,
-      "fcpMs": 1223
+      "tbtMs": 17,
+      "fcpMs": 1238
     },
     {
       "path": "/sociedade",
@@ -38,10 +38,10 @@
       "accessibility": 100,
       "bestPractices": 100,
       "seo": 100,
-      "lcpMs": 999,
+      "lcpMs": 1806,
       "cls": 0,
       "tbtMs": 0,
-      "fcpMs": 999
+      "fcpMs": 991
     },
     {
       "path": "/areas-de-atuacao/direito-fiscal",
@@ -50,10 +50,10 @@
       "accessibility": 100,
       "bestPractices": 100,
       "seo": 100,
-      "lcpMs": 2036,
+      "lcpMs": 2037,
       "cls": 0,
       "tbtMs": 0,
-      "fcpMs": 1024
+      "fcpMs": 1011
     },
     {
       "path": "/advogados",
@@ -65,7 +65,7 @@
       "lcpMs": 1885,
       "cls": 0,
       "tbtMs": 0,
-      "fcpMs": 996
+      "fcpMs": 998
     },
     {
       "path": "/advogados/catarina-pereira-carvalho",
@@ -77,7 +77,7 @@
       "lcpMs": 1807,
       "cls": 0,
       "tbtMs": 0,
-      "fcpMs": 989
+      "fcpMs": 984
     },
     {
       "path": "/contactos",
@@ -89,7 +89,7 @@
       "lcpMs": 1809,
       "cls": 0,
       "tbtMs": 0,
-      "fcpMs": 1007
+      "fcpMs": 998
     }
   ]
 }
