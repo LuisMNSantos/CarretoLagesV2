@@ -28,7 +28,7 @@ test('every page ships less than 50 KB of gzipped JavaScript', () => {
       for (const m of code.matchAll(/from\s*"\.\/([^"]+\.js)"/g)) queue.push(`/_astro/${m[1]}`);
     }
     const bytes = [...seen].reduce((n, s) => n + gzipSync(readFileSync(join('dist', s))).length, 0);
-    rows.push({ page: file.replaceAll('\\', '/').replace('dist', '').replace(/\.html$/, ''), bytes });
+    rows.push({ page: file.replaceAll('\\', '/').replace('dist', '').replace(/\.html$/, '').replace(/^\/index$/, '/'), bytes });
   }
   mkdirSync('reports/summary', { recursive: true });
   writeFileSync('reports/summary/js-budget.json', JSON.stringify(rows.sort((a, b) => b.bytes - a.bytes), null, 2));

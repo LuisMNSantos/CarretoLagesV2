@@ -1,0 +1,118 @@
+
+\newcommand{\resPages}{66}
+\newcommand{\resStates}{16}
+\newcommand{\resSlices}{298}
+\newcommand{\resUnitTotal}{1}
+\newcommand{\resUnitPassed}{1}
+\newcommand{\resUnitFiles}{1}
+\newcommand{\resEtoePassed}{132}
+\newcommand{\resEtoeFailed}{0}
+\newcommand{\resEtoeSkipped}{66}
+\newcommand{\resEtoeFlaky}{0}
+\newcommand{\resSecPassed}{136}
+\newcommand{\resSecFailed}{0}
+\newcommand{\resAxeRuns}{132}
+\newcommand{\resAxeSerious}{0}
+\newcommand{\resAxeOther}{0}
+\newcommand{\resLinksChecked}{340}
+\newcommand{\resLinksBroken}{0}
+\newcommand{\resJsMax}{31\,KB}
+\newcommand{\resJsMin}{1\,KB}
+\newcommand{\resJsPages}{66}
+\newcommand{\resAuditProd}{0}
+\newcommand{\resAuditDevModerate}{6}
+\newcommand{\resAuditDevPackages}{@sentry/bundler-plugins, @sentry/node, glob, lighthouse, linkinator, minimatch}
+\newcommand{\resAxeRules}{nenhuma}
+
+\newcommand{\resLighthouseTable}{%
+\begin{tabular}{lrrrrrr}
+\toprule
+\textbf{Página} & \textbf{Desemp.} & \textbf{Acess.} & \textbf{Boas pr.} & \textbf{SEO} & \textbf{LCP} & \textbf{CLS} \\
+\midrule
+\texttt{/} & 100 & 100 & 100 & 100 & 1.23\,s & 0 \\
+\texttt{/en} & 100 & 100 & 100 & 100 & 1.22\,s & 0 \\
+\texttt{/areas-de-atuacao/direito-fiscal} & 100 & 100 & 100 & 100 & 1.89\,s & 0 \\
+\texttt{/advogados} & 100 & 100 & 100 & 100 & 1.66\,s & 0 \\
+\texttt{/contactos} & 100 & 100 & 100 & 100 & 1.01\,s & 0 \\
+\bottomrule
+\end{tabular}}
+
+\newcommand{\resJsTable}{%
+\begin{tabular}{lr}
+\toprule
+\textbf{Página (as 8 mais pesadas)} & \textbf{JS (gzip)} \\
+\midrule
+\texttt{/en} & 31\,KB \\
+\texttt{/} & 31\,KB \\
+\texttt{/contactos} & 29\,KB \\
+\texttt{/en/contact} & 29\,KB \\
+\texttt{/areas-de-atuacao/direito-financeiro} & 29\,KB \\
+\texttt{/areas-de-atuacao/direito-fiscal} & 29\,KB \\
+\texttt{/areas-de-atuacao/direito-imobiliario} & 29\,KB \\
+\texttt{/areas-de-atuacao/direito-penal} & 29\,KB \\
+\bottomrule
+\end{tabular}}
+
+\newcommand{\resVideoTable}{%
+\begin{tabular}{lr}
+\toprule
+\textbf{Ficheiro} & \textbf{Tamanho} \\
+\midrule
+\texttt{hero-desktop.mp4} & 7.45\,MB \\
+\texttt{hero-desktop.webm} & 7.49\,MB \\
+\texttt{hero-mobile.mp4} & 2.24\,MB \\
+\texttt{hero-mobile.webm} & 2.45\,MB \\
+\texttt{hero-tablet.mp4} & 3.63\,MB \\
+\texttt{hero-tablet.webm} & 3.81\,MB \\
+\bottomrule
+\end{tabular}}
+
+\newcommand{\resPosterTable}{%
+\begin{tabular}{lr}
+\toprule
+\textbf{Imagem de capa (formatos e tamanhos gerados)} & \textbf{Tamanho} \\
+\midrule
+\texttt{hero-poster-portrait.avif} & 44\,KB \\
+\texttt{hero-poster-portrait.avif} & 25\,KB \\
+\texttt{hero-poster-portrait.webp} & 45\,KB \\
+\texttt{hero-poster-portrait.webp} & 83\,KB \\
+\texttt{hero-poster.webp} & 52\,KB \\
+\texttt{hero-poster.avif} & 25\,KB \\
+\texttt{hero-poster.avif} & 48\,KB \\
+\texttt{hero-poster.webp} & 85\,KB \\
+\texttt{hero-poster.jpg} & 73\,KB \\
+\texttt{hero-poster.avif} & 75\,KB \\
+\bottomrule
+\end{tabular}}
+
+\newcommand{\resHeadersTable}{%
+\begin{tabularx}{\textwidth}{lX}
+\toprule
+\textbf{Cabeçalho} & \textbf{Valor} \\
+\midrule
+\texttt{Strict-Transport-Security} & \texttt{max-age=31536000; includeSubDomains} \\
+\texttt{X-Content-Type-Options} & \texttt{nosniff} \\
+\texttt{Referrer-Policy} & \texttt{strict-origin-when-cross-origin} \\
+\texttt{Permissions-Policy} & \texttt{camera=(), microphone=(), geolocation=(), payment=(), usb=()} \\
+\texttt{Cross-Origin-Opener-Policy} & \texttt{same-origin} \\
+\texttt{X-Frame-Options} & \texttt{DENY} \\
+\texttt{X-Robots-Tag} & \texttt{noindex, nofollow} \\
+\bottomrule
+\end{tabularx}}
+
+\newcommand{\resCspList}{%
+\begin{itemize}
+\item \texttt{default-src 'self'}
+\item \texttt{script-src 'self'}
+\item \texttt{style-src 'self'}
+\item \texttt{img-src 'self' data:}
+\item \texttt{font-src 'self'}
+\item \texttt{media-src 'self'}
+\item \texttt{frame-src https://www.google.com}
+\item \texttt{connect-src 'self'}
+\item \texttt{base-uri 'self'}
+\item \texttt{form-action 'self'}
+\item \texttt{frame-ancestors 'none'}
+\item \texttt{object-src 'none'}
+\item \texttt{upgrade-insecure-requests}
+\end{itemize}}

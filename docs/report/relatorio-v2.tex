@@ -1,0 +1,253 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{lmodern}
+\usepackage[a4paper,margin=2.2cm]{geometry}
+\usepackage[table]{xcolor}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{needspace}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{xurl}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{verde900}{HTML}{0F241D}
+\definecolor{verde700}{HTML}{1B3A2F}
+\definecolor{marfim}{HTML}{F3F0E8}
+\definecolor{marfimcl}{HTML}{F8F6F1}
+\definecolor{areia}{HTML}{E5E1D3}
+\definecolor{areiaesc}{HTML}{D3C8B8}
+\definecolor{bronze}{HTML}{AA8D73}
+\definecolor{bronzecl}{HTML}{E9D3B4}
+\definecolor{tinta}{HTML}{1F2420}
+\definecolor{tintasuave}{HTML}{5B5347}
+
+\newcommand{\swatch}[1]{\fcolorbox{gray!40}{#1}{\rule{0pt}{10pt}\rule{22pt}{0pt}}}
+\titleformat{\section}{\Large\bfseries\color{verde700}}{\thesection}{0.8em}{}
+\titleformat{\subsection}{\large\bfseries\color{tinta}}{\thesubsection}{0.6em}{}
+\setlist{itemsep=2pt,topsep=4pt}
+\setlength{\parskip}{4pt}
+\setlength{\parindent}{0pt}
+\setlength{\emergencystretch}{3em}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small Carreto Lages --- v2 para aprovação do design}
+\rhead{\small Relatório}
+\cfoot{\small \thepage}
+
+\input{generated/results.tex}
+
+\begin{document}
+
+\begin{titlepage}
+  \vspace*{3cm}
+  {\color{bronze}\small\scshape Relatório de entrega}\\[0.6em]
+  {\Huge\bfseries\color{verde700} Website Carreto Lages \& Associados\\[0.2em] v2 --- aprovação do design}\\[1.2em]
+  {\large Design completo, capturas de ecrã, testes e segurança}\\[3em]
+  \begin{tabular}{@{}ll}
+    Data: & 5 de novembro de 2026 \\
+    Repositório: & \texttt{D:\textbackslash PersonalProjects\textbackslash CarretoLagesV2} \\
+    Requisitos: & \texttt{docs/spec/2026-11-04-redesign-website-design.pdf} \\
+    Estado: & Para revisão e aprovação do escritório \\
+  \end{tabular}
+  \vfill
+  {\small\color{tintasuave} Versão de pré-visualização: o formulário não envia dados, o conteúdo marcado
+  ``Exemplo ilustrativo'' é fictício e as moradas completas estão por confirmar.}
+\end{titlepage}
+
+\tableofcontents
+\clearpage
+
+% =====================================================================
+\section{Objetivo desta fase e como rever}
+
+Esta versão mostra o \textbf{design final de todas as páginas}, em computador e telemóvel, nas duas
+línguas, para o escritório aprovar antes da construção definitiva (envio de emails, painel de edição e
+domínio). Foi construída com a tecnologia final (Astro), por isso o que for aprovado é a base do site real.
+
+\textbf{Como rever.}
+\begin{itemize}
+  \item As secções \ref{sec:visual}--\ref{sec:ingles} explicam o desenho e as escolhas feitas.
+  \item As secções finais contêm as \textbf{capturas de ecrã de todas as \resPages{} páginas} (PT e EN) e de \resStates{} estados de interação, em computador (1440\,px) e telemóvel (390\,px).
+  \item Comentários úteis: tom dos textos, fotografias a substituir, ordem e conteúdo das secções, informação em falta (secção \ref{sec:pendentes}).
+\end{itemize}
+
+\textbf{Custo desta fase: zero.} Site 100\,\% estático; sem domínio, sem serviços de email, sem painel de
+edição e sem serviços pagos.
+
+% =====================================================================
+\section{Sistema visual}\label{sec:visual}
+
+\subsection{Cores}
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+\textbf{Cor} & \textbf{Valor} & \textbf{Uso} \\
+\midrule
+\swatch{verde900} Verde 900 & \texttt{\#0F241D} & Véu do vídeo, fundos escuros \\
+\swatch{verde700} Verde 700 & \texttt{\#1B3A2F} & Botões, separadores ativos, faixas de contacto \\
+\swatch{marfim} Marfim & \texttt{\#F3F0E8} & Fundo principal \\
+\swatch{marfimcl} Marfim claro & \texttt{\#F8F6F1} & Cartões \\
+\swatch{areia} Areia & \texttt{\#E5E1D3} & Faixas, rodapé \\
+\swatch{areiaesc} Areia escura & \texttt{\#D3C8B8} & Linhas e bordas \\
+\swatch{bronze} Bronze & \texttt{\#AA8D73} & Acentos (só decorativo) \\
+\swatch{bronzecl} Bronze claro & \texttt{\#E9D3B4} & Botão principal sobre verde \\
+\swatch{tinta} Tinta & \texttt{\#1F2420} & Texto \\
+\swatch{tintasuave} Tinta suave & \texttt{\#5B5347} & Texto secundário \\
+\bottomrule
+\end{tabular}
+\end{center}
+Todas as combinações de texto e fundo cumprem o contraste WCAG AA (verificado por testes automáticos).
+O bronze sobre marfim fica abaixo do mínimo para texto e por isso só é usado em pontos, linhas e ícones.
+
+\subsection{Tipografia}
+\begin{itemize}
+  \item \textbf{DM Sans} (variável) para todo o texto; títulos em peso leve (300), entrelinha apertada, sempre em duas linhas curtas.
+  \item \textbf{Cormorant Garamond} apenas no logótipo, com a assinatura ``\& Associados · Advogados'' em versaletes.
+  \item Rótulos pequenos em maiúsculas com espaçamento largo e um ponto bronze --- linguagem herdada da referência Alden \& Vale.
+  \item Fontes alojadas no próprio site: nenhum pedido ao Google Fonts.
+\end{itemize}
+
+\subsection{Componentes}
+Botões (bronze claro sobre verde, verde sobre claro, contorno), ligações com seta, círculos de ícone,
+cartões marfim, selos ``Exemplo ilustrativo'' e ``Rascunho para revisão'', ícones de traço fino
+desenhados para o projeto, e um logótipo com monograma ``CL''. Animações discretas de entrada ao fazer
+\textit{scroll}, feitas só com CSS e desligadas para quem prefere movimento reduzido.
+
+% =====================================================================
+\section{Página inicial, secção a secção}\label{sec:home}
+
+\begin{enumerate}
+  \item \textbf{Topo com vídeo} --- vídeo de Aveiro em ecrã inteiro com véu verde à esquerda (variante A), título ``Decisões importantes. Em boas mãos.'', botão ``Marcar uma conversa'', telefone e botão de pausa.
+  \item \textbf{Três ideias e números} --- Conversas diretas · Mais de 20 anos · Resposta em 24 horas; 2002, 2 escritórios, 8 profissionais, 4 áreas.
+  \item \textbf{Áreas de atuação em carrossel} --- um cartão grande por área com fotografia, contador ``01 / 04'', setas e barras de progresso; desliza com o dedo no telemóvel.
+  \item \textbf{``Em que situação está?''} --- quatro situações na linguagem do cliente; o painel mostra explicação, etiquetas e ligação para a área.
+  \item \textbf{Como trabalhamos} --- Ouvir, Esclarecer, Agir, Acompanhar; o passo ativo abre com fotografia.
+  \item \textbf{Equipa} --- os três sócios com fotografia e ligação para a equipa completa.
+  \item \textbf{Casos práticos} --- três casos com área, resumo e resultado, com selo ``Exemplo ilustrativo'' nesta fase.
+  \item \textbf{Testemunhos} --- faixa verde com três citações, também com selo ``Exemplo ilustrativo''.
+  \item \textbf{Perguntas frequentes} --- acordeão.
+  \item \textbf{Contacto} --- fotografia, formulário e os dois escritórios com mapa que só carrega ao clicar.
+  \item \textbf{Rodapé} --- navegação completa, contactos, escritórios e páginas legais.
+\end{enumerate}
+
+\begin{center}
+\includegraphics[width=0.62\textwidth]{screenshots/desktop/pt/home-1.jpg}\hfill
+\includegraphics[width=0.3\textwidth]{screenshots/mobile/pt/home-1.jpg}
+\end{center}
+
+% =====================================================================
+\section{Páginas interiores}
+Sociedade (resumo, História, Perfil e Valores, Pro Bono), Áreas de atuação (índice e uma página por área,
+com ``o que fazemos'', situações típicas, advogados da área e formulário com a área já escolhida),
+Advogados (equipa por grupos e uma página por pessoa; quem ainda não tem fotografia aparece com as
+iniciais), Casos práticos, Destaques (artigos), Contactos, Obrigado, página 404 e páginas legais
+(Privacidade, Termos, Resolução de litígios, Cookies) marcadas ``Rascunho para revisão''. Todas terminam
+com uma chamada para o contacto.
+
+% =====================================================================
+\section{Interações e estados}
+Menu de telemóvel em ecrã inteiro (fecha com Escape e devolve o foco), submenu da Sociedade, cabeçalho
+transparente sobre o vídeo que passa a marfim ao descer, seletor PT\,|\,EN que leva à mesma página na outra
+língua, carrossel, separadores de situações (setas do teclado, Home/End), passos do processo, perguntas
+frequentes, botão ``Copiar ligação'' nos artigos e casos, barra fixa ``Ligar / Contactar'' no telemóvel que
+se esconde junto ao formulário. As capturas dos estados estão na secção de estados e interações.
+
+% =====================================================================
+\section{Versão inglesa}\label{sec:ingles}
+Todo o conteúdo existe em inglês britânico, escrito para soar natural, em endereços próprios
+(\texttt{/en/practice-areas/tax-law}, \texttt{/en/lawyers}, \ldots). Um teste automático percorre todas as
+páginas inglesas e falha se encontrar texto de interface em português (nomes próprios excluídos). As páginas
+legais em inglês indicam que prevalece a versão portuguesa.
+
+% =====================================================================
+\section{Vídeo de fundo}
+O original (4K, 62\,MB) foi comprimido em três versões, sem som, com 15\,s em ciclo:
+\begin{center}\resVideoTable\end{center}
+\begin{itemize}
+  \item A imagem de capa aparece primeiro com prioridade alta; o vídeo só é pedido depois de a página carregar e entra com uma transição suave.
+  \item O browser recebe a versão do seu ecrã (vertical no telemóvel, 16:9 no resto).
+  \item Sem vídeo para quem tem poupança de dados, movimento reduzido ou ligação lenta (2G/3G): fica só a imagem.
+  \item Pausa automática fora do ecrã e em separadores escondidos; se o vídeo falhar, a imagem de capa mantém-se.
+\end{itemize}
+\begin{center}\resPosterTable\end{center}
+
+% =====================================================================
+\section{Formulário de contacto}
+Campos: Nome*, Email*, Telefone, Área, Escritório preferido, Mensagem*, consentimento RGPD*. A validação é
+partilhada entre o browser e o futuro servidor; os erros aparecem junto a cada campo, na língua da página,
+sem apagar o que foi escrito, e são anunciados a leitores de ecrã. Proteção contra spam sem custos: campo
+invisível, tempo mínimo de preenchimento e rejeição de campos inesperados. O gerador do email (para a fase
+seguinte) escapa todo o texto do visitante e impede injeção no assunto.
+
+\textbf{Nesta fase nada é enviado}: um envio válido apenas leva à página ``Obrigado'' (verificado por teste:
+nenhum pedido de rede transporta os dados).
+
+% =====================================================================
+\section{Segurança e privacidade}
+\subsection{Cabeçalhos HTTP}
+\resHeadersTable
+
+\subsection{Política de segurança de conteúdo (CSP)}
+\resCspList
+Sem \texttt{'unsafe-inline'} nem \texttt{'unsafe-eval'}. O único domínio externo permitido é o do Google
+Maps, e só para o mapa embutido depois do clique.
+
+\subsection{Verificações}
+\begin{itemize}
+  \item \textbf{Teste de segurança em todas as páginas} (computador e telemóvel): \resSecPassed{} verificações aprovadas, \resSecFailed{} falhadas --- cabeçalhos presentes, zero violações da CSP, zero erros na consola, zero pedidos a outros domínios e zero cookies.
+  \item \textbf{Dependências}: \resAuditProd{} vulnerabilidades nas dependências de produção. Nas ferramentas de teste usadas localmente existem \resAuditDevModerate{} avisos moderados (\resAuditDevPackages), sem impacto no site publicado.
+  \item \textbf{Segredos}: um teste confirma que nenhum ficheiro do repositório contém chaves ou ficheiros \texttt{.env}.
+  \item \textbf{Privacidade}: sem cookies, sem estatísticas, fontes locais, mapa da Google só ao clicar --- não é necessário banner de cookies.
+\end{itemize}
+
+% =====================================================================
+\section{Testes e qualidade}
+\begin{itemize}
+  \item \textbf{Testes unitários}: \resUnitPassed{} de \resUnitTotal{} aprovados (\resUnitFiles{} ficheiros) --- endereços, traduções, conteúdo, validação, vídeo, carrossel, separadores, dados estruturados, cabeçalhos, peso do JavaScript, segredos.
+  \item \textbf{Testes de ponta a ponta} (Chrome, computador, telemóvel e sem JavaScript): \resEtoePassed{} aprovados, \resEtoeFailed{} falhados, \resEtoeSkipped{} não aplicáveis ao perfil.
+  \item \textbf{Acessibilidade (axe, WCAG 2.2 AA)}: \resAxeRuns{} análises (todas as páginas, computador e telemóvel); \resAxeSerious{} problemas graves ou críticos; outros avisos: \resAxeOther{} (\resAxeRules).
+  \item \textbf{Ecrãs de 360\,px}: nenhuma página com \textit{scroll} horizontal nem botões ou títulos cortados.
+  \item \textbf{Ligações}: \resLinksChecked{} verificadas, \resLinksBroken{} partidas.
+  \item \textbf{JavaScript por página}: entre \resJsMin{} e \resJsMax{} (gzip), em \resJsPages{} páginas; limite 50\,KB.
+\end{itemize}
+
+\subsection{Lighthouse (telemóvel, 4G simulado, mediana de 3 execuções)}
+\begin{center}\resLighthouseTable\end{center}
+Medido numa versão sem \texttt{noindex} (a pré-visualização tem \texttt{noindex} de propósito, o que baixaria
+a nota de SEO).
+
+\subsection{JavaScript por página}
+\begin{center}\resJsTable\end{center}
+
+% =====================================================================
+\section{Decisões tomadas durante a construção}
+\input{generated/decisions.tex}
+
+% =====================================================================
+\section{Pendentes para a versão final}\label{sec:pendentes}
+\begin{enumerate}
+  \item Moradas completas, coordenadas e telefone de cada escritório.
+  \item Email que recebe os pedidos (presumido \texttt{geral@carretolages.com}).
+  \item Dados legais para as páginas legais: denominação social, NIPC, sede e contacto RGPD; revisão dos rascunhos.
+  \item Validação deontológica dos casos práticos e testemunhos reais (os atuais são exemplos).
+  \item Fotografias dos cinco profissionais sem retrato e, mais tarde, fotografias próprias dos escritórios.
+  \item Revisão dos textos em português e inglês pelo escritório.
+  \item Titularidade das contas (domínio novo, Cloudflare, Resend, Sanity) e manutenção após a entrega.
+  \item Fase seguinte: envio real do formulário (Resend), painel Sanity, domínio novo e retirar o \texttt{noindex}.
+\end{enumerate}
+
+% =====================================================================
+\section{Créditos das imagens}
+\input{generated/credits.tex}
+
+% =====================================================================
+\input{generated/screenshots.tex}
+
+\end{document}

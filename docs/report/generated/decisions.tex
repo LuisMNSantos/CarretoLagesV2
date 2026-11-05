@@ -1,0 +1,29 @@
+\begin{longtable}{p{3.2cm}p{6.4cm}p{5.4cm}}
+\toprule
+\textbf{Tema} & \textbf{Decisão} & \textbf{Porquê} \\
+\midrule
+\endhead
+Endereços & As páginas são servidas sem ``.html'' nem barra final (ex.: /advogados); o inglês fica em /en. & É o formato que a Cloudflare Pages serve sem redireções e mantém os endereços curtos. \\
+Conteúdo & O conteúdo vive em ficheiros JSON validados (Zod) com campos PT/EN lado a lado, organizados como os futuros modelos do Sanity. & Permite testar tudo automaticamente e ligar o Sanity mais tarde sem mudar o desenho. \\
+Conteúdo & Textos longos (artigos, páginas legais) guardados como blocos simples (parágrafo, título, lista). & Corresponde ao formato de texto rico do Sanity e evita dependências extra. \\
+Conteúdo & Moradas completas dos escritórios marcadas ``a confirmar''; biografias limitadas a factos conhecidos. & Não inventar informação sobre o escritório nem sobre as pessoas. \\
+Vídeo & Compressão com qualidade constante e teto de débito; o MP4 vem antes do WebM. & A textura da água fazia o WebM ultrapassar o limite de 2,5 MB; com o teto, o MP4 ficou mais leve. \\
+Vídeo & Imagem de capa própria para telemóvel (recorte vertical) e capas de reserva limitadas a 100 KB. & A capa tem de coincidir com o vídeo vertical e aparecer depressa em 4G. \\
+Vídeo & Um único botão de pausa/retoma no canto inferior direito, em todos os ecrãs. & Mais simples e sempre visível; obrigatório para conteúdo em movimento (WCAG 2.2.2). \\
+Imagens & Imagens de banco ligeiramente dessaturadas por CSS. & Integram-se na paleta calma sem reprocessar ficheiros que vão ser substituídos. \\
+Navegação & O menu completo aparece a partir de 1280 px; abaixo disso usa-se o botão Menu e a barra fixa Ligar/Contactar. & A 1024 px o menu completo com o botão não cabia sem partir linhas. \\
+Rodapé & Rodapé claro (areia), como na referência Alden \& Vale. & Mantém o tom calmo; o verde escuro fica reservado ao topo e às chamadas para ação. \\
+Situações & Separadores (ARIA tabs) em ecrãs largos e acordeão no telemóvel; sem JavaScript tudo fica visível. & Cada formato funciona melhor no seu ecrã e nada se perde sem JavaScript. \\
+Formulário & Escritório preferido escolhido com botões (``chips''), por omissão ``Indiferente''. & Menos toques no telemóvel. \\
+Formulário & Aviso ``sem JavaScript'' mostrado por CSS (@media scripting: none) em vez de ser removido por script. & Remover o aviso depois de carregar fazia a página saltar (CLS 0,106). \\
+Mapas & Mapa ilustrado (SVG) desenhado no próprio site até ao clique; só então carrega o Google Maps. & Nenhum pedido à Google nem cookies antes da ação do visitante. \\
+Coleções vazias & Casos, testemunhos e destaques sem conteúdo desaparecem da página inicial, do menu e do mapa do site. & Requisito do documento; nesta fase aparecem com o selo ``Exemplo ilustrativo''. \\
+Segurança & Política de segurança de conteúdo (CSP) só por cabeçalho HTTP, sem 'unsafe-inline' nem 'unsafe-eval'. & O site não tem scripts nem estilos embutidos, por isso a política mais restrita funciona. \\
+Segurança & A biblioteca de validação (Zod) corre em modo ``jitless''. & Os testes mostraram que ela tentava usar eval, que a CSP bloqueia — e bem. \\
+Segurança & Auditoria de dependências bloqueia apenas dependências de produção (0 vulnerabilidades). & As 6 vulnerabilidades moderadas estão só em ferramentas de teste usadas localmente. \\
+Desempenho & Pré-carregamento da letra DM Sans; a letra do logótipo carrega normalmente. & Evita saltos de texto (CLS) sem roubar largura de banda à imagem de capa em 4G. \\
+Testes & Lighthouse com pedido de aquecimento e mediana de 3 execuções por página. & Execuções únicas a frio davam valores anómalos (2,9 s) que não representam o site. \\
+Testes & Playwright e Lighthouse usam o Google Chrome já instalado. & Evita descarregar 150 MB de browsers de teste. \\
+Testes & Na versão inglesa, nomes próprios (``Sociedade de Advogados'', ``Ordem dos Advogados'', linha do logótipo) não contam como texto português. & São nomes, não texto de interface por traduzir. \\
+\bottomrule
+\end{longtable}

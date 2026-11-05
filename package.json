@@ -16,7 +16,7 @@
     "test:e2e": "playwright test",
     "video": "node scripts/encode-video.mjs",
     "serve:headers": "node scripts/serve-with-headers.mjs",
-    "screens": "node --experimental-strip-types scripts/screenshots.ts",
+    "screens": "playwright test -c playwright.screens.config.ts",
     "report": "node scripts/report.mjs",
     "audit": "node scripts/summarize-audit.mjs"
   },

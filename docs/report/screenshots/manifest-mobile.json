@@ -1,0 +1,1092 @@
+[
+  {
+    "id": "home",
+    "title": "Decisões importantes. Em boas mãos.",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/",
+    "height": 15404,
+    "slices": [
+      "screenshots/mobile/pt/home-1.jpg",
+      "screenshots/mobile/pt/home-2.jpg",
+      "screenshots/mobile/pt/home-3.jpg",
+      "screenshots/mobile/pt/home-4.jpg",
+      "screenshots/mobile/pt/home-5.jpg",
+      "screenshots/mobile/pt/home-6.jpg",
+      "screenshots/mobile/pt/home-7.jpg",
+      "screenshots/mobile/pt/home-8.jpg",
+      "screenshots/mobile/pt/home-9.jpg",
+      "screenshots/mobile/pt/home-10.jpg"
+    ]
+  },
+  {
+    "id": "home",
+    "title": "Important decisions. In safe hands.",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/en",
+    "height": 15095,
+    "slices": [
+      "screenshots/mobile/en/home-1.jpg",
+      "screenshots/mobile/en/home-2.jpg",
+      "screenshots/mobile/en/home-3.jpg",
+      "screenshots/mobile/en/home-4.jpg",
+      "screenshots/mobile/en/home-5.jpg",
+      "screenshots/mobile/en/home-6.jpg",
+      "screenshots/mobile/en/home-7.jpg",
+      "screenshots/mobile/en/home-8.jpg",
+      "screenshots/mobile/en/home-9.jpg"
+    ]
+  },
+  {
+    "id": "sociedade",
+    "title": "Uma sociedade próxima, desde 2002.",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/sociedade",
+    "height": 3199,
+    "slices": [
+      "screenshots/mobile/pt/sociedade-1.jpg",
+      "screenshots/mobile/pt/sociedade-2.jpg"
+    ]
+  },
+  {
+    "id": "the-firm",
+    "title": "A close-knit firm, since 2002.",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/en/the-firm",
+    "height": 3077,
+    "slices": [
+      "screenshots/mobile/en/the-firm-1.jpg",
+      "screenshots/mobile/en/the-firm-2.jpg"
+    ]
+  },
+  {
+    "id": "sociedade--historia",
+    "title": "Mais de duas décadas ao lado dos nossos clientes.",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/sociedade/historia",
+    "height": 3386,
+    "slices": [
+      "screenshots/mobile/pt/sociedade--historia-1.jpg",
+      "screenshots/mobile/pt/sociedade--historia-2.jpg"
+    ]
+  },
+  {
+    "id": "the-firm--history",
+    "title": "More than two decades alongside our clients.",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/en/the-firm/history",
+    "height": 3359,
+    "slices": [
+      "screenshots/mobile/en/the-firm--history-1.jpg",
+      "screenshots/mobile/en/the-firm--history-2.jpg"
+    ]
+  },
+  {
+    "id": "sociedade--perfil-e-valores",
+    "title": "Os princípios por detrás de cada decisão.",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/sociedade/perfil-e-valores",
+    "height": 3449,
+    "slices": [
+      "screenshots/mobile/pt/sociedade--perfil-e-valores-1.jpg",
+      "screenshots/mobile/pt/sociedade--perfil-e-valores-2.jpg",
+      "screenshots/mobile/pt/sociedade--perfil-e-valores-3.jpg"
+    ]
+  },
+  {
+    "id": "the-firm--profile-and-values",
+    "title": "The principles behind every decision.",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/en/the-firm/profile-and-values",
+    "height": 3450,
+    "slices": [
+      "screenshots/mobile/en/the-firm--profile-and-values-1.jpg",
+      "screenshots/mobile/en/the-firm--profile-and-values-2.jpg",
+      "screenshots/mobile/en/the-firm--profile-and-values-3.jpg"
+    ]
+  },
+  {
+    "id": "sociedade--pro-bono",
+    "title": "O acesso à justiça é um direito.",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/sociedade/pro-bono",
+    "height": 3379,
+    "slices": [
+      "screenshots/mobile/pt/sociedade--pro-bono-1.jpg",
+      "screenshots/mobile/pt/sociedade--pro-bono-2.jpg"
+    ]
+  },
+  {
+    "id": "the-firm--pro-bono",
+    "title": "Access to justice is a right.",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/en/the-firm/pro-bono",
+    "height": 3295,
+    "slices": [
+      "screenshots/mobile/en/the-firm--pro-bono-1.jpg",
+      "screenshots/mobile/en/the-firm--pro-bono-2.jpg"
+    ]
+  },
+  {
+    "id": "areas-de-atuacao",
+    "title": "Experiência para o que vem a seguir.",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/areas-de-atuacao",
+    "height": 4101,
+    "slices": [
+      "screenshots/mobile/pt/areas-de-atuacao-1.jpg",
+      "screenshots/mobile/pt/areas-de-atuacao-2.jpg",
+      "screenshots/mobile/pt/areas-de-atuacao-3.jpg"
+    ]
+  },
+  {
+    "id": "practice-areas",
+    "title": "Experience for what comes next.",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/en/practice-areas",
+    "height": 4101,
+    "slices": [
+      "screenshots/mobile/en/practice-areas-1.jpg",
+      "screenshots/mobile/en/practice-areas-2.jpg",
+      "screenshots/mobile/en/practice-areas-3.jpg"
+    ]
+  },
+  {
+    "id": "advogados",
+    "title": "Pessoas que conhece pelo nome.",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/advogados",
+    "height": 4868,
+    "slices": [
+      "screenshots/mobile/pt/advogados-1.jpg",
+      "screenshots/mobile/pt/advogados-2.jpg",
+      "screenshots/mobile/pt/advogados-3.jpg"
+    ]
+  },
+  {
+    "id": "lawyers",
+    "title": "People you know by name.",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/en/lawyers",
+    "height": 4828,
+    "slices": [
+      "screenshots/mobile/en/lawyers-1.jpg",
+      "screenshots/mobile/en/lawyers-2.jpg",
+      "screenshots/mobile/en/lawyers-3.jpg"
+    ]
+  },
+  {
+    "id": "casos",
+    "title": "O nosso trabalho, em casos concretos.",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/casos",
+    "height": 3409,
+    "slices": [
+      "screenshots/mobile/pt/casos-1.jpg",
+      "screenshots/mobile/pt/casos-2.jpg",
+      "screenshots/mobile/pt/casos-3.jpg"
+    ]
+  },
+  {
+    "id": "case-studies",
+    "title": "Our work, in real cases.",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/en/case-studies",
+    "height": 3326,
+    "slices": [
+      "screenshots/mobile/en/case-studies-1.jpg",
+      "screenshots/mobile/en/case-studies-2.jpg"
+    ]
+  },
+  {
+    "id": "destaques",
+    "title": "Notas claras sobre o que muda.",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/destaques",
+    "height": 3314,
+    "slices": [
+      "screenshots/mobile/pt/destaques-1.jpg",
+      "screenshots/mobile/pt/destaques-2.jpg"
+    ]
+  },
+  {
+    "id": "insights",
+    "title": "Clear notes on what is changing.",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/en/insights",
+    "height": 3346,
+    "slices": [
+      "screenshots/mobile/en/insights-1.jpg",
+      "screenshots/mobile/en/insights-2.jpg"
+    ]
+  },
+  {
+    "id": "contactos",
+    "title": "Fale connosco.",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/contactos",
+    "height": 4163,
+    "slices": [
+      "screenshots/mobile/pt/contactos-1.jpg",
+      "screenshots/mobile/pt/contactos-2.jpg",
+      "screenshots/mobile/pt/contactos-3.jpg"
+    ]
+  },
+  {
+    "id": "contact",
+    "title": "Talk to us.",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/en/contact",
+    "height": 4139,
+    "slices": [
+      "screenshots/mobile/en/contact-1.jpg",
+      "screenshots/mobile/en/contact-2.jpg",
+      "screenshots/mobile/en/contact-3.jpg"
+    ]
+  },
+  {
+    "id": "obrigado",
+    "title": "Obrigado. Recebemos a sua mensagem.",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/obrigado",
+    "height": 1832,
+    "slices": [
+      "screenshots/mobile/pt/obrigado-1.jpg",
+      "screenshots/mobile/pt/obrigado-2.jpg"
+    ]
+  },
+  {
+    "id": "thank-you",
+    "title": "Thank you. We have received your message.",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/en/thank-you",
+    "height": 1832,
+    "slices": [
+      "screenshots/mobile/en/thank-you-1.jpg",
+      "screenshots/mobile/en/thank-you-2.jpg"
+    ]
+  },
+  {
+    "id": "politica-de-privacidade",
+    "title": "Política de Privacidade",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/politica-de-privacidade",
+    "height": 3251,
+    "slices": [
+      "screenshots/mobile/pt/politica-de-privacidade-1.jpg",
+      "screenshots/mobile/pt/politica-de-privacidade-2.jpg"
+    ]
+  },
+  {
+    "id": "privacy-policy",
+    "title": "Privacy Policy",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/en/privacy-policy",
+    "height": 3210,
+    "slices": [
+      "screenshots/mobile/en/privacy-policy-1.jpg",
+      "screenshots/mobile/en/privacy-policy-2.jpg"
+    ]
+  },
+  {
+    "id": "termos-e-condicoes",
+    "title": "Termos e Condições",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/termos-e-condicoes",
+    "height": 2531,
+    "slices": [
+      "screenshots/mobile/pt/termos-e-condicoes-1.jpg",
+      "screenshots/mobile/pt/termos-e-condicoes-2.jpg"
+    ]
+  },
+  {
+    "id": "terms-and-conditions",
+    "title": "Terms and Conditions",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/en/terms-and-conditions",
+    "height": 2576,
+    "slices": [
+      "screenshots/mobile/en/terms-and-conditions-1.jpg",
+      "screenshots/mobile/en/terms-and-conditions-2.jpg"
+    ]
+  },
+  {
+    "id": "resolucao-de-litigios",
+    "title": "Resolução de Litígios",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/resolucao-de-litigios",
+    "height": 1994,
+    "slices": [
+      "screenshots/mobile/pt/resolucao-de-litigios-1.jpg",
+      "screenshots/mobile/pt/resolucao-de-litigios-2.jpg"
+    ]
+  },
+  {
+    "id": "dispute-resolution",
+    "title": "Dispute Resolution",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/en/dispute-resolution",
+    "height": 2134,
+    "slices": [
+      "screenshots/mobile/en/dispute-resolution-1.jpg",
+      "screenshots/mobile/en/dispute-resolution-2.jpg"
+    ]
+  },
+  {
+    "id": "cookies",
+    "title": "Este site não usa cookies.",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/cookies",
+    "height": 2267,
+    "slices": [
+      "screenshots/mobile/pt/cookies-1.jpg",
+      "screenshots/mobile/pt/cookies-2.jpg"
+    ]
+  },
+  {
+    "id": "cookies",
+    "title": "This website does not use cookies.",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/en/cookies",
+    "height": 2419,
+    "slices": [
+      "screenshots/mobile/en/cookies-1.jpg",
+      "screenshots/mobile/en/cookies-2.jpg"
+    ]
+  },
+  {
+    "id": "areas-de-atuacao--direito-penal",
+    "title": "Uma defesa serena. Uma resposta firme.",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/areas-de-atuacao/direito-penal",
+    "height": 5421,
+    "slices": [
+      "screenshots/mobile/pt/areas-de-atuacao--direito-penal-1.jpg",
+      "screenshots/mobile/pt/areas-de-atuacao--direito-penal-2.jpg",
+      "screenshots/mobile/pt/areas-de-atuacao--direito-penal-3.jpg",
+      "screenshots/mobile/pt/areas-de-atuacao--direito-penal-4.jpg"
+    ]
+  },
+  {
+    "id": "practice-areas--criminal-law",
+    "title": "A calm defence. A firm response.",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/en/practice-areas/criminal-law",
+    "height": 5395,
+    "slices": [
+      "screenshots/mobile/en/practice-areas--criminal-law-1.jpg",
+      "screenshots/mobile/en/practice-areas--criminal-law-2.jpg",
+      "screenshots/mobile/en/practice-areas--criminal-law-3.jpg",
+      "screenshots/mobile/en/practice-areas--criminal-law-4.jpg"
+    ]
+  },
+  {
+    "id": "areas-de-atuacao--direito-imobiliario",
+    "title": "Bases sólidas. Possibilidades maiores.",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/areas-de-atuacao/direito-imobiliario",
+    "height": 5915,
+    "slices": [
+      "screenshots/mobile/pt/areas-de-atuacao--direito-imobiliario-1.jpg",
+      "screenshots/mobile/pt/areas-de-atuacao--direito-imobiliario-2.jpg",
+      "screenshots/mobile/pt/areas-de-atuacao--direito-imobiliario-3.jpg",
+      "screenshots/mobile/pt/areas-de-atuacao--direito-imobiliario-4.jpg"
+    ]
+  },
+  {
+    "id": "practice-areas--real-estate-law",
+    "title": "A sound foundation. A wider possibility.",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/en/practice-areas/real-estate-law",
+    "height": 5766,
+    "slices": [
+      "screenshots/mobile/en/practice-areas--real-estate-law-1.jpg",
+      "screenshots/mobile/en/practice-areas--real-estate-law-2.jpg",
+      "screenshots/mobile/en/practice-areas--real-estate-law-3.jpg",
+      "screenshots/mobile/en/practice-areas--real-estate-law-4.jpg"
+    ]
+  },
+  {
+    "id": "areas-de-atuacao--direito-fiscal",
+    "title": "Clareza nos números. Firmeza na resposta.",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/areas-de-atuacao/direito-fiscal",
+    "height": 5437,
+    "slices": [
+      "screenshots/mobile/pt/areas-de-atuacao--direito-fiscal-1.jpg",
+      "screenshots/mobile/pt/areas-de-atuacao--direito-fiscal-2.jpg",
+      "screenshots/mobile/pt/areas-de-atuacao--direito-fiscal-3.jpg",
+      "screenshots/mobile/pt/areas-de-atuacao--direito-fiscal-4.jpg"
+    ]
+  },
+  {
+    "id": "practice-areas--tax-law",
+    "title": "Clarity in the numbers. Firmness in the response.",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/en/practice-areas/tax-law",
+    "height": 5396,
+    "slices": [
+      "screenshots/mobile/en/practice-areas--tax-law-1.jpg",
+      "screenshots/mobile/en/practice-areas--tax-law-2.jpg",
+      "screenshots/mobile/en/practice-areas--tax-law-3.jpg",
+      "screenshots/mobile/en/practice-areas--tax-law-4.jpg"
+    ]
+  },
+  {
+    "id": "areas-de-atuacao--direito-financeiro",
+    "title": "Equilíbrio nas contas. Força na negociação.",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/areas-de-atuacao/direito-financeiro",
+    "height": 5447,
+    "slices": [
+      "screenshots/mobile/pt/areas-de-atuacao--direito-financeiro-1.jpg",
+      "screenshots/mobile/pt/areas-de-atuacao--direito-financeiro-2.jpg",
+      "screenshots/mobile/pt/areas-de-atuacao--direito-financeiro-3.jpg",
+      "screenshots/mobile/pt/areas-de-atuacao--direito-financeiro-4.jpg"
+    ]
+  },
+  {
+    "id": "practice-areas--banking-and-finance-law",
+    "title": "Balance in your finances. Strength at the table.",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/en/practice-areas/banking-and-finance-law",
+    "height": 5369,
+    "slices": [
+      "screenshots/mobile/en/practice-areas--banking-and-finance-law-1.jpg",
+      "screenshots/mobile/en/practice-areas--banking-and-finance-law-2.jpg",
+      "screenshots/mobile/en/practice-areas--banking-and-finance-law-3.jpg",
+      "screenshots/mobile/en/practice-areas--banking-and-finance-law-4.jpg"
+    ]
+  },
+  {
+    "id": "advogados--jose-carreto-lages",
+    "title": "José Carreto Lages",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/advogados/jose-carreto-lages",
+    "height": 2758,
+    "slices": [
+      "screenshots/mobile/pt/advogados--jose-carreto-lages-1.jpg",
+      "screenshots/mobile/pt/advogados--jose-carreto-lages-2.jpg"
+    ]
+  },
+  {
+    "id": "lawyers--jose-carreto-lages",
+    "title": "José Carreto Lages",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/en/lawyers/jose-carreto-lages",
+    "height": 2758,
+    "slices": [
+      "screenshots/mobile/en/lawyers--jose-carreto-lages-1.jpg",
+      "screenshots/mobile/en/lawyers--jose-carreto-lages-2.jpg"
+    ]
+  },
+  {
+    "id": "advogados--joao-carlos-lages",
+    "title": "João Carlos Lages",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/advogados/joao-carlos-lages",
+    "height": 2703,
+    "slices": [
+      "screenshots/mobile/pt/advogados--joao-carlos-lages-1.jpg",
+      "screenshots/mobile/pt/advogados--joao-carlos-lages-2.jpg"
+    ]
+  },
+  {
+    "id": "lawyers--joao-carlos-lages",
+    "title": "João Carlos Lages",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/en/lawyers/joao-carlos-lages",
+    "height": 2703,
+    "slices": [
+      "screenshots/mobile/en/lawyers--joao-carlos-lages-1.jpg",
+      "screenshots/mobile/en/lawyers--joao-carlos-lages-2.jpg"
+    ]
+  },
+  {
+    "id": "advogados--catarina-pereira-carvalho",
+    "title": "Catarina Pereira Carvalho",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/advogados/catarina-pereira-carvalho",
+    "height": 2700,
+    "slices": [
+      "screenshots/mobile/pt/advogados--catarina-pereira-carvalho-1.jpg",
+      "screenshots/mobile/pt/advogados--catarina-pereira-carvalho-2.jpg"
+    ]
+  },
+  {
+    "id": "lawyers--catarina-pereira-carvalho",
+    "title": "Catarina Pereira Carvalho",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/en/lawyers/catarina-pereira-carvalho",
+    "height": 2698,
+    "slices": [
+      "screenshots/mobile/en/lawyers--catarina-pereira-carvalho-1.jpg",
+      "screenshots/mobile/en/lawyers--catarina-pereira-carvalho-2.jpg"
+    ]
+  },
+  {
+    "id": "advogados--adriana-silva",
+    "title": "Adriana Silva",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/advogados/adriana-silva",
+    "height": 2533,
+    "slices": [
+      "screenshots/mobile/pt/advogados--adriana-silva-1.jpg",
+      "screenshots/mobile/pt/advogados--adriana-silva-2.jpg"
+    ]
+  },
+  {
+    "id": "lawyers--adriana-silva",
+    "title": "Adriana Silva",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/en/lawyers/adriana-silva",
+    "height": 2505,
+    "slices": [
+      "screenshots/mobile/en/lawyers--adriana-silva-1.jpg",
+      "screenshots/mobile/en/lawyers--adriana-silva-2.jpg"
+    ]
+  },
+  {
+    "id": "advogados--sara-matos",
+    "title": "Sara Matos",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/advogados/sara-matos",
+    "height": 2533,
+    "slices": [
+      "screenshots/mobile/pt/advogados--sara-matos-1.jpg",
+      "screenshots/mobile/pt/advogados--sara-matos-2.jpg"
+    ]
+  },
+  {
+    "id": "lawyers--sara-matos",
+    "title": "Sara Matos",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/en/lawyers/sara-matos",
+    "height": 2505,
+    "slices": [
+      "screenshots/mobile/en/lawyers--sara-matos-1.jpg",
+      "screenshots/mobile/en/lawyers--sara-matos-2.jpg"
+    ]
+  },
+  {
+    "id": "advogados--daniela-rodrigues",
+    "title": "Daniela Rodrigues",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/advogados/daniela-rodrigues",
+    "height": 2533,
+    "slices": [
+      "screenshots/mobile/pt/advogados--daniela-rodrigues-1.jpg",
+      "screenshots/mobile/pt/advogados--daniela-rodrigues-2.jpg"
+    ]
+  },
+  {
+    "id": "lawyers--daniela-rodrigues",
+    "title": "Daniela Rodrigues",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/en/lawyers/daniela-rodrigues",
+    "height": 2505,
+    "slices": [
+      "screenshots/mobile/en/lawyers--daniela-rodrigues-1.jpg",
+      "screenshots/mobile/en/lawyers--daniela-rodrigues-2.jpg"
+    ]
+  },
+  {
+    "id": "advogados--diana-antao-seabra",
+    "title": "Diana Antão Seabra",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/advogados/diana-antao-seabra",
+    "height": 2533,
+    "slices": [
+      "screenshots/mobile/pt/advogados--diana-antao-seabra-1.jpg",
+      "screenshots/mobile/pt/advogados--diana-antao-seabra-2.jpg"
+    ]
+  },
+  {
+    "id": "lawyers--diana-antao-seabra",
+    "title": "Diana Antão Seabra",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/en/lawyers/diana-antao-seabra",
+    "height": 2505,
+    "slices": [
+      "screenshots/mobile/en/lawyers--diana-antao-seabra-1.jpg",
+      "screenshots/mobile/en/lawyers--diana-antao-seabra-2.jpg"
+    ]
+  },
+  {
+    "id": "advogados--francisco-lopes",
+    "title": "Francisco Lopes",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/advogados/francisco-lopes",
+    "height": 2505,
+    "slices": [
+      "screenshots/mobile/pt/advogados--francisco-lopes-1.jpg",
+      "screenshots/mobile/pt/advogados--francisco-lopes-2.jpg"
+    ]
+  },
+  {
+    "id": "lawyers--francisco-lopes",
+    "title": "Francisco Lopes",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/en/lawyers/francisco-lopes",
+    "height": 2505,
+    "slices": [
+      "screenshots/mobile/en/lawyers--francisco-lopes-1.jpg",
+      "screenshots/mobile/en/lawyers--francisco-lopes-2.jpg"
+    ]
+  },
+  {
+    "id": "casos--absolvicao-burla-informatica",
+    "title": "Absolvição num processo de burla informática",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/casos/absolvicao-burla-informatica",
+    "height": 2619,
+    "slices": [
+      "screenshots/mobile/pt/casos--absolvicao-burla-informatica-1.jpg",
+      "screenshots/mobile/pt/casos--absolvicao-burla-informatica-2.jpg"
+    ]
+  },
+  {
+    "id": "case-studies--acquittal-computer-fraud",
+    "title": "Acquittal in a computer fraud case",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/en/case-studies/acquittal-computer-fraud",
+    "height": 2585,
+    "slices": [
+      "screenshots/mobile/en/case-studies--acquittal-computer-fraud-1.jpg",
+      "screenshots/mobile/en/case-studies--acquittal-computer-fraud-2.jpg"
+    ]
+  },
+  {
+    "id": "casos--recuperacao-imovel-insolvencia",
+    "title": "Recuperação de um imóvel num processo de insolvência",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/casos/recuperacao-imovel-insolvencia",
+    "height": 2555,
+    "slices": [
+      "screenshots/mobile/pt/casos--recuperacao-imovel-insolvencia-1.jpg",
+      "screenshots/mobile/pt/casos--recuperacao-imovel-insolvencia-2.jpg"
+    ]
+  },
+  {
+    "id": "case-studies--property-recovered-insolvency",
+    "title": "Recovering a property in insolvency proceedings",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/en/case-studies/property-recovered-insolvency",
+    "height": 2487,
+    "slices": [
+      "screenshots/mobile/en/case-studies--property-recovered-insolvency-1.jpg",
+      "screenshots/mobile/en/case-studies--property-recovered-insolvency-2.jpg"
+    ]
+  },
+  {
+    "id": "casos--impugnacao-liquidacao-irs",
+    "title": "Impugnação de uma liquidação adicional de IRS",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/casos/impugnacao-liquidacao-irs",
+    "height": 2520,
+    "slices": [
+      "screenshots/mobile/pt/casos--impugnacao-liquidacao-irs-1.jpg",
+      "screenshots/mobile/pt/casos--impugnacao-liquidacao-irs-2.jpg"
+    ]
+  },
+  {
+    "id": "case-studies--income-tax-assessment-appeal",
+    "title": "Challenging an additional income tax assessment",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/en/case-studies/income-tax-assessment-appeal",
+    "height": 2486,
+    "slices": [
+      "screenshots/mobile/en/case-studies--income-tax-assessment-appeal-1.jpg",
+      "screenshots/mobile/en/case-studies--income-tax-assessment-appeal-2.jpg"
+    ]
+  },
+  {
+    "id": "destaques--recebi-uma-notificacao-das-financas",
+    "title": "Recebi uma notificação das Finanças. E agora?",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/destaques/recebi-uma-notificacao-das-financas",
+    "height": 3182,
+    "slices": [
+      "screenshots/mobile/pt/destaques--recebi-uma-notificacao-das-financas-1.jpg",
+      "screenshots/mobile/pt/destaques--recebi-uma-notificacao-das-financas-2.jpg"
+    ]
+  },
+  {
+    "id": "insights--received-a-tax-authority-notice",
+    "title": "I have received a notice from the Tax Authority. What now?",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/en/insights/received-a-tax-authority-notice",
+    "height": 3188,
+    "slices": [
+      "screenshots/mobile/en/insights--received-a-tax-authority-notice-1.jpg",
+      "screenshots/mobile/en/insights--received-a-tax-authority-notice-2.jpg"
+    ]
+  },
+  {
+    "id": "destaques--comprar-casa-antes-de-assinar",
+    "title": "Comprar casa: o que verificar antes de assinar",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/destaques/comprar-casa-antes-de-assinar",
+    "height": 2818,
+    "slices": [
+      "screenshots/mobile/pt/destaques--comprar-casa-antes-de-assinar-1.jpg",
+      "screenshots/mobile/pt/destaques--comprar-casa-antes-de-assinar-2.jpg"
+    ]
+  },
+  {
+    "id": "insights--buying-a-home-before-you-sign",
+    "title": "Buying a home: what to check before you sign",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/en/insights/buying-a-home-before-you-sign",
+    "height": 2729,
+    "slices": [
+      "screenshots/mobile/en/insights--buying-a-home-before-you-sign-1.jpg",
+      "screenshots/mobile/en/insights--buying-a-home-before-you-sign-2.jpg"
+    ]
+  },
+  {
+    "id": "404",
+    "title": "Esta página não existe.",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/404",
+    "height": 1790,
+    "slices": [
+      "screenshots/mobile/pt/404-1.jpg",
+      "screenshots/mobile/pt/404-2.jpg"
+    ]
+  },
+  {
+    "id": "404",
+    "title": "This page does not exist.",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "page",
+    "path": "/en/404",
+    "height": 1790,
+    "slices": [
+      "screenshots/mobile/en/404-1.jpg",
+      "screenshots/mobile/en/404-2.jpg"
+    ]
+  },
+  {
+    "id": "state-menu",
+    "title": "Menu de telemóvel aberto",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "state",
+    "path": "/",
+    "height": 844,
+    "slices": [
+      "screenshots/mobile/pt/state-menu.jpg"
+    ]
+  },
+  {
+    "id": "state-menu",
+    "title": "Mobile menu open",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "state",
+    "path": "/en",
+    "height": 844,
+    "slices": [
+      "screenshots/mobile/en/state-menu.jpg"
+    ]
+  },
+  {
+    "id": "state-header",
+    "title": "Cabeçalho depois de descer na página",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "state",
+    "path": "/",
+    "height": 844,
+    "slices": [
+      "screenshots/mobile/pt/state-header.jpg"
+    ]
+  },
+  {
+    "id": "state-header",
+    "title": "Header after scrolling",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "state",
+    "path": "/en",
+    "height": 844,
+    "slices": [
+      "screenshots/mobile/en/state-header.jpg"
+    ]
+  },
+  {
+    "id": "state-carousel",
+    "title": "Carrossel de áreas no segundo cartão",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "state",
+    "path": "/",
+    "height": 844,
+    "slices": [
+      "screenshots/mobile/pt/state-carousel.jpg"
+    ]
+  },
+  {
+    "id": "state-carousel",
+    "title": "Areas carousel on the second card",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "state",
+    "path": "/en",
+    "height": 844,
+    "slices": [
+      "screenshots/mobile/en/state-carousel.jpg"
+    ]
+  },
+  {
+    "id": "state-situation",
+    "title": "\"Em que situação está?\" com a terceira situação escolhida",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "state",
+    "path": "/",
+    "height": 844,
+    "slices": [
+      "screenshots/mobile/pt/state-situation.jpg"
+    ]
+  },
+  {
+    "id": "state-situation",
+    "title": "\"Where are you today?\" with the third situation selected",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "state",
+    "path": "/en",
+    "height": 844,
+    "slices": [
+      "screenshots/mobile/en/state-situation.jpg"
+    ]
+  },
+  {
+    "id": "state-faq",
+    "title": "Pergunta frequente aberta",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "state",
+    "path": "/",
+    "height": 844,
+    "slices": [
+      "screenshots/mobile/pt/state-faq.jpg"
+    ]
+  },
+  {
+    "id": "state-faq",
+    "title": "FAQ item open",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "state",
+    "path": "/en",
+    "height": 844,
+    "slices": [
+      "screenshots/mobile/en/state-faq.jpg"
+    ]
+  },
+  {
+    "id": "state-form-errors",
+    "title": "Formulário com erros de validação",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "state",
+    "path": "/contactos",
+    "height": 844,
+    "slices": [
+      "screenshots/mobile/pt/state-form-errors.jpg"
+    ]
+  },
+  {
+    "id": "state-form-errors",
+    "title": "Form with validation errors",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "state",
+    "path": "/en/contact",
+    "height": 844,
+    "slices": [
+      "screenshots/mobile/en/state-form-errors.jpg"
+    ]
+  },
+  {
+    "id": "state-map",
+    "title": "Mapa interativo carregado depois do clique",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "state",
+    "path": "/contactos",
+    "height": 844,
+    "slices": [
+      "screenshots/mobile/pt/state-map.jpg"
+    ]
+  },
+  {
+    "id": "state-map",
+    "title": "Interactive map loaded after the click",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "state",
+    "path": "/en/contact",
+    "height": 844,
+    "slices": [
+      "screenshots/mobile/en/state-map.jpg"
+    ]
+  },
+  {
+    "id": "state-video-paused",
+    "title": "Vídeo do topo em pausa",
+    "locale": "pt",
+    "viewport": "mobile",
+    "kind": "state",
+    "path": "/",
+    "height": 844,
+    "slices": [
+      "screenshots/mobile/pt/state-video-paused.jpg"
+    ]
+  },
+  {
+    "id": "state-video-paused",
+    "title": "Hero video paused",
+    "locale": "en",
+    "viewport": "mobile",
+    "kind": "state",
+    "path": "/en",
+    "height": 844,
+    "slices": [
+      "screenshots/mobile/en/state-video-paused.jpg"
+    ]
+  }
+]
