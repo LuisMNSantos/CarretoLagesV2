@@ -4,6 +4,8 @@ import PageHero from '../shared/PageHero.astro';
 import Blocks from '../shared/Blocks.astro';
 import CtaBand from '../shared/CtaBand.astro';
 import Icon from '../shared/Icon.astro';
+import { Picture } from 'astro:assets';
+import trophy from '../../assets/brand/trofeu.png';
 import { pages, settings, tr, type PageId } from '../../lib/content';
 import { localizePath, type RouteKey } from '../../i18n/routes';
 import { t } from '../../i18n/ui';
@@ -24,10 +26,16 @@ const crumbs = id === 'firm'
   title={`${tr(page.eyebrow, locale)} — Carreto Lages & Associados`}
   description={tr(page.metaDescription, locale)}
   alternates={{ pt: localizePath(key, 'pt'), en: localizePath(key, 'en') }}
->
-  <PageHero locale={locale} eyebrow={tr(page.eyebrow, locale)} title={[tr(page.title[0], locale), tr(page.title[1], locale)]} lead={tr(page.lead, locale)} image={page.image} crumbs={crumbs} />
+ headerVariant="overlay">
+  <PageHero locale={locale} variant="feature" watermark={tr(page.eyebrow, locale)} eyebrow={tr(page.eyebrow, locale)} title={[tr(page.title[0], locale), tr(page.title[1], locale)]} lead={tr(page.lead, locale)} image={page.image} crumbs={crumbs}>
+    {id === 'history' && (
+      <Fragment slot="card">
+        <Picture src={trophy} alt={t(locale, 'anniversary.alt')} widths={[480, 720, 960]} sizes="(min-width: 768px) 38vw, 92vw" formats={['avif', 'webp']} quality={68} loading="eager" class="h-full w-full object-cover" />
+      </Fragment>
+    )}
+  </PageHero>
 
-  <section class="pb-20 md:pb-28">
+  <section class="pb-20 pt-14 md:pb-28 md:pt-12">
     <div class="container-site grid gap-14 md:grid-cols-12">
       <div class:list={['md:col-span-7', id === 'values' && 'values-grid']}>
         <Blocks blocks={page.body} locale={locale} />

@@ -19,14 +19,14 @@ const date = page.updated ? new Intl.DateTimeFormat(locale === 'pt' ? 'pt-PT' : 
   title={`${tr(page.title[0], locale)} ${tr(page.title[1], locale)} — Carreto Lages & Associados`}
   description={tr(page.metaDescription, locale)}
   alternates={{ pt: localizePath(key, 'pt'), en: localizePath(key, 'en') }}
->
-  <PageHero locale={locale} eyebrow={tr(page.eyebrow, locale)} title={[tr(page.title[0], locale), tr(page.title[1], locale)]} lead={tr(page.lead, locale)} crumbs={[{ label: t(locale, 'footer.legal') }]}>
-    <div class="mt-8 flex flex-wrap items-center gap-4 text-sm text-tinta-suave">
+ headerVariant="overlay">
+  <PageHero locale={locale} variant="banner" image="library-books" eyebrow={tr(page.eyebrow, locale)} title={[tr(page.title[0], locale), tr(page.title[1], locale)]} lead={tr(page.lead, locale)} crumbs={[{ label: t(locale, 'footer.legal') }]}>
+    <div class="mt-8 flex flex-wrap items-center gap-4 text-sm text-marfim/80">
       {page.draft && <PlaceholderBadge locale={locale} kind="draft" />}
       {date && <span>{t(locale, 'legal.updated')}: {date}</span>}
     </div>
   </PageHero>
-  <section class="pb-24">
+  <section class="pb-24 pt-16 md:pt-20">
     <div class="container-site">
       {locale === 'en' && <p class="mb-10 max-w-[68ch] rounded bg-areia p-4 text-sm text-tinta">{t(locale, 'legal.prevails')}</p>}
       <Blocks blocks={page.body} locale={locale} />

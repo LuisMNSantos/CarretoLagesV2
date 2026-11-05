@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test';
 test('home sections appear in the approved order', async ({ page }) => {
   await page.goto('/');
   const ids = await page.locator('main section[aria-labelledby]').evaluateAll((els) => els.map((e) => e.getAttribute('aria-labelledby')));
-  expect(ids).toEqual(['hero-title', 'areas-title', 'situations-title', 'process-title', 'team-title', 'cases-title', 'testimonials-title', 'faq-title', 'contact-title']);
+  expect(ids).toEqual(['hero-title', 'areas-title', 'situations-title', 'process-title', 'anniversary-title', 'team-title', 'cases-title', 'testimonials-title', 'faq-title', 'contact-title']);
 });
 
 test('no request to Google before the map is clicked; iframe after', async ({ page }) => {

@@ -53,10 +53,12 @@ test.describe('hero background video', () => {
     const hero = page.locator('[data-hero]');
     await expect(hero).toHaveAttribute('data-video', 'playing', { timeout: 15_000 });
     const btn = page.locator('[data-hero-toggle]');
-    await btn.click();
+    await btn.focus();
+    await page.keyboard.press('Enter');
     await expect(btn).toHaveAttribute('aria-pressed', 'true');
     expect(await page.locator('video[data-hero-video]').evaluate((v: HTMLVideoElement) => v.paused)).toBe(true);
-    await btn.click();
+    await btn.focus();
+    await page.keyboard.press('Enter');
     await expect(btn).toHaveAttribute('aria-pressed', 'false');
     expect(await page.locator('video[data-hero-video]').evaluate((v: HTMLVideoElement) => v.paused)).toBe(false);
   });
@@ -94,6 +96,7 @@ test('pause button shows exactly one icon at a time', async ({ page }) => {
   await expect(page.locator('[data-hero]')).toHaveAttribute('data-video', 'playing', { timeout: 15_000 });
   const btn = page.locator('[data-hero-toggle]');
   await expect(btn.locator('svg:visible')).toHaveCount(1);
-  await btn.click();
+  await btn.focus();
+    await page.keyboard.press('Enter');
   await expect(btn.locator('svg:visible')).toHaveCount(1);
 });

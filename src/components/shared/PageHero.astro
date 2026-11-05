@@ -1,49 +1,110 @@
 ---
+/**
+ * Image-led header for secondary pages (sits under the transparent "overlay" header).
+ * Both variants run edge to edge from the top of the page, with a straight bottom edge marked
+ * by a thin bronze rule.
+ * - banner:  photo panel with a green veil; title bottom-left, lead bottom-right (editorial).
+ * - feature: deep-green panel with a vertical bronze small-caps label on the left edge, text on
+ *            the left and a photo card with an offset bronze frame on the right.
+ */
 import StockImage from './StockImage.astro';
-import Icon from './Icon.astro';
-import { localizePath } from '../../i18n/routes';
-import { t } from '../../i18n/ui';
+import Crumbs from './Crumbs.astro';
 import type { Locale } from '../../i18n/locale';
 
 export interface Props {
   locale: Locale;
+  variant?: 'banner' | 'feature';
   eyebrow: string;
   title: [string, string] | [string];
   lead?: string | undefined;
   image?: string | undefined;
+  /** Short word for the vertical label (feature variant); defaults to the eyebrow. */
+  label?: string | undefined;
+  /** @deprecated kept for call-site compatibility; used as the vertical label. */
+  watermark?: string | undefined;
   crumbs?: { label: string; href?: string }[];
 }
-const { locale, eyebrow, title, lead, image, crumbs = [] } = Astro.props;
+const { locale, variant = 'banner', eyebrow, title, lead, image, label, watermark, crumbs = [] } = Astro.props;
+const hasCard = variant === 'feature' && (image || Astro.slots.has('card'));
+const sideLabel = label ?? watermark ?? eyebrow;
 ---
-<section class="pb-14 pt-10 md:pb-20 md:pt-16" aria-labelledby="page-title">
-  <div class="container-site">
-    {crumbs.length > 0 && (
-      <nav aria-label={t(locale, 'breadcrumb.label')} class="mb-10 text-[0.8125rem] text-tinta-suave">
-        <ol class="flex flex-wrap items-center gap-2">
-          <li><a class="hover:text-verde-700" href={localizePath('home', locale)}>{t(locale, 'nav.home')}</a></li>
-          {crumbs.map((c) => (
-            <li class="flex items-center gap-2">
-              <Icon name="arrow-right" size={12} class="opacity-50" />
-              {c.href ? <a class="hover:text-verde-700" href={c.href}>{c.label}</a> : <span aria-current="page" class="text-tinta">{c.label}</span>}
-            </li>
-          ))}
-        </ol>
-      </nav>
-    )}
-    <div class="grid gap-10 md:grid-cols-12 md:items-end">
-      <div class:list={[image ? 'md:col-span-7' : 'md:col-span-9']}>
-        <p class="eyebrow text-tinta-suave">{eyebrow}</p>
-        <h1 id="page-title" class="mt-6 text-[clamp(2.4rem,4.8vw,4.25rem)] text-tinta">
-          {title.map((line) => <span class="block">{line}</span>)}
-        </h1>
-        {lead && <p class="lead mt-7 max-w-2xl text-tinta-suave">{lead}</p>}
-        <slot />
-      </div>
+<div class="page-hero-wrap" data-page-hero data-variant={variant}>
+  {variant === 'banner' ? (
+    <section class="page-hero on-dark relative isolate overflow-hidden bg-verde-900 text-marfim" aria-labelledby="page-title" data-hero-panel>
       {image && (
-        <div class="aspect-[4/3] overflow-hidden rounded-md md:col-span-5">
-          <StockImage id={image} sizes="(min-width: 768px) 40vw, 92vw" loading="eager" />
+        <div class="absolute inset-0 -z-10" aria-hidden="true">
+          <StockImage id={image} sizes="100vw" loading="eager" widths={[640, 1024, 1600, 2000]} />
+          <div class="banner-veil absolute inset-0"></div>
         </div>
       )}
-    </div>
-  </div>
-</section>
+      <div class="container-site flex min-h-[26rem] flex-col justify-end pb-10 pt-32 md:min-h-[32rem] md:pb-14 md:pt-36">
+        {crumbs.length > 0 && <Crumbs locale={locale} crumbs={crumbs} class="[&_ol]:justify-start" />}
+        <div class="mt-auto grid gap-6 border-t border-marfim/20 pt-8 md:mt-16 md:grid-cols-12 md:items-end">
+          <div class="md:col-span-8">
+            <p class="eyebrow text-marfim/85">{eyebrow}</p>
+            <h1 id="page-title" class="page-title mt-5 text-[clamp(2.4rem,5vw,4.5rem)]">
+              {title.map((line) => <span class="block">{line}</span>)}
+            </h1>
+          </div>
+          {lead && <p class="text-[0.9375rem] leading-relaxed text-marfim/85 md:col-span-4 md:pb-2">{lead}</p>}
+          {Astro.slots.has('default') && <div class="md:col-span-12"><slot /></div>}
+        </div>
+      </div>
+    </section>
+  ) : (
+    <section class="page-hero on-dark relative isolate overflow-hidden bg-verde-900 text-marfim" aria-labelledby="page-title" data-hero-panel>
+      <div class="hero-texture absolute inset-0 -z-10" aria-hidden="true"></div>
+      <p class="side-label absolute bottom-10 left-5 hidden select-none items-center gap-3 lg:flex" aria-hidden="true" data-hero-label>
+        <span class="h-px w-10 bg-bronze"></span>{sideLabel}
+      </p>
+      <div class="container-site grid gap-10 pb-12 pt-32 md:grid-cols-12 md:items-center md:pb-16 md:pt-36 lg:pl-20">
+        <div class:list={[hasCard ? 'md:col-span-7' : 'md:col-span-9']}>
+          {crumbs.length > 0 && <Crumbs locale={locale} crumbs={crumbs} class="[&_ol]:justify-start" />}
+          <p class="eyebrow mt-6 text-marfim/85">{eyebrow}</p>
+          <h1 id="page-title" class="page-title mt-5 text-[clamp(2.4rem,4.8vw,4.25rem)]">
+            {title.map((line) => <span class="block">{line}</span>)}
+          </h1>
+          {lead && <p class="lead mt-6 max-w-xl text-marfim/85">{lead}</p>}
+          <slot />
+        </div>
+        {hasCard && (
+          <div class="hero-card relative md:col-span-5 md:col-start-8">
+            <div class="hero-frame absolute inset-0 hidden rounded-xl border border-bronze/70 md:block" aria-hidden="true" data-hero-frame></div>
+            <div class="relative aspect-[4/5] overflow-hidden rounded-xl shadow-[0_30px_60px_-30px_rgb(0_0_0_/_0.6)]">
+              {Astro.slots.has('card') ? <slot name="card" /> : <StockImage id={image!} sizes="(min-width: 768px) 38vw, 92vw" loading="eager" />}
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+  )}
+</div>
+
+<style>
+  .banner-veil {
+    background:
+      linear-gradient(180deg, rgb(15 36 29 / 0.7) 0%, rgb(15 36 29 / 0.35) 32%, rgb(15 36 29 / 0.55) 62%, rgb(15 36 29 / 0.92) 100%),
+      linear-gradient(90deg, rgb(15 36 29 / 0.45) 0%, rgb(15 36 29 / 0) 70%);
+  }
+  .page-title { font-weight: 300; letter-spacing: -0.02em; line-height: 1.05; text-wrap: balance; }
+  .page-hero .page-title, .page-hero .lead { text-shadow: 0 1px 18px rgb(8 20 16 / 0.35); }
+  /* Feature panel: soft light from the top right and a fine line grid, instead of a watermark word. */
+  .hero-texture {
+    background:
+      radial-gradient(120% 90% at 85% 0%, rgb(46 85 70 / 0.55) 0%, rgb(15 36 29 / 0) 60%),
+      repeating-linear-gradient(90deg, rgb(243 240 232 / 0.035) 0 1px, transparent 1px 96px);
+  }
+  .side-label {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--color-bronze-claro);
+  }
+  .side-label span { width: 1px; height: 2.5rem; }
+  .hero-frame { transform: translate(14px, 14px); }
+  .page-hero::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: linear-gradient(90deg, var(--color-bronze) 0%, rgb(170 141 115 / 0.25) 60%, transparent 100%); }
+  .hero-card :global(picture) { display: block; height: 100%; }
+</style>

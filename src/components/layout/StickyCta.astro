@@ -9,11 +9,28 @@ const { locale } = Astro.props;
 const path = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '').replace(/\/$/, '') || '/';
 const href = path === localizePath('home', locale) ? '#contacto' : `${localizePath('contact', locale)}#contacto`;
 ---
-<div class="sticky-cta fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 gap-px border-t border-areia-escura bg-areia-escura xl:hidden" data-sticky-cta data-hidden="false">
-  <a href={settings.phoneHref} class="flex min-h-14 items-center justify-center gap-2 bg-marfim text-[0.9375rem] font-medium text-verde-700"><Icon name="phone" size={17} />{t(locale, 'cta.call')}</a>
-  <a href={href} class="flex min-h-14 items-center justify-center gap-2 bg-verde-700 text-[0.9375rem] font-medium text-marfim"><Icon name="mail" size={17} />{t(locale, 'cta.contact')}</a>
+<!-- Compact floating actions (phones/tablets): two small round buttons, bottom-right. -->
+<div class="sticky-cta fixed bottom-4 right-4 z-40 flex items-center gap-2 xl:hidden" data-sticky-cta data-hidden="false">
+  <a href={settings.phoneHref} class="sticky-btn bg-marfim text-verde-700" aria-label={`${t(locale, 'cta.call')} ${settings.phone}`}>
+    <Icon name="phone" size={19} />
+  </a>
+  <a href={href} class="sticky-btn bg-verde-700 text-marfim" aria-label={t(locale, 'cta.contact')}>
+    <Icon name="mail" size={19} />
+  </a>
 </div>
 <style>
-  .sticky-cta { transition: transform 300ms var(--ease-calm); padding-bottom: env(safe-area-inset-bottom); }
-  .sticky-cta[data-hidden='true'] { transform: translateY(110%); }
+  .sticky-cta {
+    margin-bottom: env(safe-area-inset-bottom);
+    transition: transform 300ms var(--ease-calm), opacity 300ms var(--ease-calm);
+  }
+  .sticky-cta[data-hidden='true'] { transform: translateY(140%); opacity: 0; pointer-events: none; }
+  .sticky-btn {
+    display: inline-grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 999px;
+    border: 1px solid rgb(27 58 47 / 0.18);
+    box-shadow: 0 10px 24px -12px rgb(15 36 29 / 0.55);
+  }
 </style>

@@ -18,14 +18,14 @@ const alternates =
   : {};
 const title = kind === 'contact' ? t(locale, 'nav.contact') : kind === 'thanks' ? t(locale, 'thanks.title1') : t(locale, 'notFound.title2');
 ---
-<Base locale={locale} title={`${title} — Carreto Lages & Associados`} description={tr(settings.seo.homeDescription, locale)} alternates={alternates}>
+<Base locale={locale} title={`${title} — Carreto Lages & Associados`} description={tr(settings.seo.homeDescription, locale)} alternates={alternates} headerVariant={kind === 'contact' ? 'overlay' : 'solid'}>
   {kind === 'contact' && (
     <>
-      <PageHero locale={locale} eyebrow={t(locale, 'nav.contact')} title={[locale === 'pt' ? 'Fale connosco.' : 'Talk to us.']} lead={tr(settings.responsePromise, locale)} crumbs={[{ label: t(locale, 'nav.contact') }]}>
-        <ul class="mt-8 flex flex-wrap gap-x-8 gap-y-3 text-[0.9375rem] text-tinta">
-          <li><a class="inline-flex items-center gap-2 hover:text-verde-700" href={settings.phoneHref}><Icon name="phone" size={16} />{settings.phone}</a></li>
-          <li><a class="inline-flex items-center gap-2 hover:text-verde-700" href={`mailto:${settings.email}`}><Icon name="mail" size={16} />{settings.email}</a></li>
-          <li class="inline-flex items-center gap-2 text-tinta-suave"><Icon name="clock" size={16} />{tr(settings.hours, locale)}</li>
+      <PageHero locale={locale} variant="banner" image="meeting-room" eyebrow={t(locale, 'nav.contact')} title={[locale === 'pt' ? 'Fale connosco.' : 'Talk to us.']} lead={tr(settings.responsePromise, locale)} crumbs={[{ label: t(locale, 'nav.contact') }]}>
+        <ul class="mt-8 flex flex-wrap gap-x-8 gap-y-3 text-[0.9375rem] text-marfim/90">
+          <li><a class="inline-flex items-center gap-2 hover:text-marfim" href={settings.phoneHref}><Icon name="phone" size={16} />{settings.phone}</a></li>
+          <li><a class="inline-flex items-center gap-2 hover:text-marfim" href={`mailto:${settings.email}`}><Icon name="mail" size={16} />{settings.email}</a></li>
+          <li class="inline-flex items-center gap-2 text-marfim/80"><Icon name="clock" size={16} />{tr(settings.hours, locale)}</li>
         </ul>
       </PageHero>
       <ContactSection locale={locale} />

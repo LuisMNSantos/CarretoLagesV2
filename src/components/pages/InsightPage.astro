@@ -5,7 +5,6 @@ import CtaBand from '../shared/CtaBand.astro';
 import CopyLink from '../shared/CopyLink.astro';
 import PlaceholderBadge from '../shared/PlaceholderBadge.astro';
 import ReadingHeader from '../shared/ReadingHeader.astro';
-import StockImage from '../shared/StockImage.astro';
 import { areaById, tr, type Insight } from '../../lib/content';
 import { localizePath } from '../../i18n/routes';
 import { t } from '../../i18n/ui';
@@ -20,7 +19,7 @@ const area = item.area ? areaById(item.area) : undefined;
   title={`${tr(item.title, locale)} — Carreto Lages & Associados`}
   description={tr(item.excerpt, locale)}
   alternates={{ pt: localizePath('insights', 'pt', item.slug.pt), en: item.slug.en ? localizePath('insights', 'en', item.slug.en) : undefined }}
->
+ headerVariant="overlay">
   <article>
     <ReadingHeader
       locale={locale}
@@ -29,14 +28,13 @@ const area = item.area ? areaById(item.area) : undefined;
       lead={tr(item.excerpt, locale)}
       date={item.date}
       minutes={item.readingMinutes}
+      image={item.image}
+      watermark={locale === 'pt' ? 'Destaques' : 'Insights'}
       crumbs={[{ label: t(locale, 'nav.insights'), href: localizePath('insights', locale) }]}
     >
       {item.placeholder && <PlaceholderBadge locale={locale} />}
     </ReadingHeader>
-    <div class="container-site">
-      <div class="aspect-[21/9] overflow-hidden rounded-md"><StockImage id={item.image} sizes="92vw" loading="eager" /></div>
-    </div>
-    <div class="container-site py-16 md:py-20">
+    <div class="container-site pb-20 pt-14 md:pt-12">
       <Blocks blocks={item.body} locale={locale} />
       <div class="mt-12"><CopyLink locale={locale} /></div>
     </div>

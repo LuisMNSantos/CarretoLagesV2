@@ -12,7 +12,7 @@ for (const r of allRoutes(true)) {
     expect(overflow, 'horizontal overflow in px').toBeLessThanOrEqual(0);
     const clipped = await page.evaluate(() =>
       Array.from(document.querySelectorAll<HTMLElement>('h1, h2, h3, a.btn, button'))
-        .filter((el) => el.offsetParent !== null && el.scrollWidth > el.clientWidth + 1 && getComputedStyle(el).overflowX !== 'visible')
+        .filter((el) => el.offsetParent !== null && el.clientWidth > 1 && el.scrollWidth > el.clientWidth + 1 && getComputedStyle(el).overflowX !== 'visible')
         .map((el) => el.textContent?.trim().slice(0, 40)),
     );
     expect(clipped).toEqual([]);

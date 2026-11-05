@@ -22,8 +22,8 @@ const groups = [
   title={`${t(locale, 'nav.lawyers')} — Carreto Lages & Associados`}
   description={t(locale, 'team.lead')}
   alternates={{ pt: localizePath('lawyers', 'pt'), en: localizePath('lawyers', 'en') }}
->
-  <PageHero locale={locale} eyebrow={t(locale, 'team.eyebrow')} title={[t(locale, 'team.title1'), t(locale, 'team.title2')]} lead={t(locale, 'team.lead')} crumbs={[{ label: t(locale, 'nav.lawyers') }]} />
+ headerVariant="overlay">
+  <PageHero locale={locale} variant="banner" image="office-corridor" eyebrow={t(locale, 'team.eyebrow')} title={[t(locale, 'team.title1'), t(locale, 'team.title2')]} lead={t(locale, 'team.lead')} crumbs={[{ label: t(locale, 'nav.lawyers') }]} />
   {groups.map((g) => {
     const people = list.filter((l) => l.group === g.key);
     return people.length > 0 && (

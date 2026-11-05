@@ -19,9 +19,9 @@ const list = visible(areas, locale);
   title={`${t(locale, 'nav.areas')} — Carreto Lages & Associados`}
   description={tr(s.lead, locale)}
   alternates={{ pt: localizePath('areas', 'pt'), en: localizePath('areas', 'en') }}
->
-  <PageHero locale={locale} eyebrow={tr(s.eyebrow, locale)} title={[tr(s.title[0], locale), tr(s.title[1], locale)]} lead={tr(s.lead, locale)} crumbs={[{ label: t(locale, 'nav.areas') }]} />
-  <section class="pb-24">
+ headerVariant="overlay">
+  <PageHero locale={locale} variant="banner" image="architecture-columns" eyebrow={tr(s.eyebrow, locale)} title={[tr(s.title[0], locale), tr(s.title[1], locale)]} lead={tr(s.lead, locale)} crumbs={[{ label: t(locale, 'nav.areas') }]} />
+  <section class="pb-24 pt-16 md:pt-20">
     <div class="container-site">
       <ul class="space-y-4 md:space-y-6">
         {list.map((a, i) => (

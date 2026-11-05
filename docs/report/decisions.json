@@ -1,24 +1,132 @@
 [
-  { "area": "Endereços", "decision": "As páginas são servidas sem \".html\" nem barra final (ex.: /advogados); o inglês fica em /en.", "reason": "É o formato que a Cloudflare Pages serve sem redireções e mantém os endereços curtos." },
-  { "area": "Conteúdo", "decision": "O conteúdo vive em ficheiros JSON validados (Zod) com campos PT/EN lado a lado, organizados como os futuros modelos do Sanity.", "reason": "Permite testar tudo automaticamente e ligar o Sanity mais tarde sem mudar o desenho." },
-  { "area": "Conteúdo", "decision": "Textos longos (artigos, páginas legais) guardados como blocos simples (parágrafo, título, lista).", "reason": "Corresponde ao formato de texto rico do Sanity e evita dependências extra." },
-  { "area": "Conteúdo", "decision": "Moradas completas dos escritórios marcadas \"a confirmar\"; biografias limitadas a factos conhecidos.", "reason": "Não inventar informação sobre o escritório nem sobre as pessoas." },
-  { "area": "Vídeo", "decision": "Compressão com qualidade constante e teto de débito; o MP4 vem antes do WebM.", "reason": "A textura da água fazia o WebM ultrapassar o limite de 2,5 MB; com o teto, o MP4 ficou mais leve." },
-  { "area": "Vídeo", "decision": "Imagem de capa própria para telemóvel (recorte vertical) e capas de reserva limitadas a 100 KB.", "reason": "A capa tem de coincidir com o vídeo vertical e aparecer depressa em 4G." },
-  { "area": "Vídeo", "decision": "Um único botão de pausa/retoma no canto inferior direito, em todos os ecrãs.", "reason": "Mais simples e sempre visível; obrigatório para conteúdo em movimento (WCAG 2.2.2)." },
-  { "area": "Imagens", "decision": "Imagens de banco ligeiramente dessaturadas por CSS.", "reason": "Integram-se na paleta calma sem reprocessar ficheiros que vão ser substituídos." },
-  { "area": "Navegação", "decision": "O menu completo aparece a partir de 1280 px; abaixo disso usa-se o botão Menu e a barra fixa Ligar/Contactar.", "reason": "A 1024 px o menu completo com o botão não cabia sem partir linhas." },
-  { "area": "Rodapé", "decision": "Rodapé claro (areia), como na referência Alden & Vale.", "reason": "Mantém o tom calmo; o verde escuro fica reservado ao topo e às chamadas para ação." },
-  { "area": "Situações", "decision": "Separadores (ARIA tabs) em ecrãs largos e acordeão no telemóvel; sem JavaScript tudo fica visível.", "reason": "Cada formato funciona melhor no seu ecrã e nada se perde sem JavaScript." },
-  { "area": "Formulário", "decision": "Escritório preferido escolhido com botões (\"chips\"), por omissão \"Indiferente\".", "reason": "Menos toques no telemóvel." },
-  { "area": "Formulário", "decision": "Aviso \"sem JavaScript\" mostrado por CSS (@media scripting: none) em vez de ser removido por script.", "reason": "Remover o aviso depois de carregar fazia a página saltar (CLS 0,106)." },
-  { "area": "Mapas", "decision": "Mapa ilustrado (SVG) desenhado no próprio site até ao clique; só então carrega o Google Maps.", "reason": "Nenhum pedido à Google nem cookies antes da ação do visitante." },
-  { "area": "Coleções vazias", "decision": "Casos, testemunhos e destaques sem conteúdo desaparecem da página inicial, do menu e do mapa do site.", "reason": "Requisito do documento; nesta fase aparecem com o selo \"Exemplo ilustrativo\"." },
-  { "area": "Segurança", "decision": "Política de segurança de conteúdo (CSP) só por cabeçalho HTTP, sem 'unsafe-inline' nem 'unsafe-eval'.", "reason": "O site não tem scripts nem estilos embutidos, por isso a política mais restrita funciona." },
-  { "area": "Segurança", "decision": "A biblioteca de validação (Zod) corre em modo \"jitless\".", "reason": "Os testes mostraram que ela tentava usar eval, que a CSP bloqueia — e bem." },
-  { "area": "Segurança", "decision": "Auditoria de dependências bloqueia apenas dependências de produção (0 vulnerabilidades).", "reason": "As 6 vulnerabilidades moderadas estão só em ferramentas de teste usadas localmente." },
-  { "area": "Desempenho", "decision": "Pré-carregamento da letra DM Sans; a letra do logótipo carrega normalmente.", "reason": "Evita saltos de texto (CLS) sem roubar largura de banda à imagem de capa em 4G." },
-  { "area": "Testes", "decision": "Lighthouse com pedido de aquecimento e mediana de 3 execuções por página.", "reason": "Execuções únicas a frio davam valores anómalos (2,9 s) que não representam o site." },
-  { "area": "Testes", "decision": "Playwright e Lighthouse usam o Google Chrome já instalado.", "reason": "Evita descarregar 150 MB de browsers de teste." },
-  { "area": "Testes", "decision": "Na versão inglesa, nomes próprios (\"Sociedade de Advogados\", \"Ordem dos Advogados\", linha do logótipo) não contam como texto português.", "reason": "São nomes, não texto de interface por traduzir." }
+  {
+    "area": "Endereços",
+    "decision": "As páginas são servidas sem \".html\" nem barra final (ex.: /advogados); o inglês fica em /en.",
+    "reason": "É o formato que a Cloudflare Pages serve sem redireções e mantém os endereços curtos."
+  },
+  {
+    "area": "Conteúdo",
+    "decision": "O conteúdo vive em ficheiros JSON validados (Zod) com campos PT/EN lado a lado, organizados como os futuros modelos do Sanity.",
+    "reason": "Permite testar tudo automaticamente e ligar o Sanity mais tarde sem mudar o desenho."
+  },
+  {
+    "area": "Conteúdo",
+    "decision": "Textos longos (artigos, páginas legais) guardados como blocos simples (parágrafo, título, lista).",
+    "reason": "Corresponde ao formato de texto rico do Sanity e evita dependências extra."
+  },
+  {
+    "area": "Conteúdo",
+    "decision": "Moradas completas dos escritórios marcadas \"a confirmar\"; biografias limitadas a factos conhecidos.",
+    "reason": "Não inventar informação sobre o escritório nem sobre as pessoas."
+  },
+  {
+    "area": "Vídeo",
+    "decision": "Compressão com qualidade constante e teto de débito; o MP4 vem antes do WebM.",
+    "reason": "A textura da água fazia o WebM ultrapassar o limite de 2,5 MB; com o teto, o MP4 ficou mais leve."
+  },
+  {
+    "area": "Vídeo",
+    "decision": "Imagem de capa própria para telemóvel (recorte vertical) e capas de reserva limitadas a 100 KB.",
+    "reason": "A capa tem de coincidir com o vídeo vertical e aparecer depressa em 4G."
+  },
+  {
+    "area": "Vídeo",
+    "decision": "O botão de pausa do vídeo deixou de estar visível (pedido do cliente); aparece apenas quando alcançado com a tecla Tab.",
+    "reason": "Mantém a conformidade com WCAG 2.2.2 (forma de parar conteúdo em movimento) sem ocupar espaço visual."
+  },
+  {
+    "area": "Imagens",
+    "decision": "Imagens de banco ligeiramente dessaturadas por CSS.",
+    "reason": "Integram-se na paleta calma sem reprocessar ficheiros que vão ser substituídos."
+  },
+  {
+    "area": "Navegação",
+    "decision": "O menu completo aparece a partir de 1280 px; abaixo disso usa-se o botão Menu e a barra fixa Ligar/Contactar.",
+    "reason": "A 1024 px o menu completo com o botão não cabia sem partir linhas."
+  },
+  {
+    "area": "Rodapé",
+    "decision": "Rodapé claro (areia), como na referência Alden & Vale.",
+    "reason": "Mantém o tom calmo; o verde escuro fica reservado ao topo e às chamadas para ação."
+  },
+  {
+    "area": "Situações",
+    "decision": "Separadores (ARIA tabs) em ecrãs largos e acordeão no telemóvel; sem JavaScript tudo fica visível.",
+    "reason": "Cada formato funciona melhor no seu ecrã e nada se perde sem JavaScript."
+  },
+  {
+    "area": "Formulário",
+    "decision": "Escritório preferido escolhido com botões (\"chips\"), por omissão \"Indiferente\".",
+    "reason": "Menos toques no telemóvel."
+  },
+  {
+    "area": "Formulário",
+    "decision": "Aviso \"sem JavaScript\" mostrado por CSS (@media scripting: none) em vez de ser removido por script.",
+    "reason": "Remover o aviso depois de carregar fazia a página saltar (CLS 0,106)."
+  },
+  {
+    "area": "Mapas",
+    "decision": "Mapa ilustrado (SVG) desenhado no próprio site até ao clique; só então carrega o Google Maps.",
+    "reason": "Nenhum pedido à Google nem cookies antes da ação do visitante."
+  },
+  {
+    "area": "Coleções vazias",
+    "decision": "Casos, testemunhos e destaques sem conteúdo desaparecem da página inicial, do menu e do mapa do site.",
+    "reason": "Requisito do documento; nesta fase aparecem com o selo \"Exemplo ilustrativo\"."
+  },
+  {
+    "area": "Segurança",
+    "decision": "Política de segurança de conteúdo (CSP) só por cabeçalho HTTP, sem 'unsafe-inline' nem 'unsafe-eval'.",
+    "reason": "O site não tem scripts nem estilos embutidos, por isso a política mais restrita funciona."
+  },
+  {
+    "area": "Segurança",
+    "decision": "A biblioteca de validação (Zod) corre em modo \"jitless\".",
+    "reason": "Os testes mostraram que ela tentava usar eval, que a CSP bloqueia — e bem."
+  },
+  {
+    "area": "Segurança",
+    "decision": "Auditoria de dependências bloqueia apenas dependências de produção (0 vulnerabilidades).",
+    "reason": "As 6 vulnerabilidades moderadas estão só em ferramentas de teste usadas localmente."
+  },
+  {
+    "area": "Desempenho",
+    "decision": "Pré-carregamento da letra DM Sans; a letra do logótipo carrega normalmente.",
+    "reason": "Evita saltos de texto (CLS) sem roubar largura de banda à imagem de capa em 4G."
+  },
+  {
+    "area": "Testes",
+    "decision": "Lighthouse com pedido de aquecimento e mediana de 3 execuções por página.",
+    "reason": "Execuções únicas a frio davam valores anómalos (2,9 s) que não representam o site."
+  },
+  {
+    "area": "Testes",
+    "decision": "Playwright e Lighthouse usam o Google Chrome já instalado.",
+    "reason": "Evita descarregar 150 MB de browsers de teste."
+  },
+  {
+    "area": "Testes",
+    "decision": "Na versão inglesa, nomes próprios (\"Sociedade de Advogados\", \"Ordem dos Advogados\", linha do logótipo) não contam como texto português.",
+    "reason": "São nomes, não texto de interface por traduzir."
+  },
+  {
+    "area": "Telemóvel",
+    "decision": "Os botões Ligar/Contactar passaram de barra em largura total a dois botões redondos no canto inferior direito.",
+    "reason": "Pedido do cliente: menos chamativos e sem ocupar a parte de baixo do ecrã."
+  },
+  {
+    "area": "Páginas secundárias",
+    "decision": "Topo de imagem em largura total, do topo da página, com fio bronze no fundo; faixa editorial com fotografia ou bloco verde com etiqueta vertical e moldura deslocada.",
+    "reason": "Pedido do cliente (topos mais bonitos), sem copiar o estilo da referência e sem margens brancas no topo e nos lados."
+  },
+  {
+    "area": "Advogados",
+    "decision": "Cargo e nome escritos dentro da fotografia, sobre gradiente escuro.",
+    "reason": "Pedido do cliente, inspirado na referência."
+  },
+  {
+    "area": "20 anos",
+    "decision": "Nova secção na página inicial com o troféu do 20.º aniversário; o troféu é também a imagem do topo da História.",
+    "reason": "Pedido do cliente; o texto usa só factos conhecidos (fundação em 2002, 20 anos em 2022)."
+  }
 ]

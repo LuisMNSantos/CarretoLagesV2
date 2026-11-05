@@ -1,0 +1,19 @@
+---
+import Icon from './Icon.astro';
+import { localizePath } from '../../i18n/routes';
+import { t } from '../../i18n/ui';
+import type { Locale } from '../../i18n/locale';
+export interface Props { locale: Locale; crumbs: { label: string; href?: string | undefined }[]; class?: string }
+const { locale, crumbs, class: cls = '' } = Astro.props;
+---
+<nav aria-label={t(locale, 'breadcrumb.label')} class:list={['text-[0.8125rem] text-marfim/75', cls]}>
+  <ol class="flex flex-wrap items-center justify-center gap-2 md:justify-start">
+    <li><a class="hover:text-marfim" href={localizePath('home', locale)}>{t(locale, 'nav.home')}</a></li>
+    {crumbs.map((c) => (
+      <li class="flex items-center gap-2">
+        <Icon name="arrow-right" size={12} class="opacity-60" />
+        {c.href ? <a class="hover:text-marfim" href={c.href}>{c.label}</a> : <span aria-current="page" class="text-marfim">{c.label}</span>}
+      </li>
+    ))}
+  </ol>
+</nav>

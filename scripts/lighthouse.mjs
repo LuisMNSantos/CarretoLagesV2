@@ -5,7 +5,7 @@ import lighthouse from 'lighthouse';
 import * as chromeLauncher from 'chrome-launcher';
 
 const base = process.env.LH_BASE ?? 'http://localhost:4321';
-const pages = ['/', '/en', '/areas-de-atuacao/direito-fiscal', '/advogados', '/contactos'];
+const pages = ['/', '/en', '/sociedade', '/areas-de-atuacao/direito-fiscal', '/advogados', '/advogados/catarina-pereira-carvalho', '/contactos'];
 const chromePath = process.env.CHROME_PATH ?? 'C:/Program Files/Google/Chrome/Application/chrome.exe';
 const gates = { performance: 90, accessibility: 95, lcpMs: 2500, cls: 0.1 };
 const RUNS = Number(process.env.LH_RUNS ?? 3);

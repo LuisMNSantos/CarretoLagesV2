@@ -19,7 +19,7 @@ const area = areaById(item.area)!;
   title={`${tr(item.title, locale)} — Carreto Lages & Associados`}
   description={tr(item.summary, locale)}
   alternates={{ pt: localizePath('cases', 'pt', item.slug.pt), en: item.slug.en ? localizePath('cases', 'en', item.slug.en) : undefined }}
->
+ headerVariant="overlay">
   <article>
     <ReadingHeader
       locale={locale}
@@ -27,11 +27,13 @@ const area = areaById(item.area)!;
       title={tr(item.title, locale)}
       lead={tr(item.summary, locale)}
       date={item.date}
+      image={area.image}
+      watermark={tr(area.title, locale).replace(/^Direito\s+/, '').replace(/\s+Law$/, '')}
       crumbs={[{ label: t(locale, 'nav.cases'), href: localizePath('cases', locale) }]}
     >
       {item.placeholder && <PlaceholderBadge locale={locale} />}
     </ReadingHeader>
-    <div class="container-site pb-24">
+    <div class="container-site pb-24 pt-14 md:pt-12">
       <div class="max-w-[68ch]">
         <h2 class="eyebrow text-tinta-suave">{t(locale, 'cases.context')}</h2>
         <Blocks blocks={item.context} locale={locale} class="mt-5" />

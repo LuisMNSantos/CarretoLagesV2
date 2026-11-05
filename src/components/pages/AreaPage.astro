@@ -21,9 +21,11 @@ const team = visible(lawyers, locale).filter((l) => l.areas.includes(area.id));
   description={tr(area.metaDescription, locale)}
   alternates={{ pt: localizePath('areas', 'pt', area.slug.pt), en: area.slug.en ? localizePath('areas', 'en', area.slug.en) : undefined }}
   jsonLd={jsonLd}
->
+ headerVariant="overlay">
   <PageHero
     locale={locale}
+    variant="feature"
+    watermark={tr(area.title, locale).replace(/^Direito\s+/, '').replace(/\s+Law$/, '')}
     eyebrow={tr(area.eyebrow, locale)}
     title={[tr(area.headline[0], locale), tr(area.headline[1], locale)]}
     lead={tr(area.summary, locale)}
@@ -31,7 +33,7 @@ const team = visible(lawyers, locale).filter((l) => l.areas.includes(area.id));
     crumbs={[{ label: t(locale, 'nav.areas'), href: localizePath('areas', locale) }, { label: tr(area.title, locale) }]}
   />
 
-  <section class="pb-20 md:pb-28">
+  <section class="pb-20 pt-14 md:pb-28 md:pt-12">
     <div class="container-site grid gap-14 md:grid-cols-12">
       <div class="md:col-span-6">
         <Blocks blocks={area.description} locale={locale} />

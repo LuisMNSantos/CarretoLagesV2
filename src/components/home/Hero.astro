@@ -87,9 +87,10 @@ const h = settings.hero;
       <p class="mt-2 text-sm text-marfim/70">{t(locale, 'hero.videoCaption')}</p>
     </div>
   </div>
+  <!-- Pause control kept for WCAG 2.2.2 but invisible until reached with the keyboard (client request). -->
   <button
     type="button"
-    class="hero-toggle icon-circle absolute bottom-6 right-5 border-marfim/40 bg-verde-900/30 text-marfim hover:border-marfim md:bottom-10 md:right-10"
+    class="hero-toggle icon-circle absolute bottom-6 right-5 border-marfim/40 bg-verde-900/60 text-marfim md:bottom-10 md:right-10"
     aria-pressed="false"
     aria-label={t(locale, 'hero.pause')}
     data-label-pause={t(locale, 'hero.pause')}
@@ -127,11 +128,13 @@ const h = settings.hero;
 </section>
 
 <style>
+  /* Phones: the text sits on the lower two thirds, so the veil is strongest there. */
   .hero-veil {
     background:
-      linear-gradient(180deg, rgb(15 36 29 / 0.55) 0%, rgb(15 36 29 / 0) 22%),
-      linear-gradient(0deg, rgb(15 36 29 / 0.94) 0%, rgb(15 36 29 / 0.7) 45%, rgb(15 36 29 / 0.25) 75%, rgb(15 36 29 / 0.15) 100%);
+      linear-gradient(180deg, rgb(15 36 29 / 0.6) 0%, rgb(15 36 29 / 0.2) 22%),
+      linear-gradient(0deg, rgb(15 36 29 / 0.97) 0%, rgb(15 36 29 / 0.9) 40%, rgb(15 36 29 / 0.72) 62%, rgb(15 36 29 / 0.4) 82%, rgb(15 36 29 / 0.3) 100%);
   }
+  .hero h1, .hero .lead, .hero .eyebrow { text-shadow: 0 1px 18px rgb(8 20 16 / 0.55), 0 1px 2px rgb(8 20 16 / 0.35); }
   @media (min-width: 1024px) {
     .hero-veil {
       background:
@@ -146,6 +149,11 @@ const h = settings.hero;
   .hero-toggle[data-state='paused'] :global(.icon-play) { display: block; }
   .hero-toggle[data-state='paused'] :global(.icon-pause) { display: none; }
   .hero-toggle[data-state='loading'] { visibility: hidden; }
+  /* Visually hidden (like the skip link) until it receives keyboard focus. */
+  .hero-toggle:not(:focus-visible) {
+    width: 1px; height: 1px; padding: 0; border: 0; overflow: hidden;
+    clip-path: inset(50%); white-space: nowrap;
+  }
 </style>
 
 <script>

@@ -14,9 +14,9 @@ const { locale } = Astro.props;
 const list = visible(cases, locale);
 const alt = allRoutes().find((r) => r.path === localizePath('cases', locale))?.alternates ?? {};
 ---
-<Base locale={locale} title={`${t(locale, 'nav.cases')} — Carreto Lages & Associados`} description={`${t(locale, 'cases.title1')} ${t(locale, 'cases.title2')}`} alternates={alt}>
-  <PageHero locale={locale} eyebrow={t(locale, 'cases.eyebrow')} title={[t(locale, 'cases.title1'), t(locale, 'cases.title2')]} crumbs={[{ label: t(locale, 'nav.cases') }]} />
-  <section class="pb-24">
+<Base locale={locale} title={`${t(locale, 'nav.cases')} — Carreto Lages & Associados`} description={`${t(locale, 'cases.title1')} ${t(locale, 'cases.title2')}`} alternates={alt} headerVariant="overlay">
+  <PageHero locale={locale} variant="banner" image="desk-documents" eyebrow={t(locale, 'cases.eyebrow')} title={[t(locale, 'cases.title1'), t(locale, 'cases.title2')]} crumbs={[{ label: t(locale, 'nav.cases') }]} />
+  <section class="pb-24 pt-16 md:pt-20">
     <div class="container-site">
       <ul class="grid gap-4 md:grid-cols-3 md:gap-6">
         {list.map((c) => <li><CaseCard item={c} locale={locale} headingLevel="h2" /></li>)}

@@ -2,36 +2,35 @@
 import { Picture } from 'astro:assets';
 import { teamPhoto } from '../../lib/images';
 import { initials } from '../../lib/initials';
-import { areaById, tr, type Lawyer } from '../../lib/content';
+import { tr, type Lawyer } from '../../lib/content';
 import { localizePath } from '../../i18n/routes';
 import type { Locale } from '../../i18n/locale';
 export interface Props { lawyer: Lawyer; locale: Locale; size?: 'lg' | 'sm' }
 const { lawyer, locale, size = 'lg' } = Astro.props;
-const areaNames = lawyer.areas.map((id) => areaById(id)).filter((a) => a !== undefined).map((a) => tr(a.title, locale));
 ---
+<!-- Photo card with the role and name written inside the image, on a soft dark gradient. -->
 <a href={localizePath('lawyers', locale, lawyer.slug)} class="lawyer-card group block" data-lawyer={lawyer.slug}>
-  <div class:list={['relative overflow-hidden rounded-md bg-areia', size === 'lg' ? 'aspect-[4/5]' : 'aspect-square']}>
+  <div class="relative aspect-[4/5] overflow-hidden rounded-lg bg-areia" data-lawyer-media>
     {lawyer.photo ? (
       <Picture
         src={teamPhoto(lawyer.photo)}
-        alt={lawyer.name}
+        alt=""
         widths={[320, 480, 720]}
         sizes={size === 'lg' ? '(min-width: 768px) 30vw, 90vw' : '(min-width: 768px) 22vw, 45vw'}
         formats={['avif', 'webp']}
         quality={65}
         loading="lazy"
-        class="h-full w-full object-cover object-top grayscale-[25%] transition-transform duration-700 group-hover:scale-[1.03]"
+        class="h-full w-full object-cover object-top grayscale-[20%] transition-transform duration-700 group-hover:scale-[1.04]"
       />
     ) : (
-      <div class="grid h-full w-full place-items-center bg-gradient-to-br from-areia to-areia-escura" role="img" aria-label={lawyer.name}>
-        <span class="font-logo text-[clamp(2.5rem,6vw,4.5rem)] tracking-[0.06em] text-verde-700/80" aria-hidden="true">{initials(lawyer.name)}</span>
+      <div class="grid h-full w-full place-items-center bg-gradient-to-b from-areia to-areia-escura pb-16" aria-hidden="true">
+        <span class="font-logo text-[clamp(2.75rem,6vw,4.5rem)] tracking-[0.06em] text-verde-700/70">{initials(lawyer.name)}</span>
       </div>
     )}
-  </div>
-  <div class="mt-4">
-    <p class:list={['text-tinta', size === 'lg' ? 'text-[1.25rem]' : 'text-[1.0625rem]']}>{lawyer.name}</p>
-    <p class="mt-1 text-sm text-tinta-suave">{tr(lawyer.role, locale)}</p>
-    {areaNames.length > 0 && <p class="mt-2 text-xs text-tinta-suave">{areaNames.join(' · ')}</p>}
+    <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-verde-900/90 via-verde-900/55 to-transparent px-4 pb-5 pt-16 text-center text-marfim">
+      <p class="mx-auto inline-block rounded-full bg-marfim/15 px-3 py-1 text-[0.6875rem] font-medium uppercase tracking-[0.14em] backdrop-blur-sm">{tr(lawyer.role, locale)}</p>
+      <p class:list={['mt-2 font-medium leading-tight', size === 'lg' ? 'text-[1.25rem]' : 'text-[1.0625rem]']}>{lawyer.name}</p>
+    </div>
   </div>
 </a>
 <style>

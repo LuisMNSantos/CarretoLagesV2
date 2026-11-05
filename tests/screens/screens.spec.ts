@@ -25,6 +25,8 @@ async function settle(page: Page) {
   });
   await page.waitForLoadState('networkidle');
   await page.evaluate(() => document.fonts.ready);
+  // Let the header finish its colour transition after scrolling back to the top.
+  await page.waitForTimeout(700);
 }
 
 async function save(buf: Buffer, shot: Omit<Shot, 'height' | 'slices'>): Promise<Shot> {
@@ -99,7 +101,8 @@ const states: State[] = [
     act: async (p) => {
       await p.locator('[data-hero][data-video="playing"]').waitFor({ timeout: 20_000 });
       await p.waitForTimeout(1500);
-      await p.locator('[data-hero-toggle]').click();
+      await p.locator('[data-hero-toggle]').focus();
+      await p.keyboard.press('Enter');
       await p.waitForTimeout(300);
     } },
 ];

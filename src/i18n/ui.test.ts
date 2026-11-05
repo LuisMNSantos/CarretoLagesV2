@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest';
 import { t, ui } from './ui';
 
-const SAME_IN_BOTH = new Set(['brand.name', 'brand.suffix', 'contact.phoneDisplay', 'contact.email', 'nav.proBono', 'lang.pt', 'lang.en', 'form.emailLabel', 'nav.menu', 'legal.cookies']);
+const SAME_IN_BOTH = new Set(['brand.name', 'brand.suffix', 'contact.phoneDisplay', 'contact.email', 'nav.proBono', 'lang.pt', 'lang.en', 'form.emailLabel', 'nav.menu', 'legal.cookies', 'anniversary.offices']);
 
 test('every PT key exists in EN and both are non-empty', () => {
   const pt = Object.keys(ui.pt).sort();

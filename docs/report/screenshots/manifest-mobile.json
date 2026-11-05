@@ -6,7 +6,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/",
-    "height": 15464,
+    "height": 16257,
     "slices": [
       "screenshots/mobile/pt/home-1.jpg",
       "screenshots/mobile/pt/home-2.jpg",
@@ -27,7 +27,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/en",
-    "height": 15155,
+    "height": 15948,
     "slices": [
       "screenshots/mobile/en/home-1.jpg",
       "screenshots/mobile/en/home-2.jpg",
@@ -37,7 +37,8 @@
       "screenshots/mobile/en/home-6.jpg",
       "screenshots/mobile/en/home-7.jpg",
       "screenshots/mobile/en/home-8.jpg",
-      "screenshots/mobile/en/home-9.jpg"
+      "screenshots/mobile/en/home-9.jpg",
+      "screenshots/mobile/en/home-10.jpg"
     ]
   },
   {
@@ -47,10 +48,11 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/sociedade",
-    "height": 3259,
+    "height": 3476,
     "slices": [
       "screenshots/mobile/pt/sociedade-1.jpg",
-      "screenshots/mobile/pt/sociedade-2.jpg"
+      "screenshots/mobile/pt/sociedade-2.jpg",
+      "screenshots/mobile/pt/sociedade-3.jpg"
     ]
   },
   {
@@ -60,7 +62,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/en/the-firm",
-    "height": 3137,
+    "height": 3354,
     "slices": [
       "screenshots/mobile/en/the-firm-1.jpg",
       "screenshots/mobile/en/the-firm-2.jpg"
@@ -73,7 +75,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/sociedade/historia",
-    "height": 3446,
+    "height": 3663,
     "slices": [
       "screenshots/mobile/pt/sociedade--historia-1.jpg",
       "screenshots/mobile/pt/sociedade--historia-2.jpg",
@@ -87,7 +89,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/en/the-firm/history",
-    "height": 3419,
+    "height": 3636,
     "slices": [
       "screenshots/mobile/en/the-firm--history-1.jpg",
       "screenshots/mobile/en/the-firm--history-2.jpg",
@@ -101,7 +103,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/sociedade/perfil-e-valores",
-    "height": 3509,
+    "height": 3726,
     "slices": [
       "screenshots/mobile/pt/sociedade--perfil-e-valores-1.jpg",
       "screenshots/mobile/pt/sociedade--perfil-e-valores-2.jpg",
@@ -115,7 +117,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/en/the-firm/profile-and-values",
-    "height": 3510,
+    "height": 3727,
     "slices": [
       "screenshots/mobile/en/the-firm--profile-and-values-1.jpg",
       "screenshots/mobile/en/the-firm--profile-and-values-2.jpg",
@@ -129,7 +131,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/sociedade/pro-bono",
-    "height": 3439,
+    "height": 3656,
     "slices": [
       "screenshots/mobile/pt/sociedade--pro-bono-1.jpg",
       "screenshots/mobile/pt/sociedade--pro-bono-2.jpg",
@@ -143,10 +145,11 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/en/the-firm/pro-bono",
-    "height": 3355,
+    "height": 3572,
     "slices": [
       "screenshots/mobile/en/the-firm--pro-bono-1.jpg",
-      "screenshots/mobile/en/the-firm--pro-bono-2.jpg"
+      "screenshots/mobile/en/the-firm--pro-bono-2.jpg",
+      "screenshots/mobile/en/the-firm--pro-bono-3.jpg"
     ]
   },
   {
@@ -156,7 +159,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/areas-de-atuacao",
-    "height": 4161,
+    "height": 4214,
     "slices": [
       "screenshots/mobile/pt/areas-de-atuacao-1.jpg",
       "screenshots/mobile/pt/areas-de-atuacao-2.jpg",
@@ -170,7 +173,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/en/practice-areas",
-    "height": 4161,
+    "height": 4214,
     "slices": [
       "screenshots/mobile/en/practice-areas-1.jpg",
       "screenshots/mobile/en/practice-areas-2.jpg",
@@ -184,7 +187,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/advogados",
-    "height": 4928,
+    "height": 4521,
     "slices": [
       "screenshots/mobile/pt/advogados-1.jpg",
       "screenshots/mobile/pt/advogados-2.jpg",
@@ -198,7 +201,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/en/lawyers",
-    "height": 4888,
+    "height": 4480,
     "slices": [
       "screenshots/mobile/en/lawyers-1.jpg",
       "screenshots/mobile/en/lawyers-2.jpg",
@@ -212,7 +215,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/casos",
-    "height": 3469,
+    "height": 3598,
     "slices": [
       "screenshots/mobile/pt/casos-1.jpg",
       "screenshots/mobile/pt/casos-2.jpg",
@@ -226,10 +229,11 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/en/case-studies",
-    "height": 3386,
+    "height": 3515,
     "slices": [
       "screenshots/mobile/en/case-studies-1.jpg",
-      "screenshots/mobile/en/case-studies-2.jpg"
+      "screenshots/mobile/en/case-studies-2.jpg",
+      "screenshots/mobile/en/case-studies-3.jpg"
     ]
   },
   {
@@ -239,10 +243,11 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/destaques",
-    "height": 3374,
+    "height": 3503,
     "slices": [
       "screenshots/mobile/pt/destaques-1.jpg",
-      "screenshots/mobile/pt/destaques-2.jpg"
+      "screenshots/mobile/pt/destaques-2.jpg",
+      "screenshots/mobile/pt/destaques-3.jpg"
     ]
   },
   {
@@ -252,7 +257,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/en/insights",
-    "height": 3406,
+    "height": 3535,
     "slices": [
       "screenshots/mobile/en/insights-1.jpg",
       "screenshots/mobile/en/insights-2.jpg",
@@ -266,7 +271,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/contactos",
-    "height": 4223,
+    "height": 4238,
     "slices": [
       "screenshots/mobile/pt/contactos-1.jpg",
       "screenshots/mobile/pt/contactos-2.jpg",
@@ -280,7 +285,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/en/contact",
-    "height": 4199,
+    "height": 4214,
     "slices": [
       "screenshots/mobile/en/contact-1.jpg",
       "screenshots/mobile/en/contact-2.jpg",
@@ -294,7 +299,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/obrigado",
-    "height": 1988,
+    "height": 2004,
     "slices": [
       "screenshots/mobile/pt/obrigado-1.jpg",
       "screenshots/mobile/pt/obrigado-2.jpg"
@@ -307,7 +312,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/en/thank-you",
-    "height": 1988,
+    "height": 2004,
     "slices": [
       "screenshots/mobile/en/thank-you-1.jpg",
       "screenshots/mobile/en/thank-you-2.jpg"
@@ -320,7 +325,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/politica-de-privacidade",
-    "height": 3311,
+    "height": 3388,
     "slices": [
       "screenshots/mobile/pt/politica-de-privacidade-1.jpg",
       "screenshots/mobile/pt/politica-de-privacidade-2.jpg"
@@ -333,7 +338,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/en/privacy-policy",
-    "height": 3270,
+    "height": 3347,
     "slices": [
       "screenshots/mobile/en/privacy-policy-1.jpg",
       "screenshots/mobile/en/privacy-policy-2.jpg"
@@ -346,7 +351,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/termos-e-condicoes",
-    "height": 2591,
+    "height": 2670,
     "slices": [
       "screenshots/mobile/pt/termos-e-condicoes-1.jpg",
       "screenshots/mobile/pt/termos-e-condicoes-2.jpg"
@@ -359,7 +364,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/en/terms-and-conditions",
-    "height": 2636,
+    "height": 2715,
     "slices": [
       "screenshots/mobile/en/terms-and-conditions-1.jpg",
       "screenshots/mobile/en/terms-and-conditions-2.jpg"
@@ -372,7 +377,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/resolucao-de-litigios",
-    "height": 2054,
+    "height": 2131,
     "slices": [
       "screenshots/mobile/pt/resolucao-de-litigios-1.jpg",
       "screenshots/mobile/pt/resolucao-de-litigios-2.jpg"
@@ -385,7 +390,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/en/dispute-resolution",
-    "height": 2194,
+    "height": 2246,
     "slices": [
       "screenshots/mobile/en/dispute-resolution-1.jpg",
       "screenshots/mobile/en/dispute-resolution-2.jpg"
@@ -398,7 +403,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/cookies",
-    "height": 2327,
+    "height": 2404,
     "slices": [
       "screenshots/mobile/pt/cookies-1.jpg",
       "screenshots/mobile/pt/cookies-2.jpg"
@@ -411,7 +416,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/en/cookies",
-    "height": 2479,
+    "height": 2556,
     "slices": [
       "screenshots/mobile/en/cookies-1.jpg",
       "screenshots/mobile/en/cookies-2.jpg"
@@ -424,7 +429,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/areas-de-atuacao/direito-penal",
-    "height": 5481,
+    "height": 5695,
     "slices": [
       "screenshots/mobile/pt/areas-de-atuacao--direito-penal-1.jpg",
       "screenshots/mobile/pt/areas-de-atuacao--direito-penal-2.jpg",
@@ -439,7 +444,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/en/practice-areas/criminal-law",
-    "height": 5455,
+    "height": 5668,
     "slices": [
       "screenshots/mobile/en/practice-areas--criminal-law-1.jpg",
       "screenshots/mobile/en/practice-areas--criminal-law-2.jpg",
@@ -454,7 +459,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/areas-de-atuacao/direito-imobiliario",
-    "height": 5975,
+    "height": 6184,
     "slices": [
       "screenshots/mobile/pt/areas-de-atuacao--direito-imobiliario-1.jpg",
       "screenshots/mobile/pt/areas-de-atuacao--direito-imobiliario-2.jpg",
@@ -469,7 +474,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/en/practice-areas/real-estate-law",
-    "height": 5826,
+    "height": 6036,
     "slices": [
       "screenshots/mobile/en/practice-areas--real-estate-law-1.jpg",
       "screenshots/mobile/en/practice-areas--real-estate-law-2.jpg",
@@ -484,7 +489,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/areas-de-atuacao/direito-fiscal",
-    "height": 5497,
+    "height": 5710,
     "slices": [
       "screenshots/mobile/pt/areas-de-atuacao--direito-fiscal-1.jpg",
       "screenshots/mobile/pt/areas-de-atuacao--direito-fiscal-2.jpg",
@@ -499,7 +504,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/en/practice-areas/tax-law",
-    "height": 5456,
+    "height": 5670,
     "slices": [
       "screenshots/mobile/en/practice-areas--tax-law-1.jpg",
       "screenshots/mobile/en/practice-areas--tax-law-2.jpg",
@@ -514,7 +519,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/areas-de-atuacao/direito-financeiro",
-    "height": 5507,
+    "height": 5720,
     "slices": [
       "screenshots/mobile/pt/areas-de-atuacao--direito-financeiro-1.jpg",
       "screenshots/mobile/pt/areas-de-atuacao--direito-financeiro-2.jpg",
@@ -529,7 +534,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/en/practice-areas/banking-and-finance-law",
-    "height": 5429,
+    "height": 5642,
     "slices": [
       "screenshots/mobile/en/practice-areas--banking-and-finance-law-1.jpg",
       "screenshots/mobile/en/practice-areas--banking-and-finance-law-2.jpg",
@@ -544,7 +549,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/advogados/jose-carreto-lages",
-    "height": 2818,
+    "height": 2819,
     "slices": [
       "screenshots/mobile/pt/advogados--jose-carreto-lages-1.jpg",
       "screenshots/mobile/pt/advogados--jose-carreto-lages-2.jpg"
@@ -557,7 +562,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/en/lawyers/jose-carreto-lages",
-    "height": 2818,
+    "height": 2819,
     "slices": [
       "screenshots/mobile/en/lawyers--jose-carreto-lages-1.jpg",
       "screenshots/mobile/en/lawyers--jose-carreto-lages-2.jpg"
@@ -596,7 +601,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/advogados/catarina-pereira-carvalho",
-    "height": 2760,
+    "height": 2759,
     "slices": [
       "screenshots/mobile/pt/advogados--catarina-pereira-carvalho-1.jpg",
       "screenshots/mobile/pt/advogados--catarina-pereira-carvalho-2.jpg"
@@ -609,7 +614,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/en/lawyers/catarina-pereira-carvalho",
-    "height": 2758,
+    "height": 2757,
     "slices": [
       "screenshots/mobile/en/lawyers--catarina-pereira-carvalho-1.jpg",
       "screenshots/mobile/en/lawyers--catarina-pereira-carvalho-2.jpg"
@@ -622,7 +627,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/advogados/adriana-silva",
-    "height": 2593,
+    "height": 2621,
     "slices": [
       "screenshots/mobile/pt/advogados--adriana-silva-1.jpg",
       "screenshots/mobile/pt/advogados--adriana-silva-2.jpg"
@@ -635,7 +640,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/en/lawyers/adriana-silva",
-    "height": 2565,
+    "height": 2594,
     "slices": [
       "screenshots/mobile/en/lawyers--adriana-silva-1.jpg",
       "screenshots/mobile/en/lawyers--adriana-silva-2.jpg"
@@ -648,7 +653,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/advogados/sara-matos",
-    "height": 2593,
+    "height": 2621,
     "slices": [
       "screenshots/mobile/pt/advogados--sara-matos-1.jpg",
       "screenshots/mobile/pt/advogados--sara-matos-2.jpg"
@@ -661,7 +666,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/en/lawyers/sara-matos",
-    "height": 2565,
+    "height": 2594,
     "slices": [
       "screenshots/mobile/en/lawyers--sara-matos-1.jpg",
       "screenshots/mobile/en/lawyers--sara-matos-2.jpg"
@@ -674,7 +679,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/advogados/daniela-rodrigues",
-    "height": 2593,
+    "height": 2621,
     "slices": [
       "screenshots/mobile/pt/advogados--daniela-rodrigues-1.jpg",
       "screenshots/mobile/pt/advogados--daniela-rodrigues-2.jpg"
@@ -687,7 +692,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/en/lawyers/daniela-rodrigues",
-    "height": 2565,
+    "height": 2594,
     "slices": [
       "screenshots/mobile/en/lawyers--daniela-rodrigues-1.jpg",
       "screenshots/mobile/en/lawyers--daniela-rodrigues-2.jpg"
@@ -700,7 +705,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/advogados/diana-antao-seabra",
-    "height": 2593,
+    "height": 2621,
     "slices": [
       "screenshots/mobile/pt/advogados--diana-antao-seabra-1.jpg",
       "screenshots/mobile/pt/advogados--diana-antao-seabra-2.jpg"
@@ -713,7 +718,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/en/lawyers/diana-antao-seabra",
-    "height": 2565,
+    "height": 2594,
     "slices": [
       "screenshots/mobile/en/lawyers--diana-antao-seabra-1.jpg",
       "screenshots/mobile/en/lawyers--diana-antao-seabra-2.jpg"
@@ -726,7 +731,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/advogados/francisco-lopes",
-    "height": 2565,
+    "height": 2594,
     "slices": [
       "screenshots/mobile/pt/advogados--francisco-lopes-1.jpg",
       "screenshots/mobile/pt/advogados--francisco-lopes-2.jpg"
@@ -739,7 +744,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/en/lawyers/francisco-lopes",
-    "height": 2565,
+    "height": 2594,
     "slices": [
       "screenshots/mobile/en/lawyers--francisco-lopes-1.jpg",
       "screenshots/mobile/en/lawyers--francisco-lopes-2.jpg"
@@ -752,7 +757,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/casos/absolvicao-burla-informatica",
-    "height": 2679,
+    "height": 3234,
     "slices": [
       "screenshots/mobile/pt/casos--absolvicao-burla-informatica-1.jpg",
       "screenshots/mobile/pt/casos--absolvicao-burla-informatica-2.jpg"
@@ -765,7 +770,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/en/case-studies/acquittal-computer-fraud",
-    "height": 2645,
+    "height": 3234,
     "slices": [
       "screenshots/mobile/en/case-studies--acquittal-computer-fraud-1.jpg",
       "screenshots/mobile/en/case-studies--acquittal-computer-fraud-2.jpg"
@@ -778,7 +783,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/casos/recuperacao-imovel-insolvencia",
-    "height": 2615,
+    "height": 3176,
     "slices": [
       "screenshots/mobile/pt/casos--recuperacao-imovel-insolvencia-1.jpg",
       "screenshots/mobile/pt/casos--recuperacao-imovel-insolvencia-2.jpg"
@@ -791,7 +796,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/en/case-studies/property-recovered-insolvency",
-    "height": 2547,
+    "height": 3176,
     "slices": [
       "screenshots/mobile/en/case-studies--property-recovered-insolvency-1.jpg",
       "screenshots/mobile/en/case-studies--property-recovered-insolvency-2.jpg"
@@ -804,7 +809,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/casos/impugnacao-liquidacao-irs",
-    "height": 2580,
+    "height": 3171,
     "slices": [
       "screenshots/mobile/pt/casos--impugnacao-liquidacao-irs-1.jpg",
       "screenshots/mobile/pt/casos--impugnacao-liquidacao-irs-2.jpg"
@@ -817,7 +822,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/en/case-studies/income-tax-assessment-appeal",
-    "height": 2546,
+    "height": 3135,
     "slices": [
       "screenshots/mobile/en/case-studies--income-tax-assessment-appeal-1.jpg",
       "screenshots/mobile/en/case-studies--income-tax-assessment-appeal-2.jpg"
@@ -830,10 +835,11 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/destaques/recebi-uma-notificacao-das-financas",
-    "height": 3242,
+    "height": 3669,
     "slices": [
       "screenshots/mobile/pt/destaques--recebi-uma-notificacao-das-financas-1.jpg",
-      "screenshots/mobile/pt/destaques--recebi-uma-notificacao-das-financas-2.jpg"
+      "screenshots/mobile/pt/destaques--recebi-uma-notificacao-das-financas-2.jpg",
+      "screenshots/mobile/pt/destaques--recebi-uma-notificacao-das-financas-3.jpg"
     ]
   },
   {
@@ -843,10 +849,11 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/en/insights/received-a-tax-authority-notice",
-    "height": 3248,
+    "height": 3681,
     "slices": [
       "screenshots/mobile/en/insights--received-a-tax-authority-notice-1.jpg",
-      "screenshots/mobile/en/insights--received-a-tax-authority-notice-2.jpg"
+      "screenshots/mobile/en/insights--received-a-tax-authority-notice-2.jpg",
+      "screenshots/mobile/en/insights--received-a-tax-authority-notice-3.jpg"
     ]
   },
   {
@@ -856,7 +863,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/destaques/comprar-casa-antes-de-assinar",
-    "height": 2878,
+    "height": 3271,
     "slices": [
       "screenshots/mobile/pt/destaques--comprar-casa-antes-de-assinar-1.jpg",
       "screenshots/mobile/pt/destaques--comprar-casa-antes-de-assinar-2.jpg"
@@ -869,7 +876,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/en/insights/buying-a-home-before-you-sign",
-    "height": 2789,
+    "height": 3216,
     "slices": [
       "screenshots/mobile/en/insights--buying-a-home-before-you-sign-1.jpg",
       "screenshots/mobile/en/insights--buying-a-home-before-you-sign-2.jpg"
@@ -882,7 +889,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/404",
-    "height": 1850,
+    "height": 1866,
     "slices": [
       "screenshots/mobile/pt/404-1.jpg",
       "screenshots/mobile/pt/404-2.jpg"
@@ -895,7 +902,7 @@
     "viewport": "mobile",
     "kind": "page",
     "path": "/en/404",
-    "height": 1850,
+    "height": 1866,
     "slices": [
       "screenshots/mobile/en/404-1.jpg",
       "screenshots/mobile/en/404-2.jpg"
