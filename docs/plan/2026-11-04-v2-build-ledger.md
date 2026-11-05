@@ -105,3 +105,11 @@ Final: minor (deferred): form summary has both role="alert" and aria-live="polit
 Final: minor (deferred): JSON-LD not escaped for "<" (harmless with repo content; matters once Sanity feeds it).
 Final: minor (deferred): /video/* cached immutable for a year under unhashed names — a re-encode would stay stale.
 Redeployed review-fixed build (deployment b9560129) to https://carretolages.pages.dev; live routes+security+review-fixes: 212 passed.
+
+## Second design round (client feedback, 2026-11-05)
+Ruling: pause button removed from view but kept as a keyboard-only control (appears on Tab focus) — client asked to remove it; WCAG 2.2.2 still requires a pause mechanism — cost if wrong: mouse users cannot pause (video still off for reduced-motion/save-data).
+Ruling: mobile Call/Contact became two 48 px round buttons bottom-right; body bottom padding 4.5rem so footer content is never covered.
+Ruling: secondary headers edge-to-edge from the top (client rejected framed panels with white margins); to stay distinct from the reference: straight bottom edge with a bronze rule (no rounded corners), editorial title bottom-left + lead right, vertical bronze label, offset bronze frame, fine line texture (no italic watermark).
+Ruling: trophy image moved from src/assets/stock/trofeu.jpg (PNG data) to src/assets/brand/trofeu.png — firm-owned, not stock; used in a new home "20 anos" section (between Process and Team) and as the História header card; copy uses only known facts (2002 → 2022).
+Ruling: responsive clip test ignores visually-hidden elements (clientWidth ≤ 1), i.e. the keyboard-only pause button.
+Verification: unit 135/135, e2e 417 passed, security 136 passed, links 385/0 broken, axe 0 serious/critical, Lighthouse 99–100 (7 pages), live (carretolages.pages.dev, deployment b5b9cedd) 275 passed.
