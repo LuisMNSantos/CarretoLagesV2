@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest';
-import { nextIndex, slideLabel } from './carousel';
+import { AUTOPLAY_MS, autoplayIndex, nextIndex, slideLabel } from './carousel';
 
 test.each([
   [0, 4, '01 / 04'],
@@ -15,4 +15,14 @@ test('nextIndex clamps at both ends', () => {
   expect(nextIndex(3, 1, 4)).toBe(3);
   expect(nextIndex(0, -1, 4)).toBe(0);
   expect(nextIndex(2, -1, 4)).toBe(1);
+});
+
+test('autoplayIndex steps forward and wraps from the last slide to the first', () => {
+  expect(autoplayIndex(0, 4)).toBe(1);
+  expect(autoplayIndex(2, 4)).toBe(3);
+  expect(autoplayIndex(3, 4)).toBe(0);
+});
+
+test('AUTOPLAY_MS is six seconds', () => {
+  expect(AUTOPLAY_MS).toBe(6000);
 });

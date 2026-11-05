@@ -17,6 +17,20 @@ const s = settings.sections.areas;
   <div class="container-site">
     <SectionHeading id="areas-title" eyebrow={tr(s.eyebrow, locale)} title={[tr(s.title[0], locale), tr(s.title[1], locale)]} lead={tr(s.lead, locale)} />
     <div class="carousel-controls mt-10 hidden items-center justify-end gap-4">
+      <!-- Pause control kept for WCAG 2.2.2 but invisible until reached with the keyboard (same as the hero). -->
+      <button
+        type="button"
+        class="carousel-toggle icon-circle hover:border-verde-700"
+        aria-pressed="false"
+        aria-label={t(locale, 'carousel.pause')}
+        data-label-pause={t(locale, 'carousel.pause')}
+        data-label-play={t(locale, 'carousel.play')}
+        data-carousel-toggle
+        data-state="playing"
+      >
+        <Icon name="pause" size={16} class="icon-pause" />
+        <Icon name="play" size={16} class="icon-play" />
+      </button>
       <p class="text-sm tabular-nums tracking-[0.1em] text-tinta-suave" aria-live="polite" data-carousel-counter>{slideLabel(0, list.length)}</p>
       <button type="button" class="icon-circle hover:border-verde-700 disabled:opacity-35" aria-label={t(locale, 'carousel.prev')} data-carousel-prev><Icon name="arrow-left" size={16} /></button>
       <button type="button" class="icon-circle hover:border-verde-700 disabled:opacity-35" aria-label={t(locale, 'carousel.next')} data-carousel-next><Icon name="arrow-right" size={16} /></button>
@@ -42,8 +56,8 @@ const s = settings.sections.areas;
                 </a>
               </div>
             </div>
-            <div class="order-1 aspect-[4/3] overflow-hidden md:order-2 md:aspect-auto md:min-h-[26rem]">
-              <StockImage id={a.image} sizes="(min-width: 768px) 55vw, 86vw" />
+            <div class="order-1 aspect-[4/3] overflow-hidden md:relative md:order-2 md:aspect-auto md:min-h-[27rem]">
+              <StockImage id={a.image} sizes="(min-width: 768px) 55vw, 86vw" class="md:absolute md:inset-0" />
             </div>
           </article>
         </li>
@@ -67,6 +81,14 @@ const s = settings.sections.areas;
     .carousel-track::-webkit-scrollbar { display: block; height: 6px; }
   }
   [data-enhanced='true'] .carousel-controls { display: flex; }
+  .carousel-toggle :global(.icon-play) { display: none; }
+  .carousel-toggle[data-state='paused'] :global(.icon-play) { display: block; }
+  .carousel-toggle[data-state='paused'] :global(.icon-pause) { display: none; }
+  /* Visually hidden (like the skip link) until it receives keyboard focus. */
+  .carousel-toggle:not(:focus-visible) {
+    width: 1px; height: 1px; padding: 0; border: 0; overflow: hidden;
+    clip-path: inset(50%); white-space: nowrap; margin-inline-end: -1rem;
+  }
   .carousel-bar { transition: background-color 400ms var(--ease-calm), height 400ms var(--ease-calm); }
   .carousel-bar[data-active='true'] { background: var(--color-bronze); height: 2px; }
 </style>

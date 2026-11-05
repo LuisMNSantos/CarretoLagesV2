@@ -60,6 +60,8 @@ const pt = {
   'carousel.next': 'Área seguinte',
   'carousel.label': 'Áreas de atuação',
   'carousel.footer': 'Explore as nossas áreas',
+  'carousel.pause': 'Pausar passagem automática',
+  'carousel.play': 'Retomar passagem automática',
 
   'situations.listLabel': 'Situações',
   'situations.footer': 'Situações diferentes. O mesmo compromisso pessoal.',
@@ -233,6 +235,8 @@ const en: Record<UiKey, string> = {
   'carousel.next': 'Next area',
   'carousel.label': 'Practice areas',
   'carousel.footer': 'Explore our expertise',
+  'carousel.pause': 'Pause automatic rotation',
+  'carousel.play': 'Resume automatic rotation',
 
   'situations.listLabel': 'Situations',
   'situations.footer': 'Different situations. The same personal commitment.',
