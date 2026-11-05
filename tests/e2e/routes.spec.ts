@@ -33,7 +33,7 @@ for (const r of routes) {
     if (r.locale === 'en') {
       const text = await page.locator('body').evaluate((b) => {
         const clone = b.cloneNode(true) as HTMLElement;
-        clone.querySelectorAll('.lang-switch, [lang="pt-PT"]').forEach((n) => n.remove());
+        clone.querySelectorAll('.lang-switch, .logo, [lang="pt-PT"]').forEach((n) => n.remove());
         // Proper nouns (the firm's legal name, the Bar Association) stay in Portuguese.
         return clone.innerText.replaceAll('Sociedade de Advogados', '').replaceAll('Ordem dos Advogados', '');
       });

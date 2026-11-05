@@ -1,18 +1,60 @@
 {
-  "date": "2026-11-04T23:39:06.505Z",
-  "dependencies": {
-    "prod": 207,
-    "dev": 231,
-    "optional": 113,
-    "peer": 0,
-    "peerOptional": 0,
-    "total": 531
+  "date": "2026-11-05T01:25:51.745Z",
+  "production": {
+    "counts": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0
+    },
+    "packages": []
   },
-  "vulnerabilities": {
-    "info": 0,
-    "low": 0,
-    "moderate": 6,
-    "high": 0,
-    "critical": 0
+  "all": {
+    "counts": {
+      "info": 0,
+      "low": 0,
+      "moderate": 6,
+      "high": 0,
+      "critical": 0
+    },
+    "packages": [
+      {
+        "name": "@sentry/bundler-plugins",
+        "severity": "moderate",
+        "direct": false,
+        "via": "glob"
+      },
+      {
+        "name": "@sentry/node",
+        "severity": "moderate",
+        "direct": false,
+        "via": "@sentry/bundler-plugins"
+      },
+      {
+        "name": "glob",
+        "severity": "moderate",
+        "direct": false,
+        "via": "Glob: AbortSignal cancellation bypass allows post-timeout filesystem traversal; minimatch"
+      },
+      {
+        "name": "lighthouse",
+        "severity": "moderate",
+        "direct": true,
+        "via": "@sentry/node"
+      },
+      {
+        "name": "linkinator",
+        "severity": "moderate",
+        "direct": true,
+        "via": "glob"
+      },
+      {
+        "name": "minimatch",
+        "severity": "moderate",
+        "direct": false,
+        "via": "minimatch has potential denial of service via globparts amplification"
+      }
+    ]
   }
 }
