@@ -6,6 +6,25 @@ em computador e telemóvel, antes da construção final.
 - Requisitos: `docs/spec/2026-11-04-redesign-website-design.pdf`
 - Plano de implementação: `docs/plan/2026-11-04-v2-design-approval.md`
 - Relatório (capturas, testes, segurança): `docs/report/relatorio-v2.pdf`
+- Pré-visualização publicada: https://carretolages.pages.dev (Cloudflare Pages, gratuito, `noindex`)
+
+## Publicar a pré-visualização
+
+```bash
+npm run build
+npx wrangler pages deploy dist --project-name carretolages --branch main
+```
+
+O `cf` cria e gere o projeto Pages, mas o envio direto de uma pasta ainda é feito com o Wrangler (via `npx`, sem o adicionar ao projeto). O Wrangler tem login próprio: `npx wrangler login`.
+
+## Testes de segurança
+
+A pré-visualização do Astro ignora `public/_headers`. Para testar os cabeçalhos e a CSP:
+
+```bash
+npm run build && npm run serve:headers        # http://localhost:4330
+PW_BASE_URL=http://localhost:4330 npx playwright test tests/e2e/security.spec.ts
+```
 
 ## Comandos
 

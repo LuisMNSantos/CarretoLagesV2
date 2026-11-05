@@ -54,6 +54,7 @@
     Data: & 5 de novembro de 2026 \\
     Repositório: & \texttt{D:\textbackslash PersonalProjects\textbackslash CarretoLagesV2} \\
     Requisitos: & \texttt{docs/spec/2026-11-04-redesign-website-design.pdf} \\
+    Endereço de teste: & \url{https://carretolages.pages.dev} \\
     Estado: & Para revisão e aprovação do escritório \\
   \end{tabular}
   \vfill
@@ -225,6 +226,17 @@ a nota de SEO).
 
 \subsection{JavaScript por página}
 \begin{center}\resJsTable\end{center}
+
+% =====================================================================
+\section{Publicação de teste}
+O site está publicado para revisão em \textbf{\url{https://carretolages.pages.dev}} (Cloudflare Pages, plano
+gratuito; conta sem subscrições nem método de pagamento --- verificado antes e depois da publicação).
+\begin{itemize}
+  \item Envio direto da pasta gerada (290 ficheiros), sem ligação ao GitHub e sem funções de servidor.
+  \item Todas as páginas têm \texttt{noindex} e o cabeçalho \texttt{X-Robots-Tag: noindex, nofollow}: o site não aparece no Google.
+  \item Os cabeçalhos de segurança da secção anterior foram confirmados no endereço público; páginas inexistentes devolvem 404 (portuguesa ou inglesa).
+  \item Os testes de rotas e de segurança foram repetidos contra o site publicado: \textbf{\resLivePassed{} aprovados, \resLiveFailed{} falhados}.
+\end{itemize}
 
 % =====================================================================
 \section{Decisões tomadas durante a construção}

@@ -66,6 +66,7 @@ const sliceCount = manifests.reduce((n, s) => n + s.slices.length, 0);
 const vitest = read('reports/summary/vitest.json', {});
 const pw = read('reports/summary/playwright.json', { stats: {} });
 const sec = read('reports/summary/playwright-security.json', { stats: {} });
+const live = read('reports/summary/playwright-live.json', { stats: {} });
 const axeDir = 'reports/summary/axe';
 const axe = existsSync(axeDir) ? readdirSync(axeDir).map((f) => JSON.parse(readFileSync(`${axeDir}/${f}`, 'utf8'))) : [];
 const links = read('reports/summary/links.json', { checked: 0, broken: [] });
@@ -99,6 +100,8 @@ const results = `
 \\newcommand{\\resEtoeFlaky}{${s.flaky ?? 0}}
 \\newcommand{\\resSecPassed}{${ss.expected ?? '?'}}
 \\newcommand{\\resSecFailed}{${ss.unexpected ?? '?'}}
+\\newcommand{\\resLivePassed}{${live.stats?.expected ?? '?'}}
+\\newcommand{\\resLiveFailed}{${live.stats?.unexpected ?? '?'}}
 \\newcommand{\\resAxeRuns}{${axe.length}}
 \\newcommand{\\resAxeSerious}{${(impactCount.serious ?? 0) + (impactCount.critical ?? 0)}}
 \\newcommand{\\resAxeOther}{${(impactCount.moderate ?? 0) + (impactCount.minor ?? 0)}}
