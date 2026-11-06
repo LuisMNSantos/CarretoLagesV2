@@ -12,7 +12,13 @@ describe('public/_headers', () => {
     expect(all['Referrer-Policy']).toBe('strict-origin-when-cross-origin');
     expect(all['Permissions-Policy']).toBe('camera=(), microphone=(), geolocation=(), payment=(), usb=()');
     expect(all['Cross-Origin-Opener-Policy']).toBe('same-origin');
-    expect(all['X-Robots-Tag']).toBe('noindex, nofollow');
+  });
+
+  test('noindex only on the pages.dev addresses, never on the real domain', () => {
+    expect(all['X-Robots-Tag']).toBeUndefined();
+    for (const p of ['https://:project.pages.dev/*', 'https://:version.:project.pages.dev/*']) {
+      expect(rules.find((r) => r.pattern === p)?.headers['X-Robots-Tag'], p).toBe('noindex, nofollow');
+    }
   });
 
   test('strict CSP', () => {

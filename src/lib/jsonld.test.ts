@@ -19,7 +19,7 @@ describe('JSON-LD builders', () => {
     expect(ld.name).toBe('José Carreto Lages');
     expect(ld.jobTitle).toBe('Founding Partner');
     expect(ld.worksFor.name).toBe('Carreto Lages & Associados');
-    expect(ld.url).toBe('https://carretolages.pages.dev/en/lawyers/jose-carreto-lages');
+    expect(ld.url).toBe('https://www.carretolages.com/en/lawyers/jose-carreto-lages');
   });
 
   test('FAQPage mirrors the questions', () => {
@@ -32,8 +32,8 @@ describe('JSON-LD builders', () => {
   test('BreadcrumbList uses absolute URLs and 1-based positions', () => {
     const ld = breadcrumbLd([{ name: 'Início', path: '/' }, { name: 'Advogados', path: '/advogados' }]);
     expect(ld.itemListElement.map((i) => [i.position, i.item])).toEqual([
-      [1, 'https://carretolages.pages.dev/'],
-      [2, 'https://carretolages.pages.dev/advogados'],
+      [1, 'https://www.carretolages.com/'],
+      [2, 'https://www.carretolages.com/advogados'],
     ]);
   });
 

@@ -12,7 +12,7 @@ export interface Props {
 }
 
 const { locale, title, description, alternates, jsonLd = [], ogImage } = Astro.props;
-const site = Astro.site ?? new URL('https://carretolages.pages.dev');
+const site = Astro.site ?? new URL('https://www.carretolages.com');
 const abs = (p: string) => new URL(p, site).href;
 // Static build uses `x.html` files served at `/x`: canonical URLs never carry `.html` or `/index`.
 const cleanPath = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '') || '/';

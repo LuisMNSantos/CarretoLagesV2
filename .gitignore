@@ -4,6 +4,7 @@ dist/
 .env
 .env.*
 !.env.example
+!.env.live
 reports/*
 !reports/summary/
 test-results/

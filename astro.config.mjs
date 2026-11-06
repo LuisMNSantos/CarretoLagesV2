@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://carretolages.pages.dev',
+  site: 'https://www.carretolages.com',
   output: 'static',
   integrations: [
     sitemap({

@@ -7,6 +7,13 @@
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
   Cross-Origin-Opener-Policy: same-origin
   X-Frame-Options: DENY
+
+# The pages.dev addresses (production alias and every preview/branch deployment) are never indexed;
+# the real domain (www.carretolages.com) follows PUBLIC_NOINDEX, i.e. the meta robots tag and robots.txt.
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex, nofollow
+
+https://:version.:project.pages.dev/*
   X-Robots-Tag: noindex, nofollow
 
 /_astro/*
