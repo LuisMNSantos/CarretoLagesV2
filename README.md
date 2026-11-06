@@ -17,6 +17,18 @@ npx wrangler pages deploy dist --project-name carretolages --branch main
 
 O `cf` cria e gere o projeto Pages, mas o envio direto de uma pasta ainda é feito com o Wrangler (via `npx`, sem o adicionar ao projeto). O Wrangler tem login próprio: `npx wrangler login`.
 
+## Publicar no domínio do cliente (www.carretolages.com)
+
+```bash
+npm run build:live      # usa .env.live: indexável, mantém o conteúdo de exemplo
+npx wrangler pages deploy dist --project-name carretolages --branch main
+```
+
+- `site` (canónicos, sitemap, JSON-LD) é `https://www.carretolages.com`.
+- Os endereços `*.pages.dev` ficam sempre com `X-Robots-Tag: noindex` (regra por anfitrião em `public/_headers`); o domínio real segue `PUBLIC_NOINDEX`.
+- `public/_redirects` leva os endereços do WordPress antigo para as páginas novas (301); os artigos de spam ficam de fora de propósito (404).
+- Análise do domínio atual (site pirateado, riscos) e passos da migração do DNS para a Cloudflare: `docs/report/dominio/relatorio-dominio.pdf`. Capturas: `node scripts/domain-audit.mjs`.
+
 ## Testes de segurança
 
 A pré-visualização do Astro ignora `public/_headers`. Para testar os cabeçalhos e a CSP:

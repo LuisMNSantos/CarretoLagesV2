@@ -1,0 +1,646 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{lmodern}
+\usepackage[a4paper,margin=2.2cm]{geometry}
+\usepackage[table]{xcolor}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{needspace}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{caption}
+\usepackage[htt]{hyphenat}
+\usepackage{xurl}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{verde700}{HTML}{1B3A2F}
+\definecolor{bronze}{HTML}{AA8D73}
+\definecolor{tinta}{HTML}{1F2420}
+\definecolor{tintasuave}{HTML}{5B5347}
+\definecolor{marfimcl}{HTML}{F8F6F1}
+\definecolor{critico}{HTML}{A4161A}
+\definecolor{alto}{HTML}{D9480F}
+\definecolor{medio}{HTML}{B08900}
+\definecolor{baixo}{HTML}{3B6E8F}
+\definecolor{ok}{HTML}{2B7A3D}
+
+\newcommand{\sev}[2]{\colorbox{#1}{\color{white}\footnotesize\bfseries\strut\,#2\,}}
+\newcommand{\critico}{\sev{critico}{CRÍTICO}}
+\newcommand{\altoo}{\sev{alto}{ALTO}}
+\newcommand{\medio}{\sev{medio}{MÉDIO}}
+\newcommand{\baixo}{\sev{baixo}{BAIXO}}
+\newcommand{\okk}{\sev{ok}{OK}}
+\newcommand{\shot}[3][0.92]{%
+  \begin{figure}[!htbp]\centering
+  \fcolorbox{gray!40}{white}{\includegraphics[width=#1\linewidth]{screenshots/#2}}
+  \caption{#3}\label{fig:#2}\end{figure}}
+\newcommand{\bloco}[1]{\par\needspace{3\baselineskip}\textbf{\color{verde700}#1}\par}
+
+\titleformat{\section}{\Large\bfseries\color{verde700}}{\thesection}{0.8em}{}
+\titleformat{\subsection}{\large\bfseries\color{tinta}}{\thesubsection}{0.6em}{}
+\captionsetup{font=small,labelfont=bf,labelsep=period}
+\setlist{itemsep=2pt,topsep=4pt}
+\setlength{\parskip}{4pt}
+\setlength{\parindent}{0pt}
+\setlength{\emergencystretch}{3em}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small Carreto Lages --- domínio carretolages.com}
+\rhead{\small Relatório de segurança e migração}
+\cfoot{\small \thepage}
+
+\begin{document}
+
+\begin{titlepage}
+  \vspace*{3cm}
+  {\color{bronze}\small\scshape Relatório técnico --- confidencial}\\[0.6em]
+  {\raggedright\Huge\bfseries\color{verde700} Domínio carretolages.com\\[0.2em] segurança e passagem\\ para a Cloudflare\par}\vspace{1.2em}
+  {\large O que foi encontrado no site e no email atuais, os riscos, como resolver\\ e os passos para alojar o novo site na Cloudflare}\\[3em]
+  \begin{tabular}{@{}ll}
+    Data da análise: & 6 de novembro de 2026 \\
+    Domínios: & \texttt{carretolages.com} (principal) e \texttt{carretolages.eu} \\
+    Site atual: & \url{https://www.carretolages.com} (WordPress, alojado na PTisp) \\
+    Site novo: & \url{https://carretolages.pages.dev} (pré-visualização) \\
+  \end{tabular}
+  \vfill
+  {\small\color{tintasuave} Análise feita apenas com informação pública: pedidos normais a páginas do site,
+  consultas DNS e serviços públicos de reputação. Não houve tentativas de entrar no site, no painel de
+  alojamento nem no email. Este documento descreve falhas de segurança ainda abertas: deve ser partilhado
+  só com quem vai tratar delas.}
+\end{titlepage}
+
+\tableofcontents
+\clearpage
+
+% =====================================================================
+\section{Resumo}
+
+\textbf{O site atual do escritório foi atacado e continua comprometido.} Desde outubro de 2023, alguém
+publicou no site 5 artigos de spam: programas pirateados (``crack'' de Photoshop, Ableton, Adobe Premiere)
+e réplicas de relógios Rolex. Esses artigos aparecem na secção ``Destaques'', com o cabeçalho, o logótipo e
+os contactos do escritório. Um dos artigos foi publicado por uma conta de administrador chamada
+\texttt{admin} que não pertence a ninguém do escritório nem à empresa que fez o site.
+
+O site corre em software com 2 a 10 anos de atraso e está no \textbf{mesmo servidor do email}. Quem controla
+o site pode, potencialmente, chegar ao alojamento e ao email.
+
+\textbf{Boas notícias:} o Google não marca o site como perigoso, o servidor e o domínio não estão em listas
+negras de spam e o email tem as proteções principais (DKIM e DMARC) bem configuradas.
+
+\textbf{O que recomendamos:}
+\begin{enumerate}
+  \item \textbf{Esta semana:} mudar todas as palavras-passe (PTisp, cPanel, email, WordPress), apagar a conta
+        \texttt{admin} e os artigos de spam e pedir à PTisp uma análise de malware ao alojamento
+        (secção~\ref{sec:imediato}).
+  \item \textbf{Substituir o site} pelo site novo, alojado na Cloudflare Pages: é estático, não tem base de
+        dados, painel de login nem PHP, por isso este tipo de ataque deixa de ser possível.
+  \item \textbf{Manter o email na PTisp} exatamente como está e passar apenas a gestão do DNS e o site para
+        a Cloudflare (secção~\ref{sec:migracao}).
+  \item \textbf{Desligar o WordPress} depois de o site novo estar no ar.
+\end{enumerate}
+
+\subsection*{Quadro de riscos}
+\renewcommand{\arraystretch}{1.25}
+\begin{longtable}{@{}p{0.75cm}p{7.15cm}p{2.2cm}p{4.6cm}@{}}
+\toprule
+\textbf{\#} & \textbf{Problema} & \textbf{Gravidade} & \textbf{Resolução} \\ \midrule
+\endhead
+\ref{r:spam} & Site comprometido: 5 artigos de spam publicados em nome do escritório & \critico & Apagar já; site novo \\
+\ref{r:admin} & Conta de administrador desconhecida (\texttt{admin}) & \critico & Apagar; mudar todas as palavras-passe \\
+\ref{r:software} & WordPress, PHP e plugins sem atualizações de segurança & \critico & Site novo; desligar WordPress \\
+\ref{r:partilha} & Site e email no mesmo servidor e na mesma conta & \altoo & Palavras-passe, 2FA, rever email \\
+\ref{r:exposicao} & Utilizadores, pastas e versões visíveis a qualquer pessoa; login aberto & \medio & Desaparece com o site novo \\
+\ref{r:demo} & Conteúdo de demonstração do tema publicado como se fosse real & \medio & Desaparece com o site novo \\
+\ref{r:links} & Ligações para domínios que já não existem (``Parceiros'') & \medio & Retirar; o site novo não as tem \\
+\ref{r:cabecalhos} & Sem cabeçalhos de segurança no site & \baixo & O site novo já os tem \\
+\ref{r:dns} & Pormenores de DNS e email (SPF, DNSSEC, \texttt{.eu}) & \baixo & Corrigir na migração \\
+\ref{r:bom} & Reputação, certificado, DKIM/DMARC, registo do domínio & \okk & Manter \\
+\bottomrule
+\end{longtable}
+
+% =====================================================================
+\section{O que foi encontrado}
+\label{sec:achados}
+
+Cada ponto indica o que foi encontrado, porque é perigoso e como se resolve. As capturas de ecrã foram
+feitas a 6 de novembro de 2026. As páginas com spam foram abertas com o JavaScript desligado, para não
+executar código que lá possa estar.
+
+% ---------------------------------------------------------------------
+\subsection[Artigos de spam publicados no site]{Artigos de spam publicados no site \hfill\critico}
+\label{r:spam}
+
+\bloco{O que encontrámos}
+O mapa do site (\texttt{wp-sitemap.xml}), que o WordPress entrega aos motores de busca, lista 9 artigos.
+\textbf{5 são spam} colocado por terceiros:
+
+\begin{center}\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Data} & \textbf{Endereço} & \textbf{Conta usada} \\ \midrule
+22/10/2023 & \texttt{/ableton-10-1-6-mac-crack/} & n.º 1 \\
+28/11/2024 & \texttt{/adobe-premiere-pro-transitions-pack-crack/} & n.º 101012 (\texttt{admin}) \\
+11/12/2024 & \texttt{/replica-rolex-gmt-master-ii-126711-\ldots/} & n.º 1 \\
+16/12/2024 & \texttt{/ableton-11-3-4-crack/} & n.º 1 \\
+17/12/2024 & \texttt{/photoshop-download-with-crack/} & n.º 1 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Os artigos usam o design do site, com o cabeçalho, o telefone e o email do escritório
+(figuras~\ref{fig:03-spam-photoshop.png} e~\ref{fig:04-spam-rolex.png}).
+
+\bloco{Porque é perigoso}
+\begin{itemize}
+  \item \textbf{Reputação:} um escritório de advogados a promover software pirateado e contrafação de
+        marcas, com o seu nome e contactos.
+  \item \textbf{Motores de busca:} este tipo de spam existe para usar a reputação do domínio e subir
+        páginas de terceiros no Google. Se o Google o detetar, pode penalizar o domínio inteiro ou mostrar
+        avisos nos resultados.
+  \item \textbf{Sinal de controlo:} quem publicou estes artigos teve acesso de escrita ao site durante pelo
+        menos 14 meses e pode ainda ter.
+\end{itemize}
+
+\bloco{Como resolver}
+\begin{itemize}
+  \item Apagar já os 5 artigos (e esvaziar o lixo do WordPress).
+  \item Com o site novo, os endereços de spam passam a responder ``página não encontrada'' (404). É isso que
+        leva o Google a esquecê-los: o mapa de redirecionamentos do site novo não os inclui de propósito.
+  \item No Google Search Console, pedir a remoção destes endereços e consultar ``Problemas de segurança''
+        (secção~\ref{sec:depois}).
+\end{itemize}
+
+\shot{02-sitemap-posts.png}{Mapa do site público: 5 dos 9 artigos são spam (cracks e réplicas).}
+\shot{03-spam-photoshop.png}{Artigo de spam ``How to Get Photoshop for Free'' com o cabeçalho e os contactos do escritório.}
+\shot{04-spam-rolex.png}{Artigo de spam a promover réplicas de relógios Rolex.}
+
+% ---------------------------------------------------------------------
+\subsection[Conta de administrador desconhecida]{Conta de administrador desconhecida \hfill\critico}
+\label{r:admin}
+
+\bloco{O que encontrámos}
+A interface pública do WordPress (\texttt{/wp-json/wp/v2/users}) lista três contas
+(figura~\ref{fig:06-api-users.png}):
+\begin{itemize}
+  \item n.º 1, uma conta pessoal;
+  \item n.º 2, \texttt{TecniMobile Lda}, a empresa que fez o site;
+  \item \textbf{n.º 101012, \texttt{admin}}.
+\end{itemize}
+O WordPress numera as contas por ordem (1, 2, 3\ldots). Um número como 101012 não resulta do uso normal:
+é típico de contas inseridas diretamente na base de dados por um atacante, para manter o acesso mesmo que
+as palavras-passe mudem. Foi esta conta que publicou o artigo de 28/11/2024
+(figura~\ref{fig:05-api-posts.png}). Os outros 4 artigos de spam aparecem em nome da conta n.º 1, o que
+indica que também essa conta, ou a base de dados, está nas mãos do atacante.
+
+\bloco{Porque é perigoso}
+Quem tem uma conta de administrador controla o site inteiro: pode publicar, instalar plugins com código
+próprio, alterar formulários para recolher dados de visitantes e, através do código, chegar a ficheiros do
+alojamento.
+
+\bloco{Como resolver}
+\begin{itemize}
+  \item Apagar a conta \texttt{admin} (n.º 101012) e atribuir os conteúdos a outra conta.
+  \item Mudar as palavras-passe de todas as contas do WordPress e da base de dados, e regenerar as chaves de
+        segurança do \texttt{wp-config.php}. Isto termina as sessões abertas.
+  \item Como a conta foi provavelmente criada na base de dados, assumir que o atacante pode ter deixado
+        outros acessos (ficheiros PHP escondidos). Por isso a solução definitiva é \textbf{desligar o
+        WordPress} e usar o site novo, que não tem base de dados nem login.
+\end{itemize}
+
+\shot[0.95]{06-api-users.png}{Lista pública de utilizadores: a conta \texttt{admin} com o número anómalo 101012.}
+\shot[0.95]{05-api-posts.png}{Lista pública de artigos, com a data e a conta que publicou cada um.}
+
+% ---------------------------------------------------------------------
+\subsection[Software sem atualizações de segurança]{Software sem atualizações de segurança \hfill\critico}
+\label{r:software}
+
+\bloco{O que encontrámos}
+\begin{center}\small
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Componente} & \textbf{Instalado} & \textbf{Atual} & \textbf{Estado} \\ \midrule
+WordPress & 6.1.7 & 7.1.4 & marcado ``insecure'' pelo próprio WordPress \\
+PHP (servidor) & 7.4.33 & 8.x & sem atualizações de segurança desde novembro de 2022 \\
+WPBakery Page Builder & 4.11.1 & --- & versão de 2016 \\
+Cookie Notice & 2.4.7 & 3.1.18 & desatualizado \\
+jQuery & 3.6.1 & --- & desatualizado \\
+Tema & ``lawyers'' & --- & tema comercial de demonstração \\
+\bottomrule
+\end{tabular}
+\end{center}
+A classificação ``insecure'' vem do serviço oficial do WordPress que diz a cada site se a sua versão é
+segura (\url{https://api.wordpress.org/core/stable-check/1.0/}). O servidor também anuncia a versão do PHP
+em cada resposta (\texttt{X-Powered-By: PHP/7.4.33}).
+
+\bloco{Porque é perigoso}
+Versões antigas têm falhas públicas e documentadas, com ferramentas automáticas que as procuram em milhares
+de sites por dia. É muito provável que tenha sido assim que o site foi atacado.
+
+\bloco{Como resolver}
+Atualizar tudo seria possível, mas o tema e o WPBakery de 2016 dificilmente funcionam em versões atuais, e
+a atualização não remove acessos que o atacante já tenha deixado. \textbf{Recomendamos não investir no
+WordPress}: o site novo substitui-o e o WordPress é desligado logo a seguir à mudança. Até lá, o mínimo é
+fazer o que está na secção~\ref{sec:imediato}.
+
+\shot{09-readme.png}{Ficheiro \texttt{readme.html} do WordPress, acessível a qualquer pessoa.}
+
+% ---------------------------------------------------------------------
+\subsection[Site e email no mesmo servidor]{Site e email no mesmo servidor \hfill\altoo}
+\label{r:partilha}
+
+\bloco{O que encontrámos}
+O site, o email (\texttt{mail}, \texttt{webmail}, \texttt{autodiscover}) e o painel de alojamento
+(\texttt{cpanel}, \texttt{whm}, \texttt{ftp}) estão todos no mesmo servidor da PTisp, \texttt{130.185.84.194}.
+O registo SPF do domínio, que diz que servidores podem enviar email em nome de
+\texttt{@carretolages.com}, autoriza esse servidor.
+
+\bloco{Porque é perigoso}
+\begin{itemize}
+  \item Código malicioso no site pode enviar email a partir desse servidor, e esse email pode passar as
+        verificações anti-spam dos destinatários por vir de um servidor autorizado. É o cenário ideal para
+        burlas com faturas ou pedidos de transferência ``em nome do escritório''.
+  \item Se o atacante obteve credenciais do alojamento (cPanel), pode ler caixas de correio, criar contas de
+        email ou criar reencaminhamentos silenciosos que copiam o correio para fora.
+\end{itemize}
+
+\bloco{Como resolver}
+\begin{itemize}
+  \item Mudar as palavras-passe da área de cliente PTisp, do cPanel, do FTP e de \textbf{todas} as caixas de
+        email. Ativar a autenticação em dois passos (2FA) na área de cliente PTisp.
+  \item No cPanel, verificar se há contas de email, reencaminhadores (``Forwarders'') ou filtros que ninguém
+        do escritório criou. No webmail de cada pessoa, verificar regras de reencaminhamento.
+  \item Pedir à PTisp uma análise de malware ao alojamento e os registos de acesso desde 2023.
+  \item Com o site na Cloudflare e o WordPress desligado, o servidor da PTisp fica apenas com o email.
+        Pode valer a pena perguntar à PTisp por um plano só de email.
+\end{itemize}
+
+% ---------------------------------------------------------------------
+\subsection[Informação exposta e login aberto]{Informação exposta e login aberto \hfill\medio}
+\label{r:exposicao}
+
+\bloco{O que encontrámos}
+\begin{itemize}
+  \item \textbf{Nomes de utilizador públicos:} \texttt{/wp-json/wp/v2/users} e \texttt{/?author=1}
+        revelam os nomes de login, que são metade do que é preciso para entrar.
+  \item \textbf{Listagem de pastas:} \texttt{/wp-content/uploads/} e \texttt{/wp-includes/} mostram o
+        conteúdo das pastas, como um explorador de ficheiros (figuras~\ref{fig:07-dir-uploads.png}
+        e~\ref{fig:08-dir-wp-includes.png}).
+  \item \textbf{Página de login aberta:} \texttt{/wp-login.php} aceita tentativas de qualquer lado, sem
+        limite visível (figura~\ref{fig:10-wp-login.png}).
+  \item \textbf{Versões anunciadas:} \texttt{readme.html}, a etiqueta \texttt{generator} e o cabeçalho
+        \texttt{X-Powered-By} dizem exatamente que versões atacar.
+\end{itemize}
+
+\bloco{Porque é perigoso}
+Juntas, estas informações permitem tentar palavras-passe de forma automática contra contas conhecidas e
+escolher as falhas certas para as versões instaladas.
+
+\bloco{Como resolver}
+Tudo isto desaparece com o site novo, que é composto só por ficheiros estáticos, sem login, sem base de
+dados e sem listagem de pastas. Até à mudança, a PTisp pode desligar a listagem de pastas (``Indexes'' no
+cPanel) e limitar o acesso a \texttt{wp-login.php}.
+
+\shot{07-dir-uploads.png}{Listagem pública da pasta de ficheiros carregados.}
+\shot{08-dir-wp-includes.png}{Listagem pública da pasta interna \texttt{wp-includes}.}
+\shot{10-wp-login.png}{Página de login do WordPress acessível a qualquer pessoa.}
+
+% ---------------------------------------------------------------------
+\subsection[Conteúdo de demonstração publicado]{Conteúdo de demonstração publicado \hfill\medio}
+\label{r:demo}
+
+\bloco{O que encontrámos}
+Continuam publicadas páginas que vieram com o tema e nunca foram substituídas:
+\begin{itemize}
+  \item 4 artigos em inglês sobre ``personal injury lawyer'' e ``car accident'';
+  \item 4 ``resultados de casos'' fictícios (``Auto Accident'', ``Medical Malpractice'', ``Domestic
+        Violence'', ``Motocycle Accident'');
+  \item 4 testemunhos de exemplo;
+  \item páginas ``Página exemplo'', ``2 Columns'' e ``page2-2''.
+\end{itemize}
+
+\bloco{Porque é perigoso}
+Estas páginas são indexadas como sendo do escritório e apresentam casos e testemunhos que não existem. Isso
+prejudica a credibilidade e pode ser incompatível com as regras de publicidade da Ordem dos Advogados.
+
+\bloco{Como resolver}
+O site novo não tem estas páginas. Os endereços antigos com algum valor redirecionam para a página nova
+equivalente (anexo~\ref{sec:redirects}). \textbf{Atenção:} o site novo também mostra, por decisão do
+escritório, conteúdo de exemplo (testemunhos, casos e artigos) com o selo ``Exemplo ilustrativo''. Esse
+conteúdo deve ser substituído por conteúdo real ou retirado logo que possível, pelas mesmas razões.
+
+\shot{12-demo-post.png}{Artigo de demonstração do tema, em inglês, publicado em nome do escritório.}
+\shot{11-demo-case.png}{``Resultado de caso'' de demonstração (``Auto Accident'').}
+
+% ---------------------------------------------------------------------
+\subsection[Ligações para domínios abandonados]{Ligações para domínios abandonados \hfill\medio}
+\label{r:links}
+
+\bloco{O que encontrámos}
+A secção ``Parceiros'' da página inicial liga para \texttt{cristina-lanca-advogada.com} e
+\texttt{jpalmslawfirm.com} (figura~\ref{fig:15-dead-partner-links.png}). Nenhum dos dois domínios está
+registado (consulta ao registo \texttt{.com} a 6/11/2026).
+
+\bloco{Porque é perigoso}
+Qualquer pessoa pode registar estes domínios por poucos euros e pôr lá o que quiser, por exemplo uma página
+falsa ou malware, e o site do escritório continua a enviar visitantes para lá.
+
+\bloco{Como resolver}
+Retirar as ligações. O site novo não as inclui.
+
+\shot{15-dead-partner-links.png}{Secção ``Parceiros'': as ligações assinaladas apontam para domínios que já não existem (o endereço de cada ligação foi escrito a vermelho na captura, para se ler).}
+
+% ---------------------------------------------------------------------
+\subsection[Sem cabeçalhos de segurança]{Sem cabeçalhos de segurança \hfill\baixo}
+\label{r:cabecalhos}
+
+\bloco{O que encontrámos}
+O site atual não envia nenhum dos cabeçalhos HTTP que os navegadores usam para limitar ataques.
+
+\begin{center}\small
+\begin{tabular}{@{}lcc@{}}
+\toprule
+\textbf{Cabeçalho} & \textbf{Site atual} & \textbf{Site novo} \\ \midrule
+\texttt{Strict-Transport-Security} (HTTPS obrigatório) & não & sim \\
+\texttt{Content-Security-Policy} (bloqueia scripts externos) & não & sim, estrita \\
+\texttt{X-Frame-Options} / \texttt{frame-ancestors} (anti-clickjacking) & não & sim \\
+\texttt{X-Content-Type-Options} & não & sim \\
+\texttt{Referrer-Policy} & não & sim \\
+\texttt{Permissions-Policy} (câmara, microfone, localização) & não & sim \\
+Anuncia versão do PHP (\texttt{X-Powered-By}) & sim & não \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\bloco{Como resolver}
+O site novo já tem todos estes cabeçalhos (ficheiro \texttt{public/\_headers}), testados automaticamente.
+
+% ---------------------------------------------------------------------
+\subsection[DNS e email: pormenores a corrigir]{DNS e email: pormenores a corrigir \hfill\baixo}
+\label{r:dns}
+
+\bloco{O que encontrámos}
+\begin{itemize}
+  \item \textbf{SPF de \texttt{carretolages.com}:}\\
+        {\small\texttt{v=spf1 +a +mx +include:\_spf.cleanmx.pt ip4:130.185.84.194 -all}}\\
+        O \texttt{+a} autoriza
+        ``o servidor do site''. Depois da mudança, o site passa a ser a Cloudflare, e o \texttt{+a} passaria
+        a autorizar os servidores da Cloudflare a enviar email em nome do escritório. Tem de sair. O IP do
+        servidor de email já está escrito no registo.
+  \item \textbf{SPF de \texttt{carretolages.eu}:} autoriza um endereço de rede privada
+        (\texttt{192.168.1.90}), vários IPs externos sem explicação (um deles repetido) e termina em
+        \texttt{\textasciitilde all} (``aceitar com desconfiança''). Deve ser limpo.
+  \item \textbf{\texttt{mail.carretolages.com}} é um ``alias'' do domínio principal. Na mudança, se ficar
+        assim, passa a apontar para a Cloudflare e o Outlook e os telemóveis deixam de receber email.
+        \textbf{É o ponto mais delicado da migração.}
+  \item \textbf{Certificado do email:} o servidor da PTisp usa um certificado
+        \texttt{*.carretolages.com} válido até 3/01/2027. Os certificados com \texttt{*} são renovados
+        através do DNS. Com o DNS na Cloudflare, é preciso confirmar com a PTisp que a renovação continua a
+        funcionar para \texttt{mail} e \texttt{webmail}. Caso contrário, os programas de email mostram
+        avisos de certificado a partir de janeiro.
+  \item \textbf{DNSSEC} (assinatura do DNS contra falsificação) não está ativo.
+\end{itemize}
+
+\bloco{Como resolver}
+Tudo é tratado nos passos da secção~\ref{sec:migracao}.
+
+% ---------------------------------------------------------------------
+\subsection[O que está bem]{O que está bem \hfill\okk}
+\label{r:bom}
+
+\begin{itemize}
+  \item \textbf{Google Safe Browsing:} ``Nenhum conteúdo inseguro encontrado'' (figura~\ref{fig:13-safe-browsing.png}).
+  \item \textbf{Listas negras:} nem o servidor nem o domínio constam das listas consultadas (Spamhaus ZEN e
+        DBL, SpamCop, Barracuda, UCEPROTECT, PSBL, SURBL).
+  \item \textbf{Email autenticado:} DKIM (seletor \texttt{default}) e DMARC com política
+        \texttt{p=reject} e alinhamento estrito, a configuração mais protetora. Têm de ser copiados
+        exatamente na migração.
+  \item \textbf{Sem ``cloaking'':} o Google vê o mesmo conteúdo que um visitante (comparação das respostas
+        para o robô do Google e para um navegador).
+  \item \textbf{Certificado HTTPS} válido (Let's Encrypt, até 3/01/2027) para \texttt{.com} e \texttt{.eu};
+        \texttt{http://} e o domínio sem \texttt{www} redirecionam para \texttt{https://www.}
+  \item \textbf{Registo do domínio:} registado desde 2007 na NetEarth (revendedor da PTisp), com bloqueio de
+        transferência ativo, \textbf{expira a 6/11/2027}. Convém confirmar que a renovação automática está
+        ligada.
+\end{itemize}
+
+\shot{13-safe-browsing.png}{Google Safe Browsing: sem conteúdo inseguro detetado (6/11/2026).}
+
+% =====================================================================
+\section{O que fazer já, antes da mudança}
+\label{sec:imediato}
+
+Estes passos não dependem do site novo e devem ser feitos esta semana, pelo escritório ou pela PTisp.
+
+\begin{enumerate}
+  \item \textbf{Palavras-passe novas e diferentes} para a área de cliente PTisp (com 2FA), o cPanel, o FTP,
+        todas as caixas de email e todas as contas do WordPress.
+  \item \textbf{Apagar a conta \texttt{admin}} (n.º 101012) no WordPress.
+  \item \textbf{Apagar os 5 artigos de spam} e esvaziar o lixo.
+  \item \textbf{Verificar o email:} contas, reencaminhadores e filtros no cPanel; regras de
+        reencaminhamento no webmail de cada pessoa.
+  \item \textbf{Pedir à PTisp} uma análise de malware ao alojamento, a desativação da listagem de pastas e
+        informação sobre acessos suspeitos desde 2023.
+  \item \textbf{Não fazer} cópias de segurança do WordPress para reutilizar: estão contaminadas. Se for
+        preciso arquivar textos ou imagens, copiar só esses conteúdos.
+\end{enumerate}
+
+% =====================================================================
+\section{Passos para passar para a Cloudflare}
+\label{sec:migracao}
+
+\textbf{Princípio:} o domínio continua registado na PTisp e o email continua na PTisp. Passam para a
+Cloudflare apenas o \textbf{DNS} (a ``lista telefónica'' do domínio) e o \textbf{site}. O plano gratuito da
+Cloudflare chega. O custo mensal é 0~€.
+
+\textbf{Porque o DNS e não só um registo:} a Cloudflare Pages só consegue servir o domínio sem \texttt{www}
+quando gere o DNS. Também permite redirecionamentos, DNSSEC e regras sem depender do servidor antigo.
+
+\subsection{Fase 0 --- Preparação (sem impacto no site nem no email)}
+\begin{enumerate}
+  \item \textbf{Conta Cloudflare do escritório}, criada com um email do escritório e com 2FA. O
+        programador é convidado como membro, para o escritório nunca ficar dependente de uma conta pessoal.
+  \item \textbf{Exportar a zona DNS completa} no cPanel (``Zone Editor'') ou pedi-la à PTisp em formato
+        BIND (ficheiro de texto). A análise pública só vê os registos que se sabe procurar. A exportação
+        garante que nada fica esquecido, em particular o DKIM, que é um texto longo e tem de ser copiado
+        exatamente.
+  \item \textbf{Publicar o site} na conta do escritório, com a versão para o domínio
+        (indexável, com o conteúdo de exemplo):
+\begin{verbatim}
+npm run build:live
+npx wrangler pages deploy dist --project-name carretolages --branch main
+\end{verbatim}
+        O endereço \texttt{carretolages.pages.dev} continua sempre com \texttt{noindex}, para não
+        competir com o domínio no Google.
+  \item \textbf{Combinar com a PTisp} a renovação do certificado de \texttt{mail} e \texttt{webmail}
+        depois da mudança do DNS (secção~\ref{r:dns}).
+\end{enumerate}
+
+\subsection{Fase 1 --- Criar a zona na Cloudflare}
+\begin{enumerate}
+  \item Criar a zona, que fica ``pendente'' até à mudança dos nameservers:
+\begin{verbatim}
+cf zones create --name carretolages.com --type full
+\end{verbatim}
+        A resposta indica os \textbf{dois nameservers} atribuídos (do tipo \texttt{xxx.ns.cloudflare.com}).
+  \item Importar a zona exportada na fase 0:
+\begin{verbatim}
+cf dns records import --zone carretolages.com --file carretolages.com.zone
+\end{verbatim}
+  \item \textbf{Rever registo a registo} e deixar a zona assim (``só DNS'' = nuvem cinzenta, sem passar pelo
+        proxy da Cloudflare):
+\end{enumerate}
+
+\begin{center}\small
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\linewidth}{@{}llXl@{}}
+\toprule
+\textbf{Nome} & \textbf{Tipo} & \textbf{Valor} & \textbf{Proxy} \\ \midrule
+\texttt{www} & CNAME & \texttt{carretolages.pages.dev} (criado pela Pages) & sim \\
+\texttt{@} & CNAME & \texttt{carretolages.pages.dev} (criado pela Pages) & sim \\
+\texttt{@} & MX 10 & \texttt{mx1.cleanmx.pt} & --- \\
+\texttt{@} & MX 20 & \texttt{mx2.cleanmx.pt} & --- \\
+\texttt{@} & TXT & \texttt{v=spf1 +mx +include:\_spf.cleanmx.pt ip4:130.185.84.194 -all} & --- \\
+\texttt{\_dmarc} & TXT & copiar exatamente (\texttt{v=DMARC1;p=reject;\ldots}) & --- \\
+\texttt{default.\_domainkey} & TXT & copiar exatamente (DKIM) & --- \\
+\textbf{\texttt{mail}} & \textbf{A} & \textbf{\texttt{130.185.84.194}} (hoje é CNAME: mudar!) & \textbf{não} \\
+\texttt{webmail}, \texttt{autodiscover}, \texttt{autoconfig} & A & \texttt{130.185.84.194} & não \\
+\texttt{cpanel}, \texttt{whm}, \texttt{webdisk}, \texttt{ftp} & A & \texttt{130.185.84.194} & não \\
+\texttt{cpcalendars}, \texttt{cpcontacts} & A & \texttt{130.185.84.194} & não \\
+outros da exportação (ex.: SRV) & --- & copiar como estão & não \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Os registos antigos \texttt{@ A 130.185.84.194} e \texttt{www CNAME carretolages.com} saem, porque são
+substituídos pelos do site novo. \textbf{Nada que tenha a ver com email pode ficar com proxy:} a Cloudflare
+só encaminha tráfego web.
+
+\subsection{Fase 2 --- Ligar o site ao domínio}
+\begin{enumerate}
+  \item Associar os dois endereços ao projeto Pages, que cria e valida os registos e os certificados:
+\begin{verbatim}
+cf pages projects domains create carretolages --name www.carretolages.com
+cf pages projects domains create carretolages --name carretolages.com
+\end{verbatim}
+  \item Criar no painel da Cloudflare uma \textbf{regra de redirecionamento} (Rules $\rightarrow$ Redirect
+        Rules, modelo ``Redirect from root to WWW''):\\
+        \texttt{carretolages.com/*} $\rightarrow$ \texttt{https://www.carretolages.com/\$1}, código 301,
+        mantendo o resto do endereço.
+  \item Em SSL/TLS $\rightarrow$ Edge Certificates: ``Always Use HTTPS'' ligado e TLS mínimo 1.2.
+\end{enumerate}
+Até à fase 3, tudo isto fica preparado mas sem efeito, porque o mundo ainda consulta o DNS da PTisp.
+
+\subsection{Fase 3 --- Mudar os nameservers (a mudança propriamente dita)}
+\begin{enumerate}
+  \item Na área de cliente da PTisp: Domínios $\rightarrow$ \texttt{carretolages.com} $\rightarrow$
+        Nameservers. Substituir \texttt{nsp1}--\texttt{nsp4.mydnspt.net} pelos dois nameservers da
+        Cloudflare.
+  \item \textbf{Não apagar nada na PTisp.} Durante a propagação (até 24--48 horas), parte da internet
+        consulta a PTisp e parte a Cloudflare. Como as duas têm os mesmos registos de email, o email
+        funciona sempre. O site mostra o antigo ou o novo, conforme a pessoa.
+  \item Confirmar que a zona ficou ativa:
+\begin{verbatim}
+cf zones get carretolages.com        # "status": "active"
+\end{verbatim}
+  \item \textbf{Testes no próprio dia:}
+        \begin{itemize}
+          \item enviar e receber um email de e para \texttt{geral@carretolages.com}, a partir de Gmail e
+                de Outlook;
+          \item abrir o email no telemóvel e no Outlook do escritório;
+          \item abrir \url{https://www.carretolages.com} e \url{https://carretolages.com};
+          \item abrir um endereço antigo, por exemplo \texttt{/contact/}, e confirmar que vai para
+                \texttt{/contactos};
+          \item abrir \texttt{/photoshop-download-with-crack/} e confirmar que dá ``página não
+                encontrada''.
+        \end{itemize}
+\end{enumerate}
+
+\textbf{Plano de recuo:} se algo falhar, repor os nameservers da PTisp na área de cliente. A zona antiga
+continua intacta lá, por isso volta tudo ao estado anterior em poucas horas.
+
+\subsection{Fase 4 --- Depois da mudança}
+\label{sec:depois}
+\begin{enumerate}
+  \item \textbf{DNSSEC:} ativar na Cloudflare e colar o registo DS que a Cloudflare indica na área de
+        cliente da PTisp:
+\begin{verbatim}
+cf dns dnssec edit --zone carretolages.com --status active
+\end{verbatim}
+  \item \textbf{Google Search Console:} verificar o domínio com um registo TXT, submeter
+        \url{https://www.carretolages.com/sitemap-index.xml}, consultar ``Problemas de segurança'' e pedir a
+        remoção dos 5 endereços de spam.
+  \item \textbf{Desligar o WordPress} uma semana depois, se tudo estiver estável: apagar os ficheiros e a
+        base de dados no cPanel. O plano PTisp fica só com o email.
+  \item \textbf{Domínio \texttt{carretolages.eu}:} hoje redireciona através do servidor do WordPress. Para
+        não deixar de funcionar quando o WordPress sair, criar também a zona \texttt{carretolages.eu} na
+        Cloudflare com um redirecionamento para \url{https://www.carretolages.com}, mantendo os registos de
+        email e limpando o SPF (secção~\ref{r:dns}).
+  \item \textbf{Formulário de contacto:} o site novo ainda não envia mensagens. Para as entregar em
+        \texttt{geral@carretolages.com} é preciso uma pequena função na Cloudflare e um serviço de envio
+        de email configurado num subdomínio (por exemplo \texttt{envio.carretolages.com}), sem tocar no
+        email principal. O Email Routing da Cloudflare não serve, porque obrigaria a passar o MX para a
+        Cloudflare. A escolha do serviço de envio está pendente.
+\end{enumerate}
+
+% =====================================================================
+\appendix
+\section{Endereços antigos e para onde vão}
+\label{sec:redirects}
+
+O site novo inclui o ficheiro \texttt{public/\_redirects}, com redirecionamentos permanentes (301) dos
+endereços do site antigo (com e sem a barra final). Assim, ligações em favoritos, emails antigos e
+resultados do Google continuam a funcionar e passam a sua reputação para as páginas novas. Os 5 endereços
+de spam ficam de fora de propósito.
+
+\begin{center}\footnotesize
+\renewcommand{\arraystretch}{1.1}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{8.4cm}>{\raggedright\arraybackslash}p{6.4cm}@{}}
+\toprule
+\textbf{Endereço antigo} & \textbf{Página nova} \\ \midrule
+\endhead
+\texttt{/about/} & \texttt{/sociedade} \\
+\texttt{/historia/}, \texttt{/perfil-e-valores/}, \texttt{/pro-bono/} & \texttt{/sociedade/\ldots} (mesma página) \\
+\texttt{/practice-areas/} & \texttt{/areas-de-atuacao} \\
+\nolinkurl{/practice-items/direito-penal-e-das-contra-ordenacoes/} & \texttt{/areas-de-atuacao/direito-penal} \\
+\texttt{/practice-items/direito-imobiliario-e-urbanismo/} & \texttt{/areas-de-atuacao/direito-imobiliario} \\
+\texttt{/practice-items/direito-fiscal/} & \texttt{/areas-de-atuacao/direito-fiscal} \\
+\texttt{/practice-items/direito-financeiro-bancario/} & \texttt{/areas-de-atuacao/direito-financeiro} \\
+outras 5 áreas antigas (civil, administrativo, comercial, trabalho, seguros) & \texttt{/areas-de-atuacao} \\
+\texttt{/lawyers/} & \texttt{/advogados} \\
+\texttt{/team/jose-carreto-lages/}, \texttt{/team/joao-carlos-lages/}, \texttt{/team/catarina-pereira-carvalho/} & \texttt{/advogados/<mesmo nome>} \\
+\texttt{/team/susana-portugal/}, \texttt{/team/rita-tavares/}, \texttt{/team/ana-mendes/} & \texttt{/advogados} \\
+\texttt{/blog/} e os 4 artigos de demonstração & \texttt{/destaques} \\
+\texttt{/case-results-2/} e \texttt{/cases/\ldots} & \texttt{/casos} \\
+\texttt{/contact/} & \texttt{/contactos} \\
+\texttt{/resolucao-de-litigios-online/} & \texttt{/resolucao-de-litigios} \\
+\texttt{/faq/}, \texttt{/testimonials/}, \texttt{/testimonials-list/\ldots} & \texttt{/} (página inicial) \\
+\texttt{/pagina-exemplo/}, \texttt{/2-columns/}, \texttt{/page2-2/} & \texttt{/} (página inicial) \\
+\texttt{/cookies/}, \texttt{/termos-e-condicoes/}, \texttt{/politica-de-privacidade/} & mesma página (sem barra final) \\
+5 artigos de spam & \textbf{404 --- não encontrado} \\
+\bottomrule
+\end{longtable}
+\end{center}
+
+\section{Como foi feita a análise}
+\begin{itemize}
+  \item \textbf{DNS:} consultas públicas (Cloudflare DNS-over-HTTPS e resolvedor 1.1.1.1) aos registos NS,
+        A, MX, TXT, SPF, DKIM, DMARC, DS e subdomínios comuns de alojamento.
+  \item \textbf{Registo do domínio:} RDAP do registo \texttt{.com} (Verisign).
+  \item \textbf{Site:} pedidos normais (GET) às páginas públicas, ao mapa do site, à interface pública do
+        WordPress e a ficheiros que o WordPress expõe por omissão. Não se tentou nenhum login e não se
+        enviou nenhum formulário. Respostas comparadas entre um navegador e o robô do Google.
+  \item \textbf{Versões:} serviço oficial do WordPress (\texttt{api.wordpress.org}) e diretório de plugins.
+  \item \textbf{Reputação:} Google Safe Browsing e listas negras públicas por DNS.
+  \item \textbf{Capturas:} Google Chrome automatizado (\texttt{scripts/domain-audit.mjs}), com JavaScript
+        desligado nas páginas com spam. O servidor limita pedidos seguidos (erro 429), por isso as capturas
+        foram feitas com pausas.
+\end{itemize}
+
+\end{document}

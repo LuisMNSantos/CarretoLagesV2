@@ -113,3 +113,10 @@ Ruling: secondary headers edge-to-edge from the top (client rejected framed pane
 Ruling: trophy image moved from src/assets/stock/trofeu.jpg (PNG data) to src/assets/brand/trofeu.png — firm-owned, not stock; used in a new home "20 anos" section (between Process and Team) and as the História header card; copy uses only known facts (2002 → 2022).
 Ruling: responsive clip test ignores visually-hidden elements (clientWidth ≤ 1), i.e. the keyboard-only pause button.
 Verification: unit 135/135, e2e 417 passed, security 136 passed, links 385/0 broken, axe 0 serious/critical, Lighthouse 99–100 (7 pages), live (carretolages.pages.dev, deployment b5b9cedd) 275 passed.
+
+## Domain go-live prep (2026-11-06)
+Ruling: production domain is www.carretolages.com (old site's canonical is www; apex redirects to www via a Cloudflare redirect rule) — site/JSON-LD/tests switched from carretolages.pages.dev.
+Ruling: noindex is now per host — `https://:project.pages.dev/*` and `https://:version.:project.pages.dev/*` carry X-Robots-Tag in public/_headers; the real domain follows PUBLIC_NOINDEX. `npm run build:live` (astro --mode live, committed .env.live) builds indexable WITH the example content (client's decision).
+Ruling: public/_redirects maps the 42 legitimate old WordPress paths (with and without trailing slash, 84 rules) to new pages; the 5 injected spam posts are left out on purpose so they 404.
+Finding: the current WordPress (6.1.7, PHP 7.4) is compromised — 5 spam posts 2023-10..2024-12, unknown admin account id 101012; email shares the PTisp server. Report: docs/report/dominio/relatorio-dominio.pdf (screenshots via scripts/domain-audit.mjs).
+Verification: unit 143/143 (new redirects.test.ts, headers.test.ts updated), e2e routes+base desktop 71/71, security 135 passed; build:live → no meta robots, robots.txt Allow + www sitemap, canonicals on www.

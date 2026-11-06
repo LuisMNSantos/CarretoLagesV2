@@ -1,0 +1,89 @@
+{
+  "capturedAt": "2026-11-06T20:24:19.898Z",
+  "shots": [
+    {
+      "name": "01-home",
+      "url": "https://www.carretolages.com/",
+      "status": 200,
+      "throttled": 17
+    },
+    {
+      "name": "02-sitemap-posts",
+      "url": "https://www.carretolages.com/wp-sitemap-posts-post-1.xml",
+      "status": 200,
+      "throttled": 0
+    },
+    {
+      "name": "03-spam-photoshop",
+      "url": "https://www.carretolages.com/photoshop-download-with-crack/",
+      "status": 200,
+      "throttled": 4
+    },
+    {
+      "name": "04-spam-rolex",
+      "url": "https://www.carretolages.com/replica-rolex-gmt-master-ii-126711-two-tone-rose-gold-watch-from-bp-factory/",
+      "status": 200,
+      "throttled": 4
+    },
+    {
+      "name": "05-api-posts",
+      "url": "https://www.carretolages.com/wp-json/wp/v2/posts?per_page=50&_fields=id,date,author,slug",
+      "status": 200,
+      "throttled": 0
+    },
+    {
+      "name": "06-api-users",
+      "url": "https://www.carretolages.com/wp-json/wp/v2/users?_fields=id,name,slug",
+      "status": 200,
+      "throttled": 0
+    },
+    {
+      "name": "07-dir-uploads",
+      "url": "https://www.carretolages.com/wp-content/uploads/",
+      "status": 200,
+      "throttled": 0
+    },
+    {
+      "name": "08-dir-wp-includes",
+      "url": "https://www.carretolages.com/wp-includes/",
+      "status": 200,
+      "throttled": 0
+    },
+    {
+      "name": "09-readme",
+      "url": "https://www.carretolages.com/readme.html",
+      "status": 200,
+      "throttled": 0
+    },
+    {
+      "name": "10-wp-login",
+      "url": "https://www.carretolages.com/wp-login.php",
+      "status": 200,
+      "throttled": 0
+    },
+    {
+      "name": "11-demo-case",
+      "url": "https://www.carretolages.com/cases/auto-accident/",
+      "status": 200,
+      "throttled": 4
+    },
+    {
+      "name": "12-demo-post",
+      "url": "https://www.carretolages.com/questions-you-should-ask-a-personal-injury-lawyer/",
+      "status": 200,
+      "throttled": 5
+    },
+    {
+      "name": "13-safe-browsing",
+      "url": "https://transparencyreport.google.com/safe-browsing/search?url=carretolages.com&hl=pt-PT",
+      "status": 200,
+      "throttled": 0
+    },
+    {
+      "name": "15-dead-partner-links",
+      "url": "https://www.carretolages.com/",
+      "status": 200,
+      "throttled": 19
+    }
+  ]
+}

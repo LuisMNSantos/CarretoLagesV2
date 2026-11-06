@@ -19,6 +19,7 @@
     "serve:headers": "node scripts/serve-with-headers.mjs",
     "screens": "playwright test -c playwright.screens.config.ts",
     "report": "node scripts/report.mjs",
+    "report:dominio": "node scripts/report-dominio.mjs",
     "audit": "node scripts/summarize-audit.mjs"
   },
   "dependencies": {
