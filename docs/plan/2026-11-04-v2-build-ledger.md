@@ -120,3 +120,17 @@ Ruling: noindex is now per host — `https://:project.pages.dev/*` and `https://
 Ruling: public/_redirects maps the 42 legitimate old WordPress paths (with and without trailing slash, 84 rules) to new pages; the 5 injected spam posts are left out on purpose so they 404.
 Finding: the current WordPress (6.1.7, PHP 7.4) is compromised — 5 spam posts 2023-10..2024-12, unknown admin account id 101012; email shares the PTisp server. Report: docs/report/dominio/relatorio-dominio.pdf (screenshots via scripts/domain-audit.mjs).
 Verification: unit 143/143 (new redirects.test.ts, headers.test.ts updated), e2e routes+base desktop 71/71, security 135 passed; build:live → no meta robots, robots.txt Allow + www sitemap, canonicals on www.
+
+## Three variants, one per budget (2026-11-07)
+
+Spec: docs/superpowers/specs/2026-11-07-tres-versoes-design.md. Plan: docs/superpowers/plans/2026-11-07-tres-versoes.md.
+
+- `PUBLIC_PLAN` (base | formulario | sanity) in committed mode files `.env.<plan>`; `npm run deploy:plan -- <plan>`.
+- Published: carretolages-base.pages.dev, carretolages-formulario.pages.dev (direct upload), carretolages-sanity.pages.dev (Git build of `feat/tres-versoes`, rebuilt by a Sanity webhook → Pages deploy hook). Studio: carretolages.sanity.studio (project 6e31nwsq).
+- Divergences from the original spec, each agreed or ruled during the work:
+  - Email: Resend free plan (Cloudflare Email Sending needs Workers Paid to be enabled).
+  - Turnstile on from the start, explicit render, compact below 300px, interaction-only; without JavaScript the form shows phone/email (Turnstile needs JS).
+  - Per-IP limit is a best-effort counter in the function (pages.dev has no zone rate-limit rules).
+  - CMS images are downloaded and optimised by Astro at build (CSP stays 'self') instead of served by the Sanity CDN.
+  - Sanity document ids use '-' (ids containing '.' are private in Sanity and invisible to the public build read).
+- Verified live: real emails received (formulario PT/EN; sanity PT/EN sent), CMS edit → site in ~2.5–4 min, empty required field → build fails on Zod and the previous site stays up.
