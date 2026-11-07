@@ -37,3 +37,9 @@ describe('renderContactEmail', () => {
     for (const v of ['Maria Silva', 'maria@example.pt', '+351 912 345 678', 'Aveiro', 'Preciso de ajuda.']) expect(txt).toContain(v);
   });
 });
+
+test('received time is shown in Lisbon local time (dd/mm/aaaa hh:mm)', () => {
+  const at = (iso: string) => renderContactEmail(d, { ...m, receivedAt: new Date(iso) }).text;
+  expect(at('2026-11-04T10:00:00Z')).toContain('Recebido em: 04/11/2026 10:00'); // winter: UTC+0
+  expect(at('2026-07-01T10:05:00Z')).toContain('Recebido em: 01/07/2026 11:05'); // summer: UTC+1
+});

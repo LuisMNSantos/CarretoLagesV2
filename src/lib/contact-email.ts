@@ -15,6 +15,15 @@ export function escapeHtml(s: string): string {
 }
 const oneLine = (s: string) => s.replace(/[\r\n]+/g, ' ').trim();
 
+/** dd/mm/aaaa hh:mm in Lisbon time (the firm's clock), independent of the server's time zone. */
+function lisbonTime(d: Date): string {
+  const p = Object.fromEntries(
+    new Intl.DateTimeFormat('pt-PT', { timeZone: 'Europe/Lisbon', day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' })
+      .formatToParts(d).map((x) => [x.type, x.value]),
+  );
+  return `${p.day}/${p.month}/${p.year} ${p.hour}:${p.minute}`;
+}
+
 /**
  * Email sent to the firm (production phase). Always in Portuguese, states the visitor's language,
  * escapes every visitor-provided value and keeps header-bound values on one line.
@@ -29,7 +38,7 @@ export function renderContactEmail(data: ContactData, meta: { locale: Locale; re
     ['Área', area],
     ['Escritório preferido', data.escritorio ? OFFICE_PT[data.escritorio] ?? '—' : '—'],
     ['Língua do visitante', meta.locale === 'en' ? 'inglês' : 'português'],
-    ['Recebido em', meta.receivedAt.toISOString()],
+    ['Recebido em', lisbonTime(meta.receivedAt)],
   ];
   const text = [...rows.map(([k, v]) => `${k}: ${v}`), '', 'Mensagem:', data.mensagem].join('\n');
   const html = `<!doctype html><html lang="pt-PT"><body style="font-family:Arial,sans-serif;color:#1F2420">
