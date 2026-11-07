@@ -143,6 +143,8 @@
     "lead": { "pt": "Não usamos cookies próprios nem ferramentas de rastreio.", "en": "We do not set our own cookies or use tracking tools." },
     "body": [
       { "type": "p", "text": { "pt": "Este site não define cookies e não carrega serviços de terceiros sem uma ação sua.", "en": "This website does not set cookies and does not load third-party services without an action from you." } },
+      { "type": "h2", "when": "form", "text": { "pt": "Proteção contra spam", "en": "Spam protection" } },
+      { "type": "p", "when": "form", "text": { "pt": "O formulário de contacto usa o Cloudflare Turnstile para distinguir pessoas de programas automáticos. Só é carregado quando começa a preencher o formulário e pode usar dados técnicos do seu navegador para essa verificação, de acordo com a política de privacidade da Cloudflare.", "en": "The contact form uses Cloudflare Turnstile to tell people apart from automated programs. It is only loaded when you start filling in the form and may use technical data from your browser for that check, under Cloudflare's privacy policy." } },
       { "type": "h2", "text": { "pt": "Mapas", "en": "Maps" } },
       { "type": "p", "text": { "pt": "Os mapas dos escritórios são fornecidos pela Google e só são carregados se carregar no botão \"Ver mapa interativo\". Nesse momento, a Google pode definir os seus próprios cookies, de acordo com a política de privacidade da Google.", "en": "The office maps are provided by Google and only load if you press the \"View interactive map\" button. At that point, Google may set its own cookies under Google's privacy policy." } },
       { "type": "h2", "text": { "pt": "Estatísticas", "en": "Statistics" } },

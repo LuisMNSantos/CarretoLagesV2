@@ -69,7 +69,7 @@ describe('createContactHandler', () => {
   test('missing token → 403 form.spam, no call to the email API', async () => {
     const res = await handle(post(fields({ 'cf-turnstile-response': '' })), env);
     expect(res.status).toBe(403);
-    expect(((await res.json()) as { errors: { form: string } }).errors.form).toMatch(/validar o envio/);
+    expect(((await res.json()) as { errors: { form: string } }).errors.form).toMatch(/telefone ou email/);
     expect(sends()).toHaveLength(0);
   });
 
@@ -99,7 +99,9 @@ describe('createContactHandler', () => {
 
   test('sixth POST from the same IP within 10 min → 429', async () => {
     for (let i = 0; i < 5; i++) expect((await handle(post(fields()), env)).status).toBe(200);
-    expect((await handle(post(fields()), env)).status).toBe(429);
+    const limited = await handle(post(fields()), env);
+    expect(limited.status).toBe(429);
+    expect(((await limited.json()) as { errors: { form: string } }).errors.form).toMatch(/telefone ou email/);
     expect((await handle(post(fields(), '198.51.100.9'), env)).status).toBe(200);
   });
 
@@ -108,4 +110,14 @@ describe('createContactHandler', () => {
     expect(res.status).toBe(400);
     expect(res.headers.get('content-type')).toContain('application/json');
   });
+});
+
+test('blocked attempts do not extend the lockout: the IP is free again 10 minutes after its first POST', async () => {
+  let now = NOW;
+  const h = createContactHandler({ fetch: fetchMock as unknown as typeof fetch, now: () => now });
+  const at = (ms: number) => { now = NOW + ms; return handle2(); };
+  const handle2 = () => h(post(fields({ startedAt: String(now - 10_000) })), env);
+  for (let i = 0; i < 5; i++) expect((await at(i * 1000)).status).toBe(200);
+  for (let i = 0; i < 10; i++) expect((await at(60_000 + i * 30_000)).status).toBe(429);
+  expect((await at(10 * 60 * 1000 + 5_000)).status).toBe(200);
 });

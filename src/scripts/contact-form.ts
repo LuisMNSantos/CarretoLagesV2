@@ -1,7 +1,10 @@
 import { splitSubmission, validateContact, type ContactField } from '../lib/contact-schema';
 import { t } from '../i18n/ui';
 import type { Locale } from '../i18n/locale';
-import { mountTurnstile } from './turnstile';
+import { mountTurnstile, type TurnstileHandle } from './turnstile';
+
+/** How long a submission waits for Turnstile to hand over its token before giving the phone/email fallback. */
+const TOKEN_WAIT_MS = 10_000;
 
 type ServerReply = { ok: true } | { ok: false; errors: Partial<Record<ContactField, string>> };
 
@@ -17,12 +20,14 @@ export function initContactForm(form: HTMLFormElement): void {
   const label = form.querySelector<HTMLElement>('[data-submit-label]');
   const idleLabel = label?.textContent ?? '';
   let sending = false;
-  let resetTurnstile: () => void = () => {};
   const widget = form.querySelector<HTMLElement>('[data-turnstile]');
-  if (widget) void mountTurnstile(widget).then((reset) => { resetTurnstile = reset; });
+  let turnstile: Promise<TurnstileHandle | undefined> | undefined;
+  const ensureTurnstile = () => (turnstile ??= widget ? mountTurnstile(widget) : Promise.resolve(undefined));
 
+  // Turnstile (third party) loads only once the visitor starts filling in the form, never on page load.
   form.addEventListener('focusin', () => {
     if (started && !started.value) started.value = String(Date.now());
+    void ensureTurnstile();
   });
 
   const errorEl = (field: string) => form.querySelector<HTMLElement>(`[data-error-for="${field}"]`);
@@ -69,13 +74,20 @@ export function initContactForm(form: HTMLFormElement): void {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (sending) return;
-    const data = new FormData(form);
-    const { fields } = splitSubmission(data.entries());
+    const { fields } = splitSubmission(new FormData(form).entries());
     const result = validateContact(fields, locale);
     clearAll();
     if (!result.ok) { showErrors(result.errors); return; }
 
     setSending(true);
+    const ts = await ensureTurnstile();
+    if (ts && !(await ts.token(TOKEN_WAIT_MS))) {
+      setSending(false);
+      ts.reset();
+      showErrors({ form: t(locale, 'form.verifyFailed') });
+      return;
+    }
+    const data = new FormData(form); // built after the token arrived, so it carries cf-turnstile-response
     let reply: ServerReply | undefined;
     try {
       const res = await fetch(form.action, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
@@ -88,7 +100,7 @@ export function initContactForm(form: HTMLFormElement): void {
       return;
     }
     setSending(false);
-    resetTurnstile();
+    ts?.reset();
     showErrors(reply && !reply.ok && Object.keys(reply.errors).length ? reply.errors : { form: t(locale, 'form.sendFailed') });
   });
 }

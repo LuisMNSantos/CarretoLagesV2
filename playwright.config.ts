@@ -15,5 +15,5 @@ export default defineConfig({
   ],
   ...(external
     ? {}
-    : { webServer: { command: 'npm run build && npm run preview', url: baseURL, reuseExistingServer: true, timeout: 180_000 } }),
+    : { webServer: { command: 'npm run build && npm run preview', url: baseURL, reuseExistingServer: true, timeout: 180_000, env: { ALLOW_TEST_TURNSTILE: '1' } } }),
 });

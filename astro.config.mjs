@@ -2,7 +2,7 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
-import { planBuild, resolvePlan } from './scripts/plan-build.mjs';
+import { planBuild, readBuildEnv, resolvePlan } from './scripts/plan-build.mjs';
 
 export default defineConfig({
   site: 'https://www.carretolages.com',
@@ -13,7 +13,7 @@ export default defineConfig({
       filter: (page) => !/\/(404|obrigado|thank-you)$/.test(new URL(page).pathname),
     }),
     // Astro does not hand the --mode to the config, so the plan is resolved from argv + env files.
-    planBuild(resolvePlan(process.argv, process.cwd())),
+    planBuild(resolvePlan(process.argv, process.cwd()), readBuildEnv(process.argv, process.cwd()).PUBLIC_TURNSTILE_SITE_KEY),
   ],
   trailingSlash: 'never',
   // sanity plan: CMS images are downloaded and optimised at build, so they are served from the site (CSP unchanged).

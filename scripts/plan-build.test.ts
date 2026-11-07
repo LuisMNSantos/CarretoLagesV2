@@ -1,7 +1,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { afterEach, describe, expect, test } from 'vitest';
 import { parseHeaders } from './headers-file.mjs';
-import { cspForPlan, pagesToDrop, resolvePlan } from './plan-build.mjs';
+import { assertTurnstileKey, cspForPlan, pagesToDrop, planBuild, readBuildEnv, resolvePlan } from './plan-build.mjs';
 
 const publicCsp = parseHeaders(readFileSync('public/_headers', 'utf8')).find((r) => r.pattern === '/*')!.headers['Content-Security-Policy']!;
 const envFile = (name: string) =>
@@ -71,4 +71,30 @@ describe('mode files', () => {
     }
     expect(envFile('.env.base').PUBLIC_TURNSTILE_SITE_KEY).toBeUndefined();
   });
+});
+
+describe('assertTurnstileKey (a form plan never ships a form that always fails)', () => {
+  test('a form plan with a Cloudflare test key or no key fails the build', () => {
+    expect(() => assertTurnstileKey('formulario', '1x00000000000000000000AA', false)).toThrow(/Turnstile/);
+    expect(() => assertTurnstileKey('sanity', undefined, false)).toThrow(/Turnstile/);
+  });
+  test('tests may opt in to the test key; base needs no key; a real key passes', () => {
+    expect(() => assertTurnstileKey('formulario', '1x00000000000000000000AA', true)).not.toThrow();
+    expect(() => assertTurnstileKey('base', undefined, false)).not.toThrow();
+    expect(() => assertTurnstileKey('formulario', '0x4AAAAAAF3EQQQ2jSTc3Dul', false)).not.toThrow();
+  });
+  test('readBuildEnv reads the --mode file, and the environment wins', () => {
+    const saved = process.env.PUBLIC_TURNSTILE_SITE_KEY;
+    delete process.env.PUBLIC_TURNSTILE_SITE_KEY;
+    expect(readBuildEnv(['astro', 'build', '--mode', 'formulario'], process.cwd()).PUBLIC_TURNSTILE_SITE_KEY).toMatch(/^0x4/);
+    process.env.PUBLIC_TURNSTILE_SITE_KEY = 'from-env';
+    expect(readBuildEnv(['astro', 'build', '--mode', 'formulario'], process.cwd()).PUBLIC_TURNSTILE_SITE_KEY).toBe('from-env');
+    if (saved === undefined) delete process.env.PUBLIC_TURNSTILE_SITE_KEY; else process.env.PUBLIC_TURNSTILE_SITE_KEY = saved;
+  });
+});
+
+test('the key guard only stops builds, never dev, check or sync', () => {
+  const setup = planBuild('formulario', undefined).hooks['astro:config:setup'] as (o: { command: string }) => void;
+  for (const command of ['dev', 'sync', 'preview']) expect(() => setup({ command }), command).not.toThrow();
+  expect(() => setup({ command: 'build' })).toThrow(/Turnstile/);
 });

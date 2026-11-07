@@ -8,20 +8,26 @@ em computador e telemóvel, antes da construção final.
 - Relatório (capturas, testes, segurança): `docs/report/relatorio-v2.pdf`
 - Pré-visualização publicada: https://carretolages.pages.dev (Cloudflare Pages, gratuito, `noindex`)
 
-## Publicar a pré-visualização
+## Publicar a pré-visualização (projeto `carretolages`, só design)
 
 ```bash
-npm run build
-npx wrangler pages deploy dist --project-name carretolages --branch main
+npm run build:base                # versão sem formulário: não precisa de segredos nem da pasta functions/
+cd dist && npx wrangler pages deploy . --project-name carretolages --branch main
 ```
+
+Um `npm run build` sem modo gera a versão `formulario` e **falha de propósito** sem uma chave Turnstile real: um formulário publicado com a chave de teste falharia em todos os envios. Os testes passam `ALLOW_TEST_TURNSTILE=1` (já configurado no Playwright).
 
 O `cf` cria e gere o projeto Pages, mas o envio direto de uma pasta ainda é feito com o Wrangler (via `npx`, sem o adicionar ao projeto). O Wrangler tem login próprio: `npx wrangler login`.
 
 ## Publicar no domínio do cliente (www.carretolages.com)
 
+Antes do primeiro build, escolher em `.env.live` o `PUBLIC_PLAN` que o cliente aprovou. Sem isso, `npm run build:live` falha de propósito. Nas versões com formulário são precisos também:
+- `PUBLIC_TURNSTILE_SITE_KEY`, com `www.carretolages.com` acrescentado ao widget;
+- os segredos do formulário no projeto Pages de produção.
+
 ```bash
 npm run build:live      # usa .env.live: indexável, mantém o conteúdo de exemplo
-npx wrangler pages deploy dist --project-name carretolages --branch main
+npx wrangler pages deploy dist --project-name <projeto-de-produção> --branch main   # base: correr dentro de dist/
 ```
 
 - `site` (canónicos, sitemap, JSON-LD) é `https://www.carretolages.com`.
@@ -57,6 +63,7 @@ PUBLIC_PLAN=base npx playwright test tests/e2e/plan-base.spec.ts   # testes da v
   2. O webhook do Sanity "Cloudflare Pages: gerar o site" chama o deploy hook do projeto `carretolages-sanity`.
   3. A Cloudflare gera o site a partir do ramo `feat/tres-versoes` com `npm ci && npm run build:sanity`, em cerca de 2 a 3 minutos.
   - Cada push para esse ramo também gera o site. Para gerar à mão: `cf pages projects deployments create carretolages-sanity --body '{"branch":"feat/tres-versoes"}'`.
+- **Depois de juntar o ramo ao `main`:** antes de apagar `feat/tres-versoes`, mudar o ramo de produção do projeto `carretolages-sanity` para `main`. Atualizar também este README e o comando acima. Se não for feito, as publicações no Sanity tentam gerar um ramo que já não existe.
 - **Importação inicial:** `npm run sanity:import` carrega os JSON e as imagens no Sanity. Precisa de `SANITY_WRITE_TOKEN`, um token temporário criado com `npx sanity tokens add` e apagado a seguir. Só serve para começar do zero: substitui os documentos com o mesmo identificador.
 
 ## Testes de segurança
@@ -64,7 +71,7 @@ PUBLIC_PLAN=base npx playwright test tests/e2e/plan-base.spec.ts   # testes da v
 A pré-visualização do Astro ignora `public/_headers`. Para testar os cabeçalhos e a CSP:
 
 ```bash
-npm run build && npm run serve:headers        # http://localhost:4330
+npm run build:formulario && npm run serve:headers        # http://localhost:4330
 PW_BASE_URL=http://localhost:4330 npx playwright test tests/e2e/security.spec.ts
 ```
 
@@ -73,7 +80,7 @@ PW_BASE_URL=http://localhost:4330 npx playwright test tests/e2e/security.spec.ts
 | Comando | O que faz |
 |---|---|
 | `npm run dev` | servidor de desenvolvimento |
-| `npm run build` / `npm run preview` | gerar e servir a versão estática |
+| `npm run build:base` / `build:formulario` / `build:sanity` | gerar uma versão (`npm run preview` serve-a) |
 | `npm test` | testes unitários (Vitest) |
 | `npm run test:e2e` | testes de ponta a ponta (Playwright, usa o Google Chrome instalado) |
 | `npm run video` | gerar as versões do vídeo do topo (requer `VIDEO_SRC`) |
@@ -83,9 +90,9 @@ PW_BASE_URL=http://localhost:4330 npx playwright test tests/e2e/security.spec.ts
 
 ## Regras desta fase
 
-- **Custo zero:** sem domínio, sem Resend, sem Sanity, sem funções de servidor, sem serviços pagos da Cloudflare.
-- **O formulário não envia emails** nesta fase.
-- **Pré-visualização com `noindex`.** Publicação na Cloudflare Pages só com confirmação explícita.
+- **Custo zero:** só planos gratuitos (Cloudflare Pages e Turnstile, Resend, Sanity). Nenhum serviço pago da Cloudflare.
+- **O formulário só envia emails nas versões `formulario` e `sanity`.** A pré-visualização `carretolages` e a versão `base` não têm formulário.
+- **Endereços `pages.dev` sempre com `noindex`.** Publicação na Cloudflare Pages só com confirmação explícita.
 - **Commits sem linhas de co-autoria.**
 
 ## Variáveis (`.env`, ver `.env.example`)

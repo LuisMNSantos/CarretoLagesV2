@@ -108,10 +108,18 @@ describe('blocksFor (plan-dependent copy)', () => {
   test('without the form, keeps unconditional and noForm blocks', () => {
     expect(blocksFor(blocks, false).map((b) => b.type === 'p' && b.text.pt)).toEqual(['sempre', 'sem formulário']);
   });
-  test('every when-tagged block in the content has a counterpart for the other plan', () => {
-    for (const p of Object.values(pages)) {
-      const tags = p.body.map((b) => b.when).filter(Boolean);
-      expect(tags.filter((w) => w === 'form').length, p.id).toBe(tags.filter((w) => w === 'noForm').length);
+  test('privacy and pro bono have a version of their form text for each plan', () => {
+    for (const id of ['privacy', 'proBono'] as const) {
+      const tags = pages[id].body.map((b) => b.when);
+      expect(tags, id).toContain('form');
+      expect(tags, id).toContain('noForm');
     }
+  });
+
+  test('the cookie policy names Turnstile only in the plans with the form', () => {
+    const text = (hasForm: boolean) => JSON.stringify(blocksFor(pages.cookies.body, hasForm));
+    expect(text(true)).toMatch(/Turnstile/);
+    expect(text(true)).toMatch(/começa a preencher o formulário/);
+    expect(text(false)).not.toMatch(/Turnstile|formulário/);
   });
 });

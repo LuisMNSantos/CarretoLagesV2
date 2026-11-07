@@ -119,11 +119,36 @@ test('the Turnstile widget is compact when the form is narrower than 300px', asy
   for (const [width, size] of [[1440, 'flexible'], [360, 'compact']] as const) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto('/contactos');
+    await form(page).locator('[name="nome"]').focus();
     await expect.poll(() => page.evaluate(() => (window as unknown as { __tsSizes?: string[] }).__tsSizes ?? [])).toEqual([size]);
   }
 });
 
 test('Turnstile only takes space when it needs the visitor (no blank band above the button)', async ({ page }) => {
   await page.goto('/contactos');
+  await form(page).locator('[name="nome"]').focus();
   await expect.poll(() => page.evaluate(() => (window as unknown as { __tsOpts?: { appearance?: string } }).__tsOpts?.appearance)).toBe('interaction-only');
+});
+
+test('Turnstile loads only once the visitor starts filling in the form (never on page load)', async ({ page }) => {
+  const hits: string[] = [];
+  page.on('request', (r) => { if (r.url().includes('challenges.cloudflare.com')) hits.push(r.url()); });
+  await page.goto('/contactos');
+  await page.waitForLoadState('networkidle');
+  expect(hits).toEqual([]);
+  await form(page).locator('[name="nome"]').focus();
+  await expect.poll(() => hits.length).toBe(1);
+});
+
+test('without a Turnstile token nothing is posted and the visitor gets phone and email', async ({ page }) => {
+  await page.addInitScript(() => { (window as unknown as { __tsNoToken: boolean }).__tsNoToken = true; });
+  await page.route('**/api/contacto', (r) => r.fulfill({ json: { ok: true } }));
+  const sent = posts(page);
+  await page.goto('/#contacto');
+  await fillValid(page);
+  const f = form(page);
+  await f.locator('[data-submit]').click();
+  await expect(f.locator('[data-form-summary]')).toContainText('telefone ou email', { timeout: 15_000 });
+  await expect(f.locator('[data-submit]')).toBeEnabled();
+  expect(sent).toEqual([]);
 });

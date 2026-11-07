@@ -33,10 +33,8 @@ for (const r of routes) {
 
     expect(await page.evaluate(() => (window as unknown as { __csp: string[] }).__csp)).toEqual([]);
     expect(errors.filter((e) => !e.includes('404'))).toEqual([]);
-    // The only third party allowed is the Turnstile script, and only on pages that carry the form
-    // (stubbed here; the real widget is checked live after publishing).
-    const hasWidget = (await page.locator('[data-turnstile]').count()) > 0;
-    expect(foreign).toEqual(hasWidget ? ['https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit'] : []);
+    // No third party loads without an action: Turnstile only after the visitor starts filling in the form.
+    expect(foreign).toEqual([]);
     expect(await context.cookies()).toEqual([]);
   });
 }

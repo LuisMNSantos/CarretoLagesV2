@@ -140,6 +140,7 @@ const pt = {
   'form.err.consent': 'É necessário aceitar a Política de Privacidade.',
   'form.spam': 'Não foi possível validar o envio. Tente novamente dentro de alguns segundos.',
   'form.sendFailed': 'Não foi possível enviar a mensagem. Tente de novo ou contacte-nos por telefone ou email.',
+  'form.verifyFailed': 'Não foi possível confirmar que o envio vem de uma pessoa. Tente de novo dentro de alguns minutos ou contacte-nos por telefone ou email.',
   'form.noscript': 'O formulário precisa de JavaScript. Pode contactar-nos por telefone ou email.',
 
   'thanks.title1': 'Obrigado.',
@@ -316,6 +317,7 @@ const en: Record<UiKey, string> = {
   'form.err.consent': 'You need to accept the Privacy Policy.',
   'form.spam': 'We could not validate this submission. Please try again in a few seconds.',
   'form.sendFailed': 'We could not send your message. Please try again or contact us by telephone or email.',
+  'form.verifyFailed': 'We could not confirm that this submission comes from a person. Please try again in a few minutes or contact us by telephone or email.',
   'form.noscript': 'The form needs JavaScript. You can contact us by telephone or email.',
 
   'thanks.title1': 'Thank you.',

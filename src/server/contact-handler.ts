@@ -20,7 +20,7 @@ const RATE_LIMIT = 5;
 const RATE_WINDOW_MS = 10 * 60 * 1000;
 
 const json = (status: number, body: unknown) => Response.json(body, { status, headers: { 'Cache-Control': 'no-store' } });
-const fail = (status: number, locale: Locale, key: 'form.spam' | 'form.sendFailed') => json(status, { ok: false, errors: { form: t(locale, key) } });
+const fail = (status: number, locale: Locale, key: 'form.spam' | 'form.verifyFailed' | 'form.sendFailed') => json(status, { ok: false, errors: { form: t(locale, key) } });
 
 /** Builds the handler with its own best-effort, per-isolate rate limiter (pages.dev has no zone rate-limit rules). */
 export function createContactHandler(deps: Deps) {
@@ -29,9 +29,11 @@ export function createContactHandler(deps: Deps) {
   const limited = (ip: string): boolean => {
     const now = deps.now();
     const recent = (hits.get(ip) ?? []).filter((at) => now - at < RATE_WINDOW_MS);
+    // Blocked attempts are not recorded, so the lockout never outlasts the window of the accepted ones.
+    if (recent.length >= RATE_LIMIT) { hits.set(ip, recent); return true; }
     recent.push(now);
     hits.set(ip, recent);
-    return recent.length > RATE_LIMIT;
+    return false;
   };
 
   return async function handleContact(request: Request, env: ContactEnv): Promise<Response> {
@@ -43,18 +45,18 @@ export function createContactHandler(deps: Deps) {
     }
     const { fields, token, locale } = splitSubmission(form.entries());
     const ip = request.headers.get('CF-Connecting-IP') ?? 'unknown';
-    if (limited(ip)) return fail(429, locale, 'form.spam');
+    if (limited(ip)) return fail(429, locale, 'form.verifyFailed');
 
     const result = validateContact(fields, locale, deps.now());
     if (!result.ok) return json(422, { ok: false, errors: result.errors });
 
-    if (!token) return fail(403, locale, 'form.spam');
+    if (!token) return fail(403, locale, 'form.verifyFailed');
     const verify = await deps.fetch(VERIFY_URL, {
       method: 'POST',
       body: new URLSearchParams({ secret: env.TURNSTILE_SECRET, response: token, remoteip: ip }),
     });
     const verdict = (await verify.json().catch(() => ({}))) as { success?: boolean };
-    if (verdict.success !== true) return fail(403, locale, 'form.spam');
+    if (verdict.success !== true) return fail(403, locale, 'form.verifyFailed');
 
     const email = renderContactEmail(result.data, { locale, receivedAt: new Date(deps.now()) });
     const send = await deps.fetch(SEND_URL, {
