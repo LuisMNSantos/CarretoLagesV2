@@ -68,15 +68,13 @@ só as apresenta quando souber que funcionam.
 Segue a secção "Formulário de contacto" da especificação (campos, fluxo, segurança), com estas
 concretizações:
 
-- **Envio: Cloudflare Email Sending** em vez do Resend da especificação. *Divergência, decisão do
-  desenho:* o domínio `builtbyluis.dev` já está na Cloudflare, e assim não é preciso outra conta. Com o
-  Workers Free só se pode enviar para destinos verificados, o que serve, porque o destino é sempre a
-  mesma caixa.
-  - Remetente: `formulario@builtbyluis.dev`. É preciso ativar o Email Sending no domínio, o que
-    acrescenta SPF e DKIM. O domínio não tem MX, por isso nada se parte.
-  - Destinatário: `luismanuelsantos2801@gmail.com` (decidido pelo Luís), verificado uma vez como destino
-    na conta. Fica numa variável de ambiente, para mais tarde passar a `geral@carretolages.com`.
-  - `Reply-To` com o email do visitante, depois de validado.
+- **Envio: Resend, plano gratuito** (3.000 emails por mês, 100 por dia), como na especificação original.
+  *Atualização de 2026-11-07:* o desenho previa o Cloudflare Email Sending, mas o painel exige o plano Workers Paid
+  para o ativar, e o Luís escolheu o Resend gratuito.
+  - Remetente: `formulario@builtbyluis.dev`, domínio verificado no Resend (registos DNS na zona Cloudflare).
+  - Destinatário: `luismanuelsantos2801@gmail.com` (decidido pelo Luís), numa variável de ambiente para mais
+    tarde passar a `geral@carretolages.com`.
+  - `reply_to` com o email do visitante, depois de validado.
 - **Função no servidor:** uma Cloudflare Pages Function (ex.: `functions/api/contacto.ts`).
   - Valida no servidor com o mesmo esquema de `src/lib/contact-schema.ts`.
   - Escapa todo o texto do visitante no HTML do email e tira as quebras de linha do assunto.
@@ -102,8 +100,8 @@ concretizações:
   - Os estados "A enviar…", sucesso e erro são anunciados (`aria-live`).
 - **Privacidade e registos:**
   - Nada fica guardado: nem base de dados, nem conteúdo das mensagens nos registos.
-  - A Política de Privacidade menciona o formulário e a Cloudflare como subcontratante.
-- **Segredos:** token de API ou ligação de envio, chave secreta do Turnstile e destinatário, tudo em
+  - A Política de Privacidade menciona o formulário, o Resend (envio) e a Cloudflare (alojamento, Turnstile).
+- **Segredos:** chave de API do Resend, chave secreta do Turnstile e destinatário, tudo em
   variáveis ou segredos do projeto Pages. Nunca no repositório.
 
 ## Versão sanity (formulário + painel)

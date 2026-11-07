@@ -1,4 +1,4 @@
-// POST /api/contacto (Cloudflare Pages Function): validate → Turnstile → Cloudflare Email Sending.
+// POST /api/contacto (Cloudflare Pages Function): validate → Turnstile → Resend (free plan).
 // Spec: docs/superpowers/specs/2026-11-07-tres-versoes-design.md ("Versão formulario"). Never stores or logs
 // message content: the only log line on failure carries HTTP status and API error codes.
 import { splitSubmission, validateContact } from '../lib/contact-schema';
@@ -8,14 +8,14 @@ import type { Locale } from '../i18n/locale';
 
 export type ContactEnv = {
   TURNSTILE_SECRET: string;
-  EMAIL_API_TOKEN: string;
-  CF_ACCOUNT_ID: string;
+  RESEND_API_KEY: string;
   CONTACT_TO: string;
   CONTACT_FROM: string;
 };
 type Deps = { fetch: typeof fetch; now: () => number };
 
 const VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+const SEND_URL = 'https://api.resend.com/emails';
 const RATE_LIMIT = 5;
 const RATE_WINDOW_MS = 10 * 60 * 1000;
 
@@ -57,20 +57,16 @@ export function createContactHandler(deps: Deps) {
     if (verdict.success !== true) return fail(403, locale, 'form.spam');
 
     const email = renderContactEmail(result.data, { locale, receivedAt: new Date(deps.now()) });
-    const send = await deps.fetch(`https://api.cloudflare.com/client/v4/accounts/${env.CF_ACCOUNT_ID}/email/sending/send`, {
+    const send = await deps.fetch(SEND_URL, {
       method: 'POST',
-      headers: { Authorization: `Bearer ${env.EMAIL_API_TOKEN}`, 'Content-Type': 'application/json' },
+      headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({ to: [env.CONTACT_TO], from: env.CONTACT_FROM, reply_to: result.data.email, ...email }),
     });
-    const reply = (await send.json().catch(() => ({}))) as {
-      success?: boolean;
-      errors?: { code?: number }[];
-      result?: { delivered?: string[]; queued?: string[] } | null;
-    };
-    const accepted = [...(reply.result?.delivered ?? []), ...(reply.result?.queued ?? [])].includes(env.CONTACT_TO);
-    if (send.ok && reply.success === true && accepted) return json(200, { ok: true });
+    const reply = (await send.json().catch(() => ({}))) as { id?: string; name?: string };
+    if (send.ok && typeof reply.id === 'string' && reply.id) return json(200, { ok: true });
 
-    console.error('contact: email send failed', send.status, (reply.errors ?? []).map((e) => e.code));
+    // Resend error names (e.g. validation_error) carry no visitor data; the message text may, so it is not logged.
+    console.error('contact: email send failed', send.status, reply.name ?? '');
     return fail(502, locale, 'form.sendFailed');
   };
 }

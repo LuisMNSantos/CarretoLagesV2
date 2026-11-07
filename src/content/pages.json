@@ -90,7 +90,7 @@
       { "type": "h2", "text": { "pt": "Subcontratantes", "en": "Processors" } },
       { "type": "ul", "when": "form", "items": [
         { "pt": "Alojamento do site: Cloudflare", "en": "Website hosting: Cloudflare" },
-        { "pt": "Envio dos emails do formulário e proteção contra spam (Turnstile): Cloudflare", "en": "Form email delivery and spam protection (Turnstile): Cloudflare" },
+        { "pt": "Envio dos emails do formulário: Resend; proteção contra spam: Cloudflare Turnstile", "en": "Form email delivery: Resend; spam protection: Cloudflare Turnstile" },
         { "pt": "Mapas: Google, apenas se carregar no botão para ver o mapa", "en": "Maps: Google, only if you press the button to view the map" }
       ] },
       { "type": "ul", "when": "noForm", "items": [

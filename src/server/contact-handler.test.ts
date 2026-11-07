@@ -3,13 +3,12 @@ import { createContactHandler, type ContactEnv } from './contact-handler';
 
 const env: ContactEnv = {
   TURNSTILE_SECRET: 'ts-secret',
-  EMAIL_API_TOKEN: 'email-token',
-  CF_ACCOUNT_ID: 'acc123',
+  RESEND_API_KEY: 're_test_key',
   CONTACT_TO: 'luismanuelsantos2801@gmail.com',
   CONTACT_FROM: 'formulario@builtbyluis.dev',
 };
 const NOW = 1_800_000_000_000;
-const SEND_URL = 'https://api.cloudflare.com/client/v4/accounts/acc123/email/sending/send';
+const SEND_URL = 'https://api.resend.com/emails';
 const VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
 
 const fields = (over: Record<string, string> = {}) => ({
@@ -37,7 +36,7 @@ let handle: ReturnType<typeof createContactHandler>;
 beforeEach(() => {
   fetchMock.mockClear();
   verifyOk = true;
-  sendReply = { status: 200, body: { success: true, errors: [], messages: [], result: { delivered: [env.CONTACT_TO], queued: [], permanent_bounces: [] } } };
+  sendReply = { status: 200, body: { id: '49a3999c-0ce1-4ea6-ab68-afcd6dc2e794' } };
   handle = createContactHandler({ fetch: fetchMock as unknown as typeof fetch, now: () => NOW });
 });
 
@@ -48,7 +47,7 @@ describe('createContactHandler', () => {
     expect(await res.json()).toEqual({ ok: true });
     expect(sends()).toHaveLength(1);
     const [, init] = sends()[0]!;
-    expect((init!.headers as Record<string, string>).Authorization).toBe('Bearer email-token');
+    expect((init!.headers as Record<string, string>).Authorization).toBe('Bearer re_test_key');
     const body = JSON.parse(String(init!.body));
     expect(body).toMatchObject({ to: ['luismanuelsantos2801@gmail.com'], from: 'formulario@builtbyluis.dev', reply_to: 'maria@example.pt', subject: 'Novo contacto pelo site — Direito Fiscal' });
     expect(body.text).toContain('Recebi uma notificação das Finanças');
@@ -83,17 +82,17 @@ describe('createContactHandler', () => {
 
   test('email API failure → 502 sendFailed, nothing logged', async () => {
     const log = vi.spyOn(console, 'error').mockImplementation(() => {});
-    sendReply = { status: 403, body: { success: false, errors: [{ code: 10000, message: 'Authentication error' }], result: null } };
+    sendReply = { status: 403, body: { statusCode: 403, name: 'validation_error', message: 'The builtbyluis.dev domain is not verified.' } };
     const res = await handle(post(fields()), env);
     expect(res.status).toBe(502);
     expect(((await res.json()) as { errors: { form: string } }).errors.form).toMatch(/telefone ou email/);
     const logged = JSON.stringify(log.mock.calls);
-    for (const secret of ['Recebi uma notificação', 'maria@example.pt', 'Maria Silva', 'email-token']) expect(logged).not.toContain(secret);
+    for (const secret of ['Recebi uma notificação', 'maria@example.pt', 'Maria Silva', 're_test_key']) expect(logged).not.toContain(secret);
     log.mockRestore();
   });
 
-  test('a recipient that is not delivered or queued counts as a failure', async () => {
-    sendReply = { status: 200, body: { success: true, errors: [], result: { delivered: [], queued: [], permanent_bounces: [env.CONTACT_TO] } } };
+  test('a 200 reply without a message id counts as a failure', async () => {
+    sendReply = { status: 200, body: {} };
     vi.spyOn(console, 'error').mockImplementation(() => {});
     expect((await handle(post(fields()), env)).status).toBe(502);
   });
