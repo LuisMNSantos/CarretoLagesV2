@@ -29,6 +29,26 @@ npx wrangler pages deploy dist --project-name carretolages --branch main
 - `public/_redirects` leva os endereços do WordPress antigo para as páginas novas (301); os artigos de spam ficam de fora de propósito (404).
 - Análise do domínio atual (site pirateado, riscos) e passos da migração do DNS para a Cloudflare: `docs/report/dominio/relatorio-dominio.pdf`. Capturas: `node scripts/domain-audit.mjs`.
 
+## Três versões (uma por orçamento)
+
+O mesmo código gera três versões, escolhidas por `PUBLIC_PLAN` nos ficheiros `.env.base`, `.env.formulario` e `.env.sanity`. Desenho: `docs/superpowers/specs/2026-11-07-tres-versoes-design.md`.
+
+| Versão | Endereço | O que tem |
+|---|---|---|
+| `base` (orçamento 2026-003) | https://carretolages-base.pages.dev | Sem formulário: email, telefone, morada e mapa. |
+| `formulario` (2026-001) | https://carretolages-formulario.pages.dev | Formulário que envia o pedido por email (Resend), com Turnstile. |
+| `sanity` (2026-002) | https://carretolages-sanity.pages.dev | Formulário + conteúdo editado no Sanity. |
+
+```bash
+npm run deploy:plan -- base          # gera e publica carretolages-base (sem a pasta functions/)
+npm run deploy:plan -- formulario    # gera e publica carretolages-formulario (com a função /api/contacto)
+PUBLIC_PLAN=base npx playwright test tests/e2e/plan-base.spec.ts   # testes da versão base
+```
+
+- **Formulário:** `functions/api/contacto.ts` valida o pedido, verifica o Turnstile e envia pelo Resend (plano gratuito: 3.000 emails por mês, 100 por dia). Remetente: `formulario@builtbyluis.dev`. Nada fica guardado e os registos nunca incluem o conteúdo das mensagens.
+- **Segredos do projeto Pages** (só os nomes; os valores nunca vão para o git): `TURNSTILE_SECRET`, `RESEND_API_KEY`, `CONTACT_TO` e `CONTACT_FROM`. Para mudar o destinatário, por exemplo para `geral@carretolages.com`: `npx wrangler pages secret put CONTACT_TO --project-name carretolages-formulario` e publicar de novo.
+- **Turnstile:** o widget `0x4AAAAAAF3EQQQ2jSTc3Dul` só aceita os domínios `carretolages-formulario.pages.dev` e `carretolages-sanity.pages.dev`. Um domínio novo tem de ser acrescentado ao widget.
+
 ## Testes de segurança
 
 A pré-visualização do Astro ignora `public/_headers`. Para testar os cabeçalhos e a CSP:
