@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from './fixtures';
 
 test('fonts are self-hosted (no Google Fonts requests)', async ({ page }) => {
   const external: string[] = [];

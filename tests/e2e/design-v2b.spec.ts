@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from './fixtures';
 import { allRoutes } from '../../src/lib/all-routes';
 
 // Second design round (client feedback): hero legibility, hidden pause button, compact mobile CTAs,

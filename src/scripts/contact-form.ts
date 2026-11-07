@@ -1,15 +1,25 @@
-import { validateContact, type ContactField } from '../lib/contact-schema';
+import { splitSubmission, validateContact, type ContactField } from '../lib/contact-schema';
 import { t } from '../i18n/ui';
 import type { Locale } from '../i18n/locale';
+import { mountTurnstile } from './turnstile';
+
+type ServerReply = { ok: true } | { ok: false; errors: Partial<Record<ContactField, string>> };
 
 /**
- * Design-phase contact form: validates with the shared schema and, when valid, goes to the
- * thank-you page WITHOUT sending anything (spec: "Fase atual"). Nothing goes into the URL.
+ * Contact form: validates with the shared schema, then POSTs to the Pages Function (/api/contacto) with the
+ * Turnstile token. Success goes to the thank-you page; any failure keeps what was typed and explains it.
  */
 export function initContactForm(form: HTMLFormElement): void {
   const locale = (form.dataset.locale === 'en' ? 'en' : 'pt') as Locale;
   const started = form.querySelector<HTMLInputElement>('[data-started-at]');
   const summary = form.querySelector<HTMLElement>('[data-form-summary]');
+  const button = form.querySelector<HTMLButtonElement>('[data-submit]');
+  const label = form.querySelector<HTMLElement>('[data-submit-label]');
+  const idleLabel = label?.textContent ?? '';
+  let sending = false;
+  let resetTurnstile: () => void = () => {};
+  const widget = form.querySelector<HTMLElement>('[data-turnstile]');
+  if (widget) void mountTurnstile(widget).then((reset) => { resetTurnstile = reset; });
 
   form.addEventListener('focusin', () => {
     if (started && !started.value) started.value = String(Date.now());
@@ -23,28 +33,14 @@ export function initContactForm(form: HTMLFormElement): void {
     if (el) { el.hidden = true; el.textContent = ''; }
     controls(field).forEach((c) => c.removeAttribute('aria-invalid'));
   };
-
-  form.addEventListener('input', (e) => {
-    const name = (e.target as HTMLInputElement).name;
-    if (name) clear(name);
-  });
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const raw: Record<string, unknown> = {};
-    new FormData(form).forEach((v, k) => { raw[k] = typeof v === 'string' ? v : ''; });
-    const result = validateContact(raw, locale);
-
+  const clearAll = () => {
     ['nome', 'email', 'telefone', 'area', 'escritorio', 'mensagem', 'consentimento'].forEach(clear);
     if (summary) { summary.hidden = true; summary.classList.add('hidden'); summary.textContent = ''; }
+  };
 
-    if (result.ok) {
-      window.location.assign(form.dataset.thanks ?? '/');
-      return;
-    }
-
+  const showErrors = (errors: Partial<Record<ContactField, string>>) => {
     let first: HTMLElement | undefined;
-    for (const [field, message] of Object.entries(result.errors) as [ContactField, string][]) {
+    for (const [field, message] of Object.entries(errors) as [ContactField, string][]) {
       if (field === 'form') continue;
       const el = errorEl(field);
       if (el) { el.textContent = message; el.hidden = false; }
@@ -52,10 +48,47 @@ export function initContactForm(form: HTMLFormElement): void {
       first ??= controls(field)[0];
     }
     if (summary) {
-      summary.textContent = result.errors.form ?? t(locale, 'form.errorSummary');
+      summary.textContent = errors.form ?? t(locale, 'form.errorSummary');
       summary.hidden = false;
       summary.classList.remove('hidden');
     }
     (first ?? summary)?.focus();
+  };
+
+  const setSending = (on: boolean) => {
+    sending = on;
+    if (button) { button.disabled = on; on ? button.setAttribute('aria-busy', 'true') : button.removeAttribute('aria-busy'); }
+    if (label) label.textContent = on ? t(locale, 'form.sending') : idleLabel;
+  };
+
+  form.addEventListener('input', (e) => {
+    const name = (e.target as HTMLInputElement).name;
+    if (name) clear(name);
+  });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (sending) return;
+    const data = new FormData(form);
+    const { fields } = splitSubmission(data.entries());
+    const result = validateContact(fields, locale);
+    clearAll();
+    if (!result.ok) { showErrors(result.errors); return; }
+
+    setSending(true);
+    let reply: ServerReply | undefined;
+    try {
+      const res = await fetch(form.action, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+      reply = (await res.json()) as ServerReply;
+    } catch {
+      reply = undefined;
+    }
+    if (reply?.ok) {
+      window.location.assign(form.dataset.thanks ?? '/');
+      return;
+    }
+    setSending(false);
+    resetTurnstile();
+    showErrors(reply && !reply.ok && Object.keys(reply.errors).length ? reply.errors : { form: t(locale, 'form.sendFailed') });
   });
 }

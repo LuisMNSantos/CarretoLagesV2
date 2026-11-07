@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from './fixtures';
 import { allRoutes } from '../../src/lib/all-routes';
 
 test.use({ viewport: { width: 360, height: 780 } });

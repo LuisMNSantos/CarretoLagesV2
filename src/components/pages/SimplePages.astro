@@ -8,7 +8,6 @@ import { settings, tr } from '../../lib/content';
 import { localizePath } from '../../i18n/routes';
 import { t } from '../../i18n/ui';
 import type { Locale } from '../../i18n/locale';
-import { designPreview } from '../../lib/env';
 
 export interface Props { locale: Locale; kind: 'contact' | 'thanks' | 'notFound' }
 const { locale, kind } = Astro.props;
@@ -40,7 +39,6 @@ const title = kind === 'contact' ? t(locale, 'nav.contact') : kind === 'thanks' 
           <span class="block">{t(locale, kind === 'thanks' ? 'thanks.title2' : 'notFound.title2')}</span>
         </h1>
         <p class="lead mx-auto mt-6 max-w-xl text-tinta-suave">{t(locale, kind === 'thanks' ? 'thanks.lead' : 'notFound.lead')}</p>
-        {kind === 'thanks' && designPreview && <p class="mx-auto mt-6 max-w-xl rounded bg-areia p-4 text-sm text-tinta">{t(locale, 'form.previewNotice')}</p>}
         <div class="mt-10 flex flex-wrap justify-center gap-4">
           <a href={localizePath('home', locale)} class="btn btn-verde">{t(locale, 'cta.backHome')}<Icon name="arrow-up-right" size={16} /></a>
           <a href={settings.phoneHref} class="btn btn-ghost"><Icon name="phone" size={16} />{settings.phone}</a>

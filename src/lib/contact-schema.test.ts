@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { validateContact } from './contact-schema';
+import { splitSubmission, validateContact } from './contact-schema';
 
 const NOW = 1_800_000_000_000;
 const valid = (): Record<string, unknown> => ({
@@ -77,5 +77,23 @@ describe('validateContact', () => {
   test('errors are localized', () => {
     expect(errorsOf({ ...valid(), nome: '' }, 'en').nome).toBe('Please enter your name (2 to 100 characters).');
     expect(errorsOf({ ...valid(), nome: '' }, 'pt').nome).toBe('Indique o seu nome (2 a 100 caracteres).');
+  });
+});
+
+describe('splitSubmission', () => {
+  const entries = (o: Record<string, string>) => Object.entries(o);
+
+  test('takes the Turnstile token and the locale out of the fields', () => {
+    const r = splitSubmission(entries({ nome: 'Ana', 'cf-turnstile-response': 'tok', locale: 'en', mensagem: 'x' }));
+    expect(r).toEqual({ fields: { nome: 'Ana', mensagem: 'x' }, token: 'tok', locale: 'en' });
+  });
+
+  test('a missing token is an empty string and an unknown locale falls back to pt', () => {
+    expect(splitSubmission(entries({ nome: 'Ana', locale: 'fr' }))).toEqual({ fields: { nome: 'Ana' }, token: '', locale: 'pt' });
+  });
+
+  test('the remaining fields still pass validation (no unexpected keys)', () => {
+    const { fields } = splitSubmission(entries({ ...(valid() as Record<string, string>), 'cf-turnstile-response': 'tok', locale: 'pt' }));
+    expect(run(fields).ok).toBe(true);
   });
 });

@@ -139,8 +139,8 @@ const pt = {
   'form.err.message': 'Escreva uma mensagem entre 10 e 3000 caracteres.',
   'form.err.consent': 'É necessário aceitar a Política de Privacidade.',
   'form.spam': 'Não foi possível validar o envio. Tente novamente dentro de alguns segundos.',
-  'form.previewNotice': 'Versão de pré-visualização: o envio está desativado e nenhum dado é transmitido.',
-  'form.noscript': 'Nesta versão de pré-visualização o formulário precisa de JavaScript e não envia dados. Contacte-nos por telefone ou email.',
+  'form.sendFailed': 'Não foi possível enviar a mensagem. Tente de novo ou contacte-nos por telefone ou email.',
+  'form.noscript': 'O formulário precisa de JavaScript. Pode contactar-nos por telefone ou email.',
 
   'thanks.title1': 'Obrigado.',
   'thanks.title2': 'Recebemos a sua mensagem.',
@@ -315,8 +315,8 @@ const en: Record<UiKey, string> = {
   'form.err.message': 'Please write a message between 10 and 3000 characters.',
   'form.err.consent': 'You need to accept the Privacy Policy.',
   'form.spam': 'We could not validate this submission. Please try again in a few seconds.',
-  'form.previewNotice': 'Preview version: sending is disabled and no data is transmitted.',
-  'form.noscript': 'In this preview the form needs JavaScript and does not send data. Please contact us by telephone or email.',
+  'form.sendFailed': 'We could not send your message. Please try again or contact us by telephone or email.',
+  'form.noscript': 'The form needs JavaScript. You can contact us by telephone or email.',
 
   'thanks.title1': 'Thank you.',
   'thanks.title2': 'We have received your message.',

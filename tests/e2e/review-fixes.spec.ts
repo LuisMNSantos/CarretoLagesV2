@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from './fixtures';
 
 // Findings from the final whole-branch review. Each test reproduced the problem before the fix.
 
@@ -40,9 +40,10 @@ test.describe('without JavaScript on a phone', () => {
 test.describe('with JavaScript', () => {
   test.skip(({ javaScriptEnabled }) => javaScriptEnabled === false, 'JS behaviour');
 
-  test('the thank-you page says nothing was sent in the preview', async ({ page }) => {
+  test('the thank-you page no longer claims sending is disabled (sending is real)', async ({ page }) => {
     await page.goto('/obrigado');
-    await expect(page.getByText('Versão de pré-visualização: o envio está desativado')).toBeVisible();
+    await expect(page.locator('h1')).toBeVisible();
+    await expect(page.locator('main').getByText('pré-visualização')).toHaveCount(0);
   });
 
   test('carousel slides are never hidden from assistive technology', async ({ page }, info) => {

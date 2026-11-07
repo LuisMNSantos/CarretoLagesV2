@@ -1,6 +1,6 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 import AxeBuilder from '@axe-core/playwright';
-import { expect, test } from '@playwright/test';
+import { expect, test } from './fixtures';
 import { allRoutes } from '../../src/lib/all-routes';
 
 // One result file per page and viewport: parallel workers must not overwrite each other.

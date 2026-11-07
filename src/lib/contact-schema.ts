@@ -64,3 +64,18 @@ export function validateContact(input: Record<string, unknown>, locale: Locale, 
   if (now - startedAt < MIN_FILL_MS) return { ok: false, errors: { form: t(locale, 'form.spam') } };
   return { ok: true, data };
 }
+
+/** Splits a form submission (browser FormData or the server's request.formData()) into the fields that
+ *  validateContact checks, the Turnstile token and the page language. */
+export function splitSubmission(fd: Iterable<[string, FormDataEntryValue]>): { fields: Record<string, string>; token: string; locale: Locale } {
+  const fields: Record<string, string> = {};
+  let token = '';
+  let locale: Locale = 'pt';
+  for (const [k, v] of fd) {
+    const value = typeof v === 'string' ? v : '';
+    if (k === 'cf-turnstile-response') token = value;
+    else if (k === 'locale') locale = value === 'en' ? 'en' : 'pt';
+    else fields[k] = value;
+  }
+  return { fields, token, locale };
+}

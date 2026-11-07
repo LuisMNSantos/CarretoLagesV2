@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from './fixtures';
 
 // Client feedback round 3: missing header photos, image boxes resizing on mobile, left drawer menu.
 

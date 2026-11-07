@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from './fixtures';
 
 test('home sections appear in the approved order', async ({ page }) => {
   await page.goto('/');

@@ -1,4 +1,4 @@
-import { expect, test, type Page } from '@playwright/test';
+import { expect, test, type Page } from './fixtures';
 
 test.describe('areas carousel', () => {
   test.skip(({ javaScriptEnabled }) => javaScriptEnabled === false, 'JS behaviour');

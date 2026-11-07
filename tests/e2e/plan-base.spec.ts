@@ -1,6 +1,6 @@
 // Base plan (budget 2026-003): no contact form anywhere, direct contacts instead.
 // Run against a base build only: `PUBLIC_PLAN=base npx playwright test tests/e2e/plan-base.spec.ts`.
-import { expect, test } from '@playwright/test';
+import { expect, test } from './fixtures';
 import { allRoutes } from '../../src/lib/all-routes';
 
 test.skip(process.env.PUBLIC_PLAN !== 'base', 'base-plan build only');

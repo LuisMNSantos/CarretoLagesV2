@@ -4,7 +4,7 @@ import { areas, offices, tr, visible } from '../../lib/content';
 import { localizePath } from '../../i18n/routes';
 import { t } from '../../i18n/ui';
 import type { Locale } from '../../i18n/locale';
-import { designPreview } from '../../lib/env';
+import { turnstileSiteKey } from '../../lib/env';
 
 export interface Props { locale: Locale; preselectArea?: string | undefined; idPrefix?: string }
 const { locale, preselectArea, idPrefix = 'cf' } = Astro.props;
@@ -16,7 +16,7 @@ const req = t(locale, 'form.required');
 <form
   class="contact-form"
   method="post"
-  action={thanks}
+  action="/api/contacto"
   novalidate
   aria-label={t(locale, 'form.legend')}
   data-contact-form
@@ -78,6 +78,7 @@ const req = t(locale, 'form.required');
     <input id={id('website')} name="website" type="text" tabindex="-1" autocomplete="off" />
   </div>
   <input type="hidden" name="startedAt" value="" data-started-at />
+  <input type="hidden" name="locale" value={locale} />
 
   <div class="field mt-7">
     <label class="consent flex items-start gap-3 text-sm leading-relaxed text-tinta-suave">
@@ -89,12 +90,13 @@ const req = t(locale, 'form.required');
     <p id={`${id('consentimento')}-err`} class="field-error" data-error-for="consentimento" hidden></p>
   </div>
 
+  <div class="mt-7 needs-js" data-turnstile data-sitekey={turnstileSiteKey}></div>
+
   <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
     <button type="submit" class="btn btn-verde needs-js" data-submit>
       <span data-submit-label>{t(locale, 'form.submit')}</span>
       <Icon name="arrow-up-right" size={16} />
     </button>
-    {designPreview && <p class="max-w-xs text-xs leading-relaxed text-tinta-suave">{t(locale, 'form.previewNotice')}</p>}
   </div>
   <p class="nojs-notice mt-6 rounded bg-areia p-4 text-sm text-tinta" data-nojs-notice>{t(locale, 'form.noscript')}</p>
 </form>

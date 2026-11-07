@@ -1,8 +1,9 @@
-import { expect, test, type Page } from '@playwright/test';
+import { expect, test, type Page } from './fixtures';
 
 test.skip(({ javaScriptEnabled }) => javaScriptEnabled === false, 'JS-enhanced form; no-JS notice tested separately');
 
 const form = (page: Page) => page.locator('[data-contact-form]').first();
+
 
 test('empty submit shows inline errors and focuses the first invalid field', async ({ page }) => {
   await page.goto('/#contacto');
@@ -25,19 +26,71 @@ test('typed values persist after an error and the error clears on input', async 
   await expect(f.locator('[data-error-for="email"]')).toBeHidden();
 });
 
-test('a valid submission goes to the thank-you page and sends nothing', async ({ page }) => {
-  await page.goto('/#contacto');
+const fillValid = async (page: Page) => {
   const f = form(page);
-  const posts: string[] = [];
-  page.on('request', (r) => { if (r.method() !== 'GET' || /maria%40example|Maria/.test(r.url())) posts.push(`${r.method()} ${r.url()}`); });
   await f.locator('[name="nome"]').fill('Maria Silva');
   await f.locator('[name="email"]').fill('maria@example.pt');
   await f.locator('[name="mensagem"]').fill('Preciso de ajuda com uma notificação das Finanças.');
   await f.locator('[name="consentimento"]').check();
-  await page.waitForTimeout(3100);
-  await f.locator('[data-submit]').click();
+  await page.waitForTimeout(3100); // minimum fill time
+};
+const posts = (page: Page) => {
+  const list: string[] = [];
+  page.on('request', (r) => { if (r.method() === 'POST') list.push(r.postData() ?? ''); });
+  return list;
+};
+
+test('a valid submission posts once and goes to the thank-you page', async ({ page }) => {
+  await page.route('**/api/contacto', (r) => r.fulfill({ json: { ok: true } }));
+  const sent = posts(page);
+  await page.goto('/#contacto');
+  await fillValid(page);
+  await form(page).locator('[data-submit]').click();
   await expect(page).toHaveURL(/\/obrigado$/);
-  expect(posts).toEqual([]);
+  expect(sent).toHaveLength(1);
+  expect(sent[0]).toContain('cf-turnstile-response');
+  expect(sent[0]).toMatch(/name="locale"\r\n\r\npt\r\n/);
+});
+
+test('submits once while sending', async ({ page }) => {
+  await page.route('**/api/contacto', async (r) => { await new Promise((ok) => setTimeout(ok, 1000)); await r.fulfill({ json: { ok: true } }); });
+  const sent = posts(page);
+  await page.goto('/#contacto');
+  await fillValid(page);
+  const button = form(page).locator('[data-submit]');
+  await button.dblclick();
+  await expect(button).toHaveAttribute('aria-busy', 'true');
+  await expect(button).toContainText('A enviar…');
+  await expect(page).toHaveURL(/\/obrigado$/);
+  expect(sent).toHaveLength(1);
+});
+
+test('server rejection keeps the typed values and resets Turnstile', async ({ page }) => {
+  await page.route('**/api/contacto', (r) => r.fulfill({ status: 422, json: { ok: false, errors: { email: 'Indique um email válido.' } } }));
+  await page.goto('/#contacto');
+  await fillValid(page);
+  const f = form(page);
+  await f.locator('[data-submit]').click();
+  await expect(f.locator('[data-error-for="email"]')).toHaveText('Indique um email válido.');
+  await expect(f.locator('[name="nome"]')).toHaveValue('Maria Silva');
+  await expect(f.locator('[data-submit]')).not.toHaveAttribute('aria-busy', 'true');
+  expect(await page.evaluate(() => (window as unknown as { __tsResets: number }).__tsResets)).toBe(1);
+  await expect(page).toHaveURL(/\/#contacto$/);
+});
+
+test('send failure shows the fallback message', async ({ page }) => {
+  let mode: 'error' | 'abort' = 'error';
+  await page.route('**/api/contacto', (r) =>
+    mode === 'abort' ? r.abort() : r.fulfill({ status: 502, json: { ok: false, errors: { form: 'Não foi possível enviar a mensagem. Tente de novo ou contacte-nos por telefone ou email.' } } }));
+  await page.goto('/#contacto');
+  await fillValid(page);
+  const f = form(page);
+  await f.locator('[data-submit]').click();
+  await expect(f.locator('[data-form-summary]')).toContainText('telefone ou email');
+  mode = 'abort';
+  await f.locator('[data-submit]').click();
+  await expect(f.locator('[data-form-summary]')).toContainText('telefone ou email');
+  await expect(page).toHaveURL(/\/#contacto$/);
 });
 
 test('English form shows English errors', async ({ page }) => {
@@ -60,4 +113,12 @@ test('the area select chevron sits inside the field', async ({ page }) => {
     return i.top >= s.top && i.bottom <= s.bottom + 1 && i.right <= s.right + 1;
   });
   expect(inside).toBe(true);
+});
+
+test('the Turnstile widget is compact when the form is narrower than 300px', async ({ page }) => {
+  for (const [width, size] of [[1440, 'flexible'], [360, 'compact']] as const) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto('/contactos');
+    await expect.poll(() => page.evaluate(() => (window as unknown as { __tsSizes?: string[] }).__tsSizes ?? [])).toEqual([size]);
+  }
 });

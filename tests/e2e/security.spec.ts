@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from './fixtures';
 import { allRoutes } from '../../src/lib/all-routes';
 
 // Runs against `npm run serve:headers` (PW_BASE_URL=http://localhost:4330), which applies public/_headers.
@@ -33,10 +33,22 @@ for (const r of routes) {
 
     expect(await page.evaluate(() => (window as unknown as { __csp: string[] }).__csp)).toEqual([]);
     expect(errors.filter((e) => !e.includes('404'))).toEqual([]);
-    expect(foreign).toEqual([]);
+    // The only third party allowed is the Turnstile script, and only on pages that carry the form
+    // (stubbed here; the real widget is checked live after publishing).
+    const hasWidget = (await page.locator('[data-turnstile]').count()) > 0;
+    expect(foreign).toEqual(hasWidget ? ['https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit'] : []);
     expect(await context.cookies()).toEqual([]);
   });
 }
+
+test('only the form plans load Turnstile, and the CSP allows exactly its origin', async ({ request }) => {
+  const res = await request.get('/');
+  const csp = res.headers()['content-security-policy']!;
+  const html = await res.text();
+  const base = html.includes('data-plan="base"');
+  expect(csp.includes('https://challenges.cloudflare.com')).toBe(!base);
+  expect(html.includes('data-turnstile')).toBe(!base);
+});
 
 test('the Google map may load only after the click, inside the frame-src allowance', async ({ page }, info) => {
   test.skip(info.project.name !== 'desktop', 'once');

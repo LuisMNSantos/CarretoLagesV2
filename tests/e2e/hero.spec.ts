@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from './fixtures';
 
 test.describe('hero background video', () => {
   test.skip(({ javaScriptEnabled }) => javaScriptEnabled === false, 'video is JS-enhanced');
