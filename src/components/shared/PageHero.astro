@@ -1,4 +1,5 @@
 ---
+import type { ImageRef } from '../../lib/content';
 /**
  * Image-led header for secondary pages (sits under the transparent "overlay" header).
  * Both variants run edge to edge from the top of the page, with a straight bottom edge marked
@@ -17,7 +18,7 @@ export interface Props {
   eyebrow: string;
   title: [string, string] | [string];
   lead?: string | undefined;
-  image?: string | undefined;
+  image?: ImageRef | undefined;
   /** Short word for the vertical label (feature variant); defaults to the eyebrow. */
   label?: string | undefined;
   /** @deprecated kept for call-site compatibility; used as the vertical label. */

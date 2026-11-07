@@ -1,4 +1,5 @@
 ---
+import type { ImageRef } from '../../lib/content';
 /** Header for reading pages (case studies, insights): the "feature" page hero plus date and badges. */
 import PageHero from './PageHero.astro';
 import type { Locale } from '../../i18n/locale';
@@ -10,7 +11,7 @@ export interface Props {
   lead: string;
   date: string;
   minutes?: number | undefined;
-  image?: string | undefined;
+  image?: ImageRef | undefined;
   watermark?: string | undefined;
   crumbs: { label: string; href: string }[];
 }

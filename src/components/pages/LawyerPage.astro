@@ -6,7 +6,7 @@ import Blocks from '../shared/Blocks.astro';
 import CtaBand from '../shared/CtaBand.astro';
 import Icon from '../shared/Icon.astro';
 import { areaById, tr, type Lawyer } from '../../lib/content';
-import { teamPhoto } from '../../lib/images';
+import { imageSource } from '../../lib/images';
 import { initials } from '../../lib/initials';
 import { localizePath } from '../../i18n/routes';
 import { t } from '../../i18n/ui';
@@ -44,7 +44,7 @@ const surname = lawyer.name.split(' ').at(-1) ?? lawyer.name;
     </div>
     <Fragment slot="card">
       {lawyer.photo ? (
-        <Picture src={teamPhoto(lawyer.photo)} alt={lawyer.name} widths={[480, 720, 960]} sizes="(min-width: 768px) 38vw, 92vw" formats={['avif', 'webp']} quality={70} loading="eager" class="h-full w-full object-cover object-top" />
+        <Picture {...imageSource(lawyer.photo, 'team')} alt={lawyer.name} widths={[480, 720, 960]} sizes="(min-width: 768px) 38vw, 92vw" formats={['avif', 'webp']} quality={70} loading="eager" class="h-full w-full object-cover object-top" />
       ) : (
         <div class="grid h-full place-items-center bg-gradient-to-br from-areia to-areia-escura" role="img" aria-label={lawyer.name}>
           <span class="font-logo text-[6rem] tracking-[0.06em] text-verde-700/80" aria-hidden="true">{initials(lawyer.name)}</span>

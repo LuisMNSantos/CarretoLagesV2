@@ -19,6 +19,15 @@ export type Block = z.infer<typeof block>;
 
 const base = { id: z.string().min(1), order: z.number().int() };
 const imageId = z.string().regex(/^[a-z0-9-]+$/);
+/** A CMS image (sanity plan), already dereferenced by the GROQ query; Astro downloads and optimises it at build. */
+export const remoteImage = z.strictObject({
+  url: z.string().url().startsWith('https://cdn.sanity.io/'),
+  width: z.number().int().positive(),
+  height: z.number().int().positive(),
+});
+/** A local image id (src/assets/stock or team) or a CMS image. */
+export const imageRef = z.union([imageId, remoteImage]);
+export type ImageRef = z.infer<typeof imageRef>;
 export const areaId = z.enum(['penal', 'imobiliario', 'fiscal', 'financeiro']);
 export type AreaId = z.infer<typeof areaId>;
 
@@ -48,7 +57,7 @@ export const officeSchema = z.strictObject({
   phone: z.string(),
   mapsUrl: z.string().url(),
   embedUrl: z.string().url(),
-  image: imageId,
+  image: imageRef,
 });
 
 export const areaSchema = z.strictObject({
@@ -62,7 +71,7 @@ export const areaSchema = z.strictObject({
   keywords: z.array(localized).min(2),
   services: z.array(localized).min(3),
   description: z.array(block).min(1),
-  image: imageId,
+  image: imageRef,
   metaDescription: localized,
 });
 
@@ -76,7 +85,7 @@ export const situationSchema = z.strictObject({
   tags: z.array(localized).min(2),
   area: areaId,
   linkLabel: localized,
-  image: imageId,
+  image: imageRef,
   imageCaption: localized,
 });
 
@@ -86,7 +95,7 @@ export const stepSchema = z.strictObject({
   title: localized,
   headline: localized,
   body: localized,
-  image: imageId,
+  image: imageRef,
 });
 
 export const lawyerSchema = z.strictObject({
@@ -97,7 +106,7 @@ export const lawyerSchema = z.strictObject({
   group: z.enum(['partner', 'associate', 'consultant']),
   areas: z.array(areaId),
   email: z.string().email(),
-  photo: z.string().optional(),
+  photo: imageRef.optional(),
   bio: z.array(block).min(1),
   linkedin: z.string().url().optional(),
 });
@@ -134,7 +143,7 @@ export const insightSchema = z.strictObject({
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   readingMinutes: z.number().int().positive(),
   body: z.array(block).min(1),
-  image: imageId,
+  image: imageRef,
 });
 
 export const pageSchema = z.strictObject({
@@ -145,7 +154,7 @@ export const pageSchema = z.strictObject({
   body: z.array(block).min(1),
   draft: z.boolean().optional(),
   updated: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
-  image: imageId.optional(),
+  image: imageRef.optional(),
   metaDescription: localized,
 });
 

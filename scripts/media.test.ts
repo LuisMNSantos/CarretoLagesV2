@@ -58,6 +58,7 @@ describe('stock images', () => {
       ...offices.map((o) => o.image), ...insights.map((i) => i.image),
       ...Object.values(pages).flatMap((p) => (p.image ? [p.image] : [])),
     ];
-    for (const u of used) expect(ids.has(u), u).toBe(true);
+    // Credits cover the bundled stock photos; CMS images (sanity plan) are credited in the CMS.
+    for (const u of used.filter((x): x is string => typeof x === "string")) expect(ids.has(u), u).toBe(true);
   });
 });

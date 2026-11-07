@@ -16,23 +16,34 @@ import testimonialsJson from '../content/testimonials.json' with { type: 'json' 
 import faqJson from '../content/faq.json' with { type: 'json' };
 import insightsJson from '../content/insights.json' with { type: 'json' };
 import pagesJson from '../content/pages.json' with { type: 'json' };
-import { designPreview } from './env';
+import { designPreview, plan, sanityDataset, sanityProjectId } from './env';
+import { fetchSanityContent } from './sanity-source';
+import type { RawContent } from './sanity-map';
 
 export * from '../content/schemas';
 
-/** Content is validated at import time: a malformed file fails the build and the tests. */
-export const settings = settingsSchema.parse(settingsJson);
-export const offices = z.array(officeSchema).parse(officesJson);
-export const areas = z.array(areaSchema).parse(areasJson);
-export const situations = z.array(situationSchema).parse(situationsJson);
-export const steps = z.array(stepSchema).parse(stepsJson);
-export const lawyers = z.array(lawyerSchema).parse(lawyersJson);
-export const cases = z.array(caseSchema).parse(casesJson);
-export const testimonials = z.array(testimonialSchema).parse(testimonialsJson);
-export const faq = z.array(faqSchema).parse(faqJson);
-export const insights = z.array(insightSchema).parse(insightsJson);
+/** The sanity plan reads the content from Sanity at build time; the other plans use the JSON files. */
+const raw: RawContent =
+  plan === 'sanity'
+    ? await fetchSanityContent(sanityProjectId, sanityDataset)
+    : {
+        settings: settingsJson, offices: officesJson, areas: areasJson, situations: situationsJson, steps: stepsJson,
+        lawyers: lawyersJson, cases: casesJson, testimonials: testimonialsJson, faq: faqJson, insights: insightsJson, pages: pagesJson,
+      };
+
+/** Content is validated at import time: a malformed file or CMS document fails the build and the tests. */
+export const settings = settingsSchema.parse(raw.settings);
+export const offices = z.array(officeSchema).parse(raw.offices);
+export const areas = z.array(areaSchema).parse(raw.areas);
+export const situations = z.array(situationSchema).parse(raw.situations);
+export const steps = z.array(stepSchema).parse(raw.steps);
+export const lawyers = z.array(lawyerSchema).parse(raw.lawyers);
+export const cases = z.array(caseSchema).parse(raw.cases);
+export const testimonials = z.array(testimonialSchema).parse(raw.testimonials);
+export const faq = z.array(faqSchema).parse(raw.faq);
+export const insights = z.array(insightSchema).parse(raw.insights);
 export const pages: Record<PageId, Page> = Object.fromEntries(
-  z.array(pageSchema).parse(pagesJson).map((p) => [p.id, p]),
+  z.array(pageSchema).parse(raw.pages).map((p) => [p.id, p]),
 ) as Record<PageId, Page>;
 
 /** Drops the blocks written for the other plan (contact form present or not). */

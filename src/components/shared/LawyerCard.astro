@@ -1,6 +1,6 @@
 ---
 import { Picture } from 'astro:assets';
-import { teamPhoto } from '../../lib/images';
+import { imageSource } from '../../lib/images';
 import { initials } from '../../lib/initials';
 import { tr, type Lawyer } from '../../lib/content';
 import { localizePath } from '../../i18n/routes';
@@ -13,7 +13,7 @@ const { lawyer, locale, size = 'lg' } = Astro.props;
   <div class="relative aspect-[4/5] overflow-hidden rounded-lg bg-areia" data-lawyer-media>
     {lawyer.photo ? (
       <Picture
-        src={teamPhoto(lawyer.photo)}
+        {...imageSource(lawyer.photo, 'team')}
         alt=""
         widths={[320, 480, 720]}
         sizes={size === 'lg' ? '(min-width: 768px) 30vw, 90vw' : '(min-width: 768px) 22vw, 45vw'}

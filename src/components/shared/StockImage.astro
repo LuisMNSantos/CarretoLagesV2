@@ -1,8 +1,9 @@
 ---
 import { Picture } from 'astro:assets';
-import { stockImage } from '../../lib/images';
+import { imageSource } from '../../lib/images';
+import type { ImageRef } from '../../lib/content';
 export interface Props {
-  id: string;
+  id: ImageRef;
   alt?: string;
   sizes: string;
   class?: string;
@@ -12,7 +13,7 @@ export interface Props {
 const { id, alt = '', sizes, class: cls = '', loading = 'lazy', widths = [480, 800, 1200, 1600] } = Astro.props;
 ---
 <Picture
-  src={stockImage(id)}
+  {...imageSource(id, 'stock')}
   alt={alt}
   sizes={sizes}
   widths={widths}

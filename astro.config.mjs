@@ -16,6 +16,8 @@ export default defineConfig({
     planBuild(resolvePlan(process.argv, process.cwd())),
   ],
   trailingSlash: 'never',
+  // sanity plan: CMS images are downloaded and optimised at build, so they are served from the site (CSP unchanged).
+  image: { domains: ['cdn.sanity.io'] },
   i18n: { defaultLocale: 'pt', locales: ['pt', 'en'], routing: { prefixDefaultLocale: false } },
   build: { format: 'file', inlineStylesheets: 'never' },
   vite: {

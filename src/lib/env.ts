@@ -5,6 +5,8 @@ type Env = {
   PUBLIC_NOINDEX?: string;
   PUBLIC_PLAN?: string;
   PUBLIC_TURNSTILE_SITE_KEY?: string;
+  PUBLIC_SANITY_PROJECT_ID?: string;
+  PUBLIC_SANITY_DATASET?: string;
 };
 const viteEnv = (import.meta as ImportMeta & { env?: Env }).env;
 const nodeEnv = (globalThis as { process?: { env?: Env } }).process?.env;
@@ -22,3 +24,7 @@ export const hasForm: boolean = plan !== 'base';
 
 /** Cloudflare's always-pass test key is the fallback; the published form plans set a real key in .env.<plan>. */
 export const turnstileSiteKey: string = read('PUBLIC_TURNSTILE_SITE_KEY') || '1x00000000000000000000AA';
+
+/** sanity plan: where the content is read from at build time (public, non-secret values in .env.sanity). */
+export const sanityProjectId: string = read('PUBLIC_SANITY_PROJECT_ID') ?? '';
+export const sanityDataset: string = read('PUBLIC_SANITY_DATASET') || 'production';
