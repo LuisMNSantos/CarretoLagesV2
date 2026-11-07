@@ -1,5 +1,7 @@
 ---
 import ContactForm from './ContactForm.astro';
+import ContactDirect from './ContactDirect.astro';
+import { hasForm } from '../../lib/env';
 import MapEmbed from './MapEmbed.astro';
 import StockImage from './StockImage.astro';
 import Icon from './Icon.astro';
@@ -26,8 +28,8 @@ const list = visible(offices, locale);
           <span class="block">{t(locale, 'form.title1')}</span>
           <span class="block">{t(locale, 'form.title2')}</span>
         </H>
-        <p class="mt-5 max-w-lg text-[0.9375rem] leading-relaxed text-tinta-suave">{t(locale, 'form.lead')}</p>
-        <div class="mt-10"><ContactForm locale={locale} preselectArea={preselectArea} /></div>
+        <p class="mt-5 max-w-lg text-[0.9375rem] leading-relaxed text-tinta-suave">{t(locale, hasForm ? 'form.lead' : 'contact.directLead')}</p>
+        <div class="mt-10">{hasForm ? <ContactForm locale={locale} preselectArea={preselectArea} /> : <ContactDirect locale={locale} />}</div>
       </div>
     </div>
 

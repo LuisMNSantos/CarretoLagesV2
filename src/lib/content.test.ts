@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 import {
   areas, cases, faq, getCollectionCounts, insights, isTranslated, lawyers, offices, pages, pick,
-  settings, situations, steps, testimonials, visible,
+  settings, situations, steps, testimonials, visible, blocksFor,
 } from './content';
 
 const item = (o: Partial<{ order: number; placeholder: boolean; en: boolean }>) => ({
@@ -93,5 +93,25 @@ describe('content files', () => {
   test('collection counts honour preview flag', () => {
     expect(getCollectionCounts('pt', false)).toEqual({ cases: 0, testimonials: 0, insights: 0 });
     expect(getCollectionCounts('en', true).cases).toBe(cases.length);
+  });
+});
+
+describe('blocksFor (plan-dependent copy)', () => {
+  const blocks = [
+    { type: 'p' as const, text: { pt: 'sempre' } },
+    { type: 'p' as const, text: { pt: 'com formulário' }, when: 'form' as const },
+    { type: 'p' as const, text: { pt: 'sem formulário' }, when: 'noForm' as const },
+  ];
+  test('with the form, keeps unconditional and form-only blocks', () => {
+    expect(blocksFor(blocks, true).map((b) => b.type === 'p' && b.text.pt)).toEqual(['sempre', 'com formulário']);
+  });
+  test('without the form, keeps unconditional and noForm blocks', () => {
+    expect(blocksFor(blocks, false).map((b) => b.type === 'p' && b.text.pt)).toEqual(['sempre', 'sem formulário']);
+  });
+  test('every when-tagged block in the content has a counterpart for the other plan', () => {
+    for (const p of Object.values(pages)) {
+      const tags = p.body.map((b) => b.when).filter(Boolean);
+      expect(tags.filter((w) => w === 'form').length, p.id).toBe(tags.filter((w) => w === 'noForm').length);
+    }
   });
 });

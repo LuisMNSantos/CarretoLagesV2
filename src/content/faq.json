@@ -2,7 +2,7 @@
   {
     "id": "primeiro-contacto", "order": 1,
     "question": { "pt": "Como funciona o primeiro contacto?", "en": "How does the first contact work?" },
-    "answer": { "pt": "Pode ligar-nos, escrever-nos ou usar o formulário. Marcamos uma primeira conversa para perceber a sua situação e explicar as opções e os honorários antes de qualquer decisão.", "en": "You can call us, write to us or use the form. We arrange a first conversation to understand your situation and explain the options and fees before any decision is made." }
+    "answer": { "pt": "Pode ligar-nos ou escrever-nos. Marcamos uma primeira conversa para perceber a sua situação e explicar as opções e os honorários antes de qualquer decisão.", "en": "You can call us or write to us. We arrange a first conversation to understand your situation and explain the options and fees before any decision is made." }
   },
   {
     "id": "areas", "order": 2,

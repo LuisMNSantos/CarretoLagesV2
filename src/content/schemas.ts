@@ -4,13 +4,16 @@ import { z } from 'zod';
 export const localized = z.strictObject({ pt: z.string().min(1), en: z.string().min(1).optional() });
 export type Localized = z.infer<typeof localized>;
 
+/** A block shown only in the plans with the contact form ('form') or only in the base plan ('noForm'). */
+const when = z.enum(['form', 'noForm']).optional();
+
 /** Rich text as simple blocks (Portable-Text-like), so it maps 1:1 to the future CMS. */
 export const block = z.discriminatedUnion('type', [
-  z.strictObject({ type: z.literal('p'), text: localized }),
-  z.strictObject({ type: z.literal('h2'), text: localized }),
-  z.strictObject({ type: z.literal('h3'), text: localized }),
-  z.strictObject({ type: z.literal('ul'), items: z.array(localized).min(1) }),
-  z.strictObject({ type: z.literal('quote'), text: localized, cite: localized.optional() }),
+  z.strictObject({ type: z.literal('p'), text: localized, when }),
+  z.strictObject({ type: z.literal('h2'), text: localized, when }),
+  z.strictObject({ type: z.literal('h3'), text: localized, when }),
+  z.strictObject({ type: z.literal('ul'), items: z.array(localized).min(1), when }),
+  z.strictObject({ type: z.literal('quote'), text: localized, cite: localized.optional(), when }),
 ]);
 export type Block = z.infer<typeof block>;
 

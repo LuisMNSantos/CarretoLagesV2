@@ -144,6 +144,7 @@ const pt = {
 
   'thanks.title1': 'Obrigado.',
   'thanks.title2': 'Recebemos a sua mensagem.',
+  'contact.directLead': 'Ligue-nos ou escreva-nos. Respondemos em 24 horas úteis.',
   'thanks.lead': 'Vamos analisar o seu pedido e responder no prazo de 24 horas úteis.',
 
   'notFound.title1': 'Esta página',
@@ -319,6 +320,7 @@ const en: Record<UiKey, string> = {
 
   'thanks.title1': 'Thank you.',
   'thanks.title2': 'We have received your message.',
+  'contact.directLead': 'Call or write to us. We reply within one working day.',
   'thanks.lead': 'We will review your request and reply within one working day.',
 
   'notFound.title1': 'This page',

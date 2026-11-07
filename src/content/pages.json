@@ -63,7 +63,8 @@
         { "pt": "Participação em iniciativas de literacia jurídica em escolas e comunidades locais", "en": "Taking part in legal literacy initiatives in schools and local communities" }
       ] },
       { "type": "h2", "text": { "pt": "Como pedir apoio", "en": "How to ask for support" } },
-      { "type": "p", "text": { "pt": "Envie-nos uma mensagem pelo formulário de contacto, indicando brevemente a sua situação. Cada pedido é analisado individualmente e com total confidencialidade.", "en": "Send us a message through the contact form, briefly describing your situation. Each request is assessed individually and in complete confidence." } },
+      { "type": "p", "when": "form", "text": { "pt": "Envie-nos uma mensagem pelo formulário de contacto, indicando brevemente a sua situação. Cada pedido é analisado individualmente e com total confidencialidade.", "en": "Send us a message through the contact form, briefly describing your situation. Each request is assessed individually and in complete confidence." } },
+      { "type": "p", "when": "noForm", "text": { "pt": "Escreva-nos para geral@carretolages.com ou ligue-nos, indicando brevemente a sua situação. Cada pedido é analisado individualmente e com total confidencialidade.", "en": "Write to geral@carretolages.com or call us, briefly describing your situation. Each request is assessed individually and in complete confidence." } },
       { "type": "p", "text": { "pt": "O apoio pro bono não substitui o sistema público de proteção jurídica previsto na Lei n.º 34/2004, sobre o qual também o podemos orientar.", "en": "Pro bono support does not replace the public legal aid system under Law no. 34/2004, which we can also guide you through." } }
     ],
     "image": "conversation-table",
@@ -80,15 +81,20 @@
       { "type": "h2", "text": { "pt": "Responsável pelo tratamento", "en": "Data controller" } },
       { "type": "p", "text": { "pt": "Carreto Lages & Associados — Sociedade de Advogados [denominação social, NIPC e sede a confirmar]. Contacto para questões de privacidade: geral@carretolages.com.", "en": "Carreto Lages & Associados — Sociedade de Advogados [legal name, tax number and registered office to be confirmed]. Privacy contact: geral@carretolages.com." } },
       { "type": "h2", "text": { "pt": "Que dados recolhemos", "en": "What data we collect" } },
-      { "type": "p", "text": { "pt": "Apenas os dados que nos envia pelo formulário de contacto: nome, email, telefone (opcional), área e escritório preferidos (opcionais) e a mensagem.", "en": "Only the data you send us through the contact form: name, email, telephone (optional), preferred area and office (optional) and your message." } },
+      { "type": "p", "when": "form", "text": { "pt": "Apenas os dados que nos envia pelo formulário de contacto: nome, email, telefone (opcional), área e escritório preferidos (opcionais) e a mensagem.", "en": "Only the data you send us through the contact form: name, email, telephone (optional), preferred area and office (optional) and your message." } },
+      { "type": "p", "when": "noForm", "text": { "pt": "O site não recolhe dados pessoais. Se nos contactar por email ou telefone, tratamos apenas os dados que nos fornecer para responder ao seu pedido.", "en": "The website does not collect personal data. If you contact us by email or telephone, we process only the data you give us in order to reply to your request." } },
       { "type": "h2", "text": { "pt": "Finalidade e fundamento", "en": "Purpose and legal basis" } },
       { "type": "p", "text": { "pt": "Os dados são usados apenas para responder ao seu pedido, com base no seu consentimento e em diligências pré-contratuais a seu pedido.", "en": "The data is used only to reply to your request, on the basis of your consent and of pre-contractual steps taken at your request." } },
       { "type": "h2", "text": { "pt": "Conservação", "en": "Retention" } },
       { "type": "p", "text": { "pt": "As mensagens são recebidas por email e conservadas apenas pelo tempo necessário para tratar o pedido, ou pelo prazo legal aplicável se der origem a um mandato. O site não guarda as mensagens em nenhuma base de dados.", "en": "Messages are received by email and kept only as long as needed to deal with the request, or for the applicable legal period if an engagement follows. The website does not store messages in any database." } },
       { "type": "h2", "text": { "pt": "Subcontratantes", "en": "Processors" } },
-      { "type": "ul", "items": [
+      { "type": "ul", "when": "form", "items": [
         { "pt": "Alojamento do site: Cloudflare", "en": "Website hosting: Cloudflare" },
-        { "pt": "Envio dos emails do formulário: Resend (a ativar na versão final)", "en": "Form email delivery: Resend (to be enabled in the final version)" },
+        { "pt": "Envio dos emails do formulário e proteção contra spam (Turnstile): Cloudflare", "en": "Form email delivery and spam protection (Turnstile): Cloudflare" },
+        { "pt": "Mapas: Google, apenas se carregar no botão para ver o mapa", "en": "Maps: Google, only if you press the button to view the map" }
+      ] },
+      { "type": "ul", "when": "noForm", "items": [
+        { "pt": "Alojamento do site: Cloudflare", "en": "Website hosting: Cloudflare" },
         { "pt": "Mapas: Google, apenas se carregar no botão para ver o mapa", "en": "Maps: Google, only if you press the button to view the map" }
       ] },
       { "type": "h2", "text": { "pt": "Os seus direitos", "en": "Your rights" } },

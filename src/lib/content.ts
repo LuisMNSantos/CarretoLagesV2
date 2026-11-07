@@ -3,7 +3,7 @@ import type { Locale } from '../i18n/locale';
 import {
   areaSchema, caseSchema, faqSchema, insightSchema, lawyerSchema, officeSchema, pageSchema,
   settingsSchema, situationSchema, stepSchema, testimonialSchema,
-  type Localized, type Page, type PageId,
+  type Block, type Localized, type Page, type PageId,
 } from '../content/schemas';
 import settingsJson from '../content/settings.json' with { type: 'json' };
 import officesJson from '../content/offices.json' with { type: 'json' };
@@ -34,6 +34,11 @@ export const insights = z.array(insightSchema).parse(insightsJson);
 export const pages: Record<PageId, Page> = Object.fromEntries(
   z.array(pageSchema).parse(pagesJson).map((p) => [p.id, p]),
 ) as Record<PageId, Page>;
+
+/** Drops the blocks written for the other plan (contact form present or not). */
+export function blocksFor(blocks: readonly Block[], hasForm: boolean): Block[] {
+  return blocks.filter((b) => !b.when || b.when === (hasForm ? 'form' : 'noForm'));
+}
 
 export function pick(field: { pt: string; en?: string | undefined }, locale: Locale): string | undefined {
   return field[locale];

@@ -1,0 +1,37 @@
+---
+/** Base plan (no form): the contact section offers the firm's email and phone as large direct links. */
+import Icon from './Icon.astro';
+import { settings, tr } from '../../lib/content';
+import { t } from '../../i18n/ui';
+import type { Locale } from '../../i18n/locale';
+
+export interface Props { locale: Locale }
+const { locale } = Astro.props;
+---
+<ul class="space-y-5" data-contact-direct>
+  <li>
+    <a class="direct-link" href={`mailto:${settings.email}`}>
+      <span class="icon-circle size-12 border-bronze text-verde-700" aria-hidden="true"><Icon name="mail" size={20} /></span>
+      <span>
+        <span class="block text-xs uppercase tracking-[0.18em] text-tinta-suave">{t(locale, 'form.emailLabel')}</span>
+        <span class="block text-[1.25rem] text-tinta">{settings.email}</span>
+      </span>
+    </a>
+  </li>
+  <li>
+    <a class="direct-link" href={settings.phoneHref}>
+      <span class="icon-circle size-12 border-bronze text-verde-700" aria-hidden="true"><Icon name="phone" size={20} /></span>
+      <span>
+        <span class="block text-xs uppercase tracking-[0.18em] text-tinta-suave">{t(locale, 'form.phone')}</span>
+        <span class="block text-[1.25rem] text-tinta">{settings.phone}</span>
+      </span>
+    </a>
+  </li>
+  <li class="flex items-center gap-2 pt-2 text-[0.9375rem] text-tinta-suave"><Icon name="clock" size={16} />{tr(settings.hours, locale)}</li>
+</ul>
+
+<style>
+  .direct-link { display: inline-flex; align-items: center; gap: 1rem; transition: color 250ms var(--ease-calm); }
+  .direct-link:hover span span:last-child { color: var(--color-verde-700); text-decoration: underline; text-underline-offset: 4px; }
+  .direct-link:focus-visible { outline: 2px solid var(--color-verde-700); outline-offset: 4px; }
+</style>

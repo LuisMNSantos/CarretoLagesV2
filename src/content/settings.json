@@ -17,7 +17,7 @@
   "pillars": [
     { "icon": "conversation", "title": { "pt": "Conversas diretas.", "en": "Direct conversations." }, "text": { "pt": "Respostas claras, de uma equipa que sabe o seu nome.", "en": "Clear answers from a team that knows your name." } },
     { "icon": "experience", "title": { "pt": "Mais de 20 anos.", "en": "More than 20 years." }, "text": { "pt": "Prática jurídica em Aveiro e na região de Dão-Lafões.", "en": "Legal practice in Aveiro and the Dão-Lafões region." } },
-    { "icon": "clock", "title": { "pt": "Resposta em 24 horas.", "en": "A reply within a day." }, "text": { "pt": "Por telefone, email ou formulário, em dias úteis.", "en": "By telephone, email or form, on working days." } }
+    { "icon": "clock", "title": { "pt": "Resposta em 24 horas.", "en": "A reply within a day." }, "text": { "pt": "Por telefone ou email, em dias úteis.", "en": "By telephone or email, on working days." } }
   ],
   "stats": [
     { "value": "2002", "label": { "pt": "Ano de fundação", "en": "Year founded" } },
