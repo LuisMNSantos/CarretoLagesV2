@@ -122,3 +122,8 @@ test('the Turnstile widget is compact when the form is narrower than 300px', asy
     await expect.poll(() => page.evaluate(() => (window as unknown as { __tsSizes?: string[] }).__tsSizes ?? [])).toEqual([size]);
   }
 });
+
+test('Turnstile only takes space when it needs the visitor (no blank band above the button)', async ({ page }) => {
+  await page.goto('/contactos');
+  await expect.poll(() => page.evaluate(() => (window as unknown as { __tsOpts?: { appearance?: string } }).__tsOpts?.appearance)).toBe('interaction-only');
+});

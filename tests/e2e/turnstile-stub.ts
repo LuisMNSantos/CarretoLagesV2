@@ -12,6 +12,7 @@ export async function stubTurnstile(page: Page): Promise<void> {
         window.turnstile = {
           render(el, opts) {
             window.__tsSizes.push(opts.size);
+            window.__tsOpts = opts;
             const i = document.createElement('input');
             i.type = 'hidden'; i.name = 'cf-turnstile-response'; i.value = 'XXXX.DUMMY.TOKEN.XXXX';
             el.appendChild(i);

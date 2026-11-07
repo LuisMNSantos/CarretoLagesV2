@@ -31,7 +31,8 @@ export const widgetSize = (width: number): 'flexible' | 'compact' => (width >= 3
 export async function mountTurnstile(el: HTMLElement): Promise<() => void> {
   try {
     const ts = await load();
-    const id = ts.render(el, { sitekey: el.dataset.sitekey, theme: 'light', size: widgetSize(el.clientWidth), language: 'auto' });
+    // interaction-only: the widget stays hidden unless Cloudflare needs the visitor to click (no blank band in the form).
+    const id = ts.render(el, { sitekey: el.dataset.sitekey, theme: 'light', size: widgetSize(el.clientWidth), language: 'auto', appearance: 'interaction-only' });
     return () => ts.reset(id);
   } catch {
     return () => {};

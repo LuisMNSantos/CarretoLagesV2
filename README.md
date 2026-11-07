@@ -48,6 +48,16 @@ PUBLIC_PLAN=base npx playwright test tests/e2e/plan-base.spec.ts   # testes da v
 - **Formulário:** `functions/api/contacto.ts` valida o pedido, verifica o Turnstile e envia pelo Resend (plano gratuito: 3.000 emails por mês, 100 por dia). Remetente: `formulario@builtbyluis.dev`. Nada fica guardado e os registos nunca incluem o conteúdo das mensagens.
 - **Segredos do projeto Pages** (só os nomes; os valores nunca vão para o git): `TURNSTILE_SECRET`, `RESEND_API_KEY`, `CONTACT_TO` e `CONTACT_FROM`. Para mudar o destinatário, por exemplo para `geral@carretolages.com`: `npx wrangler pages secret put CONTACT_TO --project-name carretolages-formulario` e publicar de novo.
 - **Turnstile:** o widget `0x4AAAAAAF3EQQQ2jSTc3Dul` só aceita os domínios `carretolages-formulario.pages.dev` e `carretolages-sanity.pages.dev`. Um domínio novo tem de ser acrescentado ao widget.
+- **Sanity:**
+  - Projeto `6e31nwsq`, dataset público `production`.
+  - Painel em https://carretolages.sanity.studio (pasta `studio/`; publicar o painel: `cd studio && npx sanity deploy`).
+  - Os modelos espelham `src/content/schemas.ts`. O Zod continua a validar cada build: um conteúdo inválido faz falhar o build e o site anterior continua no ar.
+- **Como uma alteração chega ao site (versão sanity):**
+  1. Publicar no painel.
+  2. O webhook do Sanity "Cloudflare Pages: gerar o site" chama o deploy hook do projeto `carretolages-sanity`.
+  3. A Cloudflare gera o site a partir do ramo `feat/tres-versoes` com `npm ci && npm run build:sanity`, em cerca de 2 a 3 minutos.
+  - Cada push para esse ramo também gera o site. Para gerar à mão: `cf pages projects deployments create carretolages-sanity --body '{"branch":"feat/tres-versoes"}'`.
+- **Importação inicial:** `npm run sanity:import` carrega os JSON e as imagens no Sanity. Precisa de `SANITY_WRITE_TOKEN`, um token temporário criado com `npx sanity tokens add` e apagado a seguir. Só serve para começar do zero: substitui os documentos com o mesmo identificador.
 
 ## Testes de segurança
 
