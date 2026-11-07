@@ -63,6 +63,12 @@ describe('mode files', () => {
     }
   });
 
-  // Enabled in Task 5 once the real Turnstile widget exists.
-  test.todo('form plans use a real Turnstile site key, not a Cloudflare test key');
+  test('form plans use a real Turnstile site key, not a Cloudflare test key', () => {
+    for (const p of ['formulario', 'sanity']) {
+      const key = envFile(`.env.${p}`).PUBLIC_TURNSTILE_SITE_KEY ?? '';
+      expect(key, p).toMatch(/^0x[0-9A-Za-z_-]{20,}$/);
+      expect(key, p).not.toMatch(/^[123]x0000/);
+    }
+    expect(envFile('.env.base').PUBLIC_TURNSTILE_SITE_KEY).toBeUndefined();
+  });
 });
