@@ -5,6 +5,9 @@ dist/
 .env.*
 !.env.example
 !.env.live
+!.env.base
+!.env.formulario
+!.env.sanity
 reports/*
 !reports/summary/
 test-results/

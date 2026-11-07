@@ -4,6 +4,7 @@ import Head from '../components/seo/Head.astro';
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 import StickyCta from '../components/layout/StickyCta.astro';
+import { plan } from '../lib/env';
 
 export interface Props {
   locale: 'pt' | 'en';
@@ -19,7 +20,7 @@ const { locale, title, description, alternates, headerVariant = 'solid', jsonLd,
 const skip = locale === 'pt' ? 'Saltar para o conteúdo' : 'Skip to content';
 ---
 <!doctype html>
-<html lang={locale === 'pt' ? 'pt-PT' : 'en'} data-header={headerVariant}>
+<html lang={locale === 'pt' ? 'pt-PT' : 'en'} data-header={headerVariant} data-plan={plan}>
   <head>
     <Head locale={locale} title={title} description={description} alternates={alternates} jsonLd={jsonLd} ogImage={ogImage} />
   </head>

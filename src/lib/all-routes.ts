@@ -1,7 +1,7 @@
 import { locales, type Locale } from '../i18n/locale';
 import { localizePath, routeMap, type RouteKey } from '../i18n/routes';
 import { areas, cases, insights, lawyers, visible } from './content';
-import { designPreview } from './env';
+import { designPreview, plan, type Plan } from './env';
 
 export type BuiltRoute = {
   path: string;
@@ -17,7 +17,7 @@ const slugOf = (item: Sluggable, locale: Locale): string | undefined =>
   typeof item.slug === 'string' ? item.slug : item.slug[locale];
 
 /** Every page the build produces (both locales). Single source for e2e, screenshots and the report. */
-export function allRoutes(preview: boolean = designPreview): BuiltRoute[] {
+export function allRoutes(preview: boolean = designPreview, p: Plan = plan): BuiltRoute[] {
   const out: BuiltRoute[] = [];
   const counts = {
     cases: { pt: visible(cases, 'pt', { preview }).length, en: visible(cases, 'en', { preview }).length },
@@ -25,6 +25,7 @@ export function allRoutes(preview: boolean = designPreview): BuiltRoute[] {
   };
 
   for (const key of Object.keys(routeMap) as RouteKey[]) {
+    if (key === 'thanks' && p === 'base') continue; // no form, so no thank-you page
     if ((key === 'cases' || key === 'insights') && (counts[key].pt === 0 || counts[key].en === 0)) {
       for (const locale of locales) {
         if (counts[key][locale] > 0) out.push({ path: localizePath(key, locale), locale, key, alternates: { [locale]: localizePath(key, locale) } });

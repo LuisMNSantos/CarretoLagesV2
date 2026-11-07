@@ -2,6 +2,7 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
+import { planBuild, resolvePlan } from './scripts/plan-build.mjs';
 
 export default defineConfig({
   site: 'https://www.carretolages.com',
@@ -11,6 +12,8 @@ export default defineConfig({
       i18n: { defaultLocale: 'pt', locales: { pt: 'pt-PT', en: 'en' } },
       filter: (page) => !/\/(404|obrigado|thank-you)$/.test(new URL(page).pathname),
     }),
+    // Astro does not hand the --mode to the config, so the plan is resolved from argv + env files.
+    planBuild(resolvePlan(process.argv, process.cwd())),
   ],
   trailingSlash: 'never',
   i18n: { defaultLocale: 'pt', locales: ['pt', 'en'], routing: { prefixDefaultLocale: false } },

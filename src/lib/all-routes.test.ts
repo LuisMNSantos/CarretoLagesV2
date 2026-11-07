@@ -50,3 +50,10 @@ test('without preview, empty collections disappear', () => {
   expect(paths).not.toContain('/en/insights');
   expect(paths.some((p) => p.startsWith('/destaques/'))).toBe(false);
 });
+
+test('the base plan has no thank-you page; the form plans do', () => {
+  const keys = (p: 'base' | 'formulario' | 'sanity') => allRoutes(true, p).map((r) => r.key);
+  expect(keys('base')).not.toContain('thanks');
+  expect(keys('formulario')).toContain('thanks');
+  expect(keys('sanity')).toContain('thanks');
+});
