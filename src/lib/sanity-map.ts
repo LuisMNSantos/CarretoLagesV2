@@ -54,7 +54,7 @@ export function toSanityDocs(raw: RawContent, assetRef: AssetRef): SanityDoc[] {
       continue;
     }
     for (const item of raw[c] as { id: string }[]) {
-      docs.push({ ...(toSanity(item, '', assetRef) as object), _id: `${type}.${item.id}`, _type: type });
+      docs.push({ ...(toSanity(item, '', assetRef) as object), _id: `${type}-${item.id}`, _type: type });
     }
   }
   return docs;

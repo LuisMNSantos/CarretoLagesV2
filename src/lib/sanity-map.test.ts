@@ -52,7 +52,9 @@ describe('sanity-map', () => {
   test('every document gets a stable _id and the type from SANITY_TYPE', () => {
     const docs = toSanityDocs(raw, fakeRef) as { _id: string; _type: string }[];
     expect(docs.find((d) => d._type === 'settings')?._id).toBe('settings');
-    expect(docs.filter((d) => d._type === SANITY_TYPE.areas).map((d) => d._id)).toContain('area.fiscal');
+    expect(docs.filter((d) => d._type === SANITY_TYPE.areas).map((d) => d._id)).toContain('area-fiscal');
+    // Sanity treats ids containing a dot as private paths: they never appear in public (unauthenticated) reads.
+    expect(docs.filter((d) => d._id.includes('.'))).toEqual([]);
     expect(new Set(docs.map((d) => d._id)).size).toBe(docs.length);
   });
 
